@@ -1,7 +1,7 @@
 ﻿
 namespace qlCSYT
 {
-    partial class frm_Admin
+    partial class Frm_Priviledges
     {
         /// <summary>
         /// Required designer variable.
@@ -29,20 +29,12 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
-            this.SuspendLayout();
-            // 
-            // frm_Admin
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "frm_Admin";
-            this.Text = "Form1";
-            this.ResumeLayout(false);
-
+            this.Text = "Frm_Priviledges";
         }
 
         #endregion
     }
 }
-
