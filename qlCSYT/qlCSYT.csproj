@@ -64,11 +64,20 @@
     <Compile Include="Frm_Priviledges.Designer.cs">
       <DependentUpon>Frm_Priviledges.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_ViewUser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ViewUser.Designer.cs">
+      <DependentUpon>frm_ViewUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="functions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frm_Admin.resx">
       <DependentUpon>frm_Admin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ViewUser.resx">
+      <DependentUpon>frm_ViewUser.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
