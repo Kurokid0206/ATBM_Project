@@ -1,7 +1,7 @@
 ﻿
 namespace qlCSYT
 {
-    partial class Form1
+    partial class frm_Admin
     {
         /// <summary>
         /// Required designer variable.

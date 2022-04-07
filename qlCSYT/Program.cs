@@ -9,41 +9,15 @@ using System.Data.Common;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
 
-/*namespace ConnectOracleWithoutClient
-{
-    static class Program
-    {
-
-        static void Main(string[] args)
-        {
-            //
-            OracleConnection conn = DBUtils.GetDBConnection();
-
-            Console.WriteLine("Get Connection: " + conn);
-            try
-            {
-                conn.Open();
-
-                Console.WriteLine(conn.ConnectionString, "Successful Connection");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("## ERROR: " + ex.Message);
-                Console.Read();
-                return;
-            }
-
-            Console.WriteLine("Connection successful!");
-
-            Console.Read();
-        }
-    }
-}*/
+using System.Windows.Forms;
+using qlCSYT;
 
 namespace CsOracleTutorial
 {
+
     class QueryDataExample
     {
+        [STAThread]
         static void Main(string[] args)
         {
             // Lấy ra đối tượng Connection kết nối vào DB.
@@ -52,10 +26,12 @@ namespace CsOracleTutorial
             try
             {
                 conn.Open();
-                Console.WriteLine(conn.ConnectionString, "Successful Connection");
+                Console.WriteLine(conn.ConnectionString);
+                Console.WriteLine("Successful Connection");
+                
 
                 //QueryEmployee(conn);
-                ShowTable(conn);
+                //ShowTable(conn);
             }
             catch (Exception e)
             {
@@ -68,6 +44,10 @@ namespace CsOracleTutorial
                 conn.Dispose();
             }
             Console.Read();
+
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frm_Admin());
         }
 
         private static void QueryEmployee(OracleConnection conn)

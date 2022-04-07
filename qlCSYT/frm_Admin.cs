@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace qlCSYT
 {
-    public partial class Form1 : Form
+    public partial class frm_Admin : Form
     {
-        public Form1()
+        public frm_Admin()
         {
             InitializeComponent();
         }

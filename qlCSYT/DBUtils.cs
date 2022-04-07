@@ -14,8 +14,8 @@ namespace Tutorial.SqlConn
             string host = "localhost";
             int port = 1521;
             string sid = "xe";
-            string user = "C##demo";
-            string password = "demo";
+            string user = "C##CSYT_Admin";
+            string password = "a";
             return DBOracleUtils.GetDBConnection(host, port, sid, user, password);
         }
         
