@@ -30,7 +30,7 @@ namespace CsOracleTutorial
                 Console.WriteLine("Successful Connection");
                 
 
-                //QueryEmployee(conn);
+                QueryEmployee(conn);
                 //ShowTable(conn);
             }
             catch (Exception e)
