@@ -32,10 +32,7 @@ namespace qlCSYT
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_addPatient = new System.Windows.Forms.Button();
             this.txt_origin = new System.Windows.Forms.TextBox();
-            this.txt_csytNo = new System.Windows.Forms.TextBox();
             this.txt_telephone = new System.Windows.Forms.TextBox();
-            this.txt_Gender = new System.Windows.Forms.TextBox();
-            this.txt_birth = new System.Windows.Forms.TextBox();
             this.txt_idNumber = new System.Windows.Forms.TextBox();
             this.lb_origin = new System.Windows.Forms.Label();
             this.lb_role = new System.Windows.Forms.Label();
@@ -53,12 +50,15 @@ namespace qlCSYT
             this.txt_specialist = new System.Windows.Forms.TextBox();
             this.lb_specialist = new System.Windows.Forms.Label();
             this.cb_role = new System.Windows.Forms.ComboBox();
+            this.cb_gender = new System.Windows.Forms.ComboBox();
+            this.time_Birth = new System.Windows.Forms.DateTimePicker();
+            this.cb_MedFac = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btn_cancel
             // 
             this.btn_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
-            this.btn_cancel.Location = new System.Drawing.Point(531, 499);
+            this.btn_cancel.Location = new System.Drawing.Point(541, 418);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(102, 40);
             this.btn_cancel.TabIndex = 60;
@@ -69,59 +69,36 @@ namespace qlCSYT
             // btn_addPatient
             // 
             this.btn_addPatient.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addPatient.Location = new System.Drawing.Point(264, 499);
+            this.btn_addPatient.Location = new System.Drawing.Point(274, 418);
             this.btn_addPatient.Name = "btn_addPatient";
             this.btn_addPatient.Size = new System.Drawing.Size(115, 40);
             this.btn_addPatient.TabIndex = 59;
             this.btn_addPatient.Text = "Thêm";
             this.btn_addPatient.UseVisualStyleBackColor = true;
+            this.btn_addPatient.Click += new System.EventHandler(this.btn_addPatient_Click);
             // 
             // txt_origin
             // 
             this.txt_origin.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_origin.Location = new System.Drawing.Point(264, 312);
             this.txt_origin.Name = "txt_origin";
-            this.txt_origin.Size = new System.Drawing.Size(162, 29);
+            this.txt_origin.Size = new System.Drawing.Size(200, 29);
             this.txt_origin.TabIndex = 55;
-            // 
-            // txt_csytNo
-            // 
-            this.txt_csytNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_csytNo.Location = new System.Drawing.Point(678, 142);
-            this.txt_csytNo.Name = "txt_csytNo";
-            this.txt_csytNo.Size = new System.Drawing.Size(162, 29);
-            this.txt_csytNo.TabIndex = 53;
             // 
             // txt_telephone
             // 
             this.txt_telephone.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_telephone.Location = new System.Drawing.Point(264, 277);
             this.txt_telephone.Name = "txt_telephone";
-            this.txt_telephone.Size = new System.Drawing.Size(162, 29);
+            this.txt_telephone.Size = new System.Drawing.Size(200, 29);
             this.txt_telephone.TabIndex = 52;
-            // 
-            // txt_Gender
-            // 
-            this.txt_Gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Gender.Location = new System.Drawing.Point(264, 242);
-            this.txt_Gender.Name = "txt_Gender";
-            this.txt_Gender.Size = new System.Drawing.Size(162, 29);
-            this.txt_Gender.TabIndex = 51;
-            // 
-            // txt_birth
-            // 
-            this.txt_birth.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_birth.Location = new System.Drawing.Point(264, 207);
-            this.txt_birth.Name = "txt_birth";
-            this.txt_birth.Size = new System.Drawing.Size(162, 29);
-            this.txt_birth.TabIndex = 50;
             // 
             // txt_idNumber
             // 
             this.txt_idNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_idNumber.Location = new System.Drawing.Point(264, 172);
             this.txt_idNumber.Name = "txt_idNumber";
-            this.txt_idNumber.Size = new System.Drawing.Size(162, 29);
+            this.txt_idNumber.Size = new System.Drawing.Size(200, 29);
             this.txt_idNumber.TabIndex = 49;
             // 
             // lb_origin
@@ -199,7 +176,7 @@ namespace qlCSYT
             this.txt_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_name.Location = new System.Drawing.Point(264, 137);
             this.txt_name.Name = "txt_name";
-            this.txt_name.Size = new System.Drawing.Size(162, 29);
+            this.txt_name.Size = new System.Drawing.Size(200, 29);
             this.txt_name.TabIndex = 38;
             // 
             // lb_name
@@ -270,31 +247,53 @@ namespace qlCSYT
             // 
             this.cb_role.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F);
             this.cb_role.FormattingEnabled = true;
-            this.cb_role.Items.AddRange(new object[] {
-            "Thanh tra",
-            "Cơ sở y tế",
-            "Bác sĩ",
-            "Nghiên cứu"});
             this.cb_role.Location = new System.Drawing.Point(678, 177);
             this.cb_role.Name = "cb_role";
             this.cb_role.Size = new System.Drawing.Size(162, 32);
             this.cb_role.TabIndex = 63;
             // 
+            // cb_gender
+            // 
+            this.cb_gender.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_gender.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_gender.FormattingEnabled = true;
+            this.cb_gender.Location = new System.Drawing.Point(264, 239);
+            this.cb_gender.Name = "cb_gender";
+            this.cb_gender.Size = new System.Drawing.Size(200, 32);
+            this.cb_gender.TabIndex = 66;
+            // 
+            // time_Birth
+            // 
+            this.time_Birth.Location = new System.Drawing.Point(264, 207);
+            this.time_Birth.Name = "time_Birth";
+            this.time_Birth.Size = new System.Drawing.Size(200, 20);
+            this.time_Birth.TabIndex = 65;
+            // 
+            // cb_MedFac
+            // 
+            this.cb_MedFac.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_MedFac.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cb_MedFac.FormattingEnabled = true;
+            this.cb_MedFac.Location = new System.Drawing.Point(678, 138);
+            this.cb_MedFac.Name = "cb_MedFac";
+            this.cb_MedFac.Size = new System.Drawing.Size(162, 32);
+            this.cb_MedFac.TabIndex = 64;
+            // 
             // frm_addEmp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 585);
+            this.ClientSize = new System.Drawing.Size(949, 516);
+            this.Controls.Add(this.cb_gender);
+            this.Controls.Add(this.time_Birth);
+            this.Controls.Add(this.cb_MedFac);
             this.Controls.Add(this.cb_role);
             this.Controls.Add(this.txt_specialist);
             this.Controls.Add(this.lb_specialist);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_addPatient);
             this.Controls.Add(this.txt_origin);
-            this.Controls.Add(this.txt_csytNo);
             this.Controls.Add(this.txt_telephone);
-            this.Controls.Add(this.txt_Gender);
-            this.Controls.Add(this.txt_birth);
             this.Controls.Add(this.txt_idNumber);
             this.Controls.Add(this.lb_origin);
             this.Controls.Add(this.lb_role);
@@ -311,6 +310,7 @@ namespace qlCSYT
             this.Controls.Add(this.lb_username);
             this.Name = "frm_addEmp";
             this.Text = "frm_addEmp";
+            this.Load += new System.EventHandler(this.frm_addEmp_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -321,10 +321,7 @@ namespace qlCSYT
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_addPatient;
         private System.Windows.Forms.TextBox txt_origin;
-        private System.Windows.Forms.TextBox txt_csytNo;
         private System.Windows.Forms.TextBox txt_telephone;
-        private System.Windows.Forms.TextBox txt_Gender;
-        private System.Windows.Forms.TextBox txt_birth;
         private System.Windows.Forms.TextBox txt_idNumber;
         private System.Windows.Forms.Label lb_origin;
         private System.Windows.Forms.Label lb_role;
@@ -342,6 +339,9 @@ namespace qlCSYT
         private System.Windows.Forms.TextBox txt_specialist;
         private System.Windows.Forms.Label lb_specialist;
         private System.Windows.Forms.ComboBox cb_role;
+        private System.Windows.Forms.ComboBox cb_gender;
+        private System.Windows.Forms.DateTimePicker time_Birth;
+        private System.Windows.Forms.ComboBox cb_MedFac;
     }
 }
 

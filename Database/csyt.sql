@@ -58,9 +58,9 @@ CREATE TABLE C##CSYT_Admin.CSYT (
 CREATE TABLE C##CSYT_Admin.NhanVien (
     MaNV        CHAR(10), 
     HoTen       NVARCHAR2(50), 
-    Phai        NVARCHAR2(3), 
-    NgaySinh    DATE, 
     CMND        CHAR(10), 
+    NgaySinh    DATE, 
+    Phai        NVARCHAR2(3),
     QueQuan     NVARCHAR2(50), 
     SDT         CHAR(11),
     CSYT        CHAR(5), 

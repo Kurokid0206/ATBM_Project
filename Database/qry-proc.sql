@@ -63,3 +63,28 @@ BEGIN
 	COMMIT;
 END;
 /
+
+CREATE OR REPLACE PROCEDURE C##CSYT_Admin.revokePrivilege(
+	pi_username IN VARCHAR2,
+	pi_priType IN INTEGER,
+    pi_obj IN VARCHAR2) IS
+	
+	user_name VARCHAR(20)  	:= pi_username;
+	priType   INTEGER 		:= pi_priType;
+    obj       VARCHAR(20)   := pi_obj;
+    sqlstmt   VARCHAR2 (1000);
+BEGIN
+    IF priType<1 then
+        sqlstmt := 'REVOKE INSERT ON ';
+    ELSIF priType<2 THEN
+        sqlstmt := 'REVOKE SELECT ON ';
+    ELSIF priType<3 THEN
+        sqlstmt := 'REVOKE UPDATE ON ';
+    ELSE
+        sqlstmt := 'REVOKE DELETE ON ';        
+    END IF;
+    sqlstmt :=sqlstmt||obj||' FROM '||user_name;
+	EXECUTE IMMEDIATE ( sqlstmt ); 
+                                                
+	COMMIT;
+END;
