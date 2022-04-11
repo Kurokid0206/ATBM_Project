@@ -14,7 +14,7 @@ BEGIN
 	EXECUTE IMMEDIATE ( lv_stmt ); 
                                                 
 	COMMIT;
-END createUser;
+END;
 /
 
 CREATE OR REPLACE PROCEDURE C##CSYT_Admin.dropUser(

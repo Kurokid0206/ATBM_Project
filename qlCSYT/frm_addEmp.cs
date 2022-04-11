@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace qlCSYT
 {
-    public partial class Frm_Priviledges : Form
+    public partial class frm_addEmp : Form
     {
-        public Frm_Priviledges()
+        public frm_addEmp()
         {
             InitializeComponent();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -7,17 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using qlCSYT;
 
 namespace qlCSYT
 {
-    public partial class frm_Admin : Form
+    public partial class frm_addPatient : Form
     {
-        public frm_Admin()
+        public frm_addPatient()
         {
             InitializeComponent();
         }
 
-        
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
