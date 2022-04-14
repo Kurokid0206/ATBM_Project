@@ -56,7 +56,13 @@ namespace qlCSYT
                             ListUser.Rows.Add(reader.GetString(0));
 
                         }
+                        //DataGridViewUser.DisplayMember = "Username";
+                        //DataGridViewUser.ValueMember = "Username";
                         DataGridViewUser.DataSource= ListUser;
+                        //DataRow topItem = DataGridViewUser.NewRow();
+
+
+
                         //Delete button
                         var deleteButton = new DataGridViewButtonColumn();
                         deleteButton.Name = "dataGridViewDeleteButton";
@@ -102,7 +108,7 @@ namespace qlCSYT
             {
                 //Put some logic here, for example to remove row from your binding list.
                 //yourBindingList.RemoveAt(e.RowIndex);
-
+                DataGridViewUser.Rows.RemoveAt(e.RowIndex);
                 // Or
                 // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
                 // do something 
