@@ -11,6 +11,7 @@ using Tutorial.SqlConn;
 using System.Data.Common;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using System.Runtime.InteropServices;
 using qlCSYT;
 
 namespace qlCSYT
@@ -58,10 +59,8 @@ namespace qlCSYT
                         }
                         //DataGridViewUser.DisplayMember = "Username";
                         //DataGridViewUser.ValueMember = "Username";
+                        //DataRow temprow = DataGridViewUser.Rows.
                         DataGridViewUser.DataSource= ListUser;
-                        //DataRow topItem = DataGridViewUser.NewRow();
-
-
 
                         //Delete button
                         var deleteButton = new DataGridViewButtonColumn();
@@ -72,7 +71,17 @@ namespace qlCSYT
                         this.DataGridViewUser.Columns.Add(deleteButton);
                         // Add a CellClick handler to handle clicks in the button column.
                         DataGridViewUser.CellClick +=
-                            new DataGridViewCellEventHandler(DataGridViewUser_CellClick);
+                            new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
+
+                        //Data Taking Button
+                        var dataButton= new DataGridViewButtonColumn();
+                        dataButton.Name = "dataGridViewDataButton";
+                        dataButton.HeaderText = "InNguoiDung";
+                        dataButton.Text = "In";
+                        dataButton.UseColumnTextForButtonValue = true;
+                        this.DataGridViewUser.Columns.Add(dataButton);
+                        DataGridViewUser.CellClick +=
+                            new DataGridViewCellEventHandler(DataGridViewUser_DataCellClick);
 
                     }
                     else
@@ -97,7 +106,7 @@ namespace qlCSYT
             Console.Read();
 
         }
-        void DataGridViewUser_CellClick(object sender, DataGridViewCellEventArgs e)
+        void DataGridViewUser_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if click is on new row or header row
             if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
@@ -114,6 +123,30 @@ namespace qlCSYT
                 // do something 
             }
         }
+        void DataGridViewUser_DataCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
+                return;
+
+            //Check if click is on specific column 
+            if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDataButton"].Index)
+            {
+                //Put some logic here, for example to remove row from your binding list.
+                //yourBindingList.RemoveAt(e.RowIndex);
+                //DataRow row = DataGridViewUser.Select();
+                Console.Write("Hello");
+                Console.Write(DataGridViewUser.Rows[e.RowIndex].ToString());
+                Console.WriteLine();
+                //TextBox box1= new System.Windows.Forms.TextBox();
+                FakeConsole.AppendText(DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString());
+                // Or
+                // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+                // do something 
+            }
+            
+        }
+        
         private void DataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 

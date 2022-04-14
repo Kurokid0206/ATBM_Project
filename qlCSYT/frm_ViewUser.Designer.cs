@@ -44,6 +44,7 @@ namespace qlCSYT
         private void InitializeComponent()
         {
             this.DataGridViewUser = new System.Windows.Forms.DataGridView();
+            this.FakeConsole = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,27 +55,37 @@ namespace qlCSYT
             this.DataGridViewUser.Name = "DataGridViewUser";
             this.DataGridViewUser.RowHeadersWidth = 51;
             this.DataGridViewUser.RowTemplate.Height = 24;
-            this.DataGridViewUser.Size = new System.Drawing.Size(342, 276);
+            this.DataGridViewUser.Size = new System.Drawing.Size(494, 276);
             this.DataGridViewUser.TabIndex = 0;
             this.DataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewUser_CellContentClick);
+            // 
+            // FakeConsole
+            // 
+            this.FakeConsole.Location = new System.Drawing.Point(12, 376);
+            this.FakeConsole.Multiline = true;
+            this.FakeConsole.Name = "FakeConsole";
+            this.FakeConsole.Size = new System.Drawing.Size(479, 62);
+            this.FakeConsole.TabIndex = 1;
             // 
             // frm_ViewUser
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.FakeConsole);
             this.Controls.Add(this.DataGridViewUser);
             this.Name = "frm_ViewUser";
             this.Text = "View User";
             this.Load += new System.EventHandler(this.frm_ViewUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).EndInit();
             this.ResumeLayout(false);
-
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.DataGridView DataGridViewUser;
+        private TextBox FakeConsole;
     }
 }
