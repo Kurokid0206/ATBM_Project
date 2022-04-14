@@ -1,0 +1,24 @@
+find_all_privs: Release 1.0.7.0.0 - Production on
+Copyright (c) 2004 PeteFinnigan.com Limited. All rights reserved.
+
+
+Error starting at line : 85 in command -
+accept file_name char prompt     'FILE NAME FOR OUTPUT              [priv.lst]: ' default priv.lst
+Error report -
+SP2-0003: Ill-formed ACCEPT command starting as .lst
+
+
+Error starting at line : 86 in command -
+accept output_dir char prompt    'OUTPUT DIRECTORY [DIRECTORY  or file (/tmp)]: ' default /tmp
+Error report -
+SP2-0003: Ill-formed ACCEPT command starting as tmp
+
+
+User => C## has been granted the following privileges
+====================================================================
+
+
+PL/SQL procedure successfully completed.
+
+For updates please visit http://www.petefinnigan.com/tools.htm
+
