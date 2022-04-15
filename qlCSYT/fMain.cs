@@ -163,6 +163,8 @@ namespace qlCSYT
 
         private void m_logout_Click(object sender, EventArgs e)
         {
+            fLogin f = new fLogin();
+            f.Show();
             this.Close();
         }
 
@@ -268,6 +270,26 @@ namespace qlCSYT
             this.Hide();
             frm.Closed += (s, args) => this.Show();
             frm.Show();
+        }
+
+        private void gv_main_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void m_user_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void m_main_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

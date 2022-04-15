@@ -29,12 +29,14 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ViewRole));
             this.GridView_ShowRole = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.GridView_ShowRole)).BeginInit();
             this.SuspendLayout();
             // 
             // GridView_ShowRole
             // 
+            this.GridView_ShowRole.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.GridView_ShowRole.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GridView_ShowRole.Location = new System.Drawing.Point(83, 36);
             this.GridView_ShowRole.Name = "GridView_ShowRole";
@@ -49,8 +51,10 @@ namespace qlCSYT
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1111, 526);
             this.Controls.Add(this.GridView_ShowRole);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frm_ViewRole";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Phân quyền User/Role";
             this.Load += new System.EventHandler(this.Frm_Edit_Roles_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GridView_ShowRole)).EndInit();

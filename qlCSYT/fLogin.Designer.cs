@@ -91,7 +91,7 @@
             // btLogin
             // 
             this.btLogin.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btLogin.Location = new System.Drawing.Point(399, 136);
+            this.btLogin.Location = new System.Drawing.Point(399, 141);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(75, 36);
             this.btLogin.TabIndex = 6;
@@ -103,7 +103,7 @@
             // 
             this.btExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btExit.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btExit.Location = new System.Drawing.Point(525, 136);
+            this.btExit.Location = new System.Drawing.Point(525, 141);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(75, 36);
             this.btExit.TabIndex = 7;
