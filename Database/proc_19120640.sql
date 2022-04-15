@@ -57,7 +57,7 @@ create or replace procedure C##CSYT_Admin.ShowPrivilegesForUser (user_name VARCH
 as
 
     BEGIN
-        Open CUR for SELECT PRIVILEGE FROM DBA_SYS_PRIVS where grantee like 'C##CSYT_'||user_name;
+        Open CUR for SELECT PRIVILEGE FROM DBA_SYS_PRIVS where grantee like user_name;
 
     END;
 

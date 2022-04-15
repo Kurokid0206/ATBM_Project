@@ -43,41 +43,43 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
-            this.DataGridViewUser = new System.Windows.Forms.DataGridView();
+            this.gv_User = new System.Windows.Forms.DataGridView();
             this.FakeConsole = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_User)).BeginInit();
             this.SuspendLayout();
             // 
-            // DataGridViewUser
+            // gv_User
             // 
-            this.DataGridViewUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DataGridViewUser.Location = new System.Drawing.Point(-3, -3);
-            this.DataGridViewUser.Name = "DataGridViewUser";
-            this.DataGridViewUser.RowHeadersWidth = 51;
-            this.DataGridViewUser.RowTemplate.Height = 24;
-            this.DataGridViewUser.Size = new System.Drawing.Size(494, 276);
-            this.DataGridViewUser.TabIndex = 0;
-            //this.DataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewUser_CellContentClick);
+            this.gv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_User.Location = new System.Drawing.Point(-2, -2);
+            this.gv_User.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gv_User.Name = "gv_User";
+            this.gv_User.RowHeadersWidth = 51;
+            this.gv_User.RowTemplate.Height = 24;
+            this.gv_User.Size = new System.Drawing.Size(370, 224);
+            this.gv_User.TabIndex = 0;
             // 
             // FakeConsole
             // 
-            this.FakeConsole.Location = new System.Drawing.Point(12, 376);
+            this.FakeConsole.Location = new System.Drawing.Point(9, 306);
+            this.FakeConsole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.FakeConsole.Multiline = true;
             this.FakeConsole.Name = "FakeConsole";
-            this.FakeConsole.Size = new System.Drawing.Size(479, 62);
+            this.FakeConsole.Size = new System.Drawing.Size(360, 51);
             this.FakeConsole.TabIndex = 1;
             // 
             // frm_ViewUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.FakeConsole);
-            this.Controls.Add(this.DataGridViewUser);
+            this.Controls.Add(this.gv_User);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_ViewUser";
             this.Text = "View User";
             this.Load += new System.EventHandler(this.frm_ViewUser_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.DataGridViewUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_User)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -85,7 +87,7 @@ namespace qlCSYT
 
         #endregion
 
-        private System.Windows.Forms.DataGridView DataGridViewUser;
+        private System.Windows.Forms.DataGridView gv_User;
         private TextBox FakeConsole;
     }
 }
