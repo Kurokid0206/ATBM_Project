@@ -57,7 +57,7 @@ namespace qlCSYT
             this.DataGridViewUser.RowTemplate.Height = 24;
             this.DataGridViewUser.Size = new System.Drawing.Size(494, 276);
             this.DataGridViewUser.TabIndex = 0;
-            this.DataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewUser_CellContentClick);
+            //this.DataGridViewUser.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewUser_CellContentClick);
             // 
             // FakeConsole
             // 
