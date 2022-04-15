@@ -29,22 +29,16 @@ namespace qlCSYT
             try
             {
                 conn.Open();
-                string sql = "SELECT USERNAME FROM all_users where USERNAME like 'C##CSYT%'";
-                // Tạo một đối tượng Command.
-                OracleCommand cmd = new OracleCommand(sql, conn);
+                OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_name", "AMIND");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-                //DataTable dt = new DataTable();
-                ////Tải dữ liệu lên dataGridView
-                //DataListUser.DataSource = dt;
-
-                ////Tải dữ liệu lên listView
-                //int i = 0;
-                //foreach (DataRow dr in dt.Rows)
-                //{
-                //    DataListUser.Items.Add(dr["id"].ToString());
-                //    DataListUser.Items[i].SubItems.Add(dr["ten"].ToString());
-                //    i++;
-                //}
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                DataGridViewUser.DataSource = dt;
 
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
