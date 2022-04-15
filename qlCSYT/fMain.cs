@@ -22,47 +22,11 @@ namespace qlCSYT
             InitializeComponent();
         }
 
-        private void lbTitle_Click(object sender, EventArgs e)
-        {
 
-        }
 
         private void fMain_Load(object sender, EventArgs e)
         {
-
-            OracleConnection conn = DBUtils.GetDBConnection();
-            conn.Open();
-                OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
-
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            
-
-            da.Fill(dt);
-            gv_main.DataSource = dt;
-            //Delete button
-            var deleteButton = new DataGridViewButtonColumn();
-            deleteButton.Name = "dataGridViewDeleteButton";
-            deleteButton.HeaderText = "DELETE";
-            deleteButton.Text = "x";
-            deleteButton.UseColumnTextForButtonValue = true;
-            this.gv_main.Columns.Add(deleteButton);
-            // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
-
-            //Show Priviledge Button
-            var showPriviledgeButton = new DataGridViewButtonColumn();
-            showPriviledgeButton.Name = "dataGridViewShowPriviledgeButton";
-            showPriviledgeButton.HeaderText = "PRIVILEDGE";
-            showPriviledgeButton.Text = "SHOW";
-            showPriviledgeButton.UseColumnTextForButtonValue = true;
-            this.gv_main.Columns.Add(showPriviledgeButton);
-            // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_ShowPriviledgeCellClick);
+            LoadUsers();
 
 
 
@@ -134,72 +98,13 @@ namespace qlCSYT
 
         }
 
-        private void lvDanhSach_SelectedIndexChanged(object sender, EventArgs e)
-        {
 
-        }
 
-        private void dtgvRoles_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
-        }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
 
-        }
 
-        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            fLogin fLogin = new fLogin();
-            fLogin.Show();
-        }
-
-        private void menustripUser_Click(object sender, EventArgs e)
-        {
-            this.gv_main.Columns.Clear();
-            this.Hide();
-            fMain fMain = new fMain();
-            fMain.Show();
-        }
-
-        private void menustripRole_Click(object sender, EventArgs e)
-        {
-            this.gv_main.Columns.Clear();
-            OracleConnection conn = DBUtils.GetDBConnection();
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
-
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            gv_main.DataSource = dt;
-            //Delete button
-            var deleteButton = new DataGridViewButtonColumn();
-            deleteButton.Name = "dataGridViewDeleteButton";
-            deleteButton.HeaderText = "DELETE";
-            deleteButton.Text = "x";
-            deleteButton.UseColumnTextForButtonValue = true;
-            this.gv_main.Columns.Add(deleteButton);
-            // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewRole_DeleteCellClick);
-
-            //Show Priviledge Button
-            var showPriviledgeButton = new DataGridViewButtonColumn();
-            showPriviledgeButton.Name = "dataGridViewShowPriviledgeButton";
-            showPriviledgeButton.HeaderText = "PRIVILEDGE";
-            showPriviledgeButton.Text = "SHOW";
-            showPriviledgeButton.UseColumnTextForButtonValue = true;
-            this.gv_main.Columns.Add(showPriviledgeButton);
-            // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_ShowPriviledgeCellClick);
-
-        }
+     
         void DataGridViewRole_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -222,6 +127,119 @@ namespace qlCSYT
                 frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
 
             }
+        }
+
+        private void m_showUserList_Click(object sender, EventArgs e)
+        {
+            LoadUsers();
+        }
+
+        private void m_logout_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void LoadUsers()
+        {
+            this.gv_main.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@user_name", "ADMIN");
+            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+            cmd.ExecuteNonQuery();
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+
+            da.Fill(dt);
+            gv_main.DataSource = dt;
+            //Delete button
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "dataGridViewDeleteButton";
+            deleteButton.HeaderText = "DELETE";
+            deleteButton.Text = "x";
+            deleteButton.UseColumnTextForButtonValue = true;
+            this.gv_main.Columns.Add(deleteButton);
+            // Add a CellClick handler to handle clicks in the button column.
+            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
+
+            //Show Priviledge Button
+            var showPriviledgeButton = new DataGridViewButtonColumn();
+            showPriviledgeButton.Name = "dataGridViewShowPriviledgeButton";
+            showPriviledgeButton.HeaderText = "PRIVILEDGE";
+            showPriviledgeButton.Text = "SHOW";
+            showPriviledgeButton.UseColumnTextForButtonValue = true;
+            this.gv_main.Columns.Add(showPriviledgeButton);
+            // Add a CellClick handler to handle clicks in the button column.
+
+            gv_main.CellClick -= DataGridViewRole_ShowPriviledgeCellClick;
+            gv_main.CellClick += DataGridViewUser_ShowPriviledgeCellClick;
+
+
+        }
+        private void LoadRoles()
+        {
+            this.gv_main.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            //cmd.Parameters.Add("@user_name", "ADMIN");
+            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+            cmd.ExecuteNonQuery();
+
+            OracleDataAdapter da = new OracleDataAdapter(cmd);
+            DataTable dt = new DataTable();
+
+
+            da.Fill(dt);
+            gv_main.DataSource = dt;
+            //Delete button
+            var deleteButton = new DataGridViewButtonColumn();
+            deleteButton.Name = "dataGridViewDeleteButton";
+            deleteButton.HeaderText = "DELETE";
+            deleteButton.Text = "x";
+            deleteButton.UseColumnTextForButtonValue = true;
+            this.gv_main.Columns.Add(deleteButton);
+            // Add a CellClick handler to handle clicks in the button column.
+            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
+
+            //Show Priviledge Button
+            var showPriviledgeButton = new DataGridViewButtonColumn();
+            showPriviledgeButton.Name = "dataGridViewShowPriviledgeButton";
+            showPriviledgeButton.HeaderText = "PRIVILEDGE";
+            showPriviledgeButton.Text = "SHOW1";
+            showPriviledgeButton.UseColumnTextForButtonValue = true;
+            this.gv_main.Columns.Add(showPriviledgeButton);
+            // Add a CellClick handler to handle clicks in the button column.
+            gv_main.CellClick += DataGridViewRole_ShowPriviledgeCellClick;
+            gv_main.CellClick -= DataGridViewUser_ShowPriviledgeCellClick;
+
+
+        }
+
+        private void m_showRoleList_Click(object sender, EventArgs e)
+        {
+            LoadRoles();
+        }
+
+        private void m_addEmp_Click(object sender, EventArgs e)
+        {
+            frm_addEmp frm = new frm_addEmp();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
+
+        private void m_addPatient_Click(object sender, EventArgs e)
+        {
+            frm_addPatient frm = new frm_addPatient();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
         }
     }
 }
