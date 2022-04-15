@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tutorial.SqlConn;
+using System.Data.Common;
+using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
+using System.Runtime.InteropServices;
+using qlCSYT;
 
 namespace qlCSYT
 {
@@ -26,34 +32,70 @@ namespace qlCSYT
                 string sql = "SELECT USERNAME FROM all_users where USERNAME like 'C##CSYT%'";
                 // Tạo một đối tượng Command.
                 OracleCommand cmd = new OracleCommand(sql, conn);
+
+                //DataTable dt = new DataTable();
+                ////Tải dữ liệu lên dataGridView
+                //DataListUser.DataSource = dt;
+
+                ////Tải dữ liệu lên listView
+                //int i = 0;
+                //foreach (DataRow dr in dt.Rows)
+                //{
+                //    DataListUser.Items.Add(dr["id"].ToString());
+                //    DataListUser.Items[i].SubItems.Add(dr["ten"].ToString());
+                //    i++;
+                //}
+
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
-
                     if (reader.HasRows)
                     {
-
-                        DataTable listuser = new DataTable();
-                        tbl.Columns.Add("MaCSYT", typeof(string));
-                        tbl.Columns.Add("TenCSYT", typeof(string));
+                        DataTable ListUser = new DataTable();
+                        ListUser.Columns.Add("TenNguoiDung", typeof(string));
                         while (reader.Read())
                         {
-                            string medFacID = reader.GetString(1);
-                            tbl.Rows.Add(reader.GetString(0), reader.GetString(1));
+                            ListUser.Rows.Add(reader.GetString(0));
+
                         }
-                        cbMedFac.DataSource = tbl;
-                        cbMedFac.DisplayMember = "TenCSYT";
-                        cbMedFac.ValueMember = "MaCSYT";
+                        //DataGridViewUser.DisplayMember = "Username";
+                        //DataGridViewUser.ValueMember = "Username";
+                        //DataRow temprow = DataGridViewUser.Rows.
+                        DataGridViewUser.DataSource= ListUser;
+
+                        //Delete button
+                        var deleteButton = new DataGridViewButtonColumn();
+                        deleteButton.Name = "dataGridViewDeleteButton";
+                        deleteButton.HeaderText = "XoaNguoiDung";
+                        deleteButton.Text = "Xoa";
+                        deleteButton.UseColumnTextForButtonValue = true;
+                        this.DataGridViewUser.Columns.Add(deleteButton);
+                        // Add a CellClick handler to handle clicks in the button column.
+                        DataGridViewUser.CellClick +=
+                            new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
+
+                        //Data Taking Button
+                        var dataButton= new DataGridViewButtonColumn();
+                        dataButton.Name = "dataGridViewDataButton";
+                        dataButton.HeaderText = "InNguoiDung";
+                        dataButton.Text = "In";
+                        dataButton.UseColumnTextForButtonValue = true;
+                        this.DataGridViewUser.Columns.Add(dataButton);
+                        DataGridViewUser.CellClick +=
+                            new DataGridViewCellEventHandler(DataGridViewUser_DataCellClick);
+
                     }
                     else
                     {
                         Console.WriteLine("failed");
                     }
+
                 }
+
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine("Error: " + e);
-                Console.WriteLine(e.StackTrace);
+                Console.WriteLine("Error: " + ex);
+                Console.WriteLine(ex.StackTrace);
             }
             finally
             {
@@ -63,17 +105,32 @@ namespace qlCSYT
             }
             Console.Read();
 
-
-
-        
-        private void DataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        }
+        void DataGridViewUser_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if click is on new row or header row
             if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
                 return;
 
             //Check if click is on specific column 
-            if (e.ColumnIndex == DataGridViewUser.Columns["TenNguoiDung"].Index)
+            if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDeleteButton"].Index)
+            {
+                //Put some logic here, for example to remove row from your binding list.
+                //yourBindingList.RemoveAt(e.RowIndex);
+                DataGridViewUser.Rows.RemoveAt(e.RowIndex);
+                // Or
+                // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+                // do something 
+            }
+        }
+        void DataGridViewUser_DataCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
+                return;
+
+            //Check if click is on specific column 
+            if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDataButton"].Index)
             {
                 //Put some logic here, for example to remove row from your binding list.
                 //yourBindingList.RemoveAt(e.RowIndex);
@@ -87,6 +144,12 @@ namespace qlCSYT
                 // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
                 // do something 
             }
+            
+        }
+        
+        private void DataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
        
     }
