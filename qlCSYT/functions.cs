@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tutorial.SqlConn;
+using qlCSYT.SqlConn;
 using System.Data;
 using System.Data.Common;
 using Oracle.DataAccess.Client;
@@ -70,5 +70,6 @@ namespace qlCSYT
                 }
             }
         }
+        
     }
 }
