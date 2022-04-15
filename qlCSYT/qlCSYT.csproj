@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>qlCSYT</RootNamespace>
     <AssemblyName>qlCSYT</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -68,11 +68,11 @@
     <Compile Include="frm_addEmp.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_addRole.cs">
+    <Compile Include="frm_priviledges.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_addRole.Designer.cs">
-      <DependentUpon>frm_addRole.cs</DependentUpon>
+    <Compile Include="frm_priviledges.Designer.cs">
+      <DependentUpon>frm_priviledges.cs</DependentUpon>
     </Compile>
     <Compile Include="Frm_Edit_Roles.cs">
       <SubType>Form</SubType>
@@ -112,8 +112,8 @@
     <EmbeddedResource Include="frm_addPatient.resx">
       <DependentUpon>frm_addPatient.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_addRole.resx">
-      <DependentUpon>frm_addRole.cs</DependentUpon>
+    <EmbeddedResource Include="frm_priviledges.resx">
+      <DependentUpon>frm_priviledges.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Frm_Edit_Roles.resx">
       <DependentUpon>Frm_Edit_Roles.cs</DependentUpon>

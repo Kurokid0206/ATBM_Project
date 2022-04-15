@@ -110,3 +110,22 @@ as
     
     END;
 /
+
+create or replace procedure C##CSYT_ADMIN.ShowTable (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from user_tables;
+    
+    END;
+/
+create or replace procedure C##CSYT_ADMIN.ShowTableCol (tblname nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR
+SELECT column_name
+FROM user_tab_cols
+WHERE table_name = tblname;
+   END;
+/

@@ -62,7 +62,7 @@ as
     END;
 
 
-
+SELECT PRIVILEGE FROM DBA_SYS_PRIVS where grantee like user_name;
 
 CREATE USER C##CSYT_MeanSun IDENTIFIED by a;
 grant connect to C##CSYT_MeanSun; 
@@ -71,4 +71,4 @@ grant select on all_users to C##CSYT_Admin;
 grant select on DBA_SYS_PRIVS to C##CSYT_Admin;
 
 
-SELECT * FROM DBA_SYS_PRIVS where grantee like 'C##CSYT_ADMIN';
+
