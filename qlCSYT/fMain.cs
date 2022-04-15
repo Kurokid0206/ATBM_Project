@@ -206,7 +206,22 @@ namespace qlCSYT
         }
         void DataGridViewRole_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
         {
+            //if click is on new row or header row
+            if (e.RowIndex == gv_main.NewRowIndex || e.RowIndex < 0)
+                return;
+            //Check if click is on specific column 
+            if (e.ColumnIndex == gv_main.Columns["dataGridViewShowPriviledgeButton"].Index)
+            {
+                string Rolename = gv_main.Rows[e.RowIndex].Cells[0].Value.ToString();
+                OracleConnection conn = DBUtils.GetDBConnection();
+                frm_ViewRole frm = new frm_ViewRole();
+                frm.LoadRole(Rolename);
+                //frm.MdiParent = this;
+                this.Hide(); // hide when another is opened
+                frm.Show(); //show next frm
+                frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
 
+            }
         }
     }
 }

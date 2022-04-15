@@ -26,21 +26,21 @@ namespace qlCSYT
 
         }
 
-        public void LoadRole(string username)
+        public void LoadRole(string rolename)
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
+            OracleCommand cmd = new OracleCommand("ShowRolePriv", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@user_name", username);
+            cmd.Parameters.Add("@roleName", rolename);
             cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
             cmd.ExecuteNonQuery();
 
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
-            gv_User.DataSource = dt;
+            GridView_ShowRole.DataSource = dt;
         }
     }
 }
