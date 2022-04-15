@@ -77,7 +77,7 @@ BEGIN
     IF priType<1 then
         sqlstmt := 'REVOKE INSERT ON ';
     ELSIF priType<2 THEN
-        sqlstmt := 'REVOKE SELECT ON ';
+        sqlstmt := 'REVOKE SELECT ON '; 
     ELSIF priType<3 THEN
         sqlstmt := 'REVOKE UPDATE ON ';
     ELSE
@@ -88,3 +88,24 @@ BEGIN
                                                 
 	COMMIT;
 END;
+
+
+create or replace procedure ShowTables (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR SELECT table_name FROM user_tables;
+    
+    END;
+/
+
+
+
+create or replace procedure C##CSYT_ADMIN.ShowPriviledge (username NVARCHAR2, mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from all_tab_privs where grantee like '%C##CSYT_'||USERNAME||'%';
+    
+    END;
+/
