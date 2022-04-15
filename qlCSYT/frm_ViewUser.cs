@@ -115,14 +115,31 @@ namespace qlCSYT
             //Check if click is on specific column 
             if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDeleteButton"].Index)
             {
-                //Put some logic here, for example to remove row from your binding list.
-                //yourBindingList.RemoveAt(e.RowIndex);
-                DataGridViewUser.Rows.RemoveAt(e.RowIndex);
-                // Or
-                // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-                // do something 
+
+                OracleConnection conn = DBUtils.GetDBConnection();
+                string username = DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString();
+
+                try
+                {
+                    conn.Open();
+
+                    DropUser(conn, username);
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine("Error: " + err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                finally
+                {
+                    Console.WriteLine("Completed!");
+                    conn.Close();
+                    conn.Dispose();
+                }
+                Console.Read();
             }
         }
+
         void DataGridViewUser_DataCellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if click is on new row or header row
@@ -135,11 +152,15 @@ namespace qlCSYT
                 //Put some logic here, for example to remove row from your binding list.
                 //yourBindingList.RemoveAt(e.RowIndex);
                 //DataRow row = DataGridViewUser.Select();
-                Console.Write("Hello");
-                Console.Write(DataGridViewUser.Rows[e.RowIndex].ToString());
-                Console.WriteLine();
+                //Console.Write("Hello");
+                //Console.Write(DataGridViewUser.Rows[e.RowIndex].ToString());
+
+                string username = DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString();
+                Console.WriteLine(username);
+
+
                 //TextBox box1= new System.Windows.Forms.TextBox();
-                FakeConsole.AppendText(DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString());
+                //FakeConsole.AppendText(DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString());
                 // Or
                 // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
                 // do something 
@@ -151,6 +172,15 @@ namespace qlCSYT
         {
 
         }
-       
+        private void DropUser(OracleConnection conn, string username)
+        {
+
+            OracleCommand cmd = new OracleCommand("dropUser", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@pi_username", username);
+
+            cmd.ExecuteNonQuery();
+            
+        }
     }
 }

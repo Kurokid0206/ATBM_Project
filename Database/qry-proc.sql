@@ -24,7 +24,8 @@ CREATE OR REPLACE PROCEDURE C##CSYT_Admin.dropUser(
     lv_stmt   VARCHAR2 (1000);
 BEGIN
     
-        lv_stmt := 'DROP USER C##CSYT_' || user_name || ' CASCADE ';
+        --lv_stmt := 'DROP USER C##CSYT_' || user_name || ' CASCADE ';
+        lv_stmt := 'DROP USER ' || user_name || ' CASCADE ';
 	DBMS_OUTPUT.put_line(lv_stmt);
 
 	EXECUTE IMMEDIATE ( lv_stmt ); 
