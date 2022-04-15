@@ -49,7 +49,7 @@ END;
 /
 
 CREATE OR REPLACE PROCEDURE C##CSYT_Admin.dropRole(
-	pi_roleName IN NVARCHAR2) IS
+	pi_roleName IN NVARCHAR2) IS    
 	
 	role_name NVARCHAR2(20)  	:= pi_roleName;
     lv_stmt   VARCHAR2 (1000);
