@@ -24,7 +24,8 @@ CREATE OR REPLACE PROCEDURE C##CSYT_Admin.dropUser(
     lv_stmt   VARCHAR2 (1000);
 BEGIN
     
-        lv_stmt := 'DROP USER C##CSYT_' || user_name || ' CASCADE ';
+        --lv_stmt := 'DROP USER C##CSYT_' || user_name || ' CASCADE ';
+        lv_stmt := 'DROP USER ' || user_name || ' CASCADE ';
 	DBMS_OUTPUT.put_line(lv_stmt);
 
 	EXECUTE IMMEDIATE ( lv_stmt ); 
@@ -77,7 +78,7 @@ BEGIN
     IF priType<1 then
         sqlstmt := 'REVOKE INSERT ON ';
     ELSIF priType<2 THEN
-        sqlstmt := 'REVOKE SELECT ON ';
+        sqlstmt := 'REVOKE SELECT ON '; 
     ELSIF priType<3 THEN
         sqlstmt := 'REVOKE UPDATE ON ';
     ELSE
@@ -88,3 +89,52 @@ BEGIN
                                                 
 	COMMIT;
 END;
+
+
+create or replace procedure ShowTables (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR SELECT table_name FROM user_tables;
+    
+    END;
+/
+
+
+
+create or replace procedure C##CSYT_ADMIN.ShowPriviledge (username NVARCHAR2, mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from all_tab_privs where grantee like '%C##CSYT_'||USERNAME||'%';
+    
+    END;
+/
+
+create or replace procedure C##CSYT_ADMIN.ShowTable (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from user_tables;
+    
+    END;
+/
+create or replace procedure C##CSYT_ADMIN.ShowTableCol (tblname nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR
+SELECT column_name
+FROM user_tab_cols
+WHERE table_name = tblname;
+   END;
+/
+
+create or replace procedure C##CSYT_ADMIN.ShowRolePriv (roleName nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR
+SELECT role,table_name,privilege FROM role_TAB_PRIVS
+WHERE role = roleName;
+   END;

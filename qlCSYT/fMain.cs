@@ -212,7 +212,6 @@ namespace qlCSYT
             //Check if click is on specific column 
             if (e.ColumnIndex == gv_main.Columns["dataGridViewShowPriviledgeButton"].Index)
             {
-                Console.WriteLine("role");
                 string Rolename = gv_main.Rows[e.RowIndex].Cells[0].Value.ToString();
                 OracleConnection conn = DBUtils.GetDBConnection();
                 frm_ViewRole frm = new frm_ViewRole();
