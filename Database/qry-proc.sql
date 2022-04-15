@@ -138,3 +138,48 @@ as
 SELECT role,table_name,privilege FROM role_TAB_PRIVS
 WHERE role = roleName;
    END;
+   
+create or replace function C##CSYT_ADMIN.autoUID
+return CHAR
+AS
+UID char(10);
+cnt NUMBER;
+v_count number;
+BEGIN
+
+    select count(*) into cnt from C##CSYT_ADMIN.BenhNhan;
+    
+    UID:= 'BN'||TRIM(TO_CHAR(cnt,'00000000'));
+    
+    select count(*) into v_count from C##CSYT_ADMIN.BenhNhan where MABN=UID;
+    while(v_count>0)
+        LOOP
+            cnt:=cnt+1;
+            UID:= 'BN'||TRIM(TO_CHAR(cnt,'00000000'));
+            select count(*) into v_count from C##CSYT_ADMIN.BenhNhan where MABN=UID;
+        END LOOP;
+    return UID;
+END;
+/
+create or replace function C##CSYT_ADMIN.autoEID
+return CHAR
+AS
+EID char(10);
+cnt NUMBER;
+v_count number;
+BEGIN
+
+    select count(*) into cnt from C##CSYT_ADMIN.NhanVien;
+    
+    EID:= 'NV'||TRIM(TO_CHAR(cnt,'00000000'));
+    
+    select count(*) into v_count from C##CSYT_ADMIN.NhanVien where MANV=EID;
+    while(v_count>0)
+        LOOP
+            cnt:=cnt+1;
+            EID:= 'NV'||TRIM(TO_CHAR(cnt,'00000000'));
+            select count(*) into v_count from C##CSYT_ADMIN.NhanVien where MANV=EID;
+        END LOOP;
+    return EID;
+END;
+/
