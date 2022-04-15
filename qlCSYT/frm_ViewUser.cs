@@ -139,21 +139,8 @@ namespace qlCSYT
             //Check if click is on specific column 
             if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDataButton"].Index)
             {
-                //Put some logic here, for example to remove row from your binding list.
-                //yourBindingList.RemoveAt(e.RowIndex);
-                //DataRow row = DataGridViewUser.Select();
-                //Console.Write("Hello");
-                //Console.Write(DataGridViewUser.Rows[e.RowIndex].ToString());
-
                 string username = DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString();
                 Console.WriteLine(username);
-
-
-                //TextBox box1= new System.Windows.Forms.TextBox();
-                //FakeConsole.AppendText(DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString());
-                // Or
-                // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
-                // do something 
             }
             
         }
