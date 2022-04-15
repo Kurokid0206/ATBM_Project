@@ -29,6 +29,7 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_priviledges));
             this.gv_tables = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.gv_tables)).BeginInit();
             this.SuspendLayout();
@@ -36,18 +37,23 @@ namespace qlCSYT
             // gv_tables
             // 
             this.gv_tables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_tables.Location = new System.Drawing.Point(58, 121);
+            this.gv_tables.Location = new System.Drawing.Point(77, 149);
+            this.gv_tables.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_tables.Name = "gv_tables";
-            this.gv_tables.Size = new System.Drawing.Size(692, 150);
+            this.gv_tables.RowHeadersWidth = 51;
+            this.gv_tables.Size = new System.Drawing.Size(923, 185);
             this.gv_tables.TabIndex = 0;
             // 
             // frm_priviledges
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
             this.Controls.Add(this.gv_tables);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_priviledges";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm role";
             this.Load += new System.EventHandler(this.frm_priviledges_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gv_tables)).EndInit();

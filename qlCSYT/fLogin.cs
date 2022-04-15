@@ -47,12 +47,12 @@ namespace qlCSYT
 
             if (username == null || username.Equals(""))
             {
-                MessageBox.Show("Chưa nhập Username!");
+                MessageBox.Show("Bạn chưa nhập Username!","Thông báo!");
                 return;
             }
             if (password == null || password.Equals(""))
             {
-                MessageBox.Show("Chưa nhập Password!");
+                MessageBox.Show("Bạn chưa nhập Password!", "Thông báo!");
                 return;
             }
             try
@@ -65,7 +65,7 @@ namespace qlCSYT
             }
             catch (Exception err)
             {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo!");
                 return;
             }
         }

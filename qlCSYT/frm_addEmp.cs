@@ -23,7 +23,8 @@ namespace qlCSYT
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
+            if(result == DialogResult.OK) this.Close();
         }
 
         private void frm_addEmp_Load(object sender, EventArgs e)
@@ -142,6 +143,16 @@ namespace qlCSYT
             cmd.Parameters.Add("@pi_username", username);
             cmd.Parameters.Add("@pi_password", password);
             cmd.ExecuteNonQuery();            
+        }
+
+        private void txt_idNumber_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_gender_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

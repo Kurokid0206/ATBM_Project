@@ -140,5 +140,10 @@ namespace qlCSYT
             cmd.Parameters.Add("@pi_password", password);
             cmd.ExecuteNonQuery();
         }
+
+        private void rtxt_sickHis_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
