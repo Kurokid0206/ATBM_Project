@@ -7,8 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
-using System.Windows.Forms;
 using System.Data.Common;
 using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
@@ -269,6 +267,7 @@ namespace qlCSYT
             frm_addPatient frm = new frm_addPatient();
             this.Hide();
             frm.Closed += (s, args) => this.Show();
+
             frm.Show();
         }
 
