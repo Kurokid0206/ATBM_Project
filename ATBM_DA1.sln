@@ -1,9 +1,16 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31911.196
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qlCSYT", "qlCSYT\qlCSYT.csproj", "{1607CEEA-E75C-4ABD-84DD-D67661D804A5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{03ED37E0-A76C-4572-A370-CE7CCE927BDA}"
+	ProjectSection(SolutionItems) = preProject
+		qlCSYT\frm_ViewUser.cs = qlCSYT\frm_ViewUser.cs
+		qlCSYT\frm_ViewUser.Designer.cs = qlCSYT\frm_ViewUser.Designer.cs
+		qlCSYT\frm_ViewUser.resx = qlCSYT\frm_ViewUser.resx
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
