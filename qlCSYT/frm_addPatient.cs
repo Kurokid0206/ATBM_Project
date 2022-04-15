@@ -23,7 +23,8 @@ namespace qlCSYT
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) this.Close();
         }
 
         private void frm_addPatient_Load(object sender, EventArgs e)
@@ -142,6 +143,76 @@ namespace qlCSYT
         }
 
         private void rtxt_sickHis_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_username_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_name_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_idNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_birth_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_Gender_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_houseNo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_street_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_district_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_city_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_csytID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_allergy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_famSickHis_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_sickHis_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_password_Click(object sender, EventArgs e)
         {
 
         }
