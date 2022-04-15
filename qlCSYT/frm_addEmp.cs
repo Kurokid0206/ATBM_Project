@@ -113,6 +113,35 @@ namespace qlCSYT
             string role = cb_role.SelectedValue.ToString();
             string specialist = txt_specialist.Text;
 
+            OracleConnection conn = DBUtils.GetDBConnection();
+            
+            try
+            {
+                conn.Open();
+
+                CreateEmp(conn,username,password);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error: " + err);
+                Console.WriteLine(err.StackTrace);
+            }
+            finally
+            {
+                Console.WriteLine("Completed!");
+                conn.Close();
+                conn.Dispose();
+            }
+            Console.Read();
+        }
+        private void CreateEmp(OracleConnection conn, string username,string password)
+        {
+            
+            OracleCommand cmd = new OracleCommand("CreateUser", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@pi_username", username);
+            cmd.Parameters.Add("@pi_password", password);
+            cmd.ExecuteNonQuery();            
         }
     }
 }
