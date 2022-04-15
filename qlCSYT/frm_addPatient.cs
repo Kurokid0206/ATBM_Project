@@ -109,8 +109,36 @@ namespace qlCSYT
             string famSickkHist = rtxt_famSickHis.Text;
             string allergy = rtxt_allergy.Text;
 
-            Console.WriteLine(gender);
+            OracleConnection conn = DBUtils.GetDBConnection();
 
+            try
+            {
+                conn.Open();
+
+                CreatePatient(conn, username, password);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error: " + err);
+                Console.WriteLine(err.StackTrace);
+            }
+            finally
+            {
+                Console.WriteLine("Completed!");
+                conn.Close();
+                conn.Dispose();
+            }
+            Console.Read();
+
+        }
+        private void CreatePatient(OracleConnection conn, string username, string password)
+        {
+
+            OracleCommand cmd = new OracleCommand("CreateUser", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@pi_username", username);
+            cmd.Parameters.Add("@pi_password", password);
+            cmd.ExecuteNonQuery();
         }
     }
 }
