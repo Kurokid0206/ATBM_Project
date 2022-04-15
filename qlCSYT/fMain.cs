@@ -34,7 +34,7 @@ namespace qlCSYT
             conn.Open();
                 OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@user_name", "MEANSUN");
+                cmd.Parameters.Add("@user_name", "AMIND");
             cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
             cmd.ExecuteNonQuery();
 
