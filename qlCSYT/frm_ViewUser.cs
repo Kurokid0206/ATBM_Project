@@ -66,7 +66,28 @@ namespace qlCSYT
 
 
         
-        } 
+        private void DataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
+                return;
 
+            //Check if click is on specific column 
+            if (e.ColumnIndex == DataGridViewUser.Columns["TenNguoiDung"].Index)
+            {
+                //Put some logic here, for example to remove row from your binding list.
+                //yourBindingList.RemoveAt(e.RowIndex);
+                //DataRow row = DataGridViewUser.Select();
+                Console.Write("Hello");
+                Console.Write(DataGridViewUser.Rows[e.RowIndex].ToString());
+                Console.WriteLine();
+                //TextBox box1= new System.Windows.Forms.TextBox();
+                FakeConsole.AppendText(DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString());
+                // Or
+                // var data = (Product)dataGridView1.Rows[e.RowIndex].DataBoundItem;
+                // do something 
+            }
+        }
+       
     }
 }
