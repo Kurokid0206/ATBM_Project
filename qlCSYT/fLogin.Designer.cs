@@ -32,11 +32,11 @@
             this.lbTitle = new System.Windows.Forms.Label();
             this.lbUsername = new System.Windows.Forms.Label();
             this.lbPassword = new System.Windows.Forms.Label();
-            this.pbLogo = new System.Windows.Forms.PictureBox();
             this.tbUsername = new System.Windows.Forms.TextBox();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.btLogin = new System.Windows.Forms.Button();
             this.btExit = new System.Windows.Forms.Button();
+            this.pbLogo = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,16 +71,6 @@
             this.lbPassword.TabIndex = 2;
             this.lbPassword.Text = "Password";
             // 
-            // pbLogo
-            // 
-            this.pbLogo.Image = global::qlCSYT.Properties.Resources.ATBMCQ_4_removebg_preview;
-            this.pbLogo.Location = new System.Drawing.Point(0, -2);
-            this.pbLogo.Name = "pbLogo";
-            this.pbLogo.Size = new System.Drawing.Size(213, 195);
-            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbLogo.TabIndex = 3;
-            this.pbLogo.TabStop = false;
-            // 
             // tbUsername
             // 
             this.tbUsername.Location = new System.Drawing.Point(330, 69);
@@ -101,7 +91,7 @@
             // btLogin
             // 
             this.btLogin.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btLogin.Location = new System.Drawing.Point(396, 143);
+            this.btLogin.Location = new System.Drawing.Point(399, 136);
             this.btLogin.Name = "btLogin";
             this.btLogin.Size = new System.Drawing.Size(75, 36);
             this.btLogin.TabIndex = 6;
@@ -113,7 +103,7 @@
             // 
             this.btExit.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btExit.Font = new System.Drawing.Font("Palatino Linotype", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btExit.Location = new System.Drawing.Point(516, 143);
+            this.btExit.Location = new System.Drawing.Point(525, 136);
             this.btExit.Name = "btExit";
             this.btExit.Size = new System.Drawing.Size(75, 36);
             this.btExit.TabIndex = 7;
@@ -121,13 +111,23 @@
             this.btExit.UseVisualStyleBackColor = true;
             this.btExit.Click += new System.EventHandler(this.btExit_Click);
             // 
+            // pbLogo
+            // 
+            this.pbLogo.Image = global::qlCSYT.Properties.Resources.ATBMCQ_4_removebg_preview;
+            this.pbLogo.Location = new System.Drawing.Point(0, -2);
+            this.pbLogo.Name = "pbLogo";
+            this.pbLogo.Size = new System.Drawing.Size(213, 195);
+            this.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbLogo.TabIndex = 3;
+            this.pbLogo.TabStop = false;
+            // 
             // fLogin
             // 
             this.AcceptButton = this.btLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btExit;
-            this.ClientSize = new System.Drawing.Size(702, 191);
+            this.ClientSize = new System.Drawing.Size(702, 189);
             this.Controls.Add(this.btExit);
             this.Controls.Add(this.btLogin);
             this.Controls.Add(this.tbPassword);
@@ -136,7 +136,7 @@
             this.Controls.Add(this.lbPassword);
             this.Controls.Add(this.lbUsername);
             this.Controls.Add(this.lbTitle);
-            //this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "fLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đăng nhập";

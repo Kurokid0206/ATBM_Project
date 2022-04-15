@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.panel1 = new System.Windows.Forms.Panel();
             this.gv_main = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -45,38 +46,38 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.gv_main);
-            this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 30);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(709, 339);
+            this.panel1.Size = new System.Drawing.Size(945, 417);
             this.panel1.TabIndex = 1;
             // 
             // gv_main
             // 
             this.gv_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_main.Location = new System.Drawing.Point(9, 0);
-            this.gv_main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gv_main.Location = new System.Drawing.Point(12, 0);
+            this.gv_main.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gv_main.Name = "gv_main";
             this.gv_main.RowHeadersWidth = 51;
             this.gv_main.RowTemplate.Height = 24;
-            this.gv_main.Size = new System.Drawing.Size(700, 323);
+            this.gv_main.Size = new System.Drawing.Size(933, 398);
             this.gv_main.TabIndex = 0;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tbSearch);
-            this.panel2.Location = new System.Drawing.Point(777, 26);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Location = new System.Drawing.Point(1036, 32);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(148, 255);
+            this.panel2.Size = new System.Drawing.Size(197, 314);
             this.panel2.TabIndex = 2;
             // 
             // tbSearch
             // 
-            this.tbSearch.Location = new System.Drawing.Point(2, 2);
-            this.tbSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tbSearch.Location = new System.Drawing.Point(3, 2);
+            this.tbSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbSearch.Name = "tbSearch";
-            this.tbSearch.Size = new System.Drawing.Size(147, 20);
+            this.tbSearch.Size = new System.Drawing.Size(195, 22);
             this.tbSearch.TabIndex = 0;
             this.tbSearch.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -85,19 +86,19 @@
             this.adminToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.thôngTinTàiKhoảnToolStripMenuItem});
             this.adminToolStripMenuItem.Name = "adminToolStripMenuItem";
-            this.adminToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
+            this.adminToolStripMenuItem.Size = new System.Drawing.Size(67, 24);
             this.adminToolStripMenuItem.Text = "Admin";
             // 
             // thôngTinTàiKhoảnToolStripMenuItem
             // 
             this.thôngTinTàiKhoảnToolStripMenuItem.Name = "thôngTinTàiKhoảnToolStripMenuItem";
-            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.thôngTinTàiKhoảnToolStripMenuItem.Size = new System.Drawing.Size(220, 26);
             this.thôngTinTàiKhoảnToolStripMenuItem.Text = "Thông tin tài khoản";
             // 
             // menustripDangXuat
             // 
             this.menustripDangXuat.Name = "menustripDangXuat";
-            this.menustripDangXuat.Size = new System.Drawing.Size(73, 20);
+            this.menustripDangXuat.Size = new System.Drawing.Size(91, 24);
             this.menustripDangXuat.Text = "Đăng xuất";
             this.menustripDangXuat.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
             // 
@@ -109,21 +110,22 @@
             this.menustripDangXuat});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1345, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1009, 367);
+            this.ClientSize = new System.Drawing.Size(1345, 452);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ATBMCQ-4";
