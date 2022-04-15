@@ -7,6 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using qlCSYT.SqlConn;
+using System.Data.Common;
+using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
+using System.Runtime.InteropServices;
+using qlCSYT;
+
 
 namespace qlCSYT
 {
@@ -34,10 +41,31 @@ namespace qlCSYT
 
         private void btLogin_Click(object sender, EventArgs e)
         {
-            //Chuyen form
-            this.Hide();
-            fMain fMain = new fMain();
-            fMain.Show();
+            string username = tbUsername.Text;
+            string password = tbPassword.Text;
+            OracleConnection conn = DBUtils.GetDBConnection(username,password);
+
+            try
+            {
+                conn.Open();
+                //Chuyen form
+                this.Hide();
+                fMain fMain = new fMain();
+                fMain.Show();
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error: " + err);
+                Console.WriteLine(err.StackTrace);
+            }
+            finally
+            {
+                Console.WriteLine("Completed!");
+                conn.Close();
+                conn.Dispose();
+            }
+
+            
         }
     }
 }

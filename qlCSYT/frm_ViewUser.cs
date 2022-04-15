@@ -33,18 +33,6 @@ namespace qlCSYT
                 // Tạo một đối tượng Command.
                 OracleCommand cmd = new OracleCommand(sql, conn);
 
-                //DataTable dt = new DataTable();
-                ////Tải dữ liệu lên dataGridView
-                //DataListUser.DataSource = dt;
-
-                ////Tải dữ liệu lên listView
-                //int i = 0;
-                //foreach (DataRow dr in dt.Rows)
-                //{
-                //    DataListUser.Items.Add(dr["id"].ToString());
-                //    DataListUser.Items[i].SubItems.Add(dr["ten"].ToString());
-                //    i++;
-                //}
 
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
