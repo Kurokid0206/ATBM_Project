@@ -25,7 +25,7 @@ namespace qlCSYT
         private void btn_test_Click(object sender, EventArgs e)
         {
             frm_ViewUser frm = new frm_ViewUser();
-            frm.LoadUser("ADMIN");
+            frm.LoadUser("C##CSYT_ADMIN");
             //frm.MdiParent = this;
             this.Hide(); // hide when another is opened
             frm.Show(); //show next frm

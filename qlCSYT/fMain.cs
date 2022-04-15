@@ -67,7 +67,12 @@ namespace qlCSYT
         }
         void DataGridViewUser_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            frm_ViewUser frm = new frm_ViewUser();
+            frm.LoadUser("C##CSYT_ADMIN");
+            //frm.MdiParent = this;
+            this.Hide(); // hide when another is opened
+            frm.Show(); //show next frm
+            frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
         void DataGridViewUser_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {

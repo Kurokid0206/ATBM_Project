@@ -23,7 +23,7 @@ namespace CsOracleTutorial
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_Edit_Roles());
+            Application.Run(new fMain());
 
         }
     }
