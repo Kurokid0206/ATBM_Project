@@ -28,10 +28,8 @@ namespace qlCSYT
         {
             LoadUsers();
 
-
-
-
         }
+
         void DataGridViewUser_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
         {
             //if click is on new row or header row
@@ -51,6 +49,26 @@ namespace qlCSYT
 
             }
             
+        }
+        void DataGridViewRole_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == gv_main.NewRowIndex || e.RowIndex < 0)
+                return;
+            //Check if click is on specific column 
+            if (e.ColumnIndex == gv_main.Columns["dataGridViewShowPriviledgeButton"].Index)
+            {
+                string roleName = gv_main.Rows[e.RowIndex].Cells[0].Value.ToString();
+                OracleConnection conn = DBUtils.GetDBConnection();
+                frm_ViewRole frm = new frm_ViewRole();
+                frm.LoadRole(roleName);
+                //frm.MdiParent = this;
+                this.Hide(); // hide when another is opened
+                frm.Show(); //show next frm
+                frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
+
+            }
+
         }
         void DataGridViewUser_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -83,6 +101,37 @@ namespace qlCSYT
                 Console.Read();
             }
         }
+        void DataGridViewRole_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == gv_main.NewRowIndex || e.RowIndex < 0)
+                return;
+            //Check if click is on specific column 
+            if (e.ColumnIndex == gv_main.Columns["dataGridViewDeleteButton"].Index)
+            {
+
+                OracleConnection conn = DBUtils.GetDBConnection();
+                string roleName = gv_main.Rows[e.RowIndex].Cells[0].Value.ToString();
+                try
+                {
+                    conn.Open();
+
+                    DropRole(conn, roleName);
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine("Error: " + err);
+                    Console.WriteLine(err.StackTrace);
+                }
+                finally
+                {
+                    Console.WriteLine("Completed!");
+                    conn.Close();
+                    conn.Dispose();
+                }
+                Console.Read();
+            }
+        }
         private void DropUser(OracleConnection conn, string username)
         {
 
@@ -93,41 +142,19 @@ namespace qlCSYT
             cmd.ExecuteNonQuery();
 
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void DropRole(OracleConnection conn, string roleName)
         {
+
+            OracleCommand cmd = new OracleCommand("dropRole", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@pi_roleName", roleName);
+
+            cmd.ExecuteNonQuery();
 
         }
 
 
 
-
-
-
-
-     
-        void DataGridViewRole_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-        void DataGridViewRole_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if click is on new row or header row
-            if (e.RowIndex == gv_main.NewRowIndex || e.RowIndex < 0)
-                return;
-            //Check if click is on specific column 
-            if (e.ColumnIndex == gv_main.Columns["dataGridViewShowPriviledgeButton"].Index)
-            {
-                string Rolename = gv_main.Rows[e.RowIndex].Cells[0].Value.ToString();
-                OracleConnection conn = DBUtils.GetDBConnection();
-                frm_ViewRole frm = new frm_ViewRole();
-                frm.LoadRole(Rolename);
-                //frm.MdiParent = this;
-                this.Hide(); // hide when another is opened
-                frm.Show(); //show next frm
-                frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
-
-            }
-        }
 
         private void m_showUserList_Click(object sender, EventArgs e)
         {
@@ -164,7 +191,8 @@ namespace qlCSYT
             deleteButton.UseColumnTextForButtonValue = true;
             this.gv_main.Columns.Add(deleteButton);
             // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
+            gv_main.CellClick += DataGridViewUser_DeleteCellClick;
+            gv_main.CellClick -= DataGridViewRole_DeleteCellClick;
 
             //Show Priviledge Button
             var showPriviledgeButton = new DataGridViewButtonColumn();
@@ -205,13 +233,13 @@ namespace qlCSYT
             deleteButton.UseColumnTextForButtonValue = true;
             this.gv_main.Columns.Add(deleteButton);
             // Add a CellClick handler to handle clicks in the button column.
-            gv_main.CellClick += new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
-
+            gv_main.CellClick -= DataGridViewUser_DeleteCellClick;
+            gv_main.CellClick += DataGridViewRole_DeleteCellClick;
             //Show Priviledge Button
             var showPriviledgeButton = new DataGridViewButtonColumn();
             showPriviledgeButton.Name = "dataGridViewShowPriviledgeButton";
             showPriviledgeButton.HeaderText = "PRIVILEDGE";
-            showPriviledgeButton.Text = "SHOW1";
+            showPriviledgeButton.Text = "SHOW";
             showPriviledgeButton.UseColumnTextForButtonValue = true;
             this.gv_main.Columns.Add(showPriviledgeButton);
             // Add a CellClick handler to handle clicks in the button column.
