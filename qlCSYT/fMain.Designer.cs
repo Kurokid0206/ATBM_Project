@@ -134,6 +134,7 @@
             // gv_main
             // 
             this.gv_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_main.Location = new System.Drawing.Point(3, 2);
             this.gv_main.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
