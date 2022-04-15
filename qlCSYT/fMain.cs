@@ -84,24 +84,7 @@ namespace qlCSYT
                 this.Hide(); // hide when another is opened
                 frm.Show(); //show next frm
                 frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
-                try
-                {
-                    conn.Open();
 
-                    DropUser(conn, username);
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine("Error: " + err);
-                    Console.WriteLine(err.StackTrace);
-                }
-                finally
-                {
-                    Console.WriteLine("Completed!");
-                    conn.Close();
-                    conn.Dispose();
-                }
-                Console.Read();
             }
             
         }

@@ -129,3 +129,12 @@ FROM user_tab_cols
 WHERE table_name = tblname;
    END;
 /
+
+create or replace procedure C##CSYT_ADMIN.ShowRolePriv (roleName nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR
+SELECT role,table_name,privilege FROM role_TAB_PRIVS
+WHERE role = roleName;
+   END;

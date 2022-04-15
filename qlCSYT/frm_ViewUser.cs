@@ -28,6 +28,7 @@ namespace qlCSYT
         }
         public void LoadUser(string username)
         {
+            
             OracleConnection conn = DBUtils.GetDBConnection();
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
