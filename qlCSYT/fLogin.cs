@@ -45,6 +45,16 @@ namespace qlCSYT
             string password = tbPassword.Text;
             OracleConnection conn = DBUtils.GetDBConnection(username,password);
 
+            if (username == null || username.Equals(""))
+            {
+                MessageBox.Show("Chưa nhập Username!");
+                return;
+            }
+            if (password == null || password.Equals(""))
+            {
+                MessageBox.Show("Chưa nhập Password!");
+                return;
+            }
             try
             {
                 conn.Open();
@@ -55,17 +65,9 @@ namespace qlCSYT
             }
             catch (Exception err)
             {
-                Console.WriteLine("Error: " + err);
-                Console.WriteLine(err.StackTrace);
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                return;
             }
-            finally
-            {
-                Console.WriteLine("Completed!");
-                conn.Close();
-                conn.Dispose();
-            }
-
-            
         }
     }
 }
