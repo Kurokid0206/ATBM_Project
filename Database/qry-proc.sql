@@ -89,6 +89,7 @@ BEGIN
                                                 
 	COMMIT;
 END;
+/
 
 
 create or replace procedure ShowTables (mycursor OUT SYS_REFCURSOR)
@@ -138,3 +139,82 @@ as
 SELECT role,table_name,privilege FROM role_TAB_PRIVS
 WHERE role = roleName;
    END;
+/
+
+--cap quyen connect cho mot user hoac role
+create or replace procedure C##CSYT_Admin.GrantConnect (user_role VARCHAR2)
+as
+
+    BEGIN
+        execute IMMEDIATE ('grant connect to ' || user_role || ' with admin option');
+    END;
+    /
+
+
+--cap quyen select cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantSelect (user_role VARCHAR2, cols VARCHAR2, tbl_view VARCHAR2, opt boolean)
+as
+
+    BEGIN
+        if opt then
+            execute IMMEDIATE ('grant select '|| cols || ' on C##CSYT_Admin.' || tbl_view || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant select '|| cols || ' on C##CSYT_Admin.' || tbl_view || ' to ' || user_role );
+        end if;
+    END;
+    /
+
+  
+--cap quyen update cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantUpdate (user_role VARCHAR2, cols VARCHAR2, tbl VARCHAR2, opt boolean)
+as
+
+    BEGIN
+        if opt then
+            execute IMMEDIATE ('grant update '|| cols || ' on C##CSYT_Admin.' || tbl || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant update '|| cols || ' on C##CSYT_Admin.' || tbl || ' to ' || user_role );
+        end if;
+    END;
+/
+
+
+--cap quyen insert cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantUpdate (user_role VARCHAR2, cols VARCHAR2, tbl VARCHAR2, opt boolean)
+as
+
+    BEGIN
+        if opt then
+            execute IMMEDIATE ('grant insert on C##CSYT_Admin.' || tbl || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant insert on C##CSYT_Admin.' || tbl || ' to ' || user_role );
+        end if;
+    END;
+/
+   
+--Lay tat ca quyen cho mot user
+create or replace procedure C##CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+as
+
+    BEGIN
+        Open CUR for SELECT grantee,table_name,privilege FROM USER_TAB_PRIVS where grantee like user_name;
+
+    END;
+/
+create or replace procedure C##CSYT_Admin.ShowAllUser (CUR out SYS_REFCURSOR)
+as
+
+    BEGIN
+        Open CUR for SELECT USERNAME FROM dba_users where USERNAME like 'C##CSYT%';
+
+    END;
+    /
+
+create or replace procedure C##CSYT_Admin.ShowAllRole (CUR out SYS_REFCURSOR)
+as
+
+    BEGIN
+        Open CUR for SELECT ROLE FROM dba_roles where ROLE like 'C##CSYT_ROLE_%';
+
+    END;
+    /
