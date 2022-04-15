@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Tutorial.SqlConn;
+using qlCSYT.SqlConn;
 using System.Data.Common;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
