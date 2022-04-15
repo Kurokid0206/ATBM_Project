@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,12 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using qlCSYT.SqlConn;
-using System.Data.Common;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
-using System.Runtime.InteropServices;
-using qlCSYT;
 
 namespace qlCSYT
 {
@@ -29,63 +23,37 @@ namespace qlCSYT
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@user_name", "AMIND");
-                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-                cmd.ExecuteNonQuery();
-
-
+                string sql = "SELECT USERNAME FROM all_users where USERNAME like 'C##CSYT%'";
+                // Tạo một đối tượng Command.
+                OracleCommand cmd = new OracleCommand(sql, conn);
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
+
                     if (reader.HasRows)
                     {
-                        DataTable ListUser = new DataTable();
-                        ListUser.Columns.Add("TenNguoiDung", typeof(string));
+
+                        DataTable listuser = new DataTable();
+                        tbl.Columns.Add("MaCSYT", typeof(string));
+                        tbl.Columns.Add("TenCSYT", typeof(string));
                         while (reader.Read())
                         {
-                            ListUser.Rows.Add(reader.GetString(0));
-
+                            string medFacID = reader.GetString(1);
+                            tbl.Rows.Add(reader.GetString(0), reader.GetString(1));
                         }
-                        //DataGridViewUser.DisplayMember = "Username";
-                        //DataGridViewUser.ValueMember = "Username";
-                        //DataRow temprow = DataGridViewUser.Rows.
-                        DataGridViewUser.DataSource= ListUser;
-
-                        //Delete button
-                        var deleteButton = new DataGridViewButtonColumn();
-                        deleteButton.Name = "dataGridViewDeleteButton";
-                        deleteButton.HeaderText = "XoaNguoiDung";
-                        deleteButton.Text = "Xoa";
-                        deleteButton.UseColumnTextForButtonValue = true;
-                        this.DataGridViewUser.Columns.Add(deleteButton);
-                        // Add a CellClick handler to handle clicks in the button column.
-                        DataGridViewUser.CellClick +=
-                            new DataGridViewCellEventHandler(DataGridViewUser_DeleteCellClick);
-
-                        //Data Taking Button
-                        var dataButton= new DataGridViewButtonColumn();
-                        dataButton.Name = "dataGridViewDataButton";
-                        dataButton.HeaderText = "InNguoiDung";
-                        dataButton.Text = "In";
-                        dataButton.UseColumnTextForButtonValue = true;
-                        this.DataGridViewUser.Columns.Add(dataButton);
-                        DataGridViewUser.CellClick +=
-                            new DataGridViewCellEventHandler(DataGridViewUser_DataCellClick);
-
+                        cbMedFac.DataSource = tbl;
+                        cbMedFac.DisplayMember = "TenCSYT";
+                        cbMedFac.ValueMember = "MaCSYT";
                     }
                     else
                     {
                         Console.WriteLine("failed");
                     }
-
                 }
-
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine("Error: " + ex);
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Error: " + e);
+                Console.WriteLine(e.StackTrace);
             }
             finally
             {
@@ -95,69 +63,10 @@ namespace qlCSYT
             }
             Console.Read();
 
-        }
-        void DataGridViewUser_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if click is on new row or header row
-            if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
-                return;
 
-            //Check if click is on specific column 
-            if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDeleteButton"].Index)
-            {
 
-                OracleConnection conn = DBUtils.GetDBConnection();
-                string username = DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString();
-
-                try
-                {
-                    conn.Open();
-
-                    DropUser(conn, username);
-                }
-                catch (Exception err)
-                {
-                    Console.WriteLine("Error: " + err);
-                    Console.WriteLine(err.StackTrace);
-                }
-                finally
-                {
-                    Console.WriteLine("Completed!");
-                    conn.Close();
-                    conn.Dispose();
-                }
-                Console.Read();
-            }
-        }
-
-        void DataGridViewUser_DataCellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //if click is on new row or header row
-            if (e.RowIndex == DataGridViewUser.NewRowIndex || e.RowIndex < 0)
-                return;
-
-            //Check if click is on specific column 
-            if (e.ColumnIndex == DataGridViewUser.Columns["dataGridViewDataButton"].Index)
-            {
-                string username = DataGridViewUser.Rows[e.RowIndex].Cells[0].Value.ToString();
-                Console.WriteLine(username);
-            }
-            
-        }
         
-        private void DataGridViewUser_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
+        } 
 
-        }
-        private void DropUser(OracleConnection conn, string username)
-        {
-
-            OracleCommand cmd = new OracleCommand("dropUser", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@pi_username", username);
-
-            cmd.ExecuteNonQuery();
-            
-        }
     }
 }
