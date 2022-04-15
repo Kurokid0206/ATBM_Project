@@ -18,13 +18,6 @@ namespace qlCSYT
             InitializeComponent();
         }
 
-        private void showPriviledge_Click(object sender, EventArgs e)
-        {
-            Frm_Priviledges frm = new Frm_Priviledges();
-            //frm.MdiParent = this;
-            this.Hide(); // hide when another is opened
-            frm.Show(); //show next frm
-            frm.Closed += (s, args) => this.Show();
-        }
+        
     }
 }
