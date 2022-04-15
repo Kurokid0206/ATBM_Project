@@ -35,10 +35,6 @@ namespace qlCSYT
                 cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
                 cmd.ExecuteNonQuery();
 
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                DataGridViewUser.DataSource = dt;
 
                 using (DbDataReader reader = cmd.ExecuteReader())
                 {
