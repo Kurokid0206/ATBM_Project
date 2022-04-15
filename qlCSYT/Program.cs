@@ -24,11 +24,9 @@ namespace CsOracleTutorial
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< Updated upstream
-            Application.Run(new frm_addEmp());
-=======
+
             Application.Run(new Frm_Edit_Roles());
->>>>>>> Stashed changes
+
         }
     }
 
