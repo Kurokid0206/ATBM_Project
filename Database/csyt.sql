@@ -89,6 +89,8 @@ GRANT SELECT ON dba_users TO C##CSYT_Admin;
 GRANT SELECT ON dba_roles TO C##CSYT_Admin;
 GRANT CREATE ROLE TO C##CSYT_Admin CONTAINER=ALL;
 GRANT CREATE TABLE TO C##CSYT_Admin;
+grant select on all_users to C##CSYT_Admin;/
+grant select on DBA_TAB_PRIVS to C##CSYT_Admin;/
 
 --insert data
 INSERT INTO C##CSYT_Admin.CSYT VALUES ('CS001','Benh vien Mat trung uong','TP.HCM','0123456789');

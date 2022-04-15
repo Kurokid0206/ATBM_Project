@@ -1,6 +1,3 @@
-SELECT username, user_id, created FROM all_users where oracle_maintained = 'N';/
-
-
 
 --cap quyen connect cho mot user hoac role
 create or replace procedure C##CSYT_Admin.GrantConnect (user_role VARCHAR2)

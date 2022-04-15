@@ -290,5 +290,13 @@ namespace qlCSYT
         {
 
         }
+
+        private void m_addRole_Click(object sender, EventArgs e)
+        {
+            frm_priviledges frm = new frm_priviledges();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
     }
 }

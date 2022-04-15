@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(fMain));
             this.m_main = new System.Windows.Forms.MenuStrip();
+            this.m_title = new System.Windows.Forms.ToolStripMenuItem();
             this.m_user = new System.Windows.Forms.ToolStripMenuItem();
             this.m_showUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.m_addUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,7 +42,6 @@
             this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_main = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.m_title = new System.Windows.Forms.ToolStripMenuItem();
             this.m_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_main)).BeginInit();
             this.panel1.SuspendLayout();
@@ -62,6 +62,12 @@
             this.m_main.Text = "main_menu";
             this.m_main.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.m_main_ItemClicked);
             // 
+            // m_title
+            // 
+            this.m_title.Name = "m_title";
+            this.m_title.Size = new System.Drawing.Size(162, 24);
+            this.m_title.Text = "Quản lý cơ sở dữ liệu";
+            // 
             // m_user
             // 
             this.m_user.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -75,7 +81,7 @@
             // m_showUserList
             // 
             this.m_showUserList.Name = "m_showUserList";
-            this.m_showUserList.Size = new System.Drawing.Size(224, 26);
+            this.m_showUserList.Size = new System.Drawing.Size(192, 26);
             this.m_showUserList.Text = "Xem danh sách";
             this.m_showUserList.Click += new System.EventHandler(this.m_showUserList_Click);
             // 
@@ -85,7 +91,7 @@
             this.m_addEmp,
             this.m_addPatient});
             this.m_addUser.Name = "m_addUser";
-            this.m_addUser.Size = new System.Drawing.Size(224, 26);
+            this.m_addUser.Size = new System.Drawing.Size(192, 26);
             this.m_addUser.Text = "Thêm mới";
             // 
             // m_addEmp
@@ -123,6 +129,7 @@
             this.m_addRole.Name = "m_addRole";
             this.m_addRole.Size = new System.Drawing.Size(224, 26);
             this.m_addRole.Text = "Thêm mới";
+            this.m_addRole.Click += new System.EventHandler(this.m_addRole_Click);
             // 
             // m_logout
             // 
@@ -134,6 +141,7 @@
             // gv_main
             // 
             this.gv_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.gv_main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_main.Location = new System.Drawing.Point(3, 2);
             this.gv_main.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -154,12 +162,6 @@
             this.panel1.Size = new System.Drawing.Size(960, 417);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
-            // 
-            // m_title
-            // 
-            this.m_title.Name = "m_title";
-            this.m_title.Size = new System.Drawing.Size(162, 24);
-            this.m_title.Text = "Quản lý cơ sở dữ liệu";
             // 
             // fMain
             // 

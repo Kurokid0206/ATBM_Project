@@ -29,6 +29,7 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_priviledges));
             this.gv_tables = new System.Windows.Forms.DataGridView();
             this.cb_user = new System.Windows.Forms.ComboBox();
             this.btn_addDelPriv = new System.Windows.Forms.Button();
@@ -37,57 +38,72 @@ namespace qlCSYT
             this.rbtn_user = new System.Windows.Forms.RadioButton();
             this.rbtn_role = new System.Windows.Forms.RadioButton();
             this.cb_roles = new System.Windows.Forms.ComboBox();
+            this.lb_User = new System.Windows.Forms.Label();
+            this.lb_Role = new System.Windows.Forms.Label();
+            this.lb_Table = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gv_tables)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_tables
             // 
+            this.gv_tables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_tables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_tables.Location = new System.Drawing.Point(58, 121);
+            this.gv_tables.Location = new System.Drawing.Point(19, 140);
+            this.gv_tables.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gv_tables.Name = "gv_tables";
-            this.gv_tables.Size = new System.Drawing.Size(692, 150);
+            this.gv_tables.RowHeadersWidth = 51;
+            this.gv_tables.Size = new System.Drawing.Size(587, 185);
             this.gv_tables.TabIndex = 0;
             // 
             // cb_user
             // 
+            this.cb_user.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_user.FormattingEnabled = true;
-            this.cb_user.Location = new System.Drawing.Point(94, 46);
+            this.cb_user.Location = new System.Drawing.Point(78, 13);
+            this.cb_user.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cb_user.Name = "cb_user";
-            this.cb_user.Size = new System.Drawing.Size(121, 21);
+            this.cb_user.Size = new System.Drawing.Size(194, 31);
             this.cb_user.TabIndex = 1;
             // 
             // btn_addDelPriv
             // 
-            this.btn_addDelPriv.Location = new System.Drawing.Point(134, 332);
+            this.btn_addDelPriv.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addDelPriv.Location = new System.Drawing.Point(350, 13);
+            this.btn_addDelPriv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_addDelPriv.Name = "btn_addDelPriv";
-            this.btn_addDelPriv.Size = new System.Drawing.Size(165, 59);
+            this.btn_addDelPriv.Size = new System.Drawing.Size(256, 47);
             this.btn_addDelPriv.TabIndex = 2;
             this.btn_addDelPriv.Text = "Cấp quyền xóa dữ liệu";
             this.btn_addDelPriv.UseVisualStyleBackColor = true;
             // 
             // btn_addInsPriv
             // 
-            this.btn_addInsPriv.Location = new System.Drawing.Point(445, 332);
+            this.btn_addInsPriv.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addInsPriv.Location = new System.Drawing.Point(350, 69);
+            this.btn_addInsPriv.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_addInsPriv.Name = "btn_addInsPriv";
-            this.btn_addInsPriv.Size = new System.Drawing.Size(157, 59);
+            this.btn_addInsPriv.Size = new System.Drawing.Size(256, 53);
             this.btn_addInsPriv.TabIndex = 3;
             this.btn_addInsPriv.Text = "Cấp quyền thêm dữ liệu";
             this.btn_addInsPriv.UseVisualStyleBackColor = true;
             // 
             // cb_tblList
             // 
+            this.cb_tblList.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_tblList.FormattingEnabled = true;
-            this.cb_tblList.Location = new System.Drawing.Point(561, 46);
+            this.cb_tblList.Location = new System.Drawing.Point(78, 91);
+            this.cb_tblList.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cb_tblList.Name = "cb_tblList";
-            this.cb_tblList.Size = new System.Drawing.Size(121, 21);
+            this.cb_tblList.Size = new System.Drawing.Size(194, 31);
             this.cb_tblList.TabIndex = 4;
             // 
             // rbtn_user
             // 
             this.rbtn_user.AutoSize = true;
-            this.rbtn_user.Location = new System.Drawing.Point(74, 49);
+            this.rbtn_user.Location = new System.Drawing.Point(280, 22);
+            this.rbtn_user.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtn_user.Name = "rbtn_user";
-            this.rbtn_user.Size = new System.Drawing.Size(14, 13);
+            this.rbtn_user.Size = new System.Drawing.Size(17, 16);
             this.rbtn_user.TabIndex = 5;
             this.rbtn_user.TabStop = true;
             this.rbtn_user.UseVisualStyleBackColor = true;
@@ -96,9 +112,10 @@ namespace qlCSYT
             // rbtn_role
             // 
             this.rbtn_role.AutoSize = true;
-            this.rbtn_role.Location = new System.Drawing.Point(74, 76);
+            this.rbtn_role.Location = new System.Drawing.Point(280, 61);
+            this.rbtn_role.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.rbtn_role.Name = "rbtn_role";
-            this.rbtn_role.Size = new System.Drawing.Size(14, 13);
+            this.rbtn_role.Size = new System.Drawing.Size(17, 16);
             this.rbtn_role.TabIndex = 7;
             this.rbtn_role.TabStop = true;
             this.rbtn_role.UseVisualStyleBackColor = true;
@@ -106,17 +123,53 @@ namespace qlCSYT
             // 
             // cb_roles
             // 
+            this.cb_roles.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_roles.FormattingEnabled = true;
-            this.cb_roles.Location = new System.Drawing.Point(94, 73);
+            this.cb_roles.Location = new System.Drawing.Point(78, 52);
+            this.cb_roles.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.cb_roles.Name = "cb_roles";
-            this.cb_roles.Size = new System.Drawing.Size(121, 21);
+            this.cb_roles.Size = new System.Drawing.Size(194, 31);
             this.cb_roles.TabIndex = 6;
+            // 
+            // lb_User
+            // 
+            this.lb_User.AutoSize = true;
+            this.lb_User.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_User.Location = new System.Drawing.Point(15, 16);
+            this.lb_User.Name = "lb_User";
+            this.lb_User.Size = new System.Drawing.Size(50, 23);
+            this.lb_User.TabIndex = 8;
+            this.lb_User.Text = "User";
+            this.lb_User.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // lb_Role
+            // 
+            this.lb_Role.AutoSize = true;
+            this.lb_Role.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Role.Location = new System.Drawing.Point(15, 55);
+            this.lb_Role.Name = "lb_Role";
+            this.lb_Role.Size = new System.Drawing.Size(48, 23);
+            this.lb_Role.TabIndex = 9;
+            this.lb_Role.Text = "Role";
+            // 
+            // lb_Table
+            // 
+            this.lb_Table.AutoSize = true;
+            this.lb_Table.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Table.Location = new System.Drawing.Point(15, 94);
+            this.lb_Table.Name = "lb_Table";
+            this.lb_Table.Size = new System.Drawing.Size(56, 23);
+            this.lb_Table.TabIndex = 10;
+            this.lb_Table.Text = "Table";
             // 
             // frm_priviledges
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(633, 356);
+            this.Controls.Add(this.lb_Table);
+            this.Controls.Add(this.lb_Role);
+            this.Controls.Add(this.lb_User);
             this.Controls.Add(this.rbtn_role);
             this.Controls.Add(this.cb_roles);
             this.Controls.Add(this.rbtn_user);
@@ -125,7 +178,10 @@ namespace qlCSYT
             this.Controls.Add(this.btn_addDelPriv);
             this.Controls.Add(this.cb_user);
             this.Controls.Add(this.gv_tables);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_priviledges";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm quyền";
             this.Load += new System.EventHandler(this.frm_priviledges_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gv_tables)).EndInit();
@@ -144,5 +200,8 @@ namespace qlCSYT
         private System.Windows.Forms.RadioButton rbtn_user;
         private System.Windows.Forms.RadioButton rbtn_role;
         private System.Windows.Forms.ComboBox cb_roles;
+        private System.Windows.Forms.Label lb_User;
+        private System.Windows.Forms.Label lb_Role;
+        private System.Windows.Forms.Label lb_Table;
     }
 }

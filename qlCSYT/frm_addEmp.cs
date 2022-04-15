@@ -154,5 +154,30 @@ namespace qlCSYT
         {
 
         }
+
+        private void lb_csytNo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_role_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_password_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txt_password_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_MedFac_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
