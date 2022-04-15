@@ -68,6 +68,12 @@
     <Compile Include="frm_addEmp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frm_addRole.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_addRole.Designer.cs">
+      <DependentUpon>frm_addRole.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_priviledges.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_addPatient.resx">
       <DependentUpon>frm_addPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_addRole.resx">
+      <DependentUpon>frm_addRole.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_priviledges.resx">
       <DependentUpon>frm_priviledges.cs</DependentUpon>

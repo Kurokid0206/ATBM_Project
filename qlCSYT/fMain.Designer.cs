@@ -33,7 +33,7 @@
             this.gv_main = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
             this.tbSearch = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.m_main = new System.Windows.Forms.MenuStrip();
             this.m_user = new System.Windows.Forms.ToolStripMenuItem();
             this.m_showUserList = new System.Windows.Forms.ToolStripMenuItem();
             this.m_addUser = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,7 +46,7 @@
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_main)).BeginInit();
             this.panel2.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.m_main.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -85,19 +85,18 @@
             this.tbSearch.Name = "tbSearch";
             this.tbSearch.Size = new System.Drawing.Size(147, 20);
             this.tbSearch.TabIndex = 0;
-            this.tbSearch.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // menuStrip1
+            // m_main
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_user,
             this.m_role,
             this.m_logout});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1009, 24);
-            this.menuStrip1.TabIndex = 3;
-            this.menuStrip1.Text = "menuStrip1";
+            this.m_main.Location = new System.Drawing.Point(0, 0);
+            this.m_main.Name = "m_main";
+            this.m_main.Size = new System.Drawing.Size(1009, 24);
+            this.m_main.TabIndex = 3;
+            this.m_main.Text = "main_menu";
             // 
             // m_user
             // 
@@ -174,7 +173,7 @@
             this.ClientSize = new System.Drawing.Size(1009, 367);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.m_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "fMain";
@@ -185,8 +184,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gv_main)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.m_main.ResumeLayout(false);
+            this.m_main.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -197,7 +196,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.TextBox tbSearch;
         private System.Windows.Forms.DataGridView gv_main;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip m_main;
         private System.Windows.Forms.ToolStripMenuItem m_user;
         private System.Windows.Forms.ToolStripMenuItem m_showUserList;
         private System.Windows.Forms.ToolStripMenuItem m_addUser;
