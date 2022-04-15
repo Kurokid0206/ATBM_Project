@@ -147,7 +147,7 @@ namespace qlCSYT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(594, 379);
+            this.ClientSize = new System.Drawing.Size(587, 379);
             this.Controls.Add(this.lb_Role);
             this.Controls.Add(this.lb_User);
             this.Controls.Add(this.rbtn_role);
