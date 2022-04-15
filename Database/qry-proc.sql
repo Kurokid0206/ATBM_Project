@@ -92,7 +92,7 @@ END;
 /
 
 
-create or replace procedure ShowTables (mycursor OUT SYS_REFCURSOR)
+create or replace procedure C##CSYT_ADMIN.ShowTables (mycursor OUT SYS_REFCURSOR)
 as
 
     BEGIN
