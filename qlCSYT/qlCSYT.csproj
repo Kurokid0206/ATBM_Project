@@ -52,23 +52,26 @@
   <ItemGroup>
     <Compile Include="DBOracleUtils.cs" />
     <Compile Include="DBUtils.cs" />
-    <Compile Include="frm_Admin.cs">
+    <Compile Include="fLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_Admin.Designer.cs">
-      <DependentUpon>frm_Admin.cs</DependentUpon>
+    <Compile Include="fLogin.Designer.cs">
+      <DependentUpon>fLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="Frm_Priviledges.cs">
+    <Compile Include="fMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Frm_Priviledges.Designer.cs">
-      <DependentUpon>Frm_Priviledges.cs</DependentUpon>
+    <Compile Include="fMain.Designer.cs">
+      <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
     <Compile Include="functions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frm_Admin.resx">
-      <DependentUpon>frm_Admin.cs</DependentUpon>
+    <EmbeddedResource Include="fLogin.resx">
+      <DependentUpon>fLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fMain.resx">
+      <DependentUpon>fMain.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +81,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -126,6 +130,7 @@
     <Content Include="OraOps12.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ATBMCQ-4-removebg-preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
