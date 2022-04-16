@@ -52,11 +52,11 @@ END;
 CREATE OR REPLACE PROCEDURE C##CSYT_Admin.dropRole(
 	pi_roleName IN NVARCHAR2) IS    
 	
-	role_name NVARCHAR2(20)  	:= pi_roleName;
+	role_name NVARCHAR2(50)  	:= pi_roleName;
     lv_stmt   VARCHAR2 (1000);
 BEGIN
     
-        lv_stmt := 'DROP ROLE C##CSYT_ROLE_' || role_name;
+        lv_stmt := 'DROP ROLE ' || role_name;
 	DBMS_OUTPUT.put_line(lv_stmt);
 
 	EXECUTE IMMEDIATE ( lv_stmt ); 
@@ -164,6 +164,18 @@ as
     END;
     /
 
+--cap quyen insert cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantInsert(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
   
 --cap quyen update cho user/role, neu la role thi opt = false
 create or replace procedure C##CSYT_Admin.GrantUpdate (user_role VARCHAR2, cols VARCHAR2, tbl VARCHAR2, opt boolean)
@@ -191,7 +203,18 @@ as
         end if;
     END;
 /
-   
+   --cap quyen delete cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantDelete(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
 --Lay tat ca quyen cho mot user
 create or replace procedure C##CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
 as
@@ -218,3 +241,4 @@ as
 
     END;
     /
+    
