@@ -284,5 +284,33 @@ var grant_select_button = new DataGridViewButtonColumn();
             DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
             if (result == DialogResult.OK) this.Close();
         }
+
+        private void btn_showPriv_Click(object sender, EventArgs e)
+        {
+           
+            if (rbtn_role.Checked)
+            {
+
+                string roleName = cb_roles.SelectedValue.ToString();
+                frm_ViewRole frm = new frm_ViewRole();
+
+                this.Hide();
+                frm.Closed += (s, args) => this.Show();
+                frm.Show();
+                frm.LoadRole(roleName);
+            }
+            else
+            {
+                string userName = cb_user.SelectedValue.ToString();
+                frm_ViewUser frm = new frm_ViewUser();
+                
+                this.Hide();
+                frm.Closed += (s, args) => this.Show();
+                frm.Show();
+                frm.LoadUser(userName);
+
+            }
+            
+        }
     }
 }
