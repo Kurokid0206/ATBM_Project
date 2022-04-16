@@ -363,7 +363,7 @@ create or replace procedure C##CSYT_Admin.ShowUpdatePrivilegesForUser (user_name
 as
 
     BEGIN
-        Open CUR for SELECT grantee,table_name,column_name,privilege FROM USER_COL_PRIVS where grantee like user_name;
+        Open CUR for SELECT grantee,table_name,privilege,column_name FROM USER_COL_PRIVS where grantee like user_name;
 
     END;
 /
