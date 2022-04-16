@@ -34,6 +34,7 @@ namespace qlCSYT
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -50,10 +51,14 @@ namespace qlCSYT
             cb_user.DisplayMember = "USERNAME";
             cb_user.ValueMember = "USERNAME";
         }
+                catch (Exception) { }
+                finally { conn.Close(); }
+        }
         private void loadRoles()
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -70,9 +75,13 @@ namespace qlCSYT
             cb_roles.DisplayMember = "ROLE";
             cb_roles.ValueMember = "ROLE";
         }
+                catch (Exception) { }
+                finally { conn.Close(); }
+        }
         private void loadTables()
         {
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowTables", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -86,7 +95,9 @@ namespace qlCSYT
             cb_tblList.DisplayMember = "table_name";
             cb_tblList.ValueMember = "table_name";
             cb_tblList.SelectedIndexChanged += OnIndexChanged;
-
+        }
+                catch (Exception) { }
+                finally { conn.Close(); }
 
         }
         private void OnIndexChanged(object sender, EventArgs e)
@@ -104,6 +115,7 @@ namespace qlCSYT
                 DataGridViewRow row = gv_tables.Rows[e.RowIndex];
      
                 OracleConnection conn = DBUtils.GetDBConnection();
+                try { 
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("GrantSelect", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -120,8 +132,11 @@ namespace qlCSYT
                                 Console.WriteLine(GrantOpt_btn.Checked.ToString());*/
 
                 cmd.ExecuteNonQuery();
-
             }
+                catch (Exception) { }
+            finally { conn.Close(); }
+
+        }
         }
         void Grant_Update_From_Grid_View_Button(object sender, DataGridViewCellEventArgs e)
         {
@@ -134,18 +149,23 @@ namespace qlCSYT
                 DataGridViewRow row = gv_tables.Rows[e.RowIndex];
                 
                 OracleConnection conn = DBUtils.GetDBConnection();
-                conn.Open();
-                OracleCommand cmd = new OracleCommand("GrantUpdate", conn);
-                string user_role = "";
-                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
-                else { user_role = cb_roles.SelectedValue.ToString(); }
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@user_role", user_role);
-                cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
-                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
-                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+                try
+                {
+                    conn.Open();
+                    OracleCommand cmd = new OracleCommand("GrantUpdate", conn);
+                    string user_role = "";
+                    if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                    else { user_role = cb_roles.SelectedValue.ToString(); }
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@user_role", user_role);
+                    cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
+                    cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                    cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
 
-                cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception) { }
+                finally { conn.Close(); }
             }
         }
         private void loadTableCol(string tblName)
