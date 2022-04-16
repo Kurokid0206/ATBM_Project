@@ -358,7 +358,15 @@ as
 
     END;
 /
+--Lay tat ca quyen update cho mot user
+create or replace procedure C##CSYT_Admin.ShowUpdatePrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+as
 
+    BEGIN
+        Open CUR for SELECT grantee,table_name,column_name,privilege FROM USER_COL_PRIVS where grantee like user_name;
+
+    END;
+/
 
 CREATE USER C##CSYT_MeanSun IDENTIFIED by a;/
 grant connect to C##CSYT_MeanSun; /
