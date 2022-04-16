@@ -75,7 +75,6 @@ namespace qlCSYT
                 cmd.Parameters.Add("@pi_priType", pinteger);
                 cmd.Parameters.Add("@pi_obj", obj);
                 cmd.ExecuteNonQuery();
-
             }
         }
     }
