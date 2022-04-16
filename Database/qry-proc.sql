@@ -76,22 +76,22 @@ CREATE OR REPLACE PROCEDURE C##CSYT_Admin.revokePrivilege(
 
 BEGIN
     IF priType<1 then
-        EXECUTE IMMEDIATE ('REVOKE INSERT ON '||obj||' FROM '||user_name);
+        EXECUTE IMMEDIATE ('REVOKE INSERT ON C##CSYT_ADMIN.'||obj||' FROM '||user_name);
     ELSIF priType<2 THEN
         EXECUTE IMMEDIATE ( 'drop view C##CSYT_ADMIN.'||obj ); 
 
         
     ELSIF priType<3 THEN
-        EXECUTE IMMEDIATE ('REVOKE UPDATE ON '||obj||' FROM '||user_name);
+        EXECUTE IMMEDIATE ('REVOKE UPDATE ON C##CSYT_ADMIN.'||obj||' FROM '||user_name);
     ELSE
-        EXECUTE IMMEDIATE ('REVOKE DELETE ON '||obj||' FROM '||user_name);        
+        EXECUTE IMMEDIATE ('REVOKE DELETE ON C##CSYT_ADMIN.'||obj||' FROM '||user_name);        
     END IF;
 	
                                                 
 	COMMIT;
 END;
 /
-
+--exec C##CSYT_Admin.revokePrivilege('C##CSYT_MEANSUN',1,'VIEW_C##CSYT_MEANSUN_HSBA');
 
 create or replace procedure C##CSYT_ADMIN.ShowTables (mycursor OUT SYS_REFCURSOR)
 as
@@ -229,7 +229,7 @@ create or replace procedure C##CSYT_Admin.ShowAllUser (CUR out SYS_REFCURSOR)
 as
 
     BEGIN
-        Open CUR for SELECT USERNAME FROM dba_users where USERNAME like 'C##CSYT%';
+        Open CUR for SELECT USERNAME FROM dba_users where USERNAME like 'C##CSYT%' and USERNAME !='C##CSYT_ADMIN';
 
     END;
     /
@@ -366,7 +366,7 @@ grant UNLIMITED TABLESPACE to C##CSYT_MeanSun;/
 grant select on all_users to C##CSYT_Admin;/
 grant select on DBA_TAB_PRIVS to C##CSYT_Admin;/
 
-
+select * from user_tab_columns;
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'C##CSYT_MEANSUN';
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'C##CSYT_MEANSUN';
 --grant update (MAHSBA) on C##CSYT_ADMIN.HSBA to C##CSYT_MEANSUN;

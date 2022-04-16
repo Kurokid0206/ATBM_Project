@@ -16,6 +16,7 @@ namespace qlCSYT
 {
     public partial class frm_ViewRole : Form
     {
+        private string curRole = "";
         public frm_ViewRole()
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace qlCSYT
 
         public void LoadRole(string rolename)
         {
-
+            curRole = rolename;
+            GridView_ShowRole.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try { 
             conn.Open();
@@ -59,6 +61,7 @@ namespace qlCSYT
             revokeButton.Text = "x";
             revokeButton.UseColumnTextForButtonValue = true;
             this.GridView_ShowRole.Columns.Add(revokeButton);
+            GridView_ShowRole.CellClick -= DataGridViewRole_RevokeCellClick;
             GridView_ShowRole.CellClick += DataGridViewRole_RevokeCellClick;
         }
         void DataGridViewRole_RevokeCellClick(object sender, DataGridViewCellEventArgs e)
@@ -69,23 +72,31 @@ namespace qlCSYT
             //Check if click is on specific column 
             if (e.ColumnIndex == GridView_ShowRole.Columns["dataGridViewRoleRevokeButton"].Index)
             {
-                string username = GridView_ShowRole.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string priviledge = GridView_ShowRole.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string obj = GridView_ShowRole.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string username = GridView_ShowRole.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string priviledge = GridView_ShowRole.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string obj = GridView_ShowRole.Rows[e.RowIndex].Cells[1].Value.ToString();
                 OracleConnection conn = DBUtils.GetDBConnection();
-                conn.Open();
-                int pinteger;
-                pinteger = -1;
-                if (priviledge == "INSERT") pinteger = 0;
-                if (priviledge == "SELECT") pinteger = 1;
-                if (priviledge == "UPDATE") pinteger = 2;
-                if (priviledge == "DELETE") pinteger = 3;
-                OracleCommand cmd = new OracleCommand("revokePrivilege", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@pi_username", username);
-                cmd.Parameters.Add("@pi_priType", pinteger);
-                cmd.Parameters.Add("@pi_obj", obj);
-                cmd.ExecuteNonQuery();
+                try
+                {
+                    conn.Open();
+                    int pinteger;
+                    pinteger = -1;
+                    if (priviledge == "INSERT") pinteger = 0;
+                    if (priviledge == "SELECT") pinteger = 1;
+                    if (priviledge == "UPDATE") pinteger = 2;
+                    if (priviledge == "DELETE") pinteger = 3;
+                    OracleCommand cmd = new OracleCommand("revokePrivilege", conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@pi_username", username);
+                    cmd.Parameters.Add("@pi_priType", pinteger);
+                    cmd.Parameters.Add("@pi_obj", obj);
+                    cmd.ExecuteNonQuery();
+                    LoadRole(curRole);
+                }catch(Exception) { }
+                finally
+                {
+                    conn.Close();
+                }
             }
         }
     }

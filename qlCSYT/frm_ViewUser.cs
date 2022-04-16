@@ -17,6 +17,7 @@ namespace qlCSYT
 {
     public partial class frm_ViewUser : Form
     {
+        private string currUser = "";
         public frm_ViewUser()
         {
             InitializeComponent();
@@ -28,7 +29,8 @@ namespace qlCSYT
         }
         public void LoadUser(string username)
         {
-            
+            gv_User.Columns.Clear();
+            currUser = username;
             OracleConnection conn = DBUtils.GetDBConnection();
             try { 
             conn.Open();
@@ -58,6 +60,7 @@ namespace qlCSYT
             revokeButton.Text = "x";
             revokeButton.UseColumnTextForButtonValue = true;
             this.gv_User.Columns.Add(revokeButton);
+            gv_User.CellClick -= DataGridViewUser_RevokeCellClick;
             gv_User.CellClick += DataGridViewUser_RevokeCellClick;
         }
         void DataGridViewUser_RevokeCellClick(object sender, DataGridViewCellEventArgs e)
@@ -68,24 +71,36 @@ namespace qlCSYT
             //Check if click is on specific column 
             if (e.ColumnIndex == gv_User.Columns["dataGridViewUserRevokeButton"].Index)
             {
-                string username = gv_User.Rows[e.RowIndex].Cells[1].Value.ToString();
-                string priviledge = gv_User.Rows[e.RowIndex].Cells[3].Value.ToString();
-                string obj = gv_User.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string username = gv_User.Rows[e.RowIndex].Cells[0].Value.ToString();
+                string priviledge = gv_User.Rows[e.RowIndex].Cells[2].Value.ToString();
+                string obj = gv_User.Rows[e.RowIndex].Cells[1].Value.ToString();
                 OracleConnection conn = DBUtils.GetDBConnection();
-                conn.Open();
-                int pinteger;
-                pinteger = -1;
-                if (priviledge == "INSERT")  pinteger = 0;
-                if (priviledge == "SELECT")  pinteger = 1;
-                if (priviledge == "UPDATE")  pinteger = 2;
-                if (priviledge == "DELETE")  pinteger = 3;
-                OracleCommand cmd = new OracleCommand("revokePrivilege", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@pi_username", username);
-                cmd.Parameters.Add("@pi_priType", pinteger);
-                cmd.Parameters.Add("@pi_obj", obj);
-                cmd.ExecuteNonQuery();
-
+                Console.WriteLine(username);
+                //Console.WriteLine(pinteger);
+                Console.WriteLine(obj);
+                try
+                {
+                    conn.Open();
+                    int pinteger;
+                    pinteger = -1;
+                    if (priviledge == "INSERT") pinteger = 0;
+                    if (priviledge == "SELECT") pinteger = 1;
+                    if (priviledge == "UPDATE") pinteger = 2;
+                    if (priviledge == "DELETE") pinteger = 3;
+                    OracleCommand cmd = new OracleCommand("revokePrivilege", conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.Add("@pi_username", username);
+                    cmd.Parameters.Add("@pi_priType", pinteger);
+                    cmd.Parameters.Add("@pi_obj", obj);
+                    cmd.ExecuteNonQuery();
+                    
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err);
+                }
+                finally { conn.Close(); }
+                LoadUser(currUser);
             }
         }
             }

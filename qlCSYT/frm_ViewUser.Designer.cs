@@ -52,22 +52,22 @@ namespace qlCSYT
             // 
             this.gv_User.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_User.Location = new System.Drawing.Point(12, 11);
-            this.gv_User.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gv_User.Location = new System.Drawing.Point(9, 9);
+            this.gv_User.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gv_User.Name = "gv_User";
             this.gv_User.RowHeadersWidth = 51;
             this.gv_User.RowTemplate.Height = 24;
-            this.gv_User.Size = new System.Drawing.Size(493, 276);
+            this.gv_User.Size = new System.Drawing.Size(640, 224);
             this.gv_User.TabIndex = 0;
             // 
             // frm_ViewUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(517, 298);
+            this.ClientSize = new System.Drawing.Size(672, 256);
             this.Controls.Add(this.gv_User);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_ViewUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View User";
