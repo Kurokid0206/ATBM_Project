@@ -172,6 +172,7 @@ namespace qlCSYT
         {
             this.gv_main.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -185,8 +186,17 @@ namespace qlCSYT
 
             da.Fill(dt);
             gv_main.DataSource = dt;
-            //Delete button
-            var deleteButton = new DataGridViewButtonColumn();
+        }
+            catch (Exception err) {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                
+                conn.Close();
+            }
+//Delete button
+var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "dataGridViewDeleteButton";
             deleteButton.HeaderText = "DELETE";
             deleteButton.Text = "x";
@@ -217,6 +227,7 @@ namespace qlCSYT
             this.gv_main.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             conn.Open();
+            try{
             OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             //cmd.Parameters.Add("@user_name", "ADMIN");
@@ -229,6 +240,15 @@ namespace qlCSYT
 
             da.Fill(dt);
             gv_main.DataSource = dt;
+        }
+            catch (Exception err) {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                
+                conn.Close();
+            }
             //Delete button
             var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "dataGridViewDeleteButton";
@@ -238,6 +258,7 @@ namespace qlCSYT
             this.gv_main.Columns.Add(deleteButton);
             // Add a CellClick handler to handle clicks in the button column.
             gv_main.CellClick -= DataGridViewUser_DeleteCellClick;
+            gv_main.CellClick -= DataGridViewRole_DeleteCellClick;
             gv_main.CellClick += DataGridViewRole_DeleteCellClick;
             //Show Priviledge Button
             var showPriviledgeButton = new DataGridViewButtonColumn();
@@ -247,6 +268,7 @@ namespace qlCSYT
             showPriviledgeButton.UseColumnTextForButtonValue = true;
             this.gv_main.Columns.Add(showPriviledgeButton);
             // Add a CellClick handler to handle clicks in the button column.
+            gv_main.CellClick -= DataGridViewRole_ShowPriviledgeCellClick;
             gv_main.CellClick += DataGridViewRole_ShowPriviledgeCellClick;
             gv_main.CellClick -= DataGridViewUser_ShowPriviledgeCellClick;
 

@@ -30,6 +30,7 @@ namespace qlCSYT
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowRolePriv", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -41,6 +42,16 @@ namespace qlCSYT
             DataTable dt = new DataTable();
             da.Fill(dt);
             GridView_ShowRole.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+
+                conn.Close();
+            }
             //Delete button
             var revokeButton = new DataGridViewButtonColumn();
             revokeButton.Name = "dataGridViewRoleRevokeButton";

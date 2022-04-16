@@ -30,6 +30,7 @@ namespace qlCSYT
         {
             
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowPrivilegesForUser", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -41,8 +42,17 @@ namespace qlCSYT
             DataTable dt = new DataTable();
             da.Fill(dt);
             gv_User.DataSource = dt;
-            //Delete button
-            var revokeButton = new DataGridViewButtonColumn();
+        }
+            catch (Exception err) {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                
+                conn.Close();
+            }
+//Delete button
+var revokeButton = new DataGridViewButtonColumn();
             revokeButton.Name = "dataGridViewUserRevokeButton";
             revokeButton.HeaderText = "REVOKE";
             revokeButton.Text = "x";
