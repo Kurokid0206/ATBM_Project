@@ -107,7 +107,10 @@ namespace qlCSYT
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("GrantSelect", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@user_role", cb_user.SelectedValue.ToString());
+                string user_role = "";
+                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                else { user_role = cb_roles.SelectedValue.ToString(); }
+                cmd.Parameters.Add("@user_role", user_role);
                 cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
                 cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
                 cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
@@ -133,8 +136,11 @@ namespace qlCSYT
                 OracleConnection conn = DBUtils.GetDBConnection();
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("GrantUpdate", conn);
+                string user_role = "";
+                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                else { user_role = cb_roles.SelectedValue.ToString(); }
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("@user_role", cb_user.SelectedValue.ToString());
+                cmd.Parameters.Add("@user_role", user_role);
                 cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
                 cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
                 cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
@@ -187,12 +193,15 @@ namespace qlCSYT
         {
             cb_user.Enabled=true;
             cb_roles.Enabled = false;
+            GrantOpt_btn.Enabled = true;
         }
 
         private void rbtn_role_CheckedChanged(object sender, EventArgs e)
         {
             cb_user.Enabled = false;
             cb_roles.Enabled = true;
+            GrantOpt_btn.Enabled = false;
+
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -203,6 +212,38 @@ namespace qlCSYT
         private void cb_user_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btn_addDelPriv_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("GrantDelete", conn);
+            string user_role = "";
+            if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+            else { user_role = cb_roles.SelectedValue.ToString(); }
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@user_role", user_role); 
+            cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+            cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+
+            cmd.ExecuteNonQuery();
+        }
+
+        private void btn_addInsPriv_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("GrantInsert", conn);
+            string user_role = "";
+            if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+            else { user_role = cb_roles.SelectedValue.ToString(); }
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@user_role", user_role);
+            cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+            cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+
+            cmd.ExecuteNonQuery();
         }
     }
 }

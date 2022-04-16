@@ -49,7 +49,7 @@ namespace qlCSYT
             // 
             this.gv_tables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_tables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_tables.Location = new System.Drawing.Point(19, 140);
+            this.gv_tables.Location = new System.Drawing.Point(13, 185);
             this.gv_tables.Margin = new System.Windows.Forms.Padding(4);
             this.gv_tables.Name = "gv_tables";
             this.gv_tables.RowHeadersWidth = 51;
@@ -77,6 +77,7 @@ namespace qlCSYT
             this.btn_addDelPriv.TabIndex = 2;
             this.btn_addDelPriv.Text = "Cấp quyền xóa dữ liệu";
             this.btn_addDelPriv.UseVisualStyleBackColor = true;
+            this.btn_addDelPriv.Click += new System.EventHandler(this.btn_addDelPriv_Click);
             // 
             // btn_addInsPriv
             // 
@@ -88,6 +89,7 @@ namespace qlCSYT
             this.btn_addInsPriv.TabIndex = 3;
             this.btn_addInsPriv.Text = "Cấp quyền thêm dữ liệu";
             this.btn_addInsPriv.UseVisualStyleBackColor = true;
+            this.btn_addInsPriv.Click += new System.EventHandler(this.btn_addInsPriv_Click);
             // 
             // cb_tblList
             // 
@@ -167,7 +169,7 @@ namespace qlCSYT
             // GrantOpt_btn
             // 
             this.GrantOpt_btn.AutoSize = true;
-            this.GrantOpt_btn.Location = new System.Drawing.Point(33, 342);
+            this.GrantOpt_btn.Location = new System.Drawing.Point(19, 143);
             this.GrantOpt_btn.Name = "GrantOpt_btn";
             this.GrantOpt_btn.Size = new System.Drawing.Size(262, 21);
             this.GrantOpt_btn.TabIndex = 11;
