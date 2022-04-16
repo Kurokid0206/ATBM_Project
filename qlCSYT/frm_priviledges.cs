@@ -122,11 +122,11 @@ namespace qlCSYT
                 string user_role = "";
                 if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
                 else { user_role = cb_roles.SelectedValue.ToString(); }
-                cmd.Parameters.Add("@user_role", user_role);
+                cmd.Parameters.Add("@tab_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@username", user_role);
                 cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
-                cmd.Parameters.Add("@tbl_view", cb_tblList.SelectedValue.ToString());
                 cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
-                /*                Console.WriteLine(cb_user.SelectedValue.ToString());
+/*                              Console.WriteLine(cb_user.SelectedValue.ToString());
                                 Console.WriteLine(row.Cells[0].Value.ToString());
                                 Console.WriteLine(cb_tblList.SelectedValue.ToString());
                                 Console.WriteLine(GrantOpt_btn.Checked.ToString());*/
