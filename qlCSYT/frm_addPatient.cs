@@ -128,6 +128,8 @@ namespace qlCSYT
                 Console.WriteLine("Completed!");
                 conn.Close();
                 conn.Dispose();
+                MessageBox.Show("Thêm bệnh nhân thành công!", "Thông báo");
+                this.Close();
             }
             Console.Read();
 

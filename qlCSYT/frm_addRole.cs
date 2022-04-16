@@ -45,9 +45,8 @@ namespace qlCSYT
             }
             finally
             {
-                
                 conn.Close();
-                MessageBox.Show("Success!");
+                MessageBox.Show("Thêm role thành công!", "Thông báo");
                 this.Close();
             }
 

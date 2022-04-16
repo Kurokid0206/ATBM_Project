@@ -132,6 +132,8 @@ namespace qlCSYT
                 Console.WriteLine("Completed!");
                 conn.Close();
                 conn.Dispose();
+                MessageBox.Show("Thêm nhân viên thành công!","Thông báo");
+                this.Close();
             }
             Console.Read();
         }
