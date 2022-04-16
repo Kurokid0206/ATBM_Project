@@ -31,6 +31,7 @@ namespace qlCSYT
         {
             curRole = rolename;
             GridView_ShowRole.Columns.Clear();
+            gv_Update_col_priv.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try { 
             conn.Open();
