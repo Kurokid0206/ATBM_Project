@@ -42,6 +42,7 @@ namespace qlCSYT
             this.lb_Role = new System.Windows.Forms.Label();
             this.lb_Table = new System.Windows.Forms.Label();
             this.GrantOpt_btn = new System.Windows.Forms.CheckBox();
+            this.btn_cancel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.gv_tables)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,11 +50,11 @@ namespace qlCSYT
             // 
             this.gv_tables.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_tables.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_tables.Location = new System.Drawing.Point(13, 185);
+            this.gv_tables.Location = new System.Drawing.Point(13, 180);
             this.gv_tables.Margin = new System.Windows.Forms.Padding(4);
             this.gv_tables.Name = "gv_tables";
             this.gv_tables.RowHeadersWidth = 51;
-            this.gv_tables.Size = new System.Drawing.Size(587, 185);
+            this.gv_tables.Size = new System.Drawing.Size(593, 185);
             this.gv_tables.TabIndex = 0;
             // 
             // cb_user
@@ -70,10 +71,10 @@ namespace qlCSYT
             // btn_addDelPriv
             // 
             this.btn_addDelPriv.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addDelPriv.Location = new System.Drawing.Point(350, 13);
+            this.btn_addDelPriv.Location = new System.Drawing.Point(350, 69);
             this.btn_addDelPriv.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addDelPriv.Name = "btn_addDelPriv";
-            this.btn_addDelPriv.Size = new System.Drawing.Size(256, 47);
+            this.btn_addDelPriv.Size = new System.Drawing.Size(256, 54);
             this.btn_addDelPriv.TabIndex = 2;
             this.btn_addDelPriv.Text = "Cấp quyền xóa dữ liệu";
             this.btn_addDelPriv.UseVisualStyleBackColor = true;
@@ -82,7 +83,7 @@ namespace qlCSYT
             // btn_addInsPriv
             // 
             this.btn_addInsPriv.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addInsPriv.Location = new System.Drawing.Point(350, 69);
+            this.btn_addInsPriv.Location = new System.Drawing.Point(350, 13);
             this.btn_addInsPriv.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addInsPriv.Name = "btn_addInsPriv";
             this.btn_addInsPriv.Size = new System.Drawing.Size(256, 53);
@@ -171,16 +172,29 @@ namespace qlCSYT
             this.GrantOpt_btn.AutoSize = true;
             this.GrantOpt_btn.Location = new System.Drawing.Point(19, 143);
             this.GrantOpt_btn.Name = "GrantOpt_btn";
-            this.GrantOpt_btn.Size = new System.Drawing.Size(262, 21);
+            this.GrantOpt_btn.Size = new System.Drawing.Size(241, 20);
             this.GrantOpt_btn.TabIndex = 11;
             this.GrantOpt_btn.Text = "With grant option (for select, update)";
             this.GrantOpt_btn.UseVisualStyleBackColor = true;
+            // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancel.Location = new System.Drawing.Point(506, 126);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(100, 46);
+            this.btn_cancel.TabIndex = 12;
+            this.btn_cancel.Text = "Hủy";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // frm_priviledges
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(750, 383);
+            this.ClientSize = new System.Drawing.Size(636, 383);
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.GrantOpt_btn);
             this.Controls.Add(this.lb_Table);
             this.Controls.Add(this.lb_Role);
@@ -219,5 +233,6 @@ namespace qlCSYT
         private System.Windows.Forms.Label lb_Role;
         private System.Windows.Forms.Label lb_Table;
         private System.Windows.Forms.CheckBox GrantOpt_btn;
+        private System.Windows.Forms.Button btn_cancel;
     }
 }
