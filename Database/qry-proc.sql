@@ -138,7 +138,7 @@ as
     BEGIN
     OPEN mycursor FOR
 SELECT role,table_name,privilege FROM role_TAB_PRIVS
-WHERE role = roleName;
+WHERE role = roleName and privilege != 'UPDATE';
    END;
 /
 
@@ -374,7 +374,6 @@ grant UNLIMITED TABLESPACE to C##CSYT_MeanSun;/
 grant select on all_users to C##CSYT_Admin;/
 grant select on DBA_TAB_PRIVS to C##CSYT_Admin;/
 
-select * from user_tab_columns;
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'C##CSYT_MEANSUN';
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'C##CSYT_MEANSUN';
 --grant update (MAHSBA) on C##CSYT_ADMIN.HSBA to C##CSYT_MEANSUN;
