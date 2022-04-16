@@ -225,6 +225,7 @@ var grant_select_button = new DataGridViewButtonColumn();
         {
             cb_user.Enabled = false;
             cb_roles.Enabled = true;
+            GrantOpt_btn.Checked = false;
             GrantOpt_btn.Enabled = false;
 
         }
