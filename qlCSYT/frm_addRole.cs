@@ -7,6 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using qlCSYT.SqlConn;
+using System.Data.Common;
+using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
+using qlCSYT;
 
 namespace qlCSYT
 {
@@ -15,6 +20,36 @@ namespace qlCSYT
         public frm_addRole()
         {
             InitializeComponent();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btn_addRole_Click(object sender, EventArgs e)
+        {
+            string roleName = tb_roleName.Text;
+            Console.WriteLine(roleName);
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
+            conn.Open();
+            OracleCommand cmd = new OracleCommand("createRole", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@pi_roleName", roleName);
+            cmd.ExecuteNonQuery();
+            }
+            catch (Exception err) {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                
+                conn.Close();
+                MessageBox.Show("Success!");
+            }
+
+
         }
     }
 }

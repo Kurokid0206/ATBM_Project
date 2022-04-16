@@ -98,6 +98,7 @@ namespace qlCSYT
                 }
                 Console.Read();
             }
+            LoadUsers();
         }
         void DataGridViewRole_DeleteCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -129,6 +130,7 @@ namespace qlCSYT
                 }
                 Console.Read();
             }
+            LoadRoles();
         }
         private void DropUser(OracleConnection conn, string username)
         {
@@ -292,6 +294,14 @@ namespace qlCSYT
         }
 
         private void m_addRole_Click(object sender, EventArgs e)
+        {
+            frm_addRole frm = new frm_addRole();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
+
+        private void m_grantPriv_Click(object sender, EventArgs e)
         {
             frm_priviledges frm = new frm_priviledges();
             this.Hide();

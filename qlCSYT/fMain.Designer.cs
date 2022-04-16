@@ -42,6 +42,7 @@
             this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_main = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.m_grantPriv = new System.Windows.Forms.ToolStripMenuItem();
             this.m_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_main)).BeginInit();
             this.panel1.SuspendLayout();
@@ -54,10 +55,12 @@
             this.m_title,
             this.m_user,
             this.m_role,
+            this.m_grantPriv,
             this.m_logout});
             this.m_main.Location = new System.Drawing.Point(0, 0);
             this.m_main.Name = "m_main";
-            this.m_main.Size = new System.Drawing.Size(960, 28);
+            this.m_main.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.m_main.Size = new System.Drawing.Size(720, 24);
             this.m_main.TabIndex = 3;
             this.m_main.Text = "main_menu";
             this.m_main.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.m_main_ItemClicked);
@@ -65,7 +68,7 @@
             // m_title
             // 
             this.m_title.Name = "m_title";
-            this.m_title.Size = new System.Drawing.Size(162, 24);
+            this.m_title.Size = new System.Drawing.Size(130, 20);
             this.m_title.Text = "Quản lý cơ sở dữ liệu";
             // 
             // m_user
@@ -74,14 +77,14 @@
             this.m_showUserList,
             this.m_addUser});
             this.m_user.Name = "m_user";
-            this.m_user.Size = new System.Drawing.Size(52, 24);
+            this.m_user.Size = new System.Drawing.Size(42, 20);
             this.m_user.Text = "User";
             this.m_user.Click += new System.EventHandler(this.m_user_Click);
             // 
             // m_showUserList
             // 
             this.m_showUserList.Name = "m_showUserList";
-            this.m_showUserList.Size = new System.Drawing.Size(192, 26);
+            this.m_showUserList.Size = new System.Drawing.Size(155, 22);
             this.m_showUserList.Text = "Xem danh sách";
             this.m_showUserList.Click += new System.EventHandler(this.m_showUserList_Click);
             // 
@@ -91,20 +94,20 @@
             this.m_addEmp,
             this.m_addPatient});
             this.m_addUser.Name = "m_addUser";
-            this.m_addUser.Size = new System.Drawing.Size(192, 26);
+            this.m_addUser.Size = new System.Drawing.Size(155, 22);
             this.m_addUser.Text = "Thêm mới";
             // 
             // m_addEmp
             // 
             this.m_addEmp.Name = "m_addEmp";
-            this.m_addEmp.Size = new System.Drawing.Size(161, 26);
+            this.m_addEmp.Size = new System.Drawing.Size(131, 22);
             this.m_addEmp.Text = "Nhân viên";
             this.m_addEmp.Click += new System.EventHandler(this.m_addEmp_Click);
             // 
             // m_addPatient
             // 
             this.m_addPatient.Name = "m_addPatient";
-            this.m_addPatient.Size = new System.Drawing.Size(161, 26);
+            this.m_addPatient.Size = new System.Drawing.Size(131, 22);
             this.m_addPatient.Text = "Bênh nhân";
             this.m_addPatient.Click += new System.EventHandler(this.m_addPatient_Click);
             // 
@@ -114,27 +117,27 @@
             this.m_showRoleList,
             this.m_addRole});
             this.m_role.Name = "m_role";
-            this.m_role.Size = new System.Drawing.Size(53, 24);
+            this.m_role.Size = new System.Drawing.Size(42, 20);
             this.m_role.Text = "Role";
             // 
             // m_showRoleList
             // 
             this.m_showRoleList.Name = "m_showRoleList";
-            this.m_showRoleList.Size = new System.Drawing.Size(224, 26);
+            this.m_showRoleList.Size = new System.Drawing.Size(155, 22);
             this.m_showRoleList.Text = "Xem danh sách";
             this.m_showRoleList.Click += new System.EventHandler(this.m_showRoleList_Click);
             // 
             // m_addRole
             // 
             this.m_addRole.Name = "m_addRole";
-            this.m_addRole.Size = new System.Drawing.Size(224, 26);
+            this.m_addRole.Size = new System.Drawing.Size(155, 22);
             this.m_addRole.Text = "Thêm mới";
             this.m_addRole.Click += new System.EventHandler(this.m_addRole_Click);
             // 
             // m_logout
             // 
             this.m_logout.Name = "m_logout";
-            this.m_logout.Size = new System.Drawing.Size(91, 24);
+            this.m_logout.Size = new System.Drawing.Size(73, 20);
             this.m_logout.Text = "Đăng xuất";
             this.m_logout.Click += new System.EventHandler(this.m_logout_Click);
             // 
@@ -143,12 +146,12 @@
             this.gv_main.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_main.Location = new System.Drawing.Point(3, 2);
-            this.gv_main.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.gv_main.Location = new System.Drawing.Point(2, 2);
+            this.gv_main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gv_main.Name = "gv_main";
             this.gv_main.RowHeadersWidth = 51;
             this.gv_main.RowTemplate.Height = 24;
-            this.gv_main.Size = new System.Drawing.Size(950, 409);
+            this.gv_main.Size = new System.Drawing.Size(712, 332);
             this.gv_main.TabIndex = 0;
             this.gv_main.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_main_CellContentClick);
             // 
@@ -156,22 +159,29 @@
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.gv_main);
-            this.panel1.Location = new System.Drawing.Point(0, 30);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(960, 417);
+            this.panel1.Size = new System.Drawing.Size(721, 340);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // m_grantPriv
+            // 
+            this.m_grantPriv.Name = "m_grantPriv";
+            this.m_grantPriv.Size = new System.Drawing.Size(76, 20);
+            this.m_grantPriv.Text = "Cấp quyền";
+            this.m_grantPriv.Click += new System.EventHandler(this.m_grantPriv_Click);
+            // 
             // fMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(960, 466);
+            this.ClientSize = new System.Drawing.Size(720, 379);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.m_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ATBMCQ-4";
@@ -199,5 +209,6 @@
         private System.Windows.Forms.DataGridView gv_main;
         public System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem m_title;
+        private System.Windows.Forms.ToolStripMenuItem m_grantPriv;
     }
 }
