@@ -124,7 +124,7 @@ namespace qlCSYT
                 else { user_role = cb_roles.SelectedValue.ToString(); }
                 cmd.Parameters.Add("@user_role", user_role);
                 cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
-                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@tbl_view", cb_tblList.SelectedValue.ToString());
                 cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
                 /*                Console.WriteLine(cb_user.SelectedValue.ToString());
                                 Console.WriteLine(row.Cells[0].Value.ToString());
@@ -133,7 +133,9 @@ namespace qlCSYT
 
                 cmd.ExecuteNonQuery();
             }
-                catch (Exception) { }
+                catch (Exception err) {
+                    Console.WriteLine(err);
+                }
             finally { conn.Close(); }
 
         }
@@ -159,7 +161,7 @@ namespace qlCSYT
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.Add("@user_role", user_role);
                     cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
-                    cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                    cmd.Parameters.Add("@tbl", cb_tblList.SelectedValue.ToString());
                     cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
 
                     cmd.ExecuteNonQuery();
