@@ -93,8 +93,58 @@ namespace qlCSYT
         {
             loadTableCol(cb_tblList.SelectedValue.ToString());
         }
+        void Grant_Select_From_Grid_View_Button(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == gv_tables.NewRowIndex || e.RowIndex < 0)
+                return;
+            //Check if click is on specific column 
+            if (e.ColumnIndex == gv_tables.Columns["dataGridView_btn_select"].Index)
+            {
+                DataGridViewRow row = gv_tables.Rows[e.RowIndex];
+     
+                OracleConnection conn = DBUtils.GetDBConnection();
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("GrantSelect", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_role", cb_user.SelectedValue.ToString());
+                cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
+                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+/*                Console.WriteLine(cb_user.SelectedValue.ToString());
+                Console.WriteLine(row.Cells[0].Value.ToString());
+                Console.WriteLine(cb_tblList.SelectedValue.ToString());
+                Console.WriteLine(GrantOpt_btn.Checked.ToString());*/
+                
+                cmd.ExecuteNonQuery();
+               
+            }
+        }
+        void Grant_Update_From_Grid_View_Button(object sender, DataGridViewCellEventArgs e)
+        {
+            //if click is on new row or header row
+            if (e.RowIndex == gv_tables.NewRowIndex || e.RowIndex < 0)
+                return;
+            //Check if click is on specific column 
+            if (e.ColumnIndex == gv_tables.Columns["dataGridView_btn_update"].Index)
+            {
+                DataGridViewRow row = gv_tables.Rows[e.RowIndex];
+                
+                OracleConnection conn = DBUtils.GetDBConnection();
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("GrantUpdate", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_role", cb_user.SelectedValue.ToString());
+                cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
+                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+
+                cmd.ExecuteNonQuery();
+            }
+        }
         private void loadTableCol(string tblName)
         {
+            gv_tables.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowTableCol", conn);
@@ -106,19 +156,33 @@ namespace qlCSYT
             OracleDataAdapter da = new OracleDataAdapter(cmd);
             DataTable dt = new DataTable();
             da.Fill(dt);
-
             gv_tables.DataSource = dt;
 
-            DataGridViewButtonColumn button = new DataGridViewButtonColumn();
-            {
-                button.Name = "btn_delete";
-                button.HeaderText = "Delete";
-                button.Text = "Delete";
-                button.UseColumnTextForButtonValue = true; //dont forget this line
-                this.gv_tables.Columns.Add(button);
-            }
-        }
 
+            var grant_select_button = new DataGridViewButtonColumn();
+             
+                grant_select_button.Name = "dataGridView_btn_select";
+                grant_select_button.HeaderText = "Grant select";
+                grant_select_button.Text = "Grant";
+                grant_select_button.UseColumnTextForButtonValue = true; //dont forget this line
+                this.gv_tables.Columns.Add(grant_select_button);
+
+                gv_tables.CellClick += Grant_Select_From_Grid_View_Button;
+                
+            
+            var grant_update_button = new DataGridViewButtonColumn();
+             
+                grant_update_button.Name = "dataGridView_btn_update";
+                grant_update_button.HeaderText = "Grant Update";
+                grant_update_button.Text = "Grant";
+                grant_update_button.UseColumnTextForButtonValue = true; //dont forget this line
+                this.gv_tables.Columns.Add(grant_update_button);
+
+                gv_tables.CellClick += Grant_Update_From_Grid_View_Button;
+                
+            
+        }
+       
         private void rbtn_user_CheckedChanged(object sender, EventArgs e)
         {
             cb_user.Enabled=true;
@@ -132,6 +196,11 @@ namespace qlCSYT
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cb_user_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
