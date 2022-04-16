@@ -29,6 +29,7 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_addRole));
             this.lb_roleName = new System.Windows.Forms.Label();
             this.tb_roleName = new System.Windows.Forms.TextBox();
             this.btn_addRole = new System.Windows.Forms.Button();
@@ -38,27 +39,30 @@ namespace qlCSYT
             // lb_roleName
             // 
             this.lb_roleName.AutoSize = true;
-            this.lb_roleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_roleName.Location = new System.Drawing.Point(95, 75);
+            this.lb_roleName.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_roleName.Location = new System.Drawing.Point(22, 31);
+            this.lb_roleName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_roleName.Name = "lb_roleName";
-            this.lb_roleName.Size = new System.Drawing.Size(81, 24);
+            this.lb_roleName.Size = new System.Drawing.Size(92, 27);
             this.lb_roleName.TabIndex = 0;
             this.lb_roleName.Text = "Tên role";
             // 
             // tb_roleName
             // 
-            this.tb_roleName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_roleName.Location = new System.Drawing.Point(182, 75);
+            this.tb_roleName.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tb_roleName.Location = new System.Drawing.Point(138, 31);
+            this.tb_roleName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tb_roleName.Name = "tb_roleName";
-            this.tb_roleName.Size = new System.Drawing.Size(175, 29);
+            this.tb_roleName.Size = new System.Drawing.Size(232, 34);
             this.tb_roleName.TabIndex = 1;
             // 
             // btn_addRole
             // 
-            this.btn_addRole.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addRole.Location = new System.Drawing.Point(182, 110);
+            this.btn_addRole.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_addRole.Location = new System.Drawing.Point(138, 74);
+            this.btn_addRole.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_addRole.Name = "btn_addRole";
-            this.btn_addRole.Size = new System.Drawing.Size(84, 37);
+            this.btn_addRole.Size = new System.Drawing.Size(112, 46);
             this.btn_addRole.TabIndex = 2;
             this.btn_addRole.Text = "Thêm role";
             this.btn_addRole.UseVisualStyleBackColor = true;
@@ -66,10 +70,11 @@ namespace qlCSYT
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cancel.Location = new System.Drawing.Point(282, 110);
+            this.btn_cancel.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancel.Location = new System.Drawing.Point(271, 74);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_cancel.Name = "btn_cancel";
-            this.btn_cancel.Size = new System.Drawing.Size(75, 37);
+            this.btn_cancel.Size = new System.Drawing.Size(100, 46);
             this.btn_cancel.TabIndex = 3;
             this.btn_cancel.Text = "Hủy";
             this.btn_cancel.UseVisualStyleBackColor = true;
@@ -77,15 +82,18 @@ namespace qlCSYT
             // 
             // frm_addRole
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(605, 269);
+            this.ClientSize = new System.Drawing.Size(437, 164);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_addRole);
             this.Controls.Add(this.tb_roleName);
             this.Controls.Add(this.lb_roleName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "frm_addRole";
-            this.Text = "frm_addRole";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Thêm role";
             this.ResumeLayout(false);
             this.PerformLayout();
 

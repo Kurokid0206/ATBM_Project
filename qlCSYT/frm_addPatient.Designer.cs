@@ -90,7 +90,7 @@ namespace qlCSYT
             // 
             this.txt_username.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_username.Location = new System.Drawing.Point(157, 13);
-            this.txt_username.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_username.Margin = new System.Windows.Forms.Padding(4);
             this.txt_username.Name = "txt_username";
             this.txt_username.Size = new System.Drawing.Size(353, 31);
             this.txt_username.TabIndex = 2;
@@ -99,7 +99,7 @@ namespace qlCSYT
             // 
             this.txt_password.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_password.Location = new System.Drawing.Point(157, 52);
-            this.txt_password.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_password.Margin = new System.Windows.Forms.Padding(4);
             this.txt_password.Name = "txt_password";
             this.txt_password.Size = new System.Drawing.Size(353, 31);
             this.txt_password.TabIndex = 3;
@@ -121,7 +121,7 @@ namespace qlCSYT
             // 
             this.txt_name.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_name.Location = new System.Drawing.Point(157, 91);
-            this.txt_name.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_name.Margin = new System.Windows.Forms.Padding(4);
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(353, 31);
             this.txt_name.TabIndex = 7;
@@ -250,7 +250,7 @@ namespace qlCSYT
             // 
             this.txt_idNumber.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_idNumber.Location = new System.Drawing.Point(157, 130);
-            this.txt_idNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_idNumber.Margin = new System.Windows.Forms.Padding(4);
             this.txt_idNumber.Name = "txt_idNumber";
             this.txt_idNumber.Size = new System.Drawing.Size(353, 31);
             this.txt_idNumber.TabIndex = 18;
@@ -259,7 +259,7 @@ namespace qlCSYT
             // 
             this.txt_houseNo.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_houseNo.Location = new System.Drawing.Point(157, 247);
-            this.txt_houseNo.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_houseNo.Margin = new System.Windows.Forms.Padding(4);
             this.txt_houseNo.Name = "txt_houseNo";
             this.txt_houseNo.Size = new System.Drawing.Size(353, 31);
             this.txt_houseNo.TabIndex = 21;
@@ -268,7 +268,7 @@ namespace qlCSYT
             // 
             this.txt_street.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_street.Location = new System.Drawing.Point(157, 286);
-            this.txt_street.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_street.Margin = new System.Windows.Forms.Padding(4);
             this.txt_street.Name = "txt_street";
             this.txt_street.Size = new System.Drawing.Size(353, 31);
             this.txt_street.TabIndex = 22;
@@ -277,7 +277,7 @@ namespace qlCSYT
             // 
             this.txt_district.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_district.Location = new System.Drawing.Point(157, 325);
-            this.txt_district.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_district.Margin = new System.Windows.Forms.Padding(4);
             this.txt_district.Name = "txt_district";
             this.txt_district.Size = new System.Drawing.Size(353, 31);
             this.txt_district.TabIndex = 23;
@@ -286,7 +286,7 @@ namespace qlCSYT
             // 
             this.txt_city.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_city.Location = new System.Drawing.Point(157, 364);
-            this.txt_city.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txt_city.Margin = new System.Windows.Forms.Padding(4);
             this.txt_city.Name = "txt_city";
             this.txt_city.Size = new System.Drawing.Size(353, 31);
             this.txt_city.TabIndex = 24;
@@ -295,7 +295,7 @@ namespace qlCSYT
             // 
             this.rtxt_sickHis.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxt_sickHis.Location = new System.Drawing.Point(744, 56);
-            this.rtxt_sickHis.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxt_sickHis.Margin = new System.Windows.Forms.Padding(4);
             this.rtxt_sickHis.Name = "rtxt_sickHis";
             this.rtxt_sickHis.Size = new System.Drawing.Size(319, 117);
             this.rtxt_sickHis.TabIndex = 28;
@@ -306,7 +306,7 @@ namespace qlCSYT
             // 
             this.rtxt_famSickHis.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxt_famSickHis.Location = new System.Drawing.Point(744, 180);
-            this.rtxt_famSickHis.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxt_famSickHis.Margin = new System.Windows.Forms.Padding(4);
             this.rtxt_famSickHis.Name = "rtxt_famSickHis";
             this.rtxt_famSickHis.Size = new System.Drawing.Size(319, 117);
             this.rtxt_famSickHis.TabIndex = 29;
@@ -316,7 +316,7 @@ namespace qlCSYT
             // 
             this.rtxt_allergy.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtxt_allergy.Location = new System.Drawing.Point(744, 306);
-            this.rtxt_allergy.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rtxt_allergy.Margin = new System.Windows.Forms.Padding(4);
             this.rtxt_allergy.Name = "rtxt_allergy";
             this.rtxt_allergy.Size = new System.Drawing.Size(319, 117);
             this.rtxt_allergy.TabIndex = 30;
@@ -327,7 +327,7 @@ namespace qlCSYT
             this.btn_addPatient.AutoSize = true;
             this.btn_addPatient.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_addPatient.Location = new System.Drawing.Point(323, 452);
-            this.btn_addPatient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_addPatient.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addPatient.Name = "btn_addPatient";
             this.btn_addPatient.Size = new System.Drawing.Size(153, 49);
             this.btn_addPatient.TabIndex = 31;
@@ -340,7 +340,7 @@ namespace qlCSYT
             this.btn_cancel.AutoSize = true;
             this.btn_cancel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancel.Location = new System.Drawing.Point(524, 452);
-            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(136, 49);
             this.btn_cancel.TabIndex = 32;
@@ -366,7 +366,7 @@ namespace qlCSYT
             this.cbMedFac.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbMedFac.FormattingEnabled = true;
             this.cbMedFac.Location = new System.Drawing.Point(744, 16);
-            this.cbMedFac.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbMedFac.Margin = new System.Windows.Forms.Padding(4);
             this.cbMedFac.Name = "cbMedFac";
             this.cbMedFac.Size = new System.Drawing.Size(319, 31);
             this.cbMedFac.TabIndex = 34;
@@ -375,7 +375,7 @@ namespace qlCSYT
             // 
             this.time_Birth.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.time_Birth.Location = new System.Drawing.Point(157, 169);
-            this.time_Birth.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.time_Birth.Margin = new System.Windows.Forms.Padding(4);
             this.time_Birth.Name = "time_Birth";
             this.time_Birth.Size = new System.Drawing.Size(353, 31);
             this.time_Birth.TabIndex = 35;
@@ -386,7 +386,7 @@ namespace qlCSYT
             this.cb_gender.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cb_gender.FormattingEnabled = true;
             this.cb_gender.Location = new System.Drawing.Point(157, 208);
-            this.cb_gender.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cb_gender.Margin = new System.Windows.Forms.Padding(4);
             this.cb_gender.Name = "cb_gender";
             this.cb_gender.Size = new System.Drawing.Size(99, 31);
             this.cb_gender.TabIndex = 36;
@@ -428,7 +428,7 @@ namespace qlCSYT
             this.Controls.Add(this.lb_password);
             this.Controls.Add(this.lb_username);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frm_addPatient";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Thêm bệnh nhân mới";

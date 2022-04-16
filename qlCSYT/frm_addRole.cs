@@ -24,7 +24,8 @@ namespace qlCSYT
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) this.Close();
         }
 
         private void btn_addRole_Click(object sender, EventArgs e)

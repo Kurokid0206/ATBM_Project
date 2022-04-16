@@ -51,8 +51,8 @@ namespace qlCSYT
                 
                 conn.Close();
             }
-//Delete button
-var revokeButton = new DataGridViewButtonColumn();
+            //Revoke Button
+            var revokeButton = new DataGridViewButtonColumn();
             revokeButton.Name = "dataGridViewUserRevokeButton";
             revokeButton.HeaderText = "REVOKE";
             revokeButton.Text = "x";
