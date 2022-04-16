@@ -172,6 +172,7 @@ namespace qlCSYT
         {
             gv_tables.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("ShowTableCol", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -183,9 +184,11 @@ namespace qlCSYT
             DataTable dt = new DataTable();
             da.Fill(dt);
             gv_tables.DataSource = dt;
+        }
+                catch (Exception) { }
+                finally { conn.Close(); }
 
-
-            var grant_select_button = new DataGridViewButtonColumn();
+var grant_select_button = new DataGridViewButtonColumn();
              
                 grant_select_button.Name = "dataGridView_btn_select";
                 grant_select_button.HeaderText = "Grant select";
@@ -237,6 +240,7 @@ namespace qlCSYT
         private void btn_addDelPriv_Click(object sender, EventArgs e)
         {
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("GrantDelete", conn);
             string user_role = "";
@@ -249,10 +253,14 @@ namespace qlCSYT
 
             cmd.ExecuteNonQuery();
         }
+                catch (Exception) { }
+                finally { conn.Close(); }
+        }
 
         private void btn_addInsPriv_Click(object sender, EventArgs e)
         {
             OracleConnection conn = DBUtils.GetDBConnection();
+            try { 
             conn.Open();
             OracleCommand cmd = new OracleCommand("GrantInsert", conn);
             string user_role = "";
@@ -264,6 +272,9 @@ namespace qlCSYT
             cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
 
             cmd.ExecuteNonQuery();
+        }
+                catch (Exception) { }
+                finally { conn.Close(); }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
