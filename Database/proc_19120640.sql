@@ -45,14 +45,27 @@ end; */
 
 
 --cap quyen insert cho user/role, neu la role thi opt = false
-create or replace procedure C##CSYT_Admin.GrantUpdate (user_role VARCHAR2, cols VARCHAR2, _table VARCHAR2, opt VARCHAR2)
+create or replace procedure C##CSYT_Admin.GrantInsert(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
 as
 
     BEGIN
-        if opt then
-            execute IMMEDIATE ('grant insert on C##CSYT_Admin.' || _table || ' to ' || user_role || ' with grant option');
+        if opt = 'True' then
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role || ' with grant option');
         else
-            execute IMMEDIATE ('grant insert on C##CSYT_Admin.' || _table || ' to ' || user_role );
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
+
+--cap quyen delete cho user/role, neu la role thi opt = false
+create or replace procedure C##CSYT_Admin.GrantDelete(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role );
         end if;
     END;
 /
