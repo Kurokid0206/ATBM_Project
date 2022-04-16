@@ -47,6 +47,7 @@ namespace qlCSYT
                 
                 conn.Close();
                 MessageBox.Show("Success!");
+                this.Close();
             }
 
 

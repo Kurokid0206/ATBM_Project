@@ -195,8 +195,8 @@ namespace qlCSYT
                 
                 conn.Close();
             }
-//Delete button
-var deleteButton = new DataGridViewButtonColumn();
+            //Delete button
+            var deleteButton = new DataGridViewButtonColumn();
             deleteButton.Name = "dataGridViewDeleteButton";
             deleteButton.HeaderText = "DELETE";
             deleteButton.Text = "x";
