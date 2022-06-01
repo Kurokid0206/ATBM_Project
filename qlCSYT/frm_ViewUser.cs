@@ -1,16 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Windows.Forms;
-using System.Data.Common;
 using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 
 namespace qlCSYT
@@ -25,7 +17,7 @@ namespace qlCSYT
 
         private void frm_ViewUser_Load(object sender, EventArgs e)
         {
-           
+
         }
         public void LoadUser(string username)
         {
@@ -101,8 +93,8 @@ namespace qlCSYT
             gv_update_col_priv.CellClick -= DataGridViewUser_RevokeUpdateCellClick;
             gv_update_col_priv.CellClick += DataGridViewUser_RevokeUpdateCellClick;
         }
-            void DataGridViewUser_RevokeCellClick(object sender, DataGridViewCellEventArgs e)
-            {
+        void DataGridViewUser_RevokeCellClick(object sender, DataGridViewCellEventArgs e)
+        {
             //if click is on new row or header row
             if (e.RowIndex == gv_User.NewRowIndex || e.RowIndex < 0)
                 return;
@@ -131,7 +123,7 @@ namespace qlCSYT
                     cmd.Parameters.Add("@pi_priType", pinteger);
                     cmd.Parameters.Add("@pi_obj", obj);
                     cmd.ExecuteNonQuery();
-                    
+
                 }
                 catch (Exception err)
                 {
@@ -153,7 +145,7 @@ namespace qlCSYT
                 string username = gv_update_col_priv.Rows[e.RowIndex].Cells[0].Value.ToString();
                 string priviledge = gv_update_col_priv.Rows[e.RowIndex].Cells[2].Value.ToString();
                 string obj = gv_update_col_priv.Rows[e.RowIndex].Cells[1].Value.ToString();
-                
+
                 OracleConnection conn = DBUtils.GetDBConnection();
                 Console.WriteLine(username);
                 //Console.WriteLine(pinteger);

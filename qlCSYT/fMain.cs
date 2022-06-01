@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Data.Common;
-using Oracle.DataAccess.Client;
+﻿using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace qlCSYT
 {
@@ -46,7 +39,7 @@ namespace qlCSYT
                 frm.Closed += (s, args) => this.Show(); //when other is closed, reopend this
 
             }
-            
+
         }
         void DataGridViewRole_ShowPriviledgeCellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -172,27 +165,29 @@ namespace qlCSYT
         {
             this.gv_main.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
 
-            da.Fill(dt);
-            gv_main.DataSource = dt;
-        }
-            catch (Exception err) {
+                da.Fill(dt);
+                gv_main.DataSource = dt;
+            }
+            catch (Exception err)
+            {
                 Console.WriteLine(err);
             }
             finally
             {
-                
+
                 conn.Close();
             }
             //Delete button
@@ -206,7 +201,7 @@ namespace qlCSYT
             gv_main.CellClick -= DataGridViewUser_DeleteCellClick;
             gv_main.CellClick -= DataGridViewRole_DeleteCellClick;
             gv_main.CellClick += DataGridViewUser_DeleteCellClick;
-            
+
 
             //Show Priviledge Button
             var showPriviledgeButton = new DataGridViewButtonColumn();
@@ -227,26 +222,28 @@ namespace qlCSYT
             this.gv_main.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             conn.Open();
-            try{
-            OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
 
-            da.Fill(dt);
-            gv_main.DataSource = dt;
-        }
-            catch (Exception err) {
+                da.Fill(dt);
+                gv_main.DataSource = dt;
+            }
+            catch (Exception err)
+            {
                 Console.WriteLine(err);
             }
             finally
             {
-                
+
                 conn.Close();
             }
             //Delete button
