@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using qlCSYT.SqlConn;
+﻿using Oracle.DataAccess.Client;
+using System;
 using System.Data;
 using System.Data.Common;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
 
 
 namespace qlCSYT
@@ -70,6 +64,6 @@ namespace qlCSYT
                 }
             }
         }
-        
+
     }
 }

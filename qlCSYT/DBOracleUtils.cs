@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Oracle.DataAccess.Client;
+﻿using Oracle.DataAccess.Client;
+using System;
 
 namespace qlCSYT.SqlConn
 {
@@ -18,8 +14,8 @@ namespace qlCSYT.SqlConn
 
             // ‘Connection String’ kết nối trực tiếp tới Oracle.
             string connString = "Data Source = (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = "
-+host + ")(PORT = " +port + "))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = "
-+sid + "))); Password = " +password + "; User ID = " +user;
++ host + ")(PORT = " + port + "))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = "
++ sid + "))); Password = " + password + "; User ID = " + user;
 
             OracleConnection conn = new OracleConnection();
 

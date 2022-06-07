@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using System.Windows.Forms;
-using System.Data.Common;
-using Oracle.DataAccess.Client;
+﻿using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
+using System;
+using System.Data;
+using System.Data.Common;
+using System.Windows.Forms;
 
 namespace qlCSYT
 {
@@ -24,7 +17,7 @@ namespace qlCSYT
         private void btn_cancel_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
-            if(result == DialogResult.OK) this.Close();
+            if (result == DialogResult.OK) this.Close();
         }
 
         private void frm_addEmp_Load(object sender, EventArgs e)
@@ -115,12 +108,12 @@ namespace qlCSYT
             string specialist = txt_specialist.Text;
 
             OracleConnection conn = DBUtils.GetDBConnection();
-            
+
             try
             {
                 conn.Open();
 
-                CreateEmp(conn,username,password);
+                CreateEmp(conn, username, password);
             }
             catch (Exception err)
             {
@@ -132,19 +125,19 @@ namespace qlCSYT
                 Console.WriteLine("Completed!");
                 conn.Close();
                 conn.Dispose();
-                MessageBox.Show("Thêm nhân viên thành công!","Thông báo");
+                MessageBox.Show("Thêm nhân viên thành công!", "Thông báo");
                 this.Close();
             }
             Console.Read();
         }
-        private void CreateEmp(OracleConnection conn, string username,string password)
+        private void CreateEmp(OracleConnection conn, string username, string password)
         {
-            
+
             OracleCommand cmd = new OracleCommand("CreateUser", conn);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@pi_username", username);
             cmd.Parameters.Add("@pi_password", password);
-            cmd.ExecuteNonQuery();            
+            cmd.ExecuteNonQuery();
         }
 
         private void txt_idNumber_TextChanged(object sender, EventArgs e)

@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
-using System.Data.Common;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
-using qlCSYT;
+using System;
+using System.Data;
+using System.Windows.Forms;
 
 namespace qlCSYT
 {
@@ -34,70 +25,73 @@ namespace qlCSYT
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
 
-            da.Fill(dt);
-            cb_user.DataSource = dt;
-            cb_user.DisplayMember = "USERNAME";
-            cb_user.ValueMember = "USERNAME";
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                da.Fill(dt);
+                cb_user.DataSource = dt;
+                cb_user.DisplayMember = "USERNAME";
+                cb_user.ValueMember = "USERNAME";
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
         }
         private void loadRoles()
         {
 
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            //cmd.Parameters.Add("@user_name", "ADMIN");
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowAllRole", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
 
 
-            da.Fill(dt);
-            cb_roles.DataSource = dt;
-            cb_roles.DisplayMember = "ROLE";
-            cb_roles.ValueMember = "ROLE";
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                da.Fill(dt);
+                cb_roles.DataSource = dt;
+                cb_roles.DisplayMember = "ROLE";
+                cb_roles.ValueMember = "ROLE";
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
         }
         private void loadTables()
         {
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowTables", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowTables", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
 
-            cb_tblList.DataSource = dt;
-            cb_tblList.DisplayMember = "table_name";
-            cb_tblList.ValueMember = "table_name";
-            cb_tblList.SelectedIndexChanged += OnIndexChanged;
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                cb_tblList.DataSource = dt;
+                cb_tblList.DisplayMember = "table_name";
+                cb_tblList.ValueMember = "table_name";
+                cb_tblList.SelectedIndexChanged += OnIndexChanged;
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
 
         }
         private void OnIndexChanged(object sender, EventArgs e)
@@ -113,32 +107,34 @@ namespace qlCSYT
             if (e.ColumnIndex == gv_tables.Columns["dataGridView_btn_select"].Index)
             {
                 DataGridViewRow row = gv_tables.Rows[e.RowIndex];
-     
-                OracleConnection conn = DBUtils.GetDBConnection();
-                try { 
-                conn.Open();
-                OracleCommand cmd = new OracleCommand("GrantSelect", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                string user_role = "";
-                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
-                else { user_role = cb_roles.SelectedValue.ToString(); }
-                cmd.Parameters.Add("@tab_priv", cb_tblList.SelectedValue.ToString());
-                cmd.Parameters.Add("@username", user_role);
-                cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
-                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
-/*                              Console.WriteLine(cb_user.SelectedValue.ToString());
-                                Console.WriteLine(row.Cells[0].Value.ToString());
-                                Console.WriteLine(cb_tblList.SelectedValue.ToString());
-                                Console.WriteLine(GrantOpt_btn.Checked.ToString());*/
 
-                cmd.ExecuteNonQuery();
-            }
-                catch (Exception err) {
+                OracleConnection conn = DBUtils.GetDBConnection();
+                try
+                {
+                    conn.Open();
+                    OracleCommand cmd = new OracleCommand("GrantSelect", conn);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    string user_role = "";
+                    if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                    else { user_role = cb_roles.SelectedValue.ToString(); }
+                    cmd.Parameters.Add("@tab_priv", cb_tblList.SelectedValue.ToString());
+                    cmd.Parameters.Add("@username", user_role);
+                    cmd.Parameters.Add("@cols", row.Cells[0].Value.ToString());
+                    cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+                    /*                              Console.WriteLine(cb_user.SelectedValue.ToString());
+                                                    Console.WriteLine(row.Cells[0].Value.ToString());
+                                                    Console.WriteLine(cb_tblList.SelectedValue.ToString());
+                                                    Console.WriteLine(GrantOpt_btn.Checked.ToString());*/
+
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception err)
+                {
                     Console.WriteLine(err);
                 }
-            finally { conn.Close(); }
+                finally { conn.Close(); }
 
-        }
+            }
         }
         void Grant_Update_From_Grid_View_Button(object sender, DataGridViewCellEventArgs e)
         {
@@ -149,7 +145,7 @@ namespace qlCSYT
             if (e.ColumnIndex == gv_tables.Columns["dataGridView_btn_update"].Index)
             {
                 DataGridViewRow row = gv_tables.Rows[e.RowIndex];
-                
+
                 OracleConnection conn = DBUtils.GetDBConnection();
                 try
                 {
@@ -174,46 +170,47 @@ namespace qlCSYT
         {
             gv_tables.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("ShowTableCol", conn);
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@tblname", tblName);
-            cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-            cmd.ExecuteNonQuery();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowTableCol", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@tblname", tblName);
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
 
-            OracleDataAdapter da = new OracleDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            gv_tables.DataSource = dt;
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                gv_tables.DataSource = dt;
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
 
-var grant_select_button = new DataGridViewButtonColumn();
-             
-                grant_select_button.Name = "dataGridView_btn_select";
-                grant_select_button.HeaderText = "Grant select";
-                grant_select_button.Text = "Grant";
-                grant_select_button.UseColumnTextForButtonValue = true; //dont forget this line
-                this.gv_tables.Columns.Add(grant_select_button);
+            var grant_select_button = new DataGridViewButtonColumn();
 
-                gv_tables.CellClick += Grant_Select_From_Grid_View_Button;
-                
-            
+            grant_select_button.Name = "dataGridView_btn_select";
+            grant_select_button.HeaderText = "Grant select";
+            grant_select_button.Text = "Grant";
+            grant_select_button.UseColumnTextForButtonValue = true; //dont forget this line
+            this.gv_tables.Columns.Add(grant_select_button);
+
+            gv_tables.CellClick += Grant_Select_From_Grid_View_Button;
+
+
             var grant_update_button = new DataGridViewButtonColumn();
-             
-                grant_update_button.Name = "dataGridView_btn_update";
-                grant_update_button.HeaderText = "Grant Update";
-                grant_update_button.Text = "Grant";
-                grant_update_button.UseColumnTextForButtonValue = true; //dont forget this line
-                this.gv_tables.Columns.Add(grant_update_button);
 
-                gv_tables.CellClick += Grant_Update_From_Grid_View_Button;
-                
-            
+            grant_update_button.Name = "dataGridView_btn_update";
+            grant_update_button.HeaderText = "Grant Update";
+            grant_update_button.Text = "Grant";
+            grant_update_button.UseColumnTextForButtonValue = true; //dont forget this line
+            this.gv_tables.Columns.Add(grant_update_button);
+
+            gv_tables.CellClick += Grant_Update_From_Grid_View_Button;
+
+
         }
-       
+
         private void rbtn_user_CheckedChanged(object sender, EventArgs e)
         {
             cb_user.Enabled = true;
@@ -243,41 +240,43 @@ var grant_select_button = new DataGridViewButtonColumn();
         private void btn_addDelPriv_Click(object sender, EventArgs e)
         {
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("GrantDelete", conn);
-            string user_role = "";
-            if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
-            else { user_role = cb_roles.SelectedValue.ToString(); }
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@user_role", user_role); 
-            cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
-            cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("GrantDelete", conn);
+                string user_role = "";
+                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                else { user_role = cb_roles.SelectedValue.ToString(); }
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_role", user_role);
+                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
 
-            cmd.ExecuteNonQuery();
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
         }
 
         private void btn_addInsPriv_Click(object sender, EventArgs e)
         {
             OracleConnection conn = DBUtils.GetDBConnection();
-            try { 
-            conn.Open();
-            OracleCommand cmd = new OracleCommand("GrantInsert", conn);
-            string user_role = "";
-            if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
-            else { user_role = cb_roles.SelectedValue.ToString(); }
-            cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@user_role", user_role);
-            cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
-            cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("GrantInsert", conn);
+                string user_role = "";
+                if (rbtn_user.Checked) { user_role = cb_user.SelectedValue.ToString(); }
+                else { user_role = cb_roles.SelectedValue.ToString(); }
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("@user_role", user_role);
+                cmd.Parameters.Add("@table_priv", cb_tblList.SelectedValue.ToString());
+                cmd.Parameters.Add("@opt", GrantOpt_btn.Checked.ToString());
 
-            cmd.ExecuteNonQuery();
-        }
-                catch (Exception) { }
-                finally { conn.Close(); }
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception) { }
+            finally { conn.Close(); }
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -288,7 +287,7 @@ var grant_select_button = new DataGridViewButtonColumn();
 
         private void btn_showPriv_Click(object sender, EventArgs e)
         {
-           
+
             if (rbtn_role.Checked)
             {
 
@@ -304,14 +303,14 @@ var grant_select_button = new DataGridViewButtonColumn();
             {
                 string userName = cb_user.SelectedValue.ToString();
                 frm_ViewUser frm = new frm_ViewUser();
-                
+
                 this.Hide();
                 frm.Closed += (s, args) => this.Show();
                 frm.Show();
                 frm.LoadUser(userName);
 
             }
-            
+
         }
     }
 }
