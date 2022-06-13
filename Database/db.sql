@@ -1,14 +1,28 @@
 ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 DROP USER CSYT_Admin CASCADE;
 
-DROP TABLE CSYT_Admin.HSBA     CASCADE CONSTRAINTS;
-DROP TABLE CSYT_Admin.HSBA_DV  CASCADE CONSTRAINTS;
-DROP TABLE CSYT_Admin.BenhNhan CASCADE CONSTRAINTS;
-DROP TABLE CSYT_Admin.CSYT     CASCADE CONSTRAINTS;
-DROP TABLE CSYT_Admin.NhanVien CASCADE CONSTRAINTS;
+--DROP TABLE CSYT_Admin.HSBA     CASCADE CONSTRAINTS;
+--DROP TABLE CSYT_Admin.HSBA_DV  CASCADE CONSTRAINTS;
+--DROP TABLE CSYT_Admin.BenhNhan CASCADE CONSTRAINTS;
+--DROP TABLE CSYT_Admin.CSYT     CASCADE CONSTRAINTS;
+--DROP TABLE CSYT_Admin.NhanVien CASCADE CONSTRAINTS;
 
 CREATE USER CSYT_Admin IDENTIFIED BY a;
+
 GRANT CONNECT TO CSYT_Admin;
+GRANT UNLIMITED TABLESPACE TO CSYT_Admin;
+GRANT CREATE USER TO CSYT_Admin CONTAINER=ALL;
+GRANT DROP USER TO CSYT_Admin CONTAINER=ALL;
+GRANT ALTER USER TO CSYT_Admin Container=All;
+
+GRANT SELECT ON dba_users TO CSYT_Admin;
+GRANT SELECT ON dba_roles TO CSYT_Admin;
+GRANT CREATE ROLE TO CSYT_Admin CONTAINER=ALL;
+GRANT CREATE TABLE TO CSYT_Admin;
+grant select on all_users to CSYT_Admin;
+grant select on DBA_TAB_PRIVS to CSYT_Admin;
+grant create view to CSYT_ADMIN CONTAINER=ALL;
+
 
 CREATE TABLE CSYT_Admin.HSBA (
     MaHSBA      CHAR(10), 
@@ -65,7 +79,7 @@ CREATE TABLE CSYT_Admin.NhanVien (
     SDT         CHAR(11),
     CSYT        CHAR(5), 
     VaiTro      NVARCHAR2(20),--???? 
-    ChuyenKhoa  NVARCHAR2(20),--???TRIGGER?
+    ChuyenKhoa  CHAR(5),--???TRIGGER?
     CONSTRAINT PK_NhanVien_N04 PRIMARY KEY(MaNV)
 );
 
@@ -74,25 +88,12 @@ ALTER TABLE CSYT_Admin.HSBA_DV     ADD CONSTRAINT FK_DV_HSBA_N04 FOREIGN KEY (Ma
 ALTER TABLE CSYT_Admin.BenhNhan    ADD CONSTRAINT FK_BN_CSYT_N04 FOREIGN KEY (MaCSYT)  REFERENCES CSYT_Admin.CSYT(MaCSYT);
 ALTER TABLE CSYT_Admin.NhanVien    ADD CONSTRAINT FK_NV_CSYT_N04 FOREIGN KEY (CSYT)    REFERENCES CSYT_Admin.CSYT(MaCSYT);
 
-GRANT UNLIMITED TABLESPACE TO CSYT_Admin;
+
 
 GRANT CONNECT TO CSYT_Admin WITH ADMIN OPTION;
 
 
 
---GRANT ALL PRIVILEGES TO CSYT_DBA;
-
-GRANT CREATE USER TO CSYT_Admin CONTAINER=ALL;
-GRANT DROP USER TO CSYT_Admin CONTAINER=ALL;
-GRANT ALTER USER TO CSYT_Admin Container=All;
-
-GRANT SELECT ON dba_users TO CSYT_Admin;
-GRANT SELECT ON dba_roles TO CSYT_Admin;
-GRANT CREATE ROLE TO CSYT_Admin CONTAINER=ALL;
-GRANT CREATE TABLE TO CSYT_Admin;
-grant select on all_users to CSYT_Admin;/
-grant select on DBA_TAB_PRIVS to CSYT_Admin;/
-grant create view to CSYT_ADMIN CONTAINER=ALL;
 
 --insert data
 INSERT INTO CSYT_Admin.CSYT VALUES ('CS001','Benh vien Mat trung uong','TP.HCM','0123456789');
@@ -111,14 +112,14 @@ INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN008','CS003','Doc Co Cau Bai','662233
 INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN009','CS003','Dong Phuong Bat Bai','112255445',to_date('19/10/2005','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null);
 
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra',null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','Da khoa');
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','Chinh hinh');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','KH001');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','KH002');
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV004','Ningguang','Nu',to_date('02/06/2000','dd/mm/yyyy'),'114477993','Trung Quoc','0123456789','CS002','Thanh tra',null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV005','Ganyu','Nu',to_date('03/08/2001','dd/mm/yyyy'),'114454223','Liyue','0123456789','CS002','Y/ bac si','Rang ham mat');
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV006','Cong Minh Hang','Nu',to_date('08/04/2001','dd/mm/yyyy'),'178477223','Tp.HCM','0123456789','CS002','Y/ bac si','Chinh hinh');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV005','Ganyu','Nu',to_date('03/08/2001','dd/mm/yyyy'),'114454223','Liyue','0123456789','CS002','Y/ bac si','KH003');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV006','Cong Minh Hang','Nu',to_date('08/04/2001','dd/mm/yyyy'),'178477223','Tp.HCM','0123456789','CS002','Y/ bac si','KH002');
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV007','Maria Ozirawa','Nu',to_date('12/02/2002','dd/mm/yyyy'),'114967223','Nhat Ban','0123456789','CS003','Thanh tra',null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV008','Raiden Shogun','Nu',to_date('19/09/2001','dd/mm/yyyy'),'114197223','Inazuma','0123456789','CS003','Y/ bac si','Rang ham mat');
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV009','Signora','Nu',to_date('18/03/2000','dd/mm/yyyy'),'113217223','Nga','0123456789','CS003','Nghien cuu','Than kinh');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV008','Raiden Shogun','Nu',to_date('19/09/2001','dd/mm/yyyy'),'114197223','Inazuma','0123456789','CS003','Y/ bac si','KH001');
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV009','Signora','Nu',to_date('18/03/2000','dd/mm/yyyy'),'113217223','Nga','0123456789','CS003','Nghien cuu','KH003');
 
 
     
@@ -435,7 +436,7 @@ as
 
     END;
 /
-
+DROP USER CSYT_MeanSun;
 CREATE USER CSYT_MeanSun IDENTIFIED by a;/
 grant connect to CSYT_MeanSun; /
 grant UNLIMITED TABLESPACE to CSYT_MeanSun;/
