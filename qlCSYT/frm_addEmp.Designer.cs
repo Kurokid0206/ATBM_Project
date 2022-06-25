@@ -59,7 +59,7 @@ namespace qlCSYT
             // btn_cancel
             // 
             this.btn_cancel.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cancel.Location = new System.Drawing.Point(809, 232);
+            this.btn_cancel.Location = new System.Drawing.Point(819, 232);
             this.btn_cancel.Margin = new System.Windows.Forms.Padding(4);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(136, 49);
@@ -71,7 +71,7 @@ namespace qlCSYT
             // btn_addPatient
             // 
             this.btn_addPatient.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_addPatient.Location = new System.Drawing.Point(635, 234);
+            this.btn_addPatient.Location = new System.Drawing.Point(645, 232);
             this.btn_addPatient.Margin = new System.Windows.Forms.Padding(4);
             this.btn_addPatient.Name = "btn_addPatient";
             this.btn_addPatient.Size = new System.Drawing.Size(153, 49);
