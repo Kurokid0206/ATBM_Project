@@ -1,5 +1,5 @@
-grant select on dba_users to C##CSYT_Admin;
-create or replace procedure C##CSYT_Admin.ShowAllUser (CUR out SYS_REFCURSOR)
+grant select on dba_users to CSYT_Admin;
+create or replace procedure CSYT_Admin.ShowAllUser (CUR out SYS_REFCURSOR)
 as
 
     BEGIN
@@ -7,9 +7,9 @@ as
 
     END;
     /
-grant select on dba_roles to C##CSYT_Admin;
+grant select on dba_roles to CSYT_Admin;
 /
-create or replace procedure C##CSYT_Admin.ShowAllRole (CUR out SYS_REFCURSOR)
+create or replace procedure CSYT_Admin.ShowAllRole (CUR out SYS_REFCURSOR)
 as
 
     BEGIN

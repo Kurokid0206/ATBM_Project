@@ -1,6 +1,6 @@
 
 --cap quyen connect cho mot user hoac role
-create or replace procedure C##CSYT_Admin.GrantConnect (user_role in VARCHAR2)
+create or replace procedure CSYT_Admin.GrantConnect (user_role in VARCHAR2)
 as
 
     BEGIN
@@ -11,7 +11,7 @@ as
 
 /
 --cap quyen select cho user/role, neu la role thi opt = false
-CREATE OR REPLACE PROCEDURE C##CSYT_Admin.GrantSelect(tab_priv in VARCHAR2,username in varchar2,cols in varchar2, opt in VARCHAR2) IS
+CREATE OR REPLACE PROCEDURE CSYT_Admin.GrantSelect(tab_priv in VARCHAR2,username in varchar2,cols in varchar2, opt in VARCHAR2) IS
 sqlstmt varchar(1000):='';
 vcol varchar(50);
 cursor cur is select COLUMN_NAME from user_tab_columns where TABLE_NAME = 'VIEW_'||username||'_'||tab_priv;
@@ -42,7 +42,7 @@ BEGIN
 END;
     /
 
-create or replace procedure C##CSYT_Admin.GrantUpdate (user_role in VARCHAR2, cols in VARCHAR2, table_priv in VARCHAR2, opt in VARCHAR2)
+create or replace procedure CSYT_Admin.GrantUpdate (user_role in VARCHAR2, cols in VARCHAR2, table_priv in VARCHAR2, opt in VARCHAR2)
 as
 
     BEGIN
@@ -59,7 +59,7 @@ end; */
 
 
 --cap quyen insert cho user/role, neu la role thi opt = false
-create or replace procedure C##CSYT_Admin.GrantInsert(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+create or replace procedure CSYT_Admin.GrantInsert(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
 as
 
     BEGIN
@@ -72,7 +72,7 @@ as
 /
 
 --cap quyen delete cho user/role, neu la role thi opt = false
-create or replace procedure C##CSYT_Admin.GrantDelete(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+create or replace procedure CSYT_Admin.GrantDelete(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
 as
 
     BEGIN
@@ -85,7 +85,7 @@ as
 /
 
 --Lay tat ca quyen cho mot user
-create or replace procedure C##CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+create or replace procedure CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
 as
 
     BEGIN
@@ -98,8 +98,8 @@ as
 CREATE USER C##CSYT_MeanSun IDENTIFIED by a;/
 grant connect to C##CSYT_MeanSun; /
 grant UNLIMITED TABLESPACE to C##CSYT_MeanSun;/
-grant select on all_users to C##CSYT_Admin;/
-grant select on DBA_TAB_PRIVS to C##CSYT_Admin;/
+grant select on all_users to CSYT_Admin;/
+grant select on DBA_TAB_PRIVS to CSYT_Admin;/
 
 
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'C##CSYT_MEANSUN';
