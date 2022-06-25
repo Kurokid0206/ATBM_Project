@@ -24,3 +24,9 @@ Thông tin về quyền (privileges) của mỗi user/ role trên các đối t�
 
 Cách chạy winform:
 Tải về, giải nén các tập tin dll vào thư mục qlCSYT và sử dụng
+
+
+Phân 2:
+Bình Gold - TC#2 & TC#5
+Sơn - TC#3
+Văn - TC#4 & TC#6
