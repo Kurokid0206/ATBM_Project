@@ -1,0 +1,20 @@
+vì các thông tin cá nhân là các thông tin nhạy cảm nên nhóm đã mã hóa chung bằng cách
+1: Bệnh nhân: key => mã bn + mã cs
+2: nhân viên: key => mã nv + mã vs
+
+sử dụng
+
+des_cbc_pkcs5 
+
+DES-Data Encryption Standard.
+Block cipher. Sử dụng khóa có độ dài 56 bits
+
+Cipher Block Chaining. 
+Khối Plaintext kế tiếp được XOR với khối
+ciphertext trước đó trước khi nó được mã hóa. Vector khởi tạo (IV)
+được xem như khối plaintext đầu tiên.
+
+PAD_PKCS5 Cung cấp cơ chế đệm thêm tuân theo chuẩn PKCS #5: Password-
+Based Cryptography Standard: thêm vào n số, chỉ n byte còn thiếu
+của khối cuối cùng. Nếu khối cuối cùng đủ, vẫn đệm thêm toàn bộ
+khối.
