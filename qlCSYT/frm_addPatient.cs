@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-using System.Data.Common;
-using Oracle.DataAccess.Client;
+﻿using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
+using System;
+using System.Data;
+using System.Data.Common;
+using System.Windows.Forms;
 
 namespace qlCSYT
 {
@@ -23,12 +16,13 @@ namespace qlCSYT
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
-            this.Close();
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) this.Close();
         }
 
         private void frm_addPatient_Load(object sender, EventArgs e)
         {
-           
+
 
             cb_gender.DisplayMember = "Phai";
             cb_gender.ValueMember = "Value";
@@ -127,6 +121,8 @@ namespace qlCSYT
                 Console.WriteLine("Completed!");
                 conn.Close();
                 conn.Dispose();
+                MessageBox.Show("Thêm bệnh nhân thành công!", "Thông báo");
+                this.Close();
             }
             Console.Read();
 
@@ -139,6 +135,81 @@ namespace qlCSYT
             cmd.Parameters.Add("@pi_username", username);
             cmd.Parameters.Add("@pi_password", password);
             cmd.ExecuteNonQuery();
+        }
+
+        private void rtxt_sickHis_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_username_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_name_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_idNumber_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_birth_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_Gender_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_houseNo_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_street_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_district_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_city_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_csytID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_allergy_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_famSickHis_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_sickHis_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lb_password_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

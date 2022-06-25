@@ -43,43 +43,72 @@ namespace qlCSYT
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_ViewUser));
             this.gv_User = new System.Windows.Forms.DataGridView();
-            this.FakeConsole = new System.Windows.Forms.TextBox();
+            this.gv_update_col_priv = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.gv_User)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_update_col_priv)).BeginInit();
             this.SuspendLayout();
             // 
             // gv_User
             // 
+            this.gv_User.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_User.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_User.Location = new System.Drawing.Point(-2, -2);
-            this.gv_User.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gv_User.Location = new System.Drawing.Point(12, 33);
+            this.gv_User.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gv_User.Name = "gv_User";
             this.gv_User.RowHeadersWidth = 51;
             this.gv_User.RowTemplate.Height = 24;
-            this.gv_User.Size = new System.Drawing.Size(370, 224);
+            this.gv_User.Size = new System.Drawing.Size(853, 241);
             this.gv_User.TabIndex = 0;
             // 
-            // FakeConsole
+            // gv_update_col_priv
             // 
-            this.FakeConsole.Location = new System.Drawing.Point(9, 306);
-            this.FakeConsole.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.FakeConsole.Multiline = true;
-            this.FakeConsole.Name = "FakeConsole";
-            this.FakeConsole.Size = new System.Drawing.Size(360, 51);
-            this.FakeConsole.TabIndex = 1;
+            this.gv_update_col_priv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gv_update_col_priv.Location = new System.Drawing.Point(15, 318);
+            this.gv_update_col_priv.Name = "gv_update_col_priv";
+            this.gv_update_col_priv.RowHeadersWidth = 51;
+            this.gv_update_col_priv.RowTemplate.Height = 24;
+            this.gv_update_col_priv.Size = new System.Drawing.Size(849, 211);
+            this.gv_update_col_priv.TabIndex = 1;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(21, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(108, 17);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Table privileges";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(21, 289);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(167, 17);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Update column privileges";
             // 
             // frm_ViewUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(600, 366);
-            this.Controls.Add(this.FakeConsole);
+            this.ClientSize = new System.Drawing.Size(896, 568);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.gv_update_col_priv);
             this.Controls.Add(this.gv_User);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "frm_ViewUser";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "View User";
             this.Load += new System.EventHandler(this.frm_ViewUser_Load);
             ((System.ComponentModel.ISupportInitialize)(this.gv_User)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gv_update_col_priv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,6 +117,8 @@ namespace qlCSYT
         #endregion
 
         private System.Windows.Forms.DataGridView gv_User;
-        private TextBox FakeConsole;
+        private DataGridView gv_update_col_priv;
+        private Label label1;
+        private Label label2;
     }
 }

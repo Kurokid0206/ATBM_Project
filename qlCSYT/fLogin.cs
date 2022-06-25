@@ -1,18 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
-using System.Data.Common;
-using Oracle.DataAccess.Client;
-using Oracle.DataAccess.Types;
-using System.Runtime.InteropServices;
-using qlCSYT;
+using System;
+using System.Windows.Forms;
 
 
 namespace qlCSYT
@@ -43,16 +32,16 @@ namespace qlCSYT
         {
             string username = tbUsername.Text;
             string password = tbPassword.Text;
-            OracleConnection conn = DBUtils.GetDBConnection(username,password);
+            OracleConnection conn = DBUtils.GetDBConnection(username, password);
 
             if (username == null || username.Equals(""))
             {
-                MessageBox.Show("Chưa nhập Username!");
+                MessageBox.Show("Bạn chưa nhập Username!", "Thông báo!");
                 return;
             }
             if (password == null || password.Equals(""))
             {
-                MessageBox.Show("Chưa nhập Password!");
+                MessageBox.Show("Bạn chưa nhập Password!", "Thông báo!");
                 return;
             }
             try
@@ -65,7 +54,7 @@ namespace qlCSYT
             }
             catch (Exception err)
             {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo!");
                 return;
             }
         }
