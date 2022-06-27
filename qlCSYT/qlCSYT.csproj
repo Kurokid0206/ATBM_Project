@@ -80,6 +80,18 @@
     <Compile Include="frm_priviledges.Designer.cs">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_QLDL_del_HSBA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLDL_del_HSBA.Designer.cs">
+      <DependentUpon>frm_QLDL_del_HSBA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_QLDL_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLDL_main.Designer.cs">
+      <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_ViewRole.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -123,6 +135,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_priviledges.resx">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLDL_del_HSBA.resx">
+      <DependentUpon>frm_QLDL_del_HSBA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLDL_main.resx">
+      <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ViewRole.resx">
       <DependentUpon>frm_ViewRole.cs</DependentUpon>
@@ -187,6 +205,7 @@
     <Content Include="OraOps12.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\1024px-Search_Icon.svg.png" />
     <None Include="Resources\ATBMCQ-4-removebg-preview.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
