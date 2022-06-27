@@ -225,6 +225,7 @@ namespace qlCSYT
             GrantOpt_btn.Checked = false;
             GrantOpt_btn.Enabled = false;
 
+
         }
 
         private void label1_Click(object sender, EventArgs e)
