@@ -53,7 +53,12 @@ namespace qlCSYT
             {
                 conn.Open();
                 User.getRoles();
-                Console.WriteLine(User.roles);
+                //xử lý role ở đây
+                //danh sách role ở dạng list: User.Roles
+                //xem là role nào thì show role đó ra
+
+                Console.WriteLine(User.Roles);
+
                 //Chuyen form
                 this.Hide();
                 fMain fMain = new fMain();
