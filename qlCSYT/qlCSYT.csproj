@@ -113,6 +113,24 @@
     <Compile Include="frm_ViewUser.Designer.cs">
       <DependentUpon>frm_ViewUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_YsBs_viewHSBA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_YsBs_viewHSBA.Designer.cs">
+      <DependentUpon>frm_YsBs_viewHSBA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_YsBs_viewHSBA_DV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_YsBs_viewHSBA_DV.Designer.cs">
+      <DependentUpon>frm_YsBs_viewHSBA_DV.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_YsBs_viewPatient.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_YsBs_viewPatient.Designer.cs">
+      <DependentUpon>frm_YsBs_viewPatient.cs</DependentUpon>
+    </Compile>
     <Compile Include="functions.cs" />
     <Compile Include="Program.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -148,6 +166,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ViewUser.resx">
       <DependentUpon>frm_ViewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_YsBs_viewHSBA.resx">
+      <DependentUpon>frm_YsBs_viewHSBA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_YsBs_viewHSBA_DV.resx">
+      <DependentUpon>frm_YsBs_viewHSBA_DV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_YsBs_viewPatient.resx">
+      <DependentUpon>frm_YsBs_viewPatient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -159,6 +159,16 @@ namespace qlCSYT
             fLogin f = new fLogin();
             f.Show();
             this.Close();
+
+            //template for view HSBA thing
+            //frm_YsBs_viewHSBA f= new frm_YsBs_viewHSBA();
+            //f.Show();
+            //this.Close();
+
+            //template for view Patient thing
+           // frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
+            //f.Show();
+            //this.Close();
         }
 
         private void LoadUsers()
