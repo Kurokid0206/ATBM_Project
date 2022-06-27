@@ -90,27 +90,27 @@
             this.lbMaBN.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMaBN.Location = new System.Drawing.Point(1, 3);
             this.lbMaBN.Name = "lbMaBN";
-            this.lbMaBN.Size = new System.Drawing.Size(65, 23);
+            this.lbMaBN.Size = new System.Drawing.Size(140, 23);
             this.lbMaBN.TabIndex = 6;
-            this.lbMaBN.Text = "MaBN";
+            this.lbMaBN.Text = "Mã bệnh nhân";
             // 
             // gv_viewPatient
             // 
             this.gv_viewPatient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_viewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_viewPatient.Location = new System.Drawing.Point(5, 198);
+            this.gv_viewPatient.Location = new System.Drawing.Point(5, 95);
             this.gv_viewPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gv_viewPatient.Name = "gv_viewPatient";
             this.gv_viewPatient.RowHeadersWidth = 51;
             this.gv_viewPatient.RowTemplate.Height = 24;
-            this.gv_viewPatient.Size = new System.Drawing.Size(791, 241);
+            this.gv_viewPatient.Size = new System.Drawing.Size(1025, 344);
             this.gv_viewPatient.TabIndex = 12;
             // 
             // frm_YsBs_viewPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1042, 450);
             this.Controls.Add(this.gv_viewPatient);
             this.Controls.Add(this.btn_searchCMND);
             this.Controls.Add(this.btn_searchMaBN);
@@ -119,7 +119,7 @@
             this.Controls.Add(this.lbCMND);
             this.Controls.Add(this.lbMaBN);
             this.Name = "frm_YsBs_viewPatient";
-            this.Text = "frm_YsBs_viewPatient";
+            this.Text = "Xem hồ sơ bệnh nhân";
             ((System.ComponentModel.ISupportInitialize)(this.gv_viewPatient)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
