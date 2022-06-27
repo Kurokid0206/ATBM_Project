@@ -15,7 +15,7 @@ namespace qlCSYT
 
         private void frm_NghienCuu_Load(object sender, EventArgs e)
         {
-            LoadHSBA();
+            LoadUsers();
         }
 
         private void menu_xemHSBADV_Click(object sender, EventArgs e)
@@ -94,5 +94,35 @@ namespace qlCSYT
             this.Close();
         }
 
+        private void LoadUsers()
+        {
+            this.gv_NghienCuu.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+
+                da.Fill(dt);
+                gv_NghienCuu.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+
+                conn.Close();
+            }
+        }
     }
 }

@@ -49,7 +49,7 @@ namespace qlCSYT
                 conn.Open();
                 //Chuyen form
                 this.Hide();
-                fMain fMain = new fMain();
+                frm_NghienCuu fMain = new frm_NghienCuu();
                 fMain.Show();
             }
             catch (Exception err)
