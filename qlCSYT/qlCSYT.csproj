@@ -74,6 +74,18 @@
     <Compile Include="frm_addRole.Designer.cs">
       <DependentUpon>frm_addRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_Nc_viewHSBA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Nc_viewHSBA.Designer.cs">
+      <DependentUpon>frm_Nc_viewHSBA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_Nc_viewHSBA_DV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_Nc_viewHSBA_DV.Designer.cs">
+      <DependentUpon>frm_Nc_viewHSBA_DV.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_priviledges.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +162,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_addRole.resx">
       <DependentUpon>frm_addRole.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Nc_viewHSBA.resx">
+      <DependentUpon>frm_Nc_viewHSBA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_Nc_viewHSBA_DV.resx">
+      <DependentUpon>frm_Nc_viewHSBA_DV.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_priviledges.resx">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
