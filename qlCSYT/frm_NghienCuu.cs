@@ -17,9 +17,14 @@ namespace qlCSYT
         {
             LoadHSBA();
         }
+
         private void menu_xemHSBADV_Click(object sender, EventArgs e)
         {
             LoadHSBA_DV();
+        }
+        private void menu_xemHSBA_Click(object sender, EventArgs e)
+        {
+            LoadHSBA();
         }
 
         private void LoadHSBA()
@@ -38,7 +43,6 @@ namespace qlCSYT
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
 
-
                 da.Fill(dt);
                 gv_NghienCuu.DataSource = dt;
             }
@@ -48,7 +52,6 @@ namespace qlCSYT
             }
             finally
             {
-
                 conn.Close();
             }
         }
@@ -90,7 +93,6 @@ namespace qlCSYT
             f.Show();
             this.Close();
         }
-
 
     }
 }

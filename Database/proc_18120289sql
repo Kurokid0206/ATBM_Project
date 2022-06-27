@@ -1,0 +1,17 @@
+create or replace procedure ShowAllHSBA (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from C##CSYT_ADMIN.HSBA;
+    
+    END;
+/
+
+create or replace procedure ShowAllHSBA_DV (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR select * from C##CSYT_ADMIN.HSBA_DV;
+    
+    END;
+/

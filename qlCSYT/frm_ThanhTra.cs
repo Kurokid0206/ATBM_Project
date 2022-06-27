@@ -17,11 +17,36 @@ namespace qlCSYT
             InitializeComponent();
         }
 
-        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menu_logout_Click(object sender, EventArgs e)
         {
             fLogin f = new fLogin();
             f.Show();
             this.Close();
+        }
+
+        private void menu_xemHSBA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_xemHSBA_DV_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_xemBenhNhan_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_xemCSYT_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menu_xemNhanVien_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

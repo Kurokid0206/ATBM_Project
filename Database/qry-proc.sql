@@ -1,4 +1,4 @@
-CREATE OR REPLACE PROCEDURE CSYT_Admin.createUser(
+zCREATE OR REPLACE PROCEDURE CSYT_Admin.createUser(
 	pi_username IN NVARCHAR2,
 	pi_password IN NVARCHAR2) IS
 	

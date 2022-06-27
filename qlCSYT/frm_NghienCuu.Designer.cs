@@ -56,6 +56,7 @@
             this.menu_xemHSBA.Name = "menu_xemHSBA";
             this.menu_xemHSBA.Size = new System.Drawing.Size(61, 24);
             this.menu_xemHSBA.Text = "HSBA";
+            this.menu_xemHSBA.Click += new System.EventHandler(this.menu_xemHSBA_Click);
             // 
             // menu_xemHSBADV
             // 
