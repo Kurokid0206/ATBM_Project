@@ -2,12 +2,15 @@
 using qlCSYT.SqlConn;
 using System;
 using System.Windows.Forms;
+using qlCSYT.UserSpace;
 
 
 namespace qlCSYT
 {
+    
     public partial class fLogin : Form
     {
+        User User = new User();
         public fLogin()
         {
             InitializeComponent();
@@ -31,8 +34,10 @@ namespace qlCSYT
         private void btLogin_Click(object sender, EventArgs e)
         {
             string username = tbUsername.Text;
+            User.username = tbUsername.Text;
             string password = tbPassword.Text;
             OracleConnection conn = DBUtils.GetDBConnection(username, password);
+            Console.WriteLine(conn);
 
             if (username == null || username.Equals(""))
             {
@@ -47,6 +52,8 @@ namespace qlCSYT
             try
             {
                 conn.Open();
+                User.getRoles();
+                Console.WriteLine(User.roles);
                 //Chuyen form
                 this.Hide();
                 fMain fMain = new fMain();
