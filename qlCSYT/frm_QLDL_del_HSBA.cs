@@ -1,9 +1,8 @@
-﻿using System;
+﻿ausing System;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System.Data;
-
 
 namespace qlCSYT
 {

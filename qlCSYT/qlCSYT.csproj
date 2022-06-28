@@ -122,18 +122,6 @@
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="frm_viewBN.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frm_viewBN.Designer.cs">
-      <DependentUpon>frm_viewBN.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_viewNV.cs">
-      <SubType>Form</SubType>
-    </Compile>
-	  <Compile Include="frm_viewNV.Designer.cs">
-		  <DependentUpon>frm_viewNV.cs</DependentUpon>
-	  </Compile>
     <Compile Include="frm_ThanhTra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,12 +224,6 @@
     <EmbeddedResource Include="frm_QLDL_main.resx">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_viewBN.resx">
-      <DependentUpon>frm_viewBN.cs</DependentUpon>
-    </EmbeddedResource>
-	  <EmbeddedResource Include="frm_viewNV.resx">
-		  <DependentUpon>frm_viewNV.cs</DependentUpon>
-	  </EmbeddedResource>
     <EmbeddedResource Include="frm_ThanhTra.resx">
       <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </EmbeddedResource>

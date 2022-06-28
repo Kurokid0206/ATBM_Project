@@ -38,6 +38,7 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_AuditData.DataSource = dt;
+                gv_AuditData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception error) { 
                 Console.WriteLine(error);
