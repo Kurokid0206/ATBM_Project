@@ -26,7 +26,7 @@ GRANT CREATE TABLE TO CSYT_Admin;
 grant select on all_users to CSYT_Admin;
 grant select on DBA_TAB_PRIVS to CSYT_Admin;
 grant create view to CSYT_ADMIN CONTAINER=ALL;
-
+GRANT EXECUTE ON SYS.DBMS_CRYPTO TO CSYT_ADMIN;
 
 CREATE TABLE CSYT_Admin.HSBA (
     MaHSBA      CHAR(10), 
@@ -53,12 +53,12 @@ CREATE TABLE CSYT_Admin.BenhNhan (
     MaBN            CHAR(10), 
     MaCSYT          CHAR(10), 
     TenBN           NVARCHAR2(50), 
-    CMND            RAW(2000), 
+    CMND            varchar2(2000), 
     NgaySinh        DATE, 
-    SoNha           RAW(2000),
-    TenDuong        RAW(2000), 
-    QuanHuyen       RAW(2000), 
-    TinhTP          RAW(2000), 
+    SoNha           varchar2(2000),
+    TenDuong        varchar2(2000), 
+    QuanHuyen       varchar2(2000), 
+    TinhTP          varchar2(2000), 
     TienSuBenh      NVARCHAR2(50), 
     TienSuBenhGD    NVARCHAR2(50),
     DiUngThuoc      NVARCHAR2(50),
@@ -79,9 +79,9 @@ CREATE TABLE CSYT_Admin.NhanVien (
     HoTen       NVARCHAR2(50), 
     Phai        NVARCHAR2(3), 
     NgaySinh    DATE, 
-    CMND        RAW(2000), 
-    QueQuan     RAW(2000), 
-    SDT         RAW(2000),
+    CMND        varchar2(2000), 
+    QueQuan     varchar2(2000), 
+    SDT         varchar2(11),
     CSYT        CHAR(10), 
     VaiTro      NVARCHAR2(20),--???? 
     ChuyenKhoa  CHAR(10),--???TRIGGER?
@@ -101,50 +101,6 @@ GRANT CONNECT TO CSYT_Admin WITH ADMIN OPTION;
 
 
 
-
---insert data
-INSERT INTO CSYT_Admin.CSYT VALUES ('CS001','Benh vien Mat trung uong','TP.HCM','0123456789');
-INSERT INTO CSYT_Admin.CSYT VALUES ('CS002','Benh vien Quan Y','Ha Noi','0123456789');
-INSERT INTO CSYT_Admin.CSYT VALUES ('CS003','Benh vien Y duoc TPHCM','TP.HCM','0123456789');
-
-
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN001','CS001','Pham Tan Ti','112233445',to_date('19/04/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN002','CS001','Tran Minh Son','118833445',to_date('19/05/2002','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN003','CS001','Lam Quoc Binh','662233445',to_date('19/08/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN004','CS002','Kamisato Ayaka','112233775',to_date('08/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN005','CS002','Le Ngoc Tai','112299445',to_date('19/11/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN006','CS002','Nguyen Quang Quy','332233445',to_date('19/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN007','CS003','Le Nam Thai Son','112233885',to_date('19/05/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN008','CS003','Doc Co Cau Bai','662233445',to_date('19/04/2004','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN009','CS003','Dong Phuong Bat Bai','112255445',to_date('19/10/2005','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
-
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra',null,Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','KH001',Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','KH002',Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV004','Ningguang','Nu',to_date('02/06/2000','dd/mm/yyyy'),'114477993','Trung Quoc','0123456789','CS002','Thanh tra',null,Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV005','Ganyu','Nu',to_date('03/08/2001','dd/mm/yyyy'),'114454223','Liyue','0123456789','CS002','Y/ bac si','KH003',Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV006','Cong Minh Hang','Nu',to_date('08/04/2001','dd/mm/yyyy'),'178477223','Tp.HCM','0123456789','CS002','Y/ bac si','KH002',Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV007','Ly Mac Sau','Nu',to_date('12/02/2002','dd/mm/yyyy'),'114967223','Nhat Ban','0123456789','CS003','Thanh tra',null,Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV008','Raiden Shogun','Nu',to_date('19/09/2001','dd/mm/yyyy'),'114197223','Inazuma','0123456789','CS003','Y/ bac si','KH001',Null);
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV009','Signora','Nu',to_date('18/03/2000','dd/mm/yyyy'),'113217223','Nga','0123456789','CS003','Nghien cuu','KH003',Null);
-
-    
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS001','BN001',to_date('19/04/2022','dd/mm/yyyy'),'Dau da day','NV002','KH001','CS001','Ung thu da day');
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS002','BN002',to_date('29/06/2022','dd/mm/yyyy'),'Gay tay','NV002','KH001','CS001','Gay xuong tay');
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS003','BN004',to_date('12/05/2022','dd/mm/yyyy'),'Gay chan','NV005','KH002','CS002','Gay xuong chau');
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS004','BN005',to_date('15/07/2022','dd/mm/yyyy'),'Xuat huyet nao','NV005','KH001','CS002','Chan thuong so nao');
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS005','BN007',to_date('02/08/2022','dd/mm/yyyy'),'Thoat vi dia dem','NV008','KH003','CS003','Gay cot song');
-INSERT INTO CSYT_Admin.HSBA VALUES ('HS006','BN008',to_date('08/03/2022','dd/mm/yyyy'),'Dau mat','NV008','KH002','CS003','Duc thuy tinh the');
-
-    
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV001',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV003',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS002','DV001',to_date('29/06/2022','dd/mm/yyyy'),'NV003','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS003','DV001',to_date('12/05/2022','dd/mm/yyyy'),'NV006','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV001',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV002',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS005','DV001',to_date('02/08/2022','dd/mm/yyyy'),'NV009','Co benh');
-INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS006','DV001',to_date('08/03/2022','dd/mm/yyyy'),'NV009','Co benh');
 
 ------------------------------------
 --Chuc nang phan he 1
@@ -815,44 +771,20 @@ GRANT SELECT ON CSYT_ADMIN.VIEW_NGHIENCUU_HSBA_DV TO CSYT_ROLE_NGHIENCUU;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NGHIENCUU;
 /
 
--------------------------------
---CAU 6: 
-CREATE ROLE CSYT_ROLE_BENHNHAN;
-/
-CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW
-AS
-SELECT * FROM CSYT_ADMIN.BENHNHAN
-WHERE 'CSYT_'||MaBN = user
-/
-GRANT SELECT ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
-GRANT UPDATE ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
-GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BENHNHAN;
-/
 
-CREATE ROLE CSYT_ROLE_NHANVIEN;
-/
-CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW
-AS
-SELECT * FROM CSYT_ADMIN.NHANVIEN
-WHERE 'CSYT_'||MaNV = user
-/
-GRANT SELECT ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
-GRANT UPDATE ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
-GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
-/
 
 
 CREATE OR REPLACE FUNCTION CSYT_ADMIN.ENCRYPT(pi_input VARCHAR2,pi_key VARCHAR2)
 RETURN RAW
 AS
-    input_string VARCHAR2(16) := pi_input;
+    input_string VARCHAR2(100) := pi_input;
     raw_input RAW(128) := utl_raw.cast_to_raw(CONVERT(input_string,'AL32UTF8','US7ASCII'));
     key_string VARCHAR2(100) := pi_key;
     raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
-    encrypted_raw RAW(2048);
-    encrypted_string VARCHAR2(2048);
+    encrypted_raw varchar2(2000);
+    encrypted_string VARCHAR2(2000);
 BEGIN
-dbms_output.put_line('key:'||raw_key);
+    dbms_output.put_line('key:'||raw_key);
     encrypted_raw := dbms_crypto.ENCRYPT(src => raw_input,
     typ => dbms_crypto.des_cbc_pkcs5,
     KEY => raw_key);
@@ -867,10 +799,10 @@ CREATE OR REPLACE FUNCTION csyt_admin.DECRYPT(pi_input RAW,pi_key VARCHAR2)
 RETURN VARCHAR2
 AS
     key_string VARCHAR2(100) := pi_key;
-    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+    raw_key RAW(1280) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
 
-    decrypted_raw RAW(2048);
-    decrypted_string VARCHAR2(2048);
+    decrypted_raw varchar2(2000);
+    decrypted_string VARCHAR2(2000);
 BEGIN
 dbms_output.put_line('key:'||raw_key);
     BEGIN 
@@ -895,6 +827,8 @@ CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_BN
     REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
 :NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
 :NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
 :NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
@@ -915,12 +849,46 @@ FOR EACH ROW
 BEGIN
 :NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
 :NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
-:NEW.SDT        := CSYT_ADMIN.encrypt(:NEW.SDT,:NEW.MaNV||:New.CSYT);
 END;
 /
 
 
+-------------------------------
+--CAU 6: 
+CREATE ROLE CSYT_ROLE_BENHNHAN;
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW
+AS
+select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan
+WHERE 'CSYT_'||MaBN = user
+/
 
+GRANT SELECT ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BENHNHAN;
+/
+
+CREATE ROLE CSYT_ROLE_NHANVIEN;
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW
+AS
+SELECT  MANV,HOTEN,PHAI,NGAYSINH,
+CSYT_ADMIN.DECRYPT(CMND,MaNV||CSYT) as CMND,
+CSYT_ADMIN.DECRYPT(QUEQUAN,MaNV||CSYT) AS QUEQUAN, SDT
+FROM CSYT_Admin.NhanVien
+
+WHERE 'CSYT_'||MaNV = user
+/
+GRANT SELECT ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
+/
 
 
 
@@ -933,3 +901,53 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'CSYT_MEANSUN';
 --grant update (MAHSBA) on CSYT_ADMIN.HSBA to CSYT_MEANSUN;
 --SELECT PRIVILEGE FROM DBA_SYS_PRIVS where grantee like 'CSYT_ADMIN';
+
+
+
+
+
+
+
+--insert data
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS001','Benh vien Mat trung uong','TP.HCM','0123456789');
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS002','Benh vien Quan Y','Ha Noi','0123456789');
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS003','Benh vien Y duoc TPHCM','TP.HCM','0123456789');
+
+
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN001','CS001','Pham Tan Ti', '112233445',to_date('19/04/2001','dd/mm/yyyy'), '15', 'Phan Van Tri', 'Go Vap', 'TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN002','CS001','Tran Minh Son','118833445',to_date('19/05/2002','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN003','CS001','Lam Quoc Binh','662233445',to_date('19/08/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN004','CS002','Kamisato Ayaka','112233775',to_date('08/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN005','CS002','Le Ngoc Tai','112299445',to_date('19/11/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN006','CS002','Nguyen Quang Quy','332233445',to_date('19/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN007','CS003','Le Nam Thai Son','112233885',to_date('19/05/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN008','CS003','Doc Co Cau Bai','662233445',to_date('19/04/2004','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN009','CS003','Dong Phuong Bat Bai','112255445',to_date('19/10/2005','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','KH001',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','KH002',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV004','Ningguang','Nu',to_date('02/06/2000','dd/mm/yyyy'),'114477993','Trung Quoc','0123456789','CS002','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV005','Ganyu','Nu',to_date('03/08/2001','dd/mm/yyyy'),'114454223','Liyue','0123456789','CS002','Y/ bac si','KH003',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV006','Cong Minh Hang','Nu',to_date('08/04/2001','dd/mm/yyyy'),'178477223','Tp.HCM','0123456789','CS002','Y/ bac si','KH002',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV007','Ly Mac Sau','Nu',to_date('12/02/2002','dd/mm/yyyy'),'114967223','Nhat Ban','0123456789','CS003','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV008','Raiden Shogun','Nu',to_date('19/09/2001','dd/mm/yyyy'),'114197223','Inazuma','0123456789','CS003','Y/ bac si','KH001',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV009','Signora','Nu',to_date('18/03/2000','dd/mm/yyyy'),'113217223','Nga','0123456789','CS003','Nghien cuu','KH003',Null);
+
+    
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS001','BN001',to_date('19/04/2022','dd/mm/yyyy'),'Dau da day','NV002','KH001','CS001','Ung thu da day');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS002','BN002',to_date('29/06/2022','dd/mm/yyyy'),'Gay tay','NV002','KH001','CS001','Gay xuong tay');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS003','BN004',to_date('12/05/2022','dd/mm/yyyy'),'Gay chan','NV005','KH002','CS002','Gay xuong chau');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS004','BN005',to_date('15/07/2022','dd/mm/yyyy'),'Xuat huyet nao','NV005','KH001','CS002','Chan thuong so nao');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS005','BN007',to_date('02/08/2022','dd/mm/yyyy'),'Thoat vi dia dem','NV008','KH003','CS003','Gay cot song');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS006','BN008',to_date('08/03/2022','dd/mm/yyyy'),'Dau mat','NV008','KH002','CS003','Duc thuy tinh the');
+
+    
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV001',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV003',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS002','DV001',to_date('29/06/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS003','DV001',to_date('12/05/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV001',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV002',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS005','DV001',to_date('02/08/2022','dd/mm/yyyy'),'NV009','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS006','DV001',to_date('08/03/2022','dd/mm/yyyy'),'NV009','Co benh');
