@@ -134,6 +134,7 @@
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_viewBN.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_viewBN.Designer.cs">
@@ -146,6 +147,8 @@
       <DependentUpon>frm_viewNV.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_ThanhTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frm_ThanhTra.Designer.cs">
       <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </Compile>
