@@ -510,83 +510,7 @@ DROP ROLE CSYT_ROLE_NGHIENCUU;
 DROP ROLE CSYT_ROLE_NHANVIEN;
 DROP ROLE CSYT_ROLE_BENHNHAN;
 /
---cau 1
 
---Xoa tai khoan cua toan bo nhan vien va benh nhan
-declare
-cur SYS_refcursor;
-manv dba_users.username%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select username from dba_users where username like 'CSYT_%' and username != 'CSYT_ADMIN';
-    loop
-    
-        fetch cur into manv;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'drop user ' || trim(manv) || ' Cascade';
-        EXECUTE IMMEDIATE ( lv_stmt );
-
-    end loop;
-    close cur;
-end;
-        
-/
---Them tai khoan cho toan bo nhan vien
-
-declare
-cur SYS_refcursor;
-manv csyt_admin.nhanvien.manv%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select csyt_admin.nhanvien.manv from CSYT_Admin.NhanVien where Username is null;
-    loop
-    
-        fetch cur into manv;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'CREATE USER CSYT_' || trim(manv) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
-
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(manv);
-        
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_' || trim(manv);
-
-        EXECUTE IMMEDIATE ( lv_stmt );
-        lv_stmt := 'update CSYT_Admin.NhanVien set Username = ''CSYT_'||trim(manv)||''' where MaNV = '''||trim(manv)||'''';
-        --DBMS_OUTPUT.put_line(lv_stmt);
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-
-    end loop;
-    close cur;
-end;
-/
---them tai khoan cho toan bo benh nhan
-declare
-cur SYS_refcursor;
-mabn csyt_admin.BenhNhan.MaBN%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select csyt_admin.BenhNhan.mabn from CSYT_Admin.BenhNhan where Username is null;
-    loop
-    
-        fetch cur into mabn;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
-
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
-        --DBMS_OUTPUT.put_line(lv_stmt);
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-
-    end loop;
-    close cur;
-end;
-
-
-/
 
 /
 ------------------------------
@@ -953,8 +877,7 @@ GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
 
 
 
-ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
-/
+
 
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'CSYT_MEANSUN';
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'CSYT_MEANSUN';
@@ -1010,3 +933,88 @@ INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV001',to_date('15/07/2022','dd/
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV002',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS005','DV001',to_date('02/08/2022','dd/mm/yyyy'),'NV009','Co benh');
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS006','DV001',to_date('08/03/2022','dd/mm/yyyy'),'NV009','Co benh');
+
+--cau 1
+
+--Xoa tai khoan cua toan bo nhan vien va benh nhan
+declare
+cur SYS_refcursor;
+manv dba_users.username%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select username from dba_users where username like 'CSYT_%' and username != 'CSYT_ADMIN';
+    loop
+    
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'drop user ' || trim(manv) || ' Cascade';
+        EXECUTE IMMEDIATE ( lv_stmt );
+
+    end loop;
+    close cur;
+end;
+        
+/
+--Them tai khoan cho toan bo nhan vien
+
+declare
+cur SYS_refcursor;
+manv csyt_admin.nhanvien.manv%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select csyt_admin.nhanvien.manv from CSYT_Admin.NhanVien where Username is null;
+    loop
+    
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(manv) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(manv);
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_' || trim(manv);
+
+        EXECUTE IMMEDIATE ( lv_stmt );
+        lv_stmt := 'update CSYT_Admin.NhanVien set Username = ''CSYT_'||trim(manv)||''' where MaNV = '''||trim(manv)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+
+    end loop;
+    close cur;
+end;
+/
+--them tai khoan cho toan bo benh nhan
+declare
+cur SYS_refcursor;
+mabn csyt_admin.BenhNhan.MaBN%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select csyt_admin.BenhNhan.mabn from CSYT_Admin.BenhNhan where Username is null;
+    loop
+    
+        fetch cur into mabn;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+
+    end loop;
+    close cur;
+end;
+
+
+/
+
+
+
+
+
+ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
+/
