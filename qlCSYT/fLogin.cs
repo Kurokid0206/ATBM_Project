@@ -61,30 +61,19 @@ namespace qlCSYT
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
-                {
-                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-                    frm_YsBs_main.Show();
-                }
-                if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
-                {
-                    frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
-                    frm_ThanhTra.Show();
-                }
-                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
-                {
-                    frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
-                    frm_NghienCuu.Show();
-                }
                 //Chuyen form
+                if (username == "ADMIN")
+                {
+                    this.Hide();
+                    fMain frm = new fMain();
+                    frm.Show();
+                }
                 this.Hide();
-                //fMain fMain = new fMain();
-                //fMain.Show();
-                //frmFGA audit = new frmFGA();
-                //audit.Show();
-                
-                //frmFGA audit = new frmFGA();
-                //audit.Show();
+                /*frm_ThanhTra fMain = new frm_ThanhTra();
+                fMain.Show();
+                frmFGA audit = new frmFGA();
+                audit.Show();
+                */
             }
             catch (Exception err)
             {

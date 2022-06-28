@@ -335,5 +335,21 @@ namespace qlCSYT
             frm.Closed += (s, args) => this.Show();
             frm.Show();
         }
+
+        private void m_InvalidAccessAudit_Click(object sender, EventArgs e)
+        {
+            frmAudit frm = new frmAudit();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
+
+        private void m_CSYT_ADMIN_Click(object sender, EventArgs e)
+        {
+            frmFGA frm = new frmFGA();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
     }
 }

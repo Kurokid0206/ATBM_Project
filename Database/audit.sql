@@ -57,12 +57,12 @@ begin
 end;
 /
 
-create or replace procedure CSYT_ADMIN.ForbidAccessAudit(cur out SYS_REFCURSOR)
+create or replace procedure CSYT_ADMIN.IllegalAccessAudit(cur out SYS_REFCURSOR)
 as
 begin
     OPEN cur FOR 
-    select distinct USERID,obj$name AS tbl,TO_char(Ntimestamp#,'dd-mon-yyyy hh:mi:ss') AS TIME 
-    from sys.aud$ where obj$creator='CSYT_ADMIN';
+    select distinct DB_USER,OBJECT_NAME AS tbl,TO_char(timestamp,'dd-mon-yyyy hh:mi:ss') AS TIME,SQL_TEXT as ViecLam 
+    from sys.DBA_FGA_AUDIT_TRAIL where OBJECT_SCHEMA='CSYT_ADMIN';
 
     --DBMS_SQL.return_result(cur);
 end;

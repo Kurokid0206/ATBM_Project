@@ -36,9 +36,9 @@ namespace qlCSYT
             // gv_AuditData
             // 
             this.gv_AuditData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_AuditData.Location = new System.Drawing.Point(157, 97);
+            this.gv_AuditData.Location = new System.Drawing.Point(22, 115);
             this.gv_AuditData.Name = "gv_AuditData";
-            this.gv_AuditData.Size = new System.Drawing.Size(354, 188);
+            this.gv_AuditData.Size = new System.Drawing.Size(612, 188);
             this.gv_AuditData.TabIndex = 0;
             // 
             // frmAudit

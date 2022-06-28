@@ -15,6 +15,7 @@ namespace qlCSYT.UserSpace
         public static string username = "NV001";
         public static List<string> Roles = new List<string>();
         public void getRoles() {
+            Roles.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
 
             try
