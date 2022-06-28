@@ -157,6 +157,7 @@
     </Compile>
     <Compile Include="frm_User_client.Designer.cs">
       <DependentUpon>frm_User_client.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_ThongBao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,6 +295,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_User_client.resx">
       <DependentUpon>frm_User_client.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_ThongBao.resx">
       <DependentUpon>frm_ThongBao.cs</DependentUpon>
     </EmbeddedResource>
