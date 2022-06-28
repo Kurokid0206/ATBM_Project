@@ -98,19 +98,19 @@
             // 
             this.gv_viewPatient.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_viewPatient.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_viewPatient.Location = new System.Drawing.Point(5, 95);
+            this.gv_viewPatient.Location = new System.Drawing.Point(5, 64);
             this.gv_viewPatient.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gv_viewPatient.Name = "gv_viewPatient";
             this.gv_viewPatient.RowHeadersWidth = 51;
             this.gv_viewPatient.RowTemplate.Height = 24;
-            this.gv_viewPatient.Size = new System.Drawing.Size(1025, 344);
+            this.gv_viewPatient.Size = new System.Drawing.Size(1651, 112);
             this.gv_viewPatient.TabIndex = 12;
             // 
             // frm_YsBs_viewPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1042, 450);
+            this.ClientSize = new System.Drawing.Size(1663, 187);
             this.Controls.Add(this.gv_viewPatient);
             this.Controls.Add(this.btn_searchCMND);
             this.Controls.Add(this.btn_searchMaBN);

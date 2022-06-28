@@ -42,14 +42,14 @@
             this.gv_HSBA.Name = "gv_HSBA";
             this.gv_HSBA.RowHeadersWidth = 51;
             this.gv_HSBA.RowTemplate.Height = 24;
-            this.gv_HSBA.Size = new System.Drawing.Size(857, 441);
+            this.gv_HSBA.Size = new System.Drawing.Size(1170, 441);
             this.gv_HSBA.TabIndex = 1;
             // 
             // frm_YsBs_viewHSBA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(881, 453);
+            this.ClientSize = new System.Drawing.Size(1194, 453);
             this.Controls.Add(this.gv_HSBA);
             this.Name = "frm_YsBs_viewHSBA";
             this.Text = "Xem hồ sơ bệnh án";

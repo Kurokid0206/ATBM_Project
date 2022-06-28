@@ -41,6 +41,7 @@ namespace qlCSYT
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gv_HSBA_DV.DataSource = dt;
+                gv_HSBA_DV.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {

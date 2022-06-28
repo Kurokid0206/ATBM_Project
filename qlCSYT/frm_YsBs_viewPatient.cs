@@ -42,6 +42,7 @@ namespace qlCSYT
                 DataTable dt1 = new DataTable();
                 da1.Fill(dt1);
                 gv_viewPatient.DataSource = dt1;
+                gv_viewPatient.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {

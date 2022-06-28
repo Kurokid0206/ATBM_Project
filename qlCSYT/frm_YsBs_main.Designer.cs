@@ -61,12 +61,14 @@
             this.m_viewHSBA.Name = "m_viewHSBA";
             this.m_viewHSBA.Size = new System.Drawing.Size(150, 24);
             this.m_viewHSBA.Text = "Xem hồ sơ bệnh án";
+            this.m_viewHSBA.Click += new System.EventHandler(this.m_viewHSBA_Click);
             // 
             // m_viewPatient
             // 
             this.m_viewPatient.Name = "m_viewPatient";
             this.m_viewPatient.Size = new System.Drawing.Size(166, 24);
             this.m_viewPatient.Text = "Xem hồ sơ bệnh nhân";
+            this.m_viewPatient.Click += new System.EventHandler(this.m_viewPatient_Click);
             // 
             // frm_YsBs_main
             // 
