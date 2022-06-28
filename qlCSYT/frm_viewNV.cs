@@ -12,35 +12,27 @@ using qlCSYT.SqlConn;
 
 namespace qlCSYT
 {
-    public partial class frm_YsBs_viewHSBA_DV : Form
+    public partial class frm_viewNV : Form
     {
-        private string curID = "";
-        public frm_YsBs_viewHSBA_DV()
+        public frm_viewNV()
         {
             InitializeComponent();
-            LoadHSBA_DV(curID);
+            LoadSelfView();
         }
-        public void LoadHSBA_DV(string MaHSBA)
+        private void LoadSelfView()
         {
-            curID = MaHSBA;
-            gv_HSBA_DV.Columns.Clear();
+            this.gv_viewSelf.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
-                string temp = "Select * from CSYT_ADMIN.VIEW_BACSI_HSBA_DV dv where dv.MaHSBA=";
-                string cmdtext = temp + "'" + MaHSBA + "'";
-                //OracleCommand cmd = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_HSBA_DV", conn);
-                OracleCommand cmd = new OracleCommand(cmdtext, conn);
+                OracleCommand cmd = new OracleCommand("Select * from CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW", conn);
                 cmd.CommandType = System.Data.CommandType.Text;
-                //cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //cmd.Parameters.Add("@MaHSBA", MaHSBA);
-                //cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
                 cmd.ExecuteNonQuery();
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                gv_HSBA_DV.DataSource = dt;
+                gv_viewSelf.DataSource = dt;
             }
             catch (Exception err)
             {
