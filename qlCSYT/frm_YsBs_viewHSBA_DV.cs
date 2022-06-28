@@ -29,19 +29,19 @@ namespace qlCSYT
             {
                 conn.Open();
                 string temp = "Select * from CSYT_ADMIN.VIEW_BACSI_HSBA_DV dv where dv.MaHSBA=";
-                //string cmdtext = temp + "'" + MaHSBA + "'";
-                //string cmdtext = temp + "'" + curID + "'";
                 string cmdtext = temp + "'" + MaHSBA + "'";
+                //OracleCommand cmd = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_HSBA_DV", conn);
                 OracleCommand cmd = new OracleCommand(cmdtext, conn);
                 cmd.CommandType = System.Data.CommandType.Text;
                 //cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //cmd.Parameters.Add("@roleName", MaHSBA);
+                //cmd.Parameters.Add("@MaHSBA", MaHSBA);
                 //cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
                 cmd.ExecuteNonQuery();
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gv_HSBA_DV.DataSource = dt;
+                //gv_HSBA_DV.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {

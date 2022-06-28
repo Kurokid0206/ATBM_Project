@@ -34,11 +34,16 @@ namespace qlCSYT
                 cmd.CommandType = System.Data.CommandType.Text;
                 //cmd.Parameters.Add("@user_name", "ADMIN");
                 //cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                //OracleCommand cmd = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_HSBA", conn);
+                //cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@MaHSVA", MaHSBA);
+                //cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
                 cmd.ExecuteNonQuery();
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gv_HSBA.DataSource = dt;
+                //gv_HSBA.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {

@@ -75,7 +75,7 @@
             // 
             this.tbUsername.Location = new System.Drawing.Point(330, 69);
             this.tbUsername.Name = "tbUsername";
-            this.tbUsername.Size = new System.Drawing.Size(328, 22);
+            this.tbUsername.Size = new System.Drawing.Size(360, 22);
             this.tbUsername.TabIndex = 4;
             this.tbUsername.TextChanged += new System.EventHandler(this.tbUsername_TextChanged);
             // 
@@ -83,7 +83,7 @@
             // 
             this.tbPassword.Location = new System.Drawing.Point(330, 108);
             this.tbPassword.Name = "tbPassword";
-            this.tbPassword.Size = new System.Drawing.Size(328, 22);
+            this.tbPassword.Size = new System.Drawing.Size(360, 22);
             this.tbPassword.TabIndex = 5;
             this.tbPassword.UseSystemPasswordChar = true;
             this.tbPassword.TextChanged += new System.EventHandler(this.tbPassword_TextChanged);
