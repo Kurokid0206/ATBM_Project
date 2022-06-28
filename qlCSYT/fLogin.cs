@@ -73,7 +73,7 @@ namespace qlCSYT
                 }
                 if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
                 {
-                    frm_NghienCuu fMaifrm_NghienCuun = new frm_NghienCuu();
+                    frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
                     frm_NghienCuu.Show();
                 }
                 //Chuyen form

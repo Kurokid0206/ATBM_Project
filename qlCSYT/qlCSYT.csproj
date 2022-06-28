@@ -131,8 +131,9 @@
     <Compile Include="frm_viewNV.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frm_viewNV.Designer.cs">
-      <DependentUpon>frm_viewNV.cs</DependentUpon>
+	  <Compile Include="frm_viewNV.Designer.cs">
+		  <DependentUpon>frm_viewNV.cs</DependentUpon>
+	  </Compile>
     <Compile Include="frm_ThanhTra.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -238,8 +239,9 @@
     <EmbeddedResource Include="frm_viewBN.resx">
       <DependentUpon>frm_viewBN.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frm_viewNV.resx">
-      <DependentUpon>frm_viewNV.cs</DependentUpon>
+	  <EmbeddedResource Include="frm_viewNV.resx">
+		  <DependentUpon>frm_viewNV.cs</DependentUpon>
+	  </EmbeddedResource>
     <EmbeddedResource Include="frm_ThanhTra.resx">
       <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </EmbeddedResource>
