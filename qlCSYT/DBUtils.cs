@@ -12,7 +12,7 @@ namespace qlCSYT.SqlConn
             string host = "localhost";
             int port = 1521;
             string sid = "xe";
-            string user = (login_username==""?"CSYT_Admin": login_username);
+            string user = (login_username==""?"CSYT_TTQB": login_username);
             string password = (login_password == "" ? "a" : login_password);
             return DBOracleUtils.GetDBConnection(host, port, sid, user, password);
         }

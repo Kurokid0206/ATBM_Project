@@ -7,7 +7,6 @@ using qlCSYT.UserSpace;
 
 namespace qlCSYT
 {
-    
     public partial class fLogin : Form
     {
         User User = new User();
@@ -65,7 +64,7 @@ namespace qlCSYT
 
                 //Chuyen form
                 this.Hide();
-                fMain fMain = new fMain();
+                frm_ThanhTra fMain = new frm_ThanhTra();
                 fMain.Show();
                 frmFGA audit = new frmFGA();
                 audit.Show();
