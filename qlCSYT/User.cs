@@ -12,8 +12,8 @@ namespace qlCSYT.UserSpace
 {
     class User
     {
-        public static string username = "";
-        public static string[] roles;
+        public static string username = "NV001";
+        public static List<string> Roles = new List<string>();
         public void getRoles() {
             OracleConnection conn = DBUtils.GetDBConnection();
 
@@ -22,8 +22,7 @@ namespace qlCSYT.UserSpace
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("CSYT_ADMIN.GETUSERROLES", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-                cmd.ExecuteNonQuery();
+                cmd.Parameters.Add("cur", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 
@@ -33,7 +32,8 @@ namespace qlCSYT.UserSpace
                 da.Fill(dt);
                 foreach (DataRow dr in dt.Rows)
                 {
-                    roles.Append(dr["GRANTED_ROLE"].ToString());
+                    Roles.Add(dr["GRANTED_ROLE"].ToString());
+                    
                 }
 
             }
@@ -47,7 +47,7 @@ namespace qlCSYT.UserSpace
                 conn.Close();
                 conn.Dispose();
             }
-            Console.Read();
+            
         }
     }
 }

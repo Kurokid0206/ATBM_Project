@@ -53,7 +53,16 @@ namespace qlCSYT
             {
                 conn.Open();
                 User.getRoles();
-                Console.WriteLine(User.roles);
+                //xử lý role ở đây
+                //danh sách role ở dạng list: User.Roles
+                //xem là role nào thì show role đó ra
+
+                if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
+                {
+                    frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
+                    frm_QLDL_Main.Show();
+                }
+
                 //Chuyen form
                 this.Hide();
                 fMain fMain = new fMain();

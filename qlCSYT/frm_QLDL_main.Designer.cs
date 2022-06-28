@@ -38,17 +38,19 @@ namespace qlCSYT
             this.add_HSBADV_strip = new System.Windows.Forms.ToolStripMenuItem();
             this.del_HSBADV_strip = new System.Windows.Forms.ToolStripMenuItem();
             this.add_HSBA_group = new System.Windows.Forms.GroupBox();
-            this.add_HSBA_btn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ketLuan_lable = new System.Windows.Forms.Label();
+            this.KetLuan_input = new System.Windows.Forms.TextBox();
+            this.MaKhoa_input = new System.Windows.Forms.TextBox();
+            this.MaBS_input = new System.Windows.Forms.TextBox();
+            this.MaBN_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.Khoa_select = new System.Windows.Forms.Label();
-            this.ChanDoan_input = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.NgayLap_input = new System.Windows.Forms.Label();
-            this.MaBN_select = new System.Windows.Forms.ComboBox();
+            this.ChanDoan_lable = new System.Windows.Forms.Label();
+            this.ChanDoan_input = new System.Windows.Forms.TextBox();
+            this.NgayLap_input = new System.Windows.Forms.DateTimePicker();
+            this.NgayLap_lable = new System.Windows.Forms.Label();
             this.select_mabn_lable = new System.Windows.Forms.Label();
+            this.add_HSBA_btn = new System.Windows.Forms.Button();
             this.QLDL_menustrip.SuspendLayout();
             this.add_HSBA_group.SuspendLayout();
             this.SuspendLayout();
@@ -87,7 +89,7 @@ namespace qlCSYT
             this.add_HSBA_strip.Name = "add_HSBA_strip";
             this.add_HSBA_strip.Size = new System.Drawing.Size(114, 27);
             this.add_HSBA_strip.Text = "Thêm HSBA";
-            this.add_HSBA_strip.Click += new System.EventHandler(this.thêmHSBAToolStripMenuItem_Click);
+            this.add_HSBA_strip.Click += new System.EventHandler(this.add_HSBA_strip_Click);
             // 
             // del_HSBA_strip
             // 
@@ -110,124 +112,141 @@ namespace qlCSYT
             // 
             // add_HSBA_group
             // 
+            this.add_HSBA_group.Controls.Add(this.ketLuan_lable);
+            this.add_HSBA_group.Controls.Add(this.KetLuan_input);
+            this.add_HSBA_group.Controls.Add(this.MaKhoa_input);
             this.add_HSBA_group.Controls.Add(this.add_HSBA_btn);
-            this.add_HSBA_group.Controls.Add(this.comboBox1);
+            this.add_HSBA_group.Controls.Add(this.MaBS_input);
+            this.add_HSBA_group.Controls.Add(this.MaBN_input);
             this.add_HSBA_group.Controls.Add(this.label1);
-            this.add_HSBA_group.Controls.Add(this.comboBox2);
             this.add_HSBA_group.Controls.Add(this.Khoa_select);
+            this.add_HSBA_group.Controls.Add(this.ChanDoan_lable);
             this.add_HSBA_group.Controls.Add(this.ChanDoan_input);
-            this.add_HSBA_group.Controls.Add(this.textBox1);
-            this.add_HSBA_group.Controls.Add(this.dateTimePicker1);
             this.add_HSBA_group.Controls.Add(this.NgayLap_input);
-            this.add_HSBA_group.Controls.Add(this.MaBN_select);
+            this.add_HSBA_group.Controls.Add(this.NgayLap_lable);
             this.add_HSBA_group.Controls.Add(this.select_mabn_lable);
             this.add_HSBA_group.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.add_HSBA_group.Location = new System.Drawing.Point(21, 52);
             this.add_HSBA_group.Name = "add_HSBA_group";
-            this.add_HSBA_group.Size = new System.Drawing.Size(744, 367);
+            this.add_HSBA_group.Size = new System.Drawing.Size(744, 441);
             this.add_HSBA_group.TabIndex = 3;
             this.add_HSBA_group.TabStop = false;
             this.add_HSBA_group.Text = "Thêm hồ sơ bệnh án";
             // 
-            // add_HSBA_btn
+            // ketLuan_lable
             // 
-            this.add_HSBA_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.add_HSBA_btn.Location = new System.Drawing.Point(618, 330);
-            this.add_HSBA_btn.Name = "add_HSBA_btn";
-            this.add_HSBA_btn.Size = new System.Drawing.Size(120, 31);
-            this.add_HSBA_btn.TabIndex = 11;
-            this.add_HSBA_btn.Text = "Thêm";
-            this.add_HSBA_btn.UseVisualStyleBackColor = false;
+            this.ketLuan_lable.AutoSize = true;
+            this.ketLuan_lable.Location = new System.Drawing.Point(28, 297);
+            this.ketLuan_lable.Name = "ketLuan_lable";
+            this.ketLuan_lable.Size = new System.Drawing.Size(90, 25);
+            this.ketLuan_lable.TabIndex = 16;
+            this.ketLuan_lable.Text = "Kết luận:";
             // 
-            // comboBox1
+            // KetLuan_input
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(376, 155);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(340, 33);
-            this.comboBox1.TabIndex = 10;
+            this.KetLuan_input.Location = new System.Drawing.Point(29, 325);
+            this.KetLuan_input.Multiline = true;
+            this.KetLuan_input.Name = "KetLuan_input";
+            this.KetLuan_input.Size = new System.Drawing.Size(685, 65);
+            this.KetLuan_input.TabIndex = 17;
+            // 
+            // MaKhoa_input
+            // 
+            this.MaKhoa_input.Location = new System.Drawing.Point(31, 155);
+            this.MaKhoa_input.Name = "MaKhoa_input";
+            this.MaKhoa_input.Size = new System.Drawing.Size(290, 30);
+            this.MaKhoa_input.TabIndex = 14;
+            // 
+            // MaBS_input
+            // 
+            this.MaBS_input.Location = new System.Drawing.Point(376, 155);
+            this.MaBS_input.Name = "MaBS_input";
+            this.MaBS_input.Size = new System.Drawing.Size(338, 30);
+            this.MaBS_input.TabIndex = 15;
+            // 
+            // MaBN_input
+            // 
+            this.MaBN_input.Location = new System.Drawing.Point(31, 72);
+            this.MaBN_input.Name = "MaBN_input";
+            this.MaBN_input.Size = new System.Drawing.Size(290, 30);
+            this.MaBN_input.TabIndex = 12;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(373, 127);
+            this.label1.Location = new System.Drawing.Point(371, 127);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 25);
+            this.label1.Size = new System.Drawing.Size(102, 25);
             this.label1.TabIndex = 9;
-            this.label1.Text = "Bác sĩ:";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(31, 155);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(292, 33);
-            this.comboBox2.TabIndex = 8;
+            this.label1.Text = "Mã bác sĩ:";
             // 
             // Khoa_select
             // 
             this.Khoa_select.AutoSize = true;
             this.Khoa_select.Location = new System.Drawing.Point(26, 127);
             this.Khoa_select.Name = "Khoa_select";
-            this.Khoa_select.Size = new System.Drawing.Size(65, 25);
+            this.Khoa_select.Size = new System.Drawing.Size(94, 25);
             this.Khoa_select.TabIndex = 7;
-            this.Khoa_select.Text = "Khoa:";
+            this.Khoa_select.Text = "Mã khoa:";
+            // 
+            // ChanDoan_lable
+            // 
+            this.ChanDoan_lable.AutoSize = true;
+            this.ChanDoan_lable.Location = new System.Drawing.Point(30, 199);
+            this.ChanDoan_lable.Name = "ChanDoan_lable";
+            this.ChanDoan_lable.Size = new System.Drawing.Size(115, 25);
+            this.ChanDoan_lable.TabIndex = 6;
+            this.ChanDoan_lable.Text = "Chẩn đoán:";
             // 
             // ChanDoan_input
             // 
-            this.ChanDoan_input.AutoSize = true;
-            this.ChanDoan_input.Location = new System.Drawing.Point(30, 199);
+            this.ChanDoan_input.Location = new System.Drawing.Point(31, 227);
+            this.ChanDoan_input.Multiline = true;
             this.ChanDoan_input.Name = "ChanDoan_input";
-            this.ChanDoan_input.Size = new System.Drawing.Size(115, 25);
-            this.ChanDoan_input.TabIndex = 6;
-            this.ChanDoan_input.Text = "Chẩn đoán:";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(31, 227);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(685, 65);
-            this.textBox1.TabIndex = 5;
-            // 
-            // dateTimePicker1
-            // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(376, 72);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(340, 30);
-            this.dateTimePicker1.TabIndex = 4;
+            this.ChanDoan_input.Size = new System.Drawing.Size(685, 65);
+            this.ChanDoan_input.TabIndex = 16;
             // 
             // NgayLap_input
             // 
-            this.NgayLap_input.AutoSize = true;
-            this.NgayLap_input.Location = new System.Drawing.Point(373, 44);
+            this.NgayLap_input.Location = new System.Drawing.Point(376, 72);
             this.NgayLap_input.Name = "NgayLap_input";
-            this.NgayLap_input.Size = new System.Drawing.Size(95, 25);
-            this.NgayLap_input.TabIndex = 3;
-            this.NgayLap_input.Text = "Ngày lập:";
+            this.NgayLap_input.Size = new System.Drawing.Size(340, 30);
+            this.NgayLap_input.TabIndex = 13;
             // 
-            // MaBN_select
+            // NgayLap_lable
             // 
-            this.MaBN_select.FormattingEnabled = true;
-            this.MaBN_select.Location = new System.Drawing.Point(31, 69);
-            this.MaBN_select.Name = "MaBN_select";
-            this.MaBN_select.Size = new System.Drawing.Size(292, 33);
-            this.MaBN_select.TabIndex = 2;
+            this.NgayLap_lable.AutoSize = true;
+            this.NgayLap_lable.Location = new System.Drawing.Point(371, 44);
+            this.NgayLap_lable.Name = "NgayLap_lable";
+            this.NgayLap_lable.Size = new System.Drawing.Size(95, 25);
+            this.NgayLap_lable.TabIndex = 3;
+            this.NgayLap_lable.Text = "Ngày lập:";
             // 
             // select_mabn_lable
             // 
             this.select_mabn_lable.AutoSize = true;
-            this.select_mabn_lable.Location = new System.Drawing.Point(26, 41);
+            this.select_mabn_lable.Location = new System.Drawing.Point(26, 44);
             this.select_mabn_lable.Name = "select_mabn_lable";
-            this.select_mabn_lable.Size = new System.Drawing.Size(113, 25);
+            this.select_mabn_lable.Size = new System.Drawing.Size(144, 25);
             this.select_mabn_lable.TabIndex = 1;
-            this.select_mabn_lable.Text = "Bệnh nhân:";
+            this.select_mabn_lable.Text = "Mã bệnh nhân:";
+            // 
+            // add_HSBA_btn
+            // 
+            this.add_HSBA_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.add_HSBA_btn.Location = new System.Drawing.Point(594, 404);
+            this.add_HSBA_btn.Name = "add_HSBA_btn";
+            this.add_HSBA_btn.Size = new System.Drawing.Size(120, 31);
+            this.add_HSBA_btn.TabIndex = 18;
+            this.add_HSBA_btn.Text = "Thêm";
+            this.add_HSBA_btn.UseVisualStyleBackColor = false;
+            this.add_HSBA_btn.Click += new System.EventHandler(this.add_HSBA_btn_Click);
             // 
             // frm_QLDL_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 505);
             this.Controls.Add(this.add_HSBA_group);
             this.Controls.Add(this.QLDL_menustrip);
             this.MainMenuStrip = this.QLDL_menustrip;
@@ -252,16 +271,18 @@ namespace qlCSYT
         private System.Windows.Forms.ToolStripMenuItem add_HSBADV_strip;
         private System.Windows.Forms.ToolStripMenuItem del_HSBADV_strip;
         private System.Windows.Forms.GroupBox add_HSBA_group;
-        private System.Windows.Forms.Label NgayLap_input;
-        private System.Windows.Forms.ComboBox MaBN_select;
+        private System.Windows.Forms.Label NgayLap_lable;
         private System.Windows.Forms.Label select_mabn_lable;
-        private System.Windows.Forms.Label ChanDoan_input;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label ChanDoan_lable;
+        private System.Windows.Forms.TextBox ChanDoan_input;
+        private System.Windows.Forms.DateTimePicker NgayLap_input;
         private System.Windows.Forms.Label Khoa_select;
         private System.Windows.Forms.Button add_HSBA_btn;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox MaKhoa_input;
+        private System.Windows.Forms.TextBox MaBS_input;
+        private System.Windows.Forms.TextBox MaBN_input;
+        private System.Windows.Forms.Label ketLuan_lable;
+        private System.Windows.Forms.TextBox KetLuan_input;
     }
 }
