@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Oracle.DataAccess.Client;
+using qlCSYT.SqlConn;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace qlCSYT
@@ -26,27 +22,173 @@ namespace qlCSYT
 
         private void menu_xemHSBA_Click(object sender, EventArgs e)
         {
-            //LoadHSBA_DV();
+            SelectHSBA();
         }
 
         private void menu_xemHSBA_DV_Click(object sender, EventArgs e)
         {
-
+            SelectHSBA_DV();
         }
 
         private void menu_xemBenhNhan_Click(object sender, EventArgs e)
         {
-
+            SelectBenhNhan();
         }
 
         private void menu_xemCSYT_Click(object sender, EventArgs e)
         {
-
+            SelectCSYT();
         }
 
         private void menu_xemNhanVien_Click(object sender, EventArgs e)
         {
-
+            SelectNhanVien();
         }
+
+        private void SelectHSBA()
+        {
+            this.gv_ThanhTra.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.TT_Select_HSBA", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                gv_ThanhTra.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void SelectHSBA_DV()
+        {
+            this.gv_ThanhTra.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.TT_Select_HSBA_DV", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                gv_ThanhTra.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void SelectBenhNhan()
+        {
+            this.gv_ThanhTra.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.TT_Select_BenhNhan", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                gv_ThanhTra.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void SelectCSYT()
+        {
+            this.gv_ThanhTra.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.TT_Select_CSYT", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                gv_ThanhTra.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void SelectNhanVien()
+        {
+            this.gv_ThanhTra.Columns.Clear();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.TT_Select_NhanVien", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@user_name", "ADMIN");
+                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
+                cmd.ExecuteNonQuery();
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                da.Fill(dt);
+                gv_ThanhTra.DataSource = dt;
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
     }
 }
