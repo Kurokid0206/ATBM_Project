@@ -1,4 +1,4 @@
-﻿ausing System;
+﻿using System;
 using System.Windows.Forms;
 using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
