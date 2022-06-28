@@ -1,4 +1,4 @@
-﻿using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System;
 using System.Windows.Forms;
@@ -7,7 +7,6 @@ using qlCSYT.UserSpace;
 
 namespace qlCSYT
 {
-    
     public partial class fLogin : Form
     {
         User User = new User();
@@ -67,10 +66,23 @@ namespace qlCSYT
                     frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
                     frm_YsBs_main.Show();
                 }
+                if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
+                {
+                    frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
+                    frm_ThanhTra.Show();
+                }
+                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
+                {
+                    frm_NghienCuu fMaifrm_NghienCuun = new frm_NghienCuu();
+                    frm_NghienCuu.Show();
+                }
                 //Chuyen form
                 this.Hide();
                 //fMain fMain = new fMain();
                 //fMain.Show();
+                //frmFGA audit = new frmFGA();
+                //audit.Show();
+                
                 //frmFGA audit = new frmFGA();
                 //audit.Show();
             }
