@@ -32,6 +32,7 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.m_viewHSBA = new System.Windows.Forms.ToolStripMenuItem();
             this.m_viewPatient = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,7 +50,8 @@
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_viewHSBA,
-            this.m_viewPatient});
+            this.m_viewPatient,
+            this.m_logout});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(800, 28);
@@ -69,6 +71,13 @@
             this.m_viewPatient.Size = new System.Drawing.Size(166, 24);
             this.m_viewPatient.Text = "Xem hồ sơ bệnh nhân";
             this.m_viewPatient.Click += new System.EventHandler(this.m_viewPatient_Click);
+            // 
+            // m_logout
+            // 
+            this.m_logout.Name = "m_logout";
+            this.m_logout.Size = new System.Drawing.Size(91, 24);
+            this.m_logout.Text = "Đăng xuất";
+            this.m_logout.Click += new System.EventHandler(this.m_logout_Click);
             // 
             // frm_YsBs_main
             // 
@@ -94,5 +103,6 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem m_viewHSBA;
         private System.Windows.Forms.ToolStripMenuItem m_viewPatient;
+        private System.Windows.Forms.ToolStripMenuItem m_logout;
     }
 }
