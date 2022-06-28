@@ -86,6 +86,12 @@
     <Compile Include="frm_addRole.Designer.cs">
       <DependentUpon>frm_addRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_NghienCuu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NghienCuu.Designer.cs">
+      <DependentUpon>frm_NghienCuu.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Nc_viewHSBA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -115,6 +121,12 @@
     </Compile>
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_ThanhTra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ThanhTra.Designer.cs">
+      <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_ViewRole.cs">
       <SubType>Form</SubType>
@@ -182,6 +194,9 @@
     <EmbeddedResource Include="frm_addRole.resx">
       <DependentUpon>frm_addRole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_NghienCuu.resx">
+      <DependentUpon>frm_NghienCuu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Nc_viewHSBA.resx">
       <DependentUpon>frm_Nc_viewHSBA.cs</DependentUpon>
     </EmbeddedResource>
@@ -196,6 +211,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_QLDL_main.resx">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ThanhTra.resx">
+      <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ViewRole.resx">
       <DependentUpon>frm_ViewRole.cs</DependentUpon>

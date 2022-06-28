@@ -4,7 +4,6 @@ using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System.Data;
 
-
 namespace qlCSYT
 {
     public partial class frm_QLDL_del_HSBA : Form
@@ -18,7 +17,7 @@ namespace qlCSYT
         private void del_HSBA_btn_Click(object sender, EventArgs e)
         {
             OracleConnection conn = DBUtils.GetDBConnection();
-            try
+            /*try
             {
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("Delete", conn);
@@ -54,7 +53,7 @@ namespace qlCSYT
             {
                 conn.Close();
                 conn.Dispose();
-            }
+            }*/
         }
     }
 }
