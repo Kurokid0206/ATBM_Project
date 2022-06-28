@@ -156,19 +156,27 @@ namespace qlCSYT
 
         private void m_logout_Click(object sender, EventArgs e)
         {
+            //logout
             fLogin f = new fLogin();
             f.Show();
             this.Close();
 
-            //template for view HSBA thing
+            //template for view HSBA thing (Y si, Bac Si)
             //frm_YsBs_viewHSBA f= new frm_YsBs_viewHSBA();
             //f.Show();
             //this.Close();
 
-            //template for view Patient thing
-           // frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
+            //template for view HSBA thing (Nghien Cuu)
+            // f = new frm_Nc_viewHSBA();
             //f.Show();
             //this.Close();
+
+            //template for view Patient thing (Y si, Bac Si)
+            //frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
+            //f.Show();
+            //this.Close();
+
+
         }
 
         private void LoadUsers()

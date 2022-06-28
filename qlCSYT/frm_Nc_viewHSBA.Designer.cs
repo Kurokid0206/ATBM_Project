@@ -1,6 +1,6 @@
 ﻿namespace qlCSYT
 {
-    partial class frm_YsBs_viewHSBA
+    partial class frm_Nc_viewHSBA
     {
         /// <summary>
         /// Required designer variable.
@@ -37,21 +37,21 @@
             this.gv_HSBA.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gv_HSBA.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv_HSBA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_HSBA.Location = new System.Drawing.Point(12, 11);
+            this.gv_HSBA.Location = new System.Drawing.Point(12, 1);
             this.gv_HSBA.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.gv_HSBA.Name = "gv_HSBA";
             this.gv_HSBA.RowHeadersWidth = 51;
             this.gv_HSBA.RowTemplate.Height = 24;
             this.gv_HSBA.Size = new System.Drawing.Size(857, 441);
-            this.gv_HSBA.TabIndex = 1;
+            this.gv_HSBA.TabIndex = 2;
             // 
-            // frm_YsBs_viewHSBA
+            // frm_Nc_viewHSBA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 453);
             this.Controls.Add(this.gv_HSBA);
-            this.Name = "frm_YsBs_viewHSBA";
+            this.Name = "frm_Nc_viewHSBA";
             this.Text = "Xem hồ sơ bệnh án";
             ((System.ComponentModel.ISupportInitialize)(this.gv_HSBA)).EndInit();
             this.ResumeLayout(false);

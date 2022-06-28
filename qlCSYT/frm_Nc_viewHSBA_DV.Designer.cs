@@ -1,6 +1,6 @@
 ﻿namespace qlCSYT
 {
-    partial class frm_YsBs_viewHSBA_DV
+    partial class frm_Nc_viewHSBA_DV
     {
         /// <summary>
         /// Required designer variable.
@@ -42,16 +42,16 @@
             this.gv_HSBA_DV.Name = "gv_HSBA_DV";
             this.gv_HSBA_DV.RowHeadersWidth = 51;
             this.gv_HSBA_DV.RowTemplate.Height = 24;
-            this.gv_HSBA_DV.Size = new System.Drawing.Size(857, 431);
-            this.gv_HSBA_DV.TabIndex = 2;
+            this.gv_HSBA_DV.Size = new System.Drawing.Size(857, 437);
+            this.gv_HSBA_DV.TabIndex = 3;
             // 
-            // frm_YsBs_viewHSBA_DV
+            // frm_Nc_viewHSBA_DV
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 453);
             this.Controls.Add(this.gv_HSBA_DV);
-            this.Name = "frm_YsBs_viewHSBA_DV";
+            this.Name = "frm_Nc_viewHSBA_DV";
             this.Text = "Xem dịch vụ của hồ sơ bệnh án";
             ((System.ComponentModel.ISupportInitialize)(this.gv_HSBA_DV)).EndInit();
             this.ResumeLayout(false);
