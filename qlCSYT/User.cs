@@ -15,12 +15,13 @@ namespace qlCSYT.UserSpace
         public static string username = "NV001";
         public static List<string> Roles = new List<string>();
         public void getRoles() {
+            Roles.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
                 OracleCommand cmd = new OracleCommand("CSYT_ADMIN.GETUSERROLES", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("cur", OracleDbType.RefCursor).Direction = ParameterDirection.Output;
 
                 OracleDataAdapter da = new OracleDataAdapter(cmd);

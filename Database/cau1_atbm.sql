@@ -42,7 +42,7 @@ begin
     
         fetch cur into manv;
         exit when cur%NOTFOUND;
-        lv_stmt := 'DROP USER CSYT_' || trim(manv) ;
+        lv_stmt := 'DROP USER CSYT_' || trim(manv);
 
         EXECUTE IMMEDIATE ( lv_stmt ); 
     lv_stmt := 'update CSYT_Admin.NhanVien set Username = Null where MaNV = '''||trim(manv)||'''';
@@ -84,7 +84,7 @@ mabn csyt_admin.BenhNhan.MaBN%type;
 lv_stmt   VARCHAR2 (1000);
 begin
     
-    open cur for select csyt_admin.BenhNhan.MaBN from CSYT_Admin.BenhNhan where Username is not null;
+    open cur for select csyt_admin.BenhNhan.MaBN from CSYT_Admin.BenhNhan;
     loop
     
         fetch cur into mabn;

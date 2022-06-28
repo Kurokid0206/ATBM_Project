@@ -4,7 +4,6 @@ using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System.Data;
 
-
 namespace qlCSYT
 {
     public partial class frm_QLDL_del_HSBA : Form
@@ -17,32 +16,22 @@ namespace qlCSYT
 
         private void del_HSBA_btn_Click(object sender, EventArgs e)
         {
-            /*OracleConnection conn = DBUtils.GetDBConnection();
+            string MAHSBA = MaHSBA_input.Text;
+            OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("Delete", conn);
+                OracleCommand cmd = new OracleCommand("CSYT_ADMIN.QLDL_Delete_HSBA", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("MaBN", MaBN);
-                var pid = DateTime.ParseExact(NgayLap, "dd-MM-yyyy", null);
-                cmd.Parameters.Add("Ngay", OracleDbType.Date).Value = pid;
-                cmd.Parameters.Add("ChanDoan", ChanDoan);
-                cmd.Parameters.Add("MaBS", MaBS);
-                cmd.Parameters.Add("MaKHOA", MaKhoa);
-                cmd.Parameters.Add("KetLuan", KetLuan);
+                cmd.Parameters.Add("MaHSBA", MAHSBA);
+               
 
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 cmd.ExecuteNonQuery();
 
-                DataTable dt = new DataTable();
+                MessageBox.Show("Xóa thành công!");
+                MaHSBA_input.Text ="";
 
-
-                da.Fill(dt);
-                foreach (DataRow dr in dt.Rows)
-                {
-                    Roles.Add(dr["GRANTED_ROLE"].ToString());
-
-                }
 
             }
             catch (Exception err)
@@ -54,7 +43,7 @@ namespace qlCSYT
             {
                 conn.Close();
                 conn.Dispose();
-            }*/
+            }
         }
     }
 }

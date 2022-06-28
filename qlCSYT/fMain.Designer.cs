@@ -39,10 +39,12 @@
             this.m_role = new System.Windows.Forms.ToolStripMenuItem();
             this.m_showRoleList = new System.Windows.Forms.ToolStripMenuItem();
             this.m_addRole = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_grantPriv = new System.Windows.Forms.ToolStripMenuItem();
             this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_main = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.m_grantPriv = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_InvalidAccessAudit = new System.Windows.Forms.ToolStripMenuItem();
+            this.m_CSYT_ADMIN = new System.Windows.Forms.ToolStripMenuItem();
             this.m_main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_main)).BeginInit();
             this.panel1.SuspendLayout();
@@ -67,6 +69,9 @@
             // 
             // m_title
             // 
+            this.m_title.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.m_InvalidAccessAudit,
+            this.m_CSYT_ADMIN});
             this.m_title.Name = "m_title";
             this.m_title.Size = new System.Drawing.Size(130, 20);
             this.m_title.Text = "Quản lý cơ sở dữ liệu";
@@ -84,7 +89,7 @@
             // m_showUserList
             // 
             this.m_showUserList.Name = "m_showUserList";
-            this.m_showUserList.Size = new System.Drawing.Size(155, 22);
+            this.m_showUserList.Size = new System.Drawing.Size(180, 22);
             this.m_showUserList.Text = "Xem danh sách";
             this.m_showUserList.Click += new System.EventHandler(this.m_showUserList_Click);
             // 
@@ -94,7 +99,7 @@
             this.m_addEmp,
             this.m_addPatient});
             this.m_addUser.Name = "m_addUser";
-            this.m_addUser.Size = new System.Drawing.Size(155, 22);
+            this.m_addUser.Size = new System.Drawing.Size(180, 22);
             this.m_addUser.Text = "Thêm mới";
             // 
             // m_addEmp
@@ -134,6 +139,13 @@
             this.m_addRole.Text = "Thêm mới";
             this.m_addRole.Click += new System.EventHandler(this.m_addRole_Click);
             // 
+            // m_grantPriv
+            // 
+            this.m_grantPriv.Name = "m_grantPriv";
+            this.m_grantPriv.Size = new System.Drawing.Size(76, 20);
+            this.m_grantPriv.Text = "Cấp quyền";
+            this.m_grantPriv.Click += new System.EventHandler(this.m_grantPriv_Click);
+            // 
             // m_logout
             // 
             this.m_logout.Name = "m_logout";
@@ -147,7 +159,7 @@
             this.gv_main.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.gv_main.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_main.Location = new System.Drawing.Point(2, 2);
-            this.gv_main.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gv_main.Margin = new System.Windows.Forms.Padding(2);
             this.gv_main.Name = "gv_main";
             this.gv_main.RowHeadersWidth = 51;
             this.gv_main.RowTemplate.Height = 24;
@@ -160,18 +172,25 @@
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panel1.Controls.Add(this.gv_main);
             this.panel1.Location = new System.Drawing.Point(0, 24);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(721, 340);
             this.panel1.TabIndex = 1;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
-            // m_grantPriv
+            // m_InvalidAccessAudit
             // 
-            this.m_grantPriv.Name = "m_grantPriv";
-            this.m_grantPriv.Size = new System.Drawing.Size(76, 20);
-            this.m_grantPriv.Text = "Cấp quyền";
-            this.m_grantPriv.Click += new System.EventHandler(this.m_grantPriv_Click);
+            this.m_InvalidAccessAudit.Name = "m_InvalidAccessAudit";
+            this.m_InvalidAccessAudit.Size = new System.Drawing.Size(219, 22);
+            this.m_InvalidAccessAudit.Text = "Truy cập bất hợp pháp";
+            this.m_InvalidAccessAudit.Click += new System.EventHandler(this.m_InvalidAccessAudit_Click);
+            // 
+            // m_CSYT_ADMIN
+            // 
+            this.m_CSYT_ADMIN.Name = "m_CSYT_ADMIN";
+            this.m_CSYT_ADMIN.Size = new System.Drawing.Size(219, 22);
+            this.m_CSYT_ADMIN.Text = "Sửa thông tin bất hợp pháp";
+            this.m_CSYT_ADMIN.Click += new System.EventHandler(this.m_CSYT_ADMIN_Click);
             // 
             // fMain
             // 
@@ -181,7 +200,7 @@
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.m_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "fMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ATBMCQ-4";
@@ -210,5 +229,7 @@
         public System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ToolStripMenuItem m_title;
         private System.Windows.Forms.ToolStripMenuItem m_grantPriv;
+        private System.Windows.Forms.ToolStripMenuItem m_InvalidAccessAudit;
+        private System.Windows.Forms.ToolStripMenuItem m_CSYT_ADMIN;
     }
 }

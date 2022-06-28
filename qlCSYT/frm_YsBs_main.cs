@@ -23,16 +23,30 @@ namespace qlCSYT
         private void m_viewHSBA_Click(object sender, EventArgs e)
         {
             //template for view HSBA thing (Y si, Bac Si)
-            frm_YsBs_viewHSBA f= new frm_YsBs_viewHSBA();
+            frm_YsBs_viewHSBA f = new frm_YsBs_viewHSBA();
             f.Show();
-            this.Close();
+            this.Hide();
+            f.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
+
         private void m_viewPatient_Click(object sender, EventArgs e)
         {
             //template for view Patient thing (Y si, Bac Si)
             frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
             f.Show();
+            this.Hide();
+            f.Closed += (s, args) => this.Show(); //when other is closed, reopend this
+        }
+
+        private void m_logout_Click(object sender, EventArgs e)
+        {
+            fLogin f = new fLogin();
+            f.Show();
             this.Close();
         }
     }
+ 
+        
+
+        
 }

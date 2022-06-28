@@ -50,6 +50,8 @@ namespace qlCSYT
                 conn.Close();
                 conn.Dispose();
             }
+            this.Controls.Clear();
+            this.InitializeComponent();
         }
 
         private void add_HSBA_strip_Click(object sender, EventArgs e)
@@ -60,6 +62,9 @@ namespace qlCSYT
         private void del_HSBA_strip_Click(object sender, EventArgs e)
         {
             this.Hide();
+            frm_QLDL_del_HSBA frm_del_hsba = new frm_QLDL_del_HSBA();
+            frm_del_hsba.Show();
+            frm_del_hsba.Closed += (s, args) => this.Show();
 
             //
         }

@@ -86,6 +86,12 @@
     <Compile Include="frm_addRole.Designer.cs">
       <DependentUpon>frm_addRole.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_BenhNhan_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_BenhNhan_main.Designer.cs">
+      <DependentUpon>frm_BenhNhan_main.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_NghienCuu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +110,12 @@
     <Compile Include="frm_Nc_viewHSBA_DV.Designer.cs">
       <DependentUpon>frm_Nc_viewHSBA_DV.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_NhanVien_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_NhanVien_main.Designer.cs">
+      <DependentUpon>frm_NhanVien_main.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_priviledges.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -121,6 +133,18 @@
     </Compile>
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_viewBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_viewBN.Designer.cs">
+      <DependentUpon>frm_viewBN.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_viewNV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_viewNV.Designer.cs">
+      <DependentUpon>frm_viewNV.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_ThanhTra.cs">
       <SubType>Form</SubType>
@@ -143,11 +167,23 @@
     <Compile Include="frm_addPatient.Designer.cs">
       <DependentUpon>frm_addPatient.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_viewSelf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_viewSelf.Designer.cs">
+      <DependentUpon>frm_viewSelf.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_ViewUser.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_ViewUser.Designer.cs">
       <DependentUpon>frm_ViewUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_YsBs_main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_YsBs_main.Designer.cs">
+      <DependentUpon>frm_YsBs_main.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_YsBs_viewHSBA.cs">
       <SubType>Form</SubType>
@@ -212,14 +248,26 @@
     <EmbeddedResource Include="frm_QLDL_main.resx">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_viewBN.resx">
+      <DependentUpon>frm_viewBN.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_viewNV.resx">
+      <DependentUpon>frm_viewNV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_ThanhTra.resx">
       <DependentUpon>frm_ThanhTra.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_ViewRole.resx">
       <DependentUpon>frm_ViewRole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_viewSelf.resx">
+      <DependentUpon>frm_viewSelf.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_ViewUser.resx">
       <DependentUpon>frm_ViewUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_YsBs_main.resx">
+      <DependentUpon>frm_YsBs_main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_YsBs_viewHSBA.resx">
       <DependentUpon>frm_YsBs_viewHSBA.cs</DependentUpon>

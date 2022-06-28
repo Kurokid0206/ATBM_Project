@@ -1,4 +1,4 @@
-﻿using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System;
 using System.Windows.Forms;
@@ -61,13 +61,19 @@ namespace qlCSYT
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-
                 //Chuyen form
+                if (username == "ADMIN")
+                {
+                    this.Hide();
+                    fMain frm = new fMain();
+                    frm.Show();
+                }
                 this.Hide();
-                frm_ThanhTra fMain = new frm_ThanhTra();
+                /*frm_ThanhTra fMain = new frm_ThanhTra();
                 fMain.Show();
-                //frmFGA audit = new frmFGA();
-                //audit.Show();
+                frmFGA audit = new frmFGA();
+                audit.Show();
+                */
             }
             catch (Exception err)
             {

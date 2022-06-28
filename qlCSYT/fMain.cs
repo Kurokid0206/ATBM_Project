@@ -160,22 +160,10 @@ namespace qlCSYT
             fLogin f = new fLogin();
             f.Show();
             this.Close();
-
-            //template for view HSBA thing (Y si, Bac Si)
-            //frm_YsBs_viewHSBA f= new frm_YsBs_viewHSBA();
-            //f.Show();
-            //this.Close();
-
             //template for view HSBA thing (Nghien Cuu)
             // f = new frm_Nc_viewHSBA();
             //f.Show();
             //this.Close();
-
-            //template for view Patient thing (Y si, Bac Si)
-            //frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
-            //f.Show();
-            //this.Close();
-
 
         }
 
@@ -343,6 +331,22 @@ namespace qlCSYT
         private void m_grantPriv_Click(object sender, EventArgs e)
         {
             frm_priviledges frm = new frm_priviledges();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
+
+        private void m_InvalidAccessAudit_Click(object sender, EventArgs e)
+        {
+            frmAudit frm = new frmAudit();
+            this.Hide();
+            frm.Closed += (s, args) => this.Show();
+            frm.Show();
+        }
+
+        private void m_CSYT_ADMIN_Click(object sender, EventArgs e)
+        {
+            frmFGA frm = new frmFGA();
             this.Hide();
             frm.Closed += (s, args) => this.Show();
             frm.Show();

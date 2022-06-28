@@ -76,7 +76,7 @@ namespace qlCSYT
             {
                 fMain f = new fMain();
                 f.Show();
-            } 
+            }
             
         }
 
