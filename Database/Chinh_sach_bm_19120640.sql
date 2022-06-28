@@ -48,35 +48,34 @@ grant select on CSYT_Admin.View_QuanLiDuLieu_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;
 
 /
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA(
-    MaHSBA   in   CHAR, 
     MaBN  in      CHAR, 
     Ngay     in   DATE, 
     ChanDoan  in  NVARCHAR2, 
     MaBS    in    CHAR, 
     MaKHOA   in   CHAR, 
-    MaCSYT   in   CHAR,
     KetLuan  in   NVARCHAR2)
 is
-user_CSYT char(5);
+MaHSBA  CHAR(10); 
+user_CSYT char(10);
 
 Begin
     select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
     where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user;
-    if CSYT_Admin.QLDL_Insert_HSBA.MaCSYT = user_CSYT
-    then 
+    MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
     insert into CSYT_Admin.View_QuanLiDuLieu_HSBA 
-    values( CSYT_Admin.QLDL_Insert_HSBA.MaHSBA   , 
+    values(MaHSBA   , 
     CSYT_Admin.QLDL_Insert_HSBA.MaBN  , 
     CSYT_Admin.QLDL_Insert_HSBA.Ngay    , 
     CSYT_Admin.QLDL_Insert_HSBA.ChanDoan , 
     CSYT_Admin.QLDL_Insert_HSBA.MaBS    , 
     CSYT_Admin.QLDL_Insert_HSBA.MaKHOA  , 
-    CSYT_Admin.QLDL_Insert_HSBA.MaCSYT  ,
+    user_CSYT  ,
     CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
-    end if;
     commit;
 end;
+
 /
+
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
    MaHSBA      CHAR, 
     MaDV        CHAR, 
@@ -103,6 +102,7 @@ Begin
     end if;
     commit;
 end;
+
 /
 grant execute on CSYT_Admin.QLDL_Insert_HSBA to CSYT_ROLE_QUANLIDULIEU;
 grant execute on CSYT_Admin.QLDL_Insert_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;

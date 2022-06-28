@@ -396,7 +396,7 @@ namespace qlCSYT
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(1076, 524);
+            this.ClientSize = new System.Drawing.Size(1090, 524);
             this.Controls.Add(this.cb_gender);
             this.Controls.Add(this.time_Birth);
             this.Controls.Add(this.cbMedFac);

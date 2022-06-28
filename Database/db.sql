@@ -34,15 +34,15 @@ CREATE TABLE CSYT_Admin.HSBA (
     Ngay        DATE, 
     ChanDoan    NVARCHAR2(100), 
     MaBS        CHAR(10), 
-    MaKHOA      CHAR(5), 
-    MaCSYT      CHAR(5),
+    MaKHOA      CHAR(10), 
+    MaCSYT      CHAR(10),
     KetLuan     NVARCHAR2(100),
     CONSTRAINT PK_MaHSBA_N04 PRIMARY KEY(MaHSBA)
 );
 
 CREATE TABLE CSYT_Admin.HSBA_DV (
     MaHSBA      CHAR(10), 
-    MaDV        CHAR(5), 
+    MaDV        CHAR(10), 
     Ngay        DATE, 
     MaKTV       CHAR(10), 
     KetQua      NVARCHAR2(50),
@@ -51,7 +51,7 @@ CREATE TABLE CSYT_Admin.HSBA_DV (
 
 CREATE TABLE CSYT_Admin.BenhNhan (
     MaBN            CHAR(10), 
-    MaCSYT          CHAR(5), 
+    MaCSYT          CHAR(10), 
     TenBN           NVARCHAR2(50), 
     CMND            CHAR(9), 
     NgaySinh        DATE, 
@@ -67,7 +67,7 @@ CREATE TABLE CSYT_Admin.BenhNhan (
 );
 
 CREATE TABLE CSYT_Admin.CSYT (
-    MaCSYT  CHAR(5), 
+    MaCSYT  CHAR(10), 
     TenCSYT NVARCHAR2(30), 
     DCCSYT  NVARCHAR2(100), 
     SDTCSYT NVARCHAR2(11),
@@ -82,14 +82,15 @@ CREATE TABLE CSYT_Admin.NhanVien (
     CMND        CHAR(10), 
     QueQuan     NVARCHAR2(50), 
     SDT         CHAR(11),
-    CSYT        CHAR(5), 
+    CSYT        CHAR(10), 
     VaiTro      NVARCHAR2(20),--???? 
-    ChuyenKhoa  CHAR(5),--???TRIGGER?
+    ChuyenKhoa  CHAR(10),--???TRIGGER?
     Username        CHAR(15),
     CONSTRAINT PK_NhanVien_N04 PRIMARY KEY(MaNV)
 );
 
 ALTER TABLE CSYT_Admin.HSBA        ADD CONSTRAINT FK_BN_HSBA_N04 FOREIGN KEY (MaBN)    REFERENCES CSYT_Admin.BenhNhan(MaBN);
+ALTER TABLE CSYT_Admin.HSBA        ADD CONSTRAINT FK_BS_HSBA_N04 FOREIGN KEY (MaBS)    REFERENCES CSYT_Admin.NhanVien(MaNV);
 ALTER TABLE CSYT_Admin.HSBA_DV     ADD CONSTRAINT FK_DV_HSBA_N04 FOREIGN KEY (MaHSBA)  REFERENCES CSYT_Admin.HSBA(MaHSBA);
 ALTER TABLE CSYT_Admin.BenhNhan    ADD CONSTRAINT FK_BN_CSYT_N04 FOREIGN KEY (MaCSYT)  REFERENCES CSYT_Admin.CSYT(MaCSYT);
 ALTER TABLE CSYT_Admin.NhanVien    ADD CONSTRAINT FK_NV_CSYT_N04 FOREIGN KEY (CSYT)    REFERENCES CSYT_Admin.CSYT(MaCSYT);

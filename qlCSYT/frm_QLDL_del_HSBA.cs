@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.DataAccess.Client;
+using qlCSYT.SqlConn;
+using System.Data;
+
 
 namespace qlCSYT
 {
@@ -17,9 +14,47 @@ namespace qlCSYT
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
 
+        private void del_HSBA_btn_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd = new OracleCommand("Delete", conn);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add("MaBN", MaBN);
+                var pid = DateTime.ParseExact(NgayLap, "dd-MM-yyyy", null);
+                cmd.Parameters.Add("Ngay", OracleDbType.Date).Value = pid;
+                cmd.Parameters.Add("ChanDoan", ChanDoan);
+                cmd.Parameters.Add("MaBS", MaBS);
+                cmd.Parameters.Add("MaKHOA", MaKhoa);
+                cmd.Parameters.Add("KetLuan", KetLuan);
+
+                OracleDataAdapter da = new OracleDataAdapter(cmd);
+                cmd.ExecuteNonQuery();
+
+                DataTable dt = new DataTable();
+
+
+                da.Fill(dt);
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Roles.Add(dr["GRANTED_ROLE"].ToString());
+
+                }
+
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine("Error: " + err);
+                Console.WriteLine(err.StackTrace);
+            }
+            finally
+            {
+                conn.Close();
+                conn.Dispose();
+            }
         }
     }
 }

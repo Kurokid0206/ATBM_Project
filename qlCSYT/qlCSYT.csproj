@@ -65,6 +65,18 @@
     <Compile Include="fMain.Designer.cs">
       <DependentUpon>fMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAudit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAudit.Designer.cs">
+      <DependentUpon>frmAudit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFGA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFGA.Designer.cs">
+      <DependentUpon>frmFGA.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_addEmp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,6 +178,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="fMain.resx">
       <DependentUpon>fMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAudit.resx">
+      <DependentUpon>frmAudit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFGA.resx">
+      <DependentUpon>frmFGA.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_addEmp.resx">
       <DependentUpon>frm_addEmp.cs</DependentUpon>

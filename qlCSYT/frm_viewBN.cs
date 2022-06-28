@@ -12,35 +12,33 @@ using qlCSYT.SqlConn;
 
 namespace qlCSYT
 {
-    public partial class frm_YsBs_viewHSBA_DV : Form
+    public partial class frm_viewBN : Form
     {
-        private string curID = "";
-        public frm_YsBs_viewHSBA_DV()
+        public frm_viewBN()
         {
             InitializeComponent();
-            LoadHSBA_DV(curID);
+            LoadSelfView();
         }
-        public void LoadHSBA_DV(string MaHSBA)
+        private void btn_cancel_Click(object sender, EventArgs e)
         {
-            curID = MaHSBA;
-            gv_HSBA_DV.Columns.Clear();
+            DialogResult result = MessageBox.Show("Bạn có muốn hủy thao tác?", "Thông báo", MessageBoxButtons.OKCancel);
+            if (result == DialogResult.OK) this.Close();
+        }
+
+        private void LoadSelfView()
+        {
+            this.gv_viewSelf.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
-                string temp = "Select * from CSYT_ADMIN.VIEW_BACSI_HSBA_DV dv where dv.MaHSBA=";
-                string cmdtext = temp + "'" + MaHSBA + "'";
-                //OracleCommand cmd = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_HSBA_DV", conn);
-                OracleCommand cmd = new OracleCommand(cmdtext, conn);
+                OracleCommand cmd = new OracleCommand("Select * from CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW", conn);
                 cmd.CommandType = System.Data.CommandType.Text;
-                //cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //cmd.Parameters.Add("@MaHSBA", MaHSBA);
-                //cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
                 cmd.ExecuteNonQuery();
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-                gv_HSBA_DV.DataSource = dt;
+                gv_viewSelf.DataSource = dt;
             }
             catch (Exception err)
             {
@@ -51,6 +49,11 @@ namespace qlCSYT
 
                 conn.Close();
             }
+        }
+
+        private void lb_csytID_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
