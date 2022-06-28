@@ -55,23 +55,25 @@ namespace qlCSYT
                 //xử lý role ở đây
                 //danh sách role ở dạng list: User.Roles
                 //xem là role nào thì show role đó ra
+                frm_ThongBao frmTB = new frm_ThongBao();
+                frmTB.Show();
 
                 /*if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
                 {
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
-                {
-                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-                    frm_YsBs_main.Show();
-                }
+                //if (User.Roles.Contains("CSYT_ROLE_BACSI"))
+                //{
+                //    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
+                //    frm_YsBs_main.Show();
+                //}
                 if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
                 {
                     frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
                     frm_ThanhTra.Show();
                 }
-                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
+                //if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
                     //Chuyen form
                     if (username == "ADMIN")
                 {
