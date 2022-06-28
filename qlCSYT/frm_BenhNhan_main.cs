@@ -37,11 +37,5 @@ namespace qlCSYT
             
         }
 
-        private void m_logout_Click(object sender, EventArgs e)
-        {
-            fLogin f = new fLogin();
-            f.Show();
-            this.Close();
-        }
     }
 }

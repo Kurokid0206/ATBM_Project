@@ -31,7 +31,6 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.m_viewBN = new System.Windows.Forms.ToolStripMenuItem();
             this.m_modifyBN = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -40,8 +39,7 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_viewBN,
-            this.m_modifyBN,
-            this.m_logout});
+            this.m_modifyBN});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 28);
@@ -61,13 +59,6 @@
             this.m_modifyBN.Size = new System.Drawing.Size(112, 24);
             this.m_modifyBN.Text = "Sửa thông tin";
             this.m_modifyBN.Click += new System.EventHandler(this.m_modifyBN_Click);
-            // 
-            // m_logout
-            // 
-            this.m_logout.Name = "m_logout";
-            this.m_logout.Size = new System.Drawing.Size(91, 24);
-            this.m_logout.Text = "Đăng xuất";
-            this.m_logout.Click += new System.EventHandler(this.m_logout_Click);
             // 
             // frm_BenhNhan_main
             // 
@@ -90,6 +81,5 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem m_viewBN;
         private System.Windows.Forms.ToolStripMenuItem m_modifyBN;
-        private System.Windows.Forms.ToolStripMenuItem m_logout;
     }
 }
