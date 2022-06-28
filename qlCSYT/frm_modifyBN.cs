@@ -19,82 +19,88 @@ namespace qlCSYT
         {
             InitializeComponent();
         }
-        
+
 
         private void frm_modifyBN_Load(object sender, EventArgs e)
         {
 
         }
-        //private void LoadBN()
-        //{
-        //    OracleConnection conn = DBUtils.GetDBConnection();
-        //    try
-        //    {
-        //        conn.Open();
-        //        OracleCommand cmd = new OracleCommand();
-        //        cmd.Connection = conn;
-        //        cmd.CommandText = "Select* from CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW";
-        //        using (DbDataReader reader = cmd.ExecuteReader())
-        //        {
-        //            if (reader.HasRows)
-        //            {
-        //                while (reader.Read())
-        //                {
-        //                    int MaBN_index = reader.GetOrdinal("MaBN");
-        //                    string MaBN = reader.GetString(1);
 
-        //                    int MaCSYT_index = reader.GetOrdinal("MaCSYT");
-        //                    int TenBN_index = reader.GetOrdinal("TenBN");
-        //                    int CMND_index = reader.GetOrdinal("CMND");
-        //                    int NgaySinh_index = reader.GetOrdinal("NgaySinh");
-        //                    int SoNha_index = reader.GetOrdinal("SoNha");
-        //                    int TenDuong_index = reader.GetOrdinal("TenDuong");
-        //                    int QuanHuyen_index = reader.GetOrdinal("QuanHuyen");
-        //                    int TinhTP_index = reader.GetOrdinal("TinhTP");
-        //                    int TienSuBenh_index = reader.GetOrdinal("TienSuBenh");
-        //                    int TienSuBenhGD_index = reader.GetOrdinal("TienSuBenhGD");
-        //                    int DiUngThuoc_index = reader.GetOrdinal("DiUngThuoc");
-        //                    int Username_index = reader.GetOrdinal("MaBN");
+        private void bt_TenBN_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd1 = new OracleCommand("CSYT_ADMIN.BENHNHAN_UPDATE_TENBN", conn);
+                cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@input", tb_TenBN.Text);
+                cmd1.ExecuteNonQuery();
+                //gv_viewPatient.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
 
-        //                    string MaCSYT= reader.GetString(MaCSYT_index);
-        //                    string TenBN = reader.GetString(TenBN_index);
-        //                    string CMND = reader.GetString(CMND_index);
-        //                    DateTime NgaySinh = reader.GetDateTime(NgaySinh_index);
-        //                    string SoNha = reader.GetString(SoNha_index);
-        //                    string TenDuong = reader.GetString(TenDuong_index);
-        //                    string QuanHuyen = reader.GetString(QuanHuyen_index);
-        //                    string TinhTP = reader.GetString(TinhTP_index);
-        //                    string TienSuBenh = reader.GetString(TienSuBenh_index);
-        //                    string TienSuBenhGD = reader.GetString(TienSuBenhGD_index);
-        //                    string DiUngThuoc = reader.GetString(DiUngThuoc_index);
-        //                    string Username = reader.GetString(Username_index);
-        //                    Console.WriteLine(MaBN);
-        //                    TextBox Mytextbox = new TextBox();
-        //                    Mytextbox.Text = MaBN;
-        //                    this.Controls.Add(Mytextbox);
+                conn.Close();
+            }
+        }
+
+        private void bt_CMND_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd1 = new OracleCommand("CSYT_ADMIN.BENHNHAN_UPDATE_CMND", conn);
+                cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd1.Parameters.Add("@input", tb_CMND.Text);//here
+                cmd1.ExecuteNonQuery();
+                //gv_viewPatient.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+
+                conn.Close();
+            }
+        }
+
+        private void bt_ngaysinh_Click(object sender, EventArgs e)
+        {
+            OracleConnection conn = DBUtils.GetDBConnection();
+            try
+            {
+                conn.Open();
+                OracleCommand cmd1 = new OracleCommand("CSYT_ADMIN.BENHNHAN_UPDATE_NGAYSINH", conn);
+                cmd1.CommandType = System.Data.CommandType.StoredProcedure;
+
+                cmd1.Parameters.Add("@input", tb_ngaysinh.Value.Date);//here
+                cmd1.ExecuteNonQuery();
+                //gv_viewPatient.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+            }
+            catch (Exception err)
+            {
+                Console.WriteLine(err);
+            }
+            finally
+            {
+
+                conn.Close();
+            }
 
 
-        //                    //int empNameIndex = reader.GetOrdinal("Emp_Name");// 2
-        //                    //string empName = reader.GetString(empNameIndex);
-        //                    //int  userindex= reader.GetOrdinal("user");
-        //                    //string id = reader.GetString(userindex);
-        //                    //id = reader.GetString(0);
-        //                }
+        }
 
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine("Error: " + e);
-        //        Console.WriteLine(e.StackTrace);
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //        conn.Dispose();
-        //    }
-        //    Console.Read();
-        //}
+        private void bt_SoNha_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

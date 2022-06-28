@@ -61,17 +61,17 @@ namespace qlCSYT
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
-                {
-                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-                    frm_YsBs_main.Show();
-                }
+                //if (User.Roles.Contains("CSYT_ROLE_BACSI"))
+                //{
+                //    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
+                //    frm_YsBs_main.Show();
+                //}
                 if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
                 {
                     frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
                     frm_ThanhTra.Show();
                 }
-                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
+                //if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
                     //Chuyen form
                     if (username == "ADMIN")
                 {
@@ -79,7 +79,19 @@ namespace qlCSYT
                     fMain frm = new fMain();
                     frm.Show();
                 }
+                if (User.Roles.Contains("CSYT_ROLE_BENHNHAN"))
+                {
+                    frm_BenhNhan_main frm_BenhNhan_main = new frm_BenhNhan_main();
+                    frm_BenhNhan_main.Show();
+                }
+                if (User.Roles.Contains("CSYT_ROLE_NHANVIEN"))
+                {
+                    frm_NhanVien_main frm_NhanVien_main = new frm_NhanVien_main();
+                    frm_NhanVien_main.Show();
+                }
                 this.Hide();
+                //frm_BenhNhan_main frm_BenhNhan_main = new frm_BenhNhan_main();
+                //frm_BenhNhan_main.Show();
                 /*frm_ThanhTra fMain = new frm_ThanhTra();
                 fMain.Show();
                 frmFGA audit = new frmFGA();

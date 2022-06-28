@@ -37,16 +37,9 @@ namespace qlCSYT
             this.Hide();
             f.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
-
-        private void m_logout_Click(object sender, EventArgs e)
-        {
-            fLogin f = new fLogin();
-            f.Show();
-            this.Close();
-        }
     }
- 
+}
         
 
         
-}
+

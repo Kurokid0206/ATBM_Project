@@ -92,6 +92,12 @@
     <Compile Include="frm_BenhNhan_main.Designer.cs">
       <DependentUpon>frm_BenhNhan_main.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_modifyBN.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_modifyBN.Designer.cs">
+      <DependentUpon>frm_modifyBN.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_NghienCuu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -230,6 +236,12 @@
     <EmbeddedResource Include="frm_addRole.resx">
       <DependentUpon>frm_addRole.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_BenhNhan_main.resx">
+      <DependentUpon>frm_BenhNhan_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_modifyBN.resx">
+      <DependentUpon>frm_modifyBN.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_NghienCuu.resx">
       <DependentUpon>frm_NghienCuu.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_Nc_viewHSBA_DV.resx">
       <DependentUpon>frm_Nc_viewHSBA_DV.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_NhanVien_main.resx">
+      <DependentUpon>frm_NhanVien_main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_priviledges.resx">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
