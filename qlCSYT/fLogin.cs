@@ -62,13 +62,17 @@ namespace qlCSYT
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-
+                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
+                {
+                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
+                    frm_YsBs_main.Show();
+                }
                 //Chuyen form
                 this.Hide();
-                fMain fMain = new fMain();
-                fMain.Show();
-                frmFGA audit = new frmFGA();
-                audit.Show();
+                //fMain fMain = new fMain();
+                //fMain.Show();
+                //frmFGA audit = new frmFGA();
+                //audit.Show();
             }
             catch (Exception err)
             {
