@@ -103,14 +103,15 @@
             this.gv_viewPatient.Name = "gv_viewPatient";
             this.gv_viewPatient.RowHeadersWidth = 51;
             this.gv_viewPatient.RowTemplate.Height = 24;
-            this.gv_viewPatient.Size = new System.Drawing.Size(1651, 112);
+            this.gv_viewPatient.Size = new System.Drawing.Size(1606, 112);
             this.gv_viewPatient.TabIndex = 12;
+            this.gv_viewPatient.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_viewPatient_CellContentClick);
             // 
             // frm_YsBs_viewPatient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1663, 187);
+            this.ClientSize = new System.Drawing.Size(1623, 187);
             this.Controls.Add(this.gv_viewPatient);
             this.Controls.Add(this.btn_searchCMND);
             this.Controls.Add(this.btn_searchMaBN);
