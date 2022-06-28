@@ -140,6 +140,12 @@
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_ThongBao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_ThongBao.Designer.cs">
+      <DependentUpon>frm_ThongBao.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_viewBN.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +268,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_QLDL_main.resx">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_ThongBao.resx">
+      <DependentUpon>frm_ThongBao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_viewBN.resx">
       <DependentUpon>frm_viewBN.cs</DependentUpon>
