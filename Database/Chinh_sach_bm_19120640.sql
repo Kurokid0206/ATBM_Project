@@ -73,40 +73,7 @@ Begin
     CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
     commit;
 end;
-/
---declare
---    MaBN        CHAR(10); 
---    Ngay        DATE; 
---    ChanDoan    NVARCHAR2(50); 
---    MaBS        CHAR(10);
---    MaKHOA      CHAR(10);
---    KetLuan     NVARCHAR2(50);
---MaHSBA  CHAR(10); 
---user_CSYT char(10);
---begin
---    MaBN   :=     'BN001'; 
---    Ngay    :=    date '2022-01-03'; 
---    ChanDoan :=   'Sang chan tam li'; 
---    MaBS   :=     'BS001';
---    MaKHOA   :=   'KH001';
---    KetLuan  :=   'Tram cam sau roll gatcha';
---    
---    select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
---    where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = 'CSYT_NV001';
---    --DBMS_OUTPUT.put_line(user_CSYT);
---    MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
---    --DBMS_OUTPUT.put_line(MaHSBA);
---    insert into CSYT_Admin.View_QuanLiDuLieu_HSBA 
---    values(MaHSBA   , 
---    MaBN  , 
---    Ngay    , 
---    ChanDoan , 
---    MaBS    , 
---    MaKHOA  , 
---    user_CSYT  ,
---    KetLuan );
---
---end;
+
 /
 
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
@@ -135,6 +102,7 @@ Begin
     end if;
     commit;
 end;
+
 /
 grant execute on CSYT_Admin.QLDL_Insert_HSBA to CSYT_ROLE_QUANLIDULIEU;
 grant execute on CSYT_Admin.QLDL_Insert_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;

@@ -8,6 +8,7 @@ end;
 /
 grant CSYT_ROLE_BACSI to CSYT_NV001;
 grant CSYT_ROLE_THANHTRA to CSYT_NV001;
+grant CSYT_ROLE_QUANLIDULIEU to CSYT_NV001;
 
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ADMIN WITH GRANT OPTION;
 /
@@ -19,7 +20,7 @@ numberpart number;
 temp varchar2(10);
 begin
     select count(MAHSBA) into numberpart from CSYT_ADMIN.HSBA;
-    temp:= 'HS'|| TO_CHAR(numberpart, 'FM000');
+    temp:= 'HS'|| TO_CHAR(numberpart+1, 'FM000');
     return temp;
 end;
 
@@ -31,7 +32,7 @@ numberpart number;
 temp varchar2(10);
 begin
     select count(MANV) into numberpart from CSYT_ADMIN.NhanVien;
-    temp:= 'NV'|| TO_CHAR(numberpart, 'FM000');
+    temp:= 'NV'|| TO_CHAR(numberpart+1, 'FM000');
     return temp;
 end;
 /
@@ -42,7 +43,7 @@ numberpart number;
 temp varchar2(10);
 begin
     select count(MABN) into numberpart from CSYT_ADMIN.BenhNhan;
-    temp:= 'BN'|| TO_CHAR(numberpart, 'FM000');
+    temp:= 'BN'|| TO_CHAR(numberpart+1, 'FM000');
     return temp;
 end;
 /

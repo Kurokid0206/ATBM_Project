@@ -96,6 +96,7 @@ namespace qlCSYT
             this.del_HSBA_strip.Name = "del_HSBA_strip";
             this.del_HSBA_strip.Size = new System.Drawing.Size(100, 27);
             this.del_HSBA_strip.Text = "Xóa HSBA";
+            this.del_HSBA_strip.Click += new System.EventHandler(this.del_HSBA_strip_Click);
             // 
             // add_HSBADV_strip
             // 

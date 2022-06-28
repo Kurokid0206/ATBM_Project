@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using qlCSYT.UserSpace;
 using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 
@@ -37,8 +29,6 @@ namespace qlCSYT
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add("MaBN",MaBN);
                 var pid = DateTime.ParseExact(NgayLap, "dd-MM-yyyy", null);
-
-
                 cmd.Parameters.Add("Ngay", OracleDbType.Date).Value = pid;
                 cmd.Parameters.Add("ChanDoan", ChanDoan);
                 cmd.Parameters.Add("MaBS", MaBS);
@@ -67,8 +57,11 @@ namespace qlCSYT
             
         }
 
+        private void del_HSBA_strip_Click(object sender, EventArgs e)
+        {
+            this.Hide();
 
-
-    
+            //
+        }
     }
 }
