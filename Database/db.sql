@@ -819,36 +819,95 @@ END;
 /
 
 
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_BN 
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_BN 
     BEFORE 
-    INSERT OR UPDATE 
+    INSERT 
     ON CSYT_ADMIN.BenhNhan
     REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 BEGIN
     dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
 
+
 :NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+
 :NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+
 :NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+
 :NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+
 :NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+
 END;
 /
 
 
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_NV 
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_BN 
     BEFORE 
-    INSERT OR UPDATE 
+    UPDATE 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.SoNha!=:OLD.SoNha)
+THEN
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TenDuong!=:OLD.TenDuong)
+THEN
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.QuanHuyen!=:OLD.QuanHuyen)
+THEN
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TinhTP!=:OLD.TinhTP)
+THEN
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_NV 
+    BEFORE 
+    INSERT
     ON CSYT_ADMIN.NhanVien
     REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 
 BEGIN
+
 :NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+
 :NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_NV 
+    BEFORE 
+    UPDATE 
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+END IF;
+IF(:NEW.QueQuan!=:OLD.QueQuan)
+THEN
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+END IF;
 END;
 /
 
