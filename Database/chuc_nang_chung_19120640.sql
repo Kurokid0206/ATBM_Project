@@ -17,11 +17,27 @@ create or replace function CSYT_ADMIN.func_auto_MaHSBA
 return varchar
 is
 numberpart number;
+number_id number;
 temp varchar2(10);
 begin
     select count(MAHSBA) into numberpart from CSYT_ADMIN.HSBA;
     temp:= 'HS'|| TO_CHAR(numberpart+1, 'FM000');
-    return temp;
+    Loop
+        select count(MAHSBA) into number_id  from CSYT_ADMIN.HSBA where trim(MAHSBA) = trim(temp);
+        --DBMS_OUTPUT.put_line(trim(temp));
+        --DBMS_OUTPUT.put_line(number_id);
+        --DBMS_OUTPUT.put_line(numberpart);
+        if number_id != 0
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'HS'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
 end;
 
 /
@@ -29,21 +45,53 @@ create or replace function CSYT_ADMIN.func_auto_MaNV
 return varchar
 is
 numberpart number;
+number_id number;
 temp varchar2(10);
 begin
-    select count(MANV) into numberpart from CSYT_ADMIN.NhanVien;
+    select count(MANV) into numberpart from CSYT_ADMIN.NHANVIEN;
     temp:= 'NV'|| TO_CHAR(numberpart+1, 'FM000');
-    return temp;
+    Loop
+        select count(MANV) into number_id  from CSYT_ADMIN.NHANVIEN where trim(MANV) = trim(temp);
+        --DBMS_OUTPUT.put_line(trim(temp));
+        --DBMS_OUTPUT.put_line(number_id);
+        --DBMS_OUTPUT.put_line(numberpart);
+        if number_id != 0
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'NV'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
 end;
 /
 create or replace function CSYT_ADMIN.func_auto_MaBN
 return varchar
 is
 numberpart number;
+number_id number;
 temp varchar2(10);
 begin
-    select count(MABN) into numberpart from CSYT_ADMIN.BenhNhan;
+    select count(MABN) into numberpart from CSYT_ADMIN.BEnhNhan;
     temp:= 'BN'|| TO_CHAR(numberpart+1, 'FM000');
-    return temp;
+    Loop
+        select count(MABN) into number_id  from CSYT_ADMIN.BenhNhan where trim(MABN) = trim(temp);
+        --DBMS_OUTPUT.put_line(trim(temp));
+        --DBMS_OUTPUT.put_line(number_id);
+        --DBMS_OUTPUT.put_line(numberpart);
+        if number_id != 0
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'BN'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
 end;
 /

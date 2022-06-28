@@ -21,9 +21,9 @@ namespace qlCSYT
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("Delete", conn);
+                OracleCommand cmd = new OracleCommand("CSYT_ADMIN.QLDL_Delete_HSBA", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add("MaBN", MaBN);
+                cmd.Parameters.Add("MaHSBA", MaBN);
                 var pid = DateTime.ParseExact(NgayLap, "dd-MM-yyyy", null);
                 cmd.Parameters.Add("Ngay", OracleDbType.Date).Value = pid;
                 cmd.Parameters.Add("ChanDoan", ChanDoan);
