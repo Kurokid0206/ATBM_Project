@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="frm_NghienCuu.Designer.cs">
       <DependentUpon>frm_NghienCuu.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_Nc_viewHSBA.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +178,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frm_NghienCuu.resx">
       <DependentUpon>frm_NghienCuu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_Nc_viewHSBA.resx">
       <DependentUpon>frm_Nc_viewHSBA.cs</DependentUpon>
     </EmbeddedResource>

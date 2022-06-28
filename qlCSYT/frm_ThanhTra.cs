@@ -26,7 +26,7 @@ namespace qlCSYT
 
         private void menu_xemHSBA_Click(object sender, EventArgs e)
         {
-
+            //LoadHSBA_DV();
         }
 
         private void menu_xemHSBA_DV_Click(object sender, EventArgs e)

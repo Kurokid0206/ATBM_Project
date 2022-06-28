@@ -12,29 +12,22 @@ namespace qlCSYT
         {
             InitializeComponent();
         }
-
-        private void frm_NghienCuu_Load(object sender, EventArgs e)
-        {
-            OracleConnection conn = DBUtils.GetDBConnection();
-        }
-
         private void menu_xemHSBADV_Click(object sender, EventArgs e)
         {
-            LoadHSBA_DV();
+            ViewHSBA_DV();
         }
         private void menu_xemHSBA_Click(object sender, EventArgs e)
         {
-            LoadHSBA();
+            ViewHSBA();
         }
-
-        private void LoadHSBA()
+        private void ViewHSBA()
         {
             this.gv_NghienCuu.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("ShowAllHSBA", conn);
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.NC_View_HSBA", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 //cmd.Parameters.Add("@user_name", "ADMIN");
                 cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
@@ -56,14 +49,14 @@ namespace qlCSYT
             }
         }
 
-        private void LoadHSBA_DV()
+        private void ViewHSBA_DV()
         {
             this.gv_NghienCuu.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
-                OracleCommand cmd = new OracleCommand("ShowAllHSBA_DV", conn);
+                OracleCommand cmd = new OracleCommand("CSYT_Admin.NC_View_HSBA_DV", conn);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 //cmd.Parameters.Add("@user_name", "ADMIN");
                 cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
@@ -92,37 +85,6 @@ namespace qlCSYT
             fLogin f = new fLogin();
             f.Show();
             this.Close();
-        }
-
-        private void LoadUsers()
-        {
-            this.gv_NghienCuu.Columns.Clear();
-            OracleConnection conn = DBUtils.GetDBConnection();
-            try
-            {
-                conn.Open();
-                OracleCommand cmd = new OracleCommand("ShowAllUser", conn);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                //cmd.Parameters.Add("@user_name", "ADMIN");
-                cmd.Parameters.Add("vCHASSIS_RESULT", OracleDbType.RefCursor, ParameterDirection.InputOutput);
-                cmd.ExecuteNonQuery();
-
-                OracleDataAdapter da = new OracleDataAdapter(cmd);
-                DataTable dt = new DataTable();
-
-
-                da.Fill(dt);
-                gv_NghienCuu.DataSource = dt;
-            }
-            catch (Exception err)
-            {
-                Console.WriteLine(err);
-            }
-            finally
-            {
-
-                conn.Close();
-            }
         }
     }
 }
