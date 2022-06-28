@@ -15,7 +15,7 @@ namespace qlCSYT
 
         private void frm_NghienCuu_Load(object sender, EventArgs e)
         {
-            LoadUsers();
+            OracleConnection conn = DBUtils.GetDBConnection();
         }
 
         private void menu_xemHSBADV_Click(object sender, EventArgs e)
