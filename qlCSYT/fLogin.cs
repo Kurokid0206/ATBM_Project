@@ -1,4 +1,4 @@
-﻿using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Client;
 using qlCSYT.SqlConn;
 using System;
 using System.Windows.Forms;

@@ -31,6 +31,7 @@ namespace qlCSYT
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
+                this.gv_viewPatient.Columns.Clear();
                 conn.Open();
                 OracleCommand cmd1 = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_BENHNHAN", conn);
                 cmd1.CommandType = System.Data.CommandType.StoredProcedure;
@@ -42,6 +43,8 @@ namespace qlCSYT
                 DataTable dt1 = new DataTable();
                 da1.Fill(dt1);
                 gv_viewPatient.DataSource = dt1;
+                gv_viewPatient.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                //gv_viewPatient.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
@@ -67,6 +70,8 @@ namespace qlCSYT
             OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
+                this.gv_viewPatient.Columns.Clear();
+
                 conn.Open();
                 OracleCommand cmd2 = new OracleCommand("CSYT_ADMIN.BACSI_SELECT_BENHNHAN", conn);
                 cmd2.CommandType = System.Data.CommandType.StoredProcedure;
@@ -90,5 +95,9 @@ namespace qlCSYT
             }
         }
 
+        private void gv_viewPatient_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
