@@ -65,8 +65,10 @@ namespace qlCSYT
 
                 //Chuyen form
                 this.Hide();
-                //fMain fMain = new fMain();
-                //fMain.Show();
+                fMain fMain = new fMain();
+                fMain.Show();
+                frmFGA audit = new frmFGA();
+                audit.Show();
             }
             catch (Exception err)
             {
