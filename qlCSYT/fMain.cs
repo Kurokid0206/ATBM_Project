@@ -160,22 +160,10 @@ namespace qlCSYT
             fLogin f = new fLogin();
             f.Show();
             this.Close();
-
-            //template for view HSBA thing (Y si, Bac Si)
-            //frm_YsBs_viewHSBA f= new frm_YsBs_viewHSBA();
-            //f.Show();
-            //this.Close();
-
             //template for view HSBA thing (Nghien Cuu)
             // f = new frm_Nc_viewHSBA();
             //f.Show();
             //this.Close();
-
-            //template for view Patient thing (Y si, Bac Si)
-            //frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
-            //f.Show();
-            //this.Close();
-
 
         }
 
