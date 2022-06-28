@@ -23,6 +23,7 @@ CREATE TABLE CSYT_Admin.ThongBao (
 insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Giam doc so',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
 insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Co so y te',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
 insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Y bac sy',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
+insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Y bac sy',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Can trung tam');
 
 
 UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDS') WHERE NoiDung like '%Giam doc so%';

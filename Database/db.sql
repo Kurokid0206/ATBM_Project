@@ -53,12 +53,12 @@ CREATE TABLE CSYT_Admin.BenhNhan (
     MaBN            CHAR(10), 
     MaCSYT          CHAR(10), 
     TenBN           NVARCHAR2(50), 
-    CMND            CHAR(9), 
+    CMND            RAW(2000), 
     NgaySinh        DATE, 
-    SoNha           NVARCHAR2(10),
-    TenDuong        NVARCHAR2(20), 
-    QuanHuyen       NVARCHAR2(20), 
-    TinhTP          NVARCHAR2(20), 
+    SoNha           RAW(2000),
+    TenDuong        RAW(2000), 
+    QuanHuyen       RAW(2000), 
+    TinhTP          RAW(2000), 
     TienSuBenh      NVARCHAR2(50), 
     TienSuBenhGD    NVARCHAR2(50),
     DiUngThuoc      NVARCHAR2(50),
@@ -79,9 +79,9 @@ CREATE TABLE CSYT_Admin.NhanVien (
     HoTen       NVARCHAR2(50), 
     Phai        NVARCHAR2(3), 
     NgaySinh    DATE, 
-    CMND        CHAR(10), 
-    QueQuan     NVARCHAR2(50), 
-    SDT         CHAR(11),
+    CMND        RAW(2000), 
+    QueQuan     RAW(2000), 
+    SDT         RAW(2000),
     CSYT        CHAR(10), 
     VaiTro      NVARCHAR2(20),--???? 
     ChuyenKhoa  CHAR(10),--???TRIGGER?
@@ -839,6 +839,84 @@ WHERE 'CSYT_'||MaNV = user
 GRANT SELECT ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
 GRANT UPDATE ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
+/
+
+
+CREATE OR REPLACE FUNCTION CSYT_ADMIN.ENCRYPT(pi_input VARCHAR2,pi_key VARCHAR2)
+RETURN RAW
+AS
+    input_string VARCHAR2(16) := pi_input;
+    raw_input RAW(128) := utl_raw.cast_to_raw(CONVERT(input_string,'AL32UTF8','US7ASCII'));
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+    encrypted_raw RAW(2048);
+    encrypted_string VARCHAR2(2048);
+BEGIN
+dbms_output.put_line('key:'||raw_key);
+    encrypted_raw := dbms_crypto.ENCRYPT(src => raw_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+
+    RETURN encrypted_raw;
+END;
+/
+
+
+
+CREATE OR REPLACE FUNCTION csyt_admin.DECRYPT(pi_input RAW,pi_key VARCHAR2)
+RETURN VARCHAR2
+AS
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+
+    decrypted_raw RAW(2048);
+    decrypted_string VARCHAR2(2048);
+BEGIN
+dbms_output.put_line('key:'||raw_key);
+    BEGIN 
+    decrypted_raw := dbms_crypto.DECRYPT(src => pi_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+    decrypted_string:=CONVERT(utl_raw.cast_to_varchar2(decrypted_raw),'US7ASCII','AL32UTF8');
+    RETURN decrypted_string;
+        EXCEPTION 
+        WHEN OTHERS THEN
+        RETURN NULL;
+    END;    
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_BN 
+    BEFORE 
+    INSERT OR UPDATE 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_NV 
+    BEFORE 
+    INSERT OR UPDATE 
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+:NEW.SDT        := CSYT_ADMIN.encrypt(:NEW.SDT,:NEW.MaNV||:New.CSYT);
+END;
 /
 
 
