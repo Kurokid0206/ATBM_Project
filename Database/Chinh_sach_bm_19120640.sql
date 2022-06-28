@@ -48,35 +48,67 @@ grant select on CSYT_Admin.View_QuanLiDuLieu_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;
 
 /
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA(
-    MaHSBA   in   CHAR, 
     MaBN  in      CHAR, 
     Ngay     in   DATE, 
     ChanDoan  in  NVARCHAR2, 
     MaBS    in    CHAR, 
     MaKHOA   in   CHAR, 
-    MaCSYT   in   CHAR,
     KetLuan  in   NVARCHAR2)
 is
-user_CSYT char(5);
+MaHSBA  CHAR(10); 
+user_CSYT char(10);
 
 Begin
     select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
     where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user;
-    if CSYT_Admin.QLDL_Insert_HSBA.MaCSYT = user_CSYT
-    then 
+    MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
     insert into CSYT_Admin.View_QuanLiDuLieu_HSBA 
-    values( CSYT_Admin.QLDL_Insert_HSBA.MaHSBA   , 
+    values(MaHSBA   , 
     CSYT_Admin.QLDL_Insert_HSBA.MaBN  , 
     CSYT_Admin.QLDL_Insert_HSBA.Ngay    , 
     CSYT_Admin.QLDL_Insert_HSBA.ChanDoan , 
     CSYT_Admin.QLDL_Insert_HSBA.MaBS    , 
     CSYT_Admin.QLDL_Insert_HSBA.MaKHOA  , 
-    CSYT_Admin.QLDL_Insert_HSBA.MaCSYT  ,
+    user_CSYT  ,
     CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
-    end if;
     commit;
 end;
 /
+--declare
+--    MaBN        CHAR(10); 
+--    Ngay        DATE; 
+--    ChanDoan    NVARCHAR2(50); 
+--    MaBS        CHAR(10);
+--    MaKHOA      CHAR(10);
+--    KetLuan     NVARCHAR2(50);
+--MaHSBA  CHAR(10); 
+--user_CSYT char(10);
+--begin
+--    MaBN   :=     'BN001'; 
+--    Ngay    :=    date '2022-01-03'; 
+--    ChanDoan :=   'Sang chan tam li'; 
+--    MaBS   :=     'BS001';
+--    MaKHOA   :=   'KH001';
+--    KetLuan  :=   'Tram cam sau roll gatcha';
+--    
+--    select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
+--    where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = 'CSYT_NV001';
+--    --DBMS_OUTPUT.put_line(user_CSYT);
+--    MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
+--    --DBMS_OUTPUT.put_line(MaHSBA);
+--    insert into CSYT_Admin.View_QuanLiDuLieu_HSBA 
+--    values(MaHSBA   , 
+--    MaBN  , 
+--    Ngay    , 
+--    ChanDoan , 
+--    MaBS    , 
+--    MaKHOA  , 
+--    user_CSYT  ,
+--    KetLuan );
+--
+--end;
+/
+
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
    MaHSBA      CHAR, 
     MaDV        CHAR, 

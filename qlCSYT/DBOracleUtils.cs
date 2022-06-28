@@ -20,7 +20,7 @@ namespace qlCSYT.SqlConn
             OracleConnection conn = new OracleConnection();
 
             conn.ConnectionString = connString;
-            Console.WriteLine(connString);
+            //Console.WriteLine(connString);
 
             return conn;
         }

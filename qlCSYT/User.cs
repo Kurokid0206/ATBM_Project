@@ -12,7 +12,7 @@ namespace qlCSYT.UserSpace
 {
     class User
     {
-        public static string username = "";
+        public static string username = "NV001";
         public static List<string> Roles = new List<string>();
         public void getRoles() {
             OracleConnection conn = DBUtils.GetDBConnection();
@@ -47,7 +47,7 @@ namespace qlCSYT.UserSpace
                 conn.Close();
                 conn.Dispose();
             }
-            Console.Read();
+            
         }
     }
 }
