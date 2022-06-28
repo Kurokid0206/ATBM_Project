@@ -122,17 +122,35 @@
     <Compile Include="frm_priviledges.Designer.cs">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_QLDL_add_HSBA_DV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLDL_add_HSBA_DV.Designer.cs">
+      <DependentUpon>frm_QLDL_add_HSBA_DV.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_QLDL_del_HSBA.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_QLDL_del_HSBA.Designer.cs">
       <DependentUpon>frm_QLDL_del_HSBA.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_QLDL_del_HSBA_DV.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_QLDL_del_HSBA_DV.Designer.cs">
+      <DependentUpon>frm_QLDL_del_HSBA_DV.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_QLDL_main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_QLDL_main.Designer.cs">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frm_User_client.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_User_client.Designer.cs">
+      <DependentUpon>frm_User_client.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_viewBN.cs">
       <SubType>Form</SubType>
@@ -242,11 +260,20 @@
     <EmbeddedResource Include="frm_priviledges.resx">
       <DependentUpon>frm_priviledges.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLDL_add_HSBA_DV.resx">
+      <DependentUpon>frm_QLDL_add_HSBA_DV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_QLDL_del_HSBA.resx">
       <DependentUpon>frm_QLDL_del_HSBA.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frm_QLDL_del_HSBA_DV.resx">
+      <DependentUpon>frm_QLDL_del_HSBA_DV.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_QLDL_main.resx">
       <DependentUpon>frm_QLDL_main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_User_client.resx">
+      <DependentUpon>frm_User_client.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_viewBN.resx">
       <DependentUpon>frm_viewBN.cs</DependentUpon>

@@ -61,7 +61,7 @@ namespace qlCSYT
             this.MaHSBA_input.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaHSBA_input.Location = new System.Drawing.Point(86, 118);
             this.MaHSBA_input.Name = "MaHSBA_input";
-            this.MaHSBA_input.Size = new System.Drawing.Size(328, 32);
+            this.MaHSBA_input.Size = new System.Drawing.Size(619, 32);
             this.MaHSBA_input.TabIndex = 2;
             // 
             // del_HSBA_btn
@@ -69,9 +69,9 @@ namespace qlCSYT
             this.del_HSBA_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
             this.del_HSBA_btn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.del_HSBA_btn.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.del_HSBA_btn.Location = new System.Drawing.Point(463, 118);
+            this.del_HSBA_btn.Location = new System.Drawing.Point(578, 170);
             this.del_HSBA_btn.Name = "del_HSBA_btn";
-            this.del_HSBA_btn.Size = new System.Drawing.Size(127, 32);
+            this.del_HSBA_btn.Size = new System.Drawing.Size(127, 40);
             this.del_HSBA_btn.TabIndex = 5;
             this.del_HSBA_btn.Text = "Xóa";
             this.del_HSBA_btn.UseVisualStyleBackColor = false;

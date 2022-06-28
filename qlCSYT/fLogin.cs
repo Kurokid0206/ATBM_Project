@@ -56,7 +56,7 @@ namespace qlCSYT
                 //danh sách role ở dạng list: User.Roles
                 //xem là role nào thì show role đó ra
 
-                if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
+                /*if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
                 {
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
@@ -78,8 +78,16 @@ namespace qlCSYT
                     this.Hide();
                     fMain frm = new fMain();
                     frm.Show();
-                }
+                }*/
                 this.Hide();
+                frm_User_client frm_User_client = new frm_User_client();
+                frm_User_client.Show();
+                frm_User_client.Closed += (s, args) => { this.Show();
+                    this.Controls.Clear();
+                    this.InitializeComponent();
+                };
+                
+                
                 /*frm_ThanhTra fMain = new frm_ThanhTra();
                 fMain.Show();
                 frmFGA audit = new frmFGA();

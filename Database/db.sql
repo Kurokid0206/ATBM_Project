@@ -562,6 +562,12 @@ MaHSBA  CHAR(10);
 user_CSYT char(10);
 
 Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
     select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
     where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user;
     MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
@@ -574,21 +580,32 @@ Begin
     CSYT_Admin.QLDL_Insert_HSBA.MaKHOA  , 
     user_CSYT  ,
     CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
+    
+    
+    --end;
+    --end if;
     commit;
 end;
 
 /
 
+
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
-   MaHSBA      CHAR, 
-    MaDV        CHAR, 
-    Ngay        DATE, 
-    MaKTV       CHAR, 
-    KetQua      NVARCHAR2)
+   MaHSBA   in   CHAR, 
+    MaDV    in    CHAR, 
+    Ngay    in    DATE, 
+    MaKTV   in    CHAR, 
+    KetQua  in    NVARCHAR2)
 is
 user_MaHSBA char(10);
 
 Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
     SELECT CSYT_Admin.HSBA.MaHSBA into user_MaHSBA FROM CSYT_Admin.HSBA, CSYT_Admin.NhanVien
                                     WHERE CSYT_Admin.HSBA.MaCSYT =  CSYT_Admin.NhanVien.CSYT
                                     and 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user 
@@ -604,28 +621,54 @@ Begin
     CSYT_Admin.QLDL_Insert_HSBA_DV.KetQua );
     end if;
     commit;
+    
+     --end;
+    --end if;
 end;
 /
 create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA(
-MAHSBA char)
+MAHSBA in char)
 as
 lv_stmt   VARCHAR2 (1000);
 begin
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||'''';
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||'''';
     EXECUTE IMMEDIATE ( lv_stmt ); 
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA where MaHSBA = '''|| trim(MAHSBA)||'''';
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA where MaHSBA = '''|| trim(MAHSBA)||'''';
     EXECUTE IMMEDIATE ( lv_stmt );
+    
+    
+     --end;
+    --end if;
+    commit;
 end;
 /
+
 create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA_DV(
-MAHSBA char,
-MADV char)
+MAHSBA in char,
+MADV in char)
 as
 lv_stmt   VARCHAR2 (1000);
 begin
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||''''
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||''''
     ||' and MaDV = '''||trim(MADV)||'''';
     EXECUTE IMMEDIATE ( lv_stmt ); 
+    
+    --end;
+    --end if;
+    commit;
 end;
 
 
