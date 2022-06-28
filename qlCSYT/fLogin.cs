@@ -55,6 +55,8 @@ namespace qlCSYT
                 //xử lý role ở đây
                 //danh sách role ở dạng list: User.Roles
                 //xem là role nào thì show role đó ra
+                frm_ThongBao frmTB = new frm_ThongBao();
+                frmTB.Show();
 
                 if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
                 {
