@@ -53,7 +53,7 @@
             this.menu_logout});
             this.menuThanhTra.Location = new System.Drawing.Point(0, 0);
             this.menuThanhTra.Name = "menuThanhTra";
-            this.menuThanhTra.Size = new System.Drawing.Size(800, 28);
+            this.menuThanhTra.Size = new System.Drawing.Size(1014, 28);
             this.menuThanhTra.TabIndex = 0;
             this.menuThanhTra.Text = "menuStrip1";
             // 
@@ -110,14 +110,14 @@
             this.gv_ThanhTra.ReadOnly = true;
             this.gv_ThanhTra.RowHeadersWidth = 51;
             this.gv_ThanhTra.RowTemplate.Height = 24;
-            this.gv_ThanhTra.Size = new System.Drawing.Size(776, 407);
+            this.gv_ThanhTra.Size = new System.Drawing.Size(990, 407);
             this.gv_ThanhTra.TabIndex = 1;
             // 
             // frm_ThanhTra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1014, 450);
             this.Controls.Add(this.gv_ThanhTra);
             this.Controls.Add(this.menuThanhTra);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

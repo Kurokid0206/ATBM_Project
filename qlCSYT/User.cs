@@ -16,7 +16,6 @@ namespace qlCSYT.UserSpace
         public static List<string> Roles = new List<string>();
         public void getRoles() {
             OracleConnection conn = DBUtils.GetDBConnection();
-
             try
             {
                 conn.Open();

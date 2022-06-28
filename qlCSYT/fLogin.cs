@@ -66,8 +66,8 @@ namespace qlCSYT
                 this.Hide();
                 frm_ThanhTra fMain = new frm_ThanhTra();
                 fMain.Show();
-                frmFGA audit = new frmFGA();
-                audit.Show();
+                //frmFGA audit = new frmFGA();
+                //audit.Show();
             }
             catch (Exception err)
             {

@@ -63,6 +63,8 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_ThanhTra.DataSource = dt;
+                gv_ThanhTra.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
+                this.Width = gv_ThanhTra.Width;
             }
             catch (Exception err)
             {
@@ -92,6 +94,7 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_ThanhTra.DataSource = dt;
+                gv_ThanhTra.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
@@ -121,6 +124,7 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_ThanhTra.DataSource = dt;
+                gv_ThanhTra.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
@@ -150,6 +154,7 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_ThanhTra.DataSource = dt;
+                gv_ThanhTra.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
@@ -179,6 +184,7 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_ThanhTra.DataSource = dt;
+                gv_ThanhTra.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {

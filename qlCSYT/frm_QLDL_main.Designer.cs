@@ -41,6 +41,7 @@ namespace qlCSYT
             this.ketLuan_lable = new System.Windows.Forms.Label();
             this.KetLuan_input = new System.Windows.Forms.TextBox();
             this.MaKhoa_input = new System.Windows.Forms.TextBox();
+            this.add_HSBA_btn = new System.Windows.Forms.Button();
             this.MaBS_input = new System.Windows.Forms.TextBox();
             this.MaBN_input = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -50,7 +51,6 @@ namespace qlCSYT
             this.NgayLap_input = new System.Windows.Forms.DateTimePicker();
             this.NgayLap_lable = new System.Windows.Forms.Label();
             this.select_mabn_lable = new System.Windows.Forms.Label();
-            this.add_HSBA_btn = new System.Windows.Forms.Button();
             this.QLDL_menustrip.SuspendLayout();
             this.add_HSBA_group.SuspendLayout();
             this.SuspendLayout();
@@ -158,6 +158,17 @@ namespace qlCSYT
             this.MaKhoa_input.Size = new System.Drawing.Size(290, 30);
             this.MaKhoa_input.TabIndex = 14;
             // 
+            // add_HSBA_btn
+            // 
+            this.add_HSBA_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.add_HSBA_btn.Location = new System.Drawing.Point(594, 404);
+            this.add_HSBA_btn.Name = "add_HSBA_btn";
+            this.add_HSBA_btn.Size = new System.Drawing.Size(120, 31);
+            this.add_HSBA_btn.TabIndex = 18;
+            this.add_HSBA_btn.Text = "Thêm";
+            this.add_HSBA_btn.UseVisualStyleBackColor = false;
+            this.add_HSBA_btn.Click += new System.EventHandler(this.add_HSBA_btn_Click);
+            // 
             // MaBS_input
             // 
             this.MaBS_input.Location = new System.Drawing.Point(376, 155);
@@ -231,17 +242,6 @@ namespace qlCSYT
             this.select_mabn_lable.Size = new System.Drawing.Size(144, 25);
             this.select_mabn_lable.TabIndex = 1;
             this.select_mabn_lable.Text = "Mã bệnh nhân:";
-            // 
-            // add_HSBA_btn
-            // 
-            this.add_HSBA_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.add_HSBA_btn.Location = new System.Drawing.Point(594, 404);
-            this.add_HSBA_btn.Name = "add_HSBA_btn";
-            this.add_HSBA_btn.Size = new System.Drawing.Size(120, 31);
-            this.add_HSBA_btn.TabIndex = 18;
-            this.add_HSBA_btn.Text = "Thêm";
-            this.add_HSBA_btn.UseVisualStyleBackColor = false;
-            this.add_HSBA_btn.Click += new System.EventHandler(this.add_HSBA_btn_Click);
             // 
             // frm_QLDL_main
             // 

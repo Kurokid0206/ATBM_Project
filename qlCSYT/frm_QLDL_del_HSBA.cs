@@ -17,7 +17,7 @@ namespace qlCSYT
 
         private void del_HSBA_btn_Click(object sender, EventArgs e)
         {
-            OracleConnection conn = DBUtils.GetDBConnection();
+            /*OracleConnection conn = DBUtils.GetDBConnection();
             try
             {
                 conn.Open();
@@ -54,7 +54,7 @@ namespace qlCSYT
             {
                 conn.Close();
                 conn.Dispose();
-            }
+            }*/
         }
     }
 }
