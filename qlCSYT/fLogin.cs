@@ -61,8 +61,19 @@ namespace qlCSYT
                     frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
                     frm_QLDL_Main.Show();
                 }
-                //Chuyen form
-                if (username == "ADMIN")
+                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
+                {
+                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
+                    frm_YsBs_main.Show();
+                }
+                if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
+                {
+                    frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
+                    frm_ThanhTra.Show();
+                }
+                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
+                    //Chuyen form
+                    if (username == "ADMIN")
                 {
                     this.Hide();
                     fMain frm = new fMain();
