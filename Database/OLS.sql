@@ -25,7 +25,7 @@ insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Co so y te',to_
 insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Y bac sy',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
 
 
-UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDS') WHERE NoiDung like '%Giam doc so%';
+UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDS:CS,NT,NGT') WHERE NoiDung like '%Giam doc so%';
 UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDCS:CS,NT:TT') WHERE NoiDung like '%Co so y te%';
 UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','YBS:CS:TT') WHERE NoiDung like '%Y bac sy%' AND DiaDiem='Trung tam';
 
