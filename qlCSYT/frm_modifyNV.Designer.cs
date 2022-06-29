@@ -74,9 +74,9 @@
             this.lb_HoTen.Location = new System.Drawing.Point(3, 10);
             this.lb_HoTen.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_HoTen.Name = "lb_HoTen";
-            this.lb_HoTen.Size = new System.Drawing.Size(140, 23);
+            this.lb_HoTen.Size = new System.Drawing.Size(134, 23);
             this.lb_HoTen.TabIndex = 22;
-            this.lb_HoTen.Text = "Tên bệnh nhân:";
+            this.lb_HoTen.Text = "Tên nhân viên:";
             // 
             // bt_ngaysinh
             // 
