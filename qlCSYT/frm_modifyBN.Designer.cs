@@ -268,6 +268,7 @@
             this.bt_QuanHuyen.TabIndex = 23;
             this.bt_QuanHuyen.Text = "Sửa";
             this.bt_QuanHuyen.UseVisualStyleBackColor = true;
+            this.bt_QuanHuyen.Click += new System.EventHandler(this.bt_QuanHuyen_Click);
             // 
             // bt_TenDuong
             // 
@@ -277,6 +278,7 @@
             this.bt_TenDuong.TabIndex = 26;
             this.bt_TenDuong.Text = "Sửa";
             this.bt_TenDuong.UseVisualStyleBackColor = true;
+            this.bt_TenDuong.Click += new System.EventHandler(this.bt_TenDuong_Click);
             // 
             // bt_SoNha
             // 
@@ -296,6 +298,7 @@
             this.bt_tiensubenh.TabIndex = 28;
             this.bt_tiensubenh.Text = "Sửa";
             this.bt_tiensubenh.UseVisualStyleBackColor = true;
+            this.bt_tiensubenh.Click += new System.EventHandler(this.bt_tiensubenh_Click);
             // 
             // bt_TinhTP
             // 
@@ -305,6 +308,7 @@
             this.bt_TinhTP.TabIndex = 27;
             this.bt_TinhTP.Text = "Sửa";
             this.bt_TinhTP.UseVisualStyleBackColor = true;
+            this.bt_TinhTP.Click += new System.EventHandler(this.bt_TinhTP_Click);
             // 
             // bt_diungthuoc
             // 
@@ -314,6 +318,7 @@
             this.bt_diungthuoc.TabIndex = 30;
             this.bt_diungthuoc.Text = "Sửa";
             this.bt_diungthuoc.UseVisualStyleBackColor = true;
+            this.bt_diungthuoc.Click += new System.EventHandler(this.bt_diungthuoc_Click);
             // 
             // bt_tiensubenhgd
             // 
@@ -323,6 +328,7 @@
             this.bt_tiensubenhgd.TabIndex = 29;
             this.bt_tiensubenhgd.Text = "Sửa";
             this.bt_tiensubenhgd.UseVisualStyleBackColor = true;
+            this.bt_tiensubenhgd.Click += new System.EventHandler(this.bt_tiensubenhgd_Click);
             // 
             // tb_ngaysinh
             // 
