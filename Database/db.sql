@@ -1,4 +1,4 @@
-aALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 DROP USER CSYT_Admin CASCADE;
 
 --DROP TABLE CSYT_Admin.HSBA     CASCADE CONSTRAINTS;
@@ -99,7 +99,144 @@ ALTER TABLE CSYT_Admin.NhanVien    ADD CONSTRAINT FK_NV_CSYT_N04 FOREIGN KEY (CS
 
 GRANT CONNECT TO CSYT_Admin WITH ADMIN OPTION;
 
+-----------------------------
+--Ma hoa section
 
+
+CREATE OR REPLACE FUNCTION CSYT_ADMIN.ENCRYPT(pi_input VARCHAR2,pi_key VARCHAR2)
+RETURN RAW
+AS
+    input_string VARCHAR2(100) := pi_input;
+    raw_input RAW(128) := utl_raw.cast_to_raw(CONVERT(input_string,'AL32UTF8','US7ASCII'));
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+    encrypted_raw varchar2(2000);
+    encrypted_string VARCHAR2(2000);
+BEGIN
+    dbms_output.put_line('key:'||raw_key);
+    encrypted_raw := dbms_crypto.ENCRYPT(src => raw_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+
+    RETURN encrypted_raw;
+END;
+/
+
+CREATE OR REPLACE FUNCTION csyt_admin.DECRYPT(pi_input RAW,pi_key VARCHAR2)
+RETURN VARCHAR2
+AS
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(1280) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+
+    decrypted_raw varchar2(2000);
+    decrypted_string VARCHAR2(2000);
+BEGIN
+dbms_output.put_line('key:'||raw_key);
+    BEGIN 
+    decrypted_raw := dbms_crypto.DECRYPT(src => pi_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+    decrypted_string:=CONVERT(utl_raw.cast_to_varchar2(decrypted_raw),'US7ASCII','AL32UTF8');
+    RETURN decrypted_string;
+        EXCEPTION 
+        WHEN OTHERS THEN
+        RETURN NULL;
+    END;    
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_BN 
+    BEFORE 
+    INSERT 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
+
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_BN 
+    BEFORE 
+    UPDATE 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.SoNha!=:OLD.SoNha)
+THEN
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TenDuong!=:OLD.TenDuong)
+THEN
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.QuanHuyen!=:OLD.QuanHuyen)
+THEN
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TinhTP!=:OLD.TinhTP)
+THEN
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_NV 
+    BEFORE 
+    INSERT
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+
+END;
+/
+
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_NV 
+    BEFORE 
+    UPDATE 
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+END IF;
+IF(:NEW.QueQuan!=:OLD.QueQuan)
+THEN
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+END IF;
+END;
+/
 
 
 ------------------------------------
@@ -702,7 +839,7 @@ CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
 CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
 CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
 tiensubenh,tiensubenhgd,diungthuoc
-FROM CSYT_Admin.BenhNhan
+FROM CSYT_Admin.BenhNhan;
 /
 CREATE OR REPLACE PROCEDURE CSYT_ADMIN.BACSI_SELECT_BENHNHAN(
 MABN IN CHAR DEFAULT NULL,
@@ -746,147 +883,6 @@ GRANT SELECT ON CSYT_ADMIN.VIEW_NGHIENCUU_HSBA TO CSYT_ROLE_NGHIENCUU;
 GRANT SELECT ON CSYT_ADMIN.VIEW_NGHIENCUU_HSBA_DV TO CSYT_ROLE_NGHIENCUU;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NGHIENCUU;
 /
-
-
-
-
-CREATE OR REPLACE FUNCTION CSYT_ADMIN.ENCRYPT(pi_input VARCHAR2,pi_key VARCHAR2)
-RETURN RAW
-AS
-    input_string VARCHAR2(100) := pi_input;
-    raw_input RAW(128) := utl_raw.cast_to_raw(CONVERT(input_string,'AL32UTF8','US7ASCII'));
-    key_string VARCHAR2(100) := pi_key;
-    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
-    encrypted_raw varchar2(2000);
-    encrypted_string VARCHAR2(2000);
-BEGIN
-    dbms_output.put_line('key:'||raw_key);
-    encrypted_raw := dbms_crypto.ENCRYPT(src => raw_input,
-    typ => dbms_crypto.des_cbc_pkcs5,
-    KEY => raw_key);
-
-    RETURN encrypted_raw;
-END;
-/
-
-
-
-CREATE OR REPLACE FUNCTION csyt_admin.DECRYPT(pi_input RAW,pi_key VARCHAR2)
-RETURN VARCHAR2
-AS
-    key_string VARCHAR2(100) := pi_key;
-    raw_key RAW(1280) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
-
-    decrypted_raw varchar2(2000);
-    decrypted_string VARCHAR2(2000);
-BEGIN
-dbms_output.put_line('key:'||raw_key);
-    BEGIN 
-    decrypted_raw := dbms_crypto.DECRYPT(src => pi_input,
-    typ => dbms_crypto.des_cbc_pkcs5,
-    KEY => raw_key);
-    decrypted_string:=CONVERT(utl_raw.cast_to_varchar2(decrypted_raw),'US7ASCII','AL32UTF8');
-    RETURN decrypted_string;
-        EXCEPTION 
-        WHEN OTHERS THEN
-        RETURN NULL;
-    END;    
-END;
-/
-
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_BN 
-    BEFORE 
-    INSERT 
-    ON CSYT_ADMIN.BenhNhan
-    REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-BEGIN
-    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
-
-
-:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
-
-:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
-
-:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
-
-:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
-
-:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
-
-END;
-/
-
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_BN 
-    BEFORE 
-    UPDATE 
-    ON CSYT_ADMIN.BenhNhan
-    REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-BEGIN
-    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
-
-IF(:NEW.CMND!=:OLD.CMND)
-THEN
-:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
-END IF;
-IF(:NEW.SoNha!=:OLD.SoNha)
-THEN
-:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
-END IF;
-IF(:NEW.TenDuong!=:OLD.TenDuong)
-THEN
-:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
-END IF;
-IF(:NEW.QuanHuyen!=:OLD.QuanHuyen)
-THEN
-:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
-END IF;
-IF(:NEW.TinhTP!=:OLD.TinhTP)
-THEN
-:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
-END IF;
-END;
-/
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_NV 
-    BEFORE 
-    INSERT
-    ON CSYT_ADMIN.NhanVien
-    REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-
-BEGIN
-
-:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
-
-:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
-
-END;
-/
-
-
-CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_NV 
-    BEFORE 
-    UPDATE 
-    ON CSYT_ADMIN.NhanVien
-    REFERENCING NEW AS NEW OLD AS OLD
-FOR EACH ROW
-
-BEGIN
-IF(:NEW.CMND!=:OLD.CMND)
-THEN
-:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
-END IF;
-IF(:NEW.QueQuan!=:OLD.QueQuan)
-THEN
-:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
-END IF;
-END;
-/
-
 
 -------------------------------
 --CAU 6: 
