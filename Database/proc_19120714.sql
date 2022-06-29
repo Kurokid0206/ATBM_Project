@@ -147,7 +147,7 @@ BEGIN DBMS_RLS.DROP_POLICY(
     policy_name     => 'BN_CONTROL'
 );
 END;
-
+/
 BEGIN DBMS_RLS.ADD_POLICY(
     object_schema   => 'CSYT_ADMIN',
     object_name     => 'BENHNHAN',
