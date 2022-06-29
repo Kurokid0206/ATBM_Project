@@ -38,7 +38,6 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_NghienCuu.DataSource = dt;
-                gv_NghienCuu.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
@@ -69,7 +68,6 @@ namespace qlCSYT
 
                 da.Fill(dt);
                 gv_NghienCuu.DataSource = dt;
-                gv_NghienCuu.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.Fill);
             }
             catch (Exception err)
             {
