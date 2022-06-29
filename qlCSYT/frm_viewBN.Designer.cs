@@ -42,7 +42,7 @@
             this.gv_viewSelf.Name = "gv_viewSelf";
             this.gv_viewSelf.RowHeadersWidth = 51;
             this.gv_viewSelf.RowTemplate.Height = 24;
-            this.gv_viewSelf.Size = new System.Drawing.Size(1361, 76);
+            this.gv_viewSelf.Size = new System.Drawing.Size(1487, 76);
             this.gv_viewSelf.TabIndex = 2;
             this.gv_viewSelf.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gv_viewSelf_CellContentClick);
             // 
@@ -50,7 +50,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1385, 80);
+            this.ClientSize = new System.Drawing.Size(1506, 80);
             this.Controls.Add(this.gv_viewSelf);
             this.Name = "frm_viewBN";
             this.Text = "Xem thông tin cá nhân";
