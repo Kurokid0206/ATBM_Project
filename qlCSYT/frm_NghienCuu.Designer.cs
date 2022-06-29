@@ -47,7 +47,7 @@
             this.menu_logout});
             this.menuNghienCuu.Location = new System.Drawing.Point(0, 0);
             this.menuNghienCuu.Name = "menuNghienCuu";
-            this.menuNghienCuu.Size = new System.Drawing.Size(716, 28);
+            this.menuNghienCuu.Size = new System.Drawing.Size(1077, 28);
             this.menuNghienCuu.TabIndex = 0;
             this.menuNghienCuu.Text = "menuStrip1";
             // 
@@ -83,14 +83,14 @@
             this.gv_NghienCuu.ReadOnly = true;
             this.gv_NghienCuu.RowHeadersWidth = 51;
             this.gv_NghienCuu.RowTemplate.Height = 24;
-            this.gv_NghienCuu.Size = new System.Drawing.Size(692, 329);
+            this.gv_NghienCuu.Size = new System.Drawing.Size(1053, 329);
             this.gv_NghienCuu.TabIndex = 1;
             // 
             // frm_NghienCuu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 372);
+            this.ClientSize = new System.Drawing.Size(1077, 372);
             this.Controls.Add(this.gv_NghienCuu);
             this.Controls.Add(this.menuNghienCuu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

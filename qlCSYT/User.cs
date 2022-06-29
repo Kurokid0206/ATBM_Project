@@ -17,7 +17,6 @@ namespace qlCSYT.UserSpace
         public void getRoles() {
             Roles.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
-
             try
             {
                 conn.Open();
