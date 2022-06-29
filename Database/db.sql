@@ -967,6 +967,8 @@ WHERE CSYT_ADMIN.HSBA_DV.MAHSBA IN (SELECT CSYT_ADMIN.HSBA.MAHSBA FROM CSYT_ADMI
                                 AND CSYT_ADMIN.NHANVIEN.CHUYENKHOA =  CSYT_ADMIN.HSBA.MAKHOA);
     END;
 /
+GRANT select ON CSYT_Admin.HSBA      TO CSYT_ROLE_NGHIENCUU; 
+GRANT select ON CSYT_Admin.NHANVIEN      TO CSYT_ROLE_NGHIENCUU; 
 
 GRANT EXECUTE ON CSYT_Admin.NC_View_HSBA      TO CSYT_ROLE_NGHIENCUU; 
 GRANT EXECUTE ON CSYT_Admin.NC_View_HSBA_DV   TO CSYT_ROLE_NGHIENCUU; 
@@ -1248,6 +1250,7 @@ grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_SDT to CSYT_ROLE_NHANVIEN;
 
 
 
+
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'CSYT_MEANSUN';
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'CSYT_MEANSUN';
 --grant update (MAHSBA) on CSYT_ADMIN.HSBA to CSYT_MEANSUN;
@@ -1275,7 +1278,7 @@ INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN007','CS003','Le Nam Thai Son','11223
 INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN008','CS003','Doc Co Cau Bai','662233445',to_date('19/04/2004','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
 INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN009','CS003','Dong Phuong Bat Bai','112255445',to_date('19/10/2005','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
 
-INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra','KH001',Null);
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','KH001',Null);
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','KH002',Null);
 INSERT INTO CSYT_Admin.NhanVien VALUES ('NV004','Ningguang','Nu',to_date('02/06/2000','dd/mm/yyyy'),'114477993','Trung Quoc','0123456789','CS002','Thanh tra',null,Null);
@@ -1387,7 +1390,22 @@ end;
 
 /
 
+DROP USER CSYT_TTQB CASCADE;/
+DROP USER CSYT_NCQB CASCADE;/
 
+CREATE USER CSYT_TTQB IDENTIFIED BY a;/
+CREATE USER CSYT_NCQB IDENTIFIED BY a;/
+
+GRANT CONNECT TO CSYT_TTQB;
+GRANT CONNECT TO CSYT_NCQB;
+
+GRANT CSYT_ROLE_THANHTRA TO CSYT_TTQB;
+GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NCQB;
+GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NV001;
+
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_TTQB;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_NCQB;
+/
 
 
 
