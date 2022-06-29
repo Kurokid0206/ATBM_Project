@@ -47,7 +47,10 @@ namespace qlCSYT
         }
         private void m_modifyNV_Click(object sender, EventArgs e)
         {
-
+            frm_modifyNV frm_modifyNV = new frm_modifyNV();
+            frm_modifyNV.Show();
+            this.Hide();
+            frm_modifyNV.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
     }
 }

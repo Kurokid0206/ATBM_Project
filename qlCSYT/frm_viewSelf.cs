@@ -35,7 +35,7 @@ namespace qlCSYT
                 frm_User_client frm_User_client = new frm_User_client();
                 frm_NhanVien_main.Closed += (s, args) => frm_User_client.Show();
             }
-            if (User.Roles.Contains("CSYT_ROLE_BENHNHAN"))
+            else if (User.Roles.Contains("CSYT_ROLE_BENHNHAN"))
             {
                 frm_BenhNhan_main frm_BenhNhan_main = new frm_BenhNhan_main();
                 frm_BenhNhan_main.Show();

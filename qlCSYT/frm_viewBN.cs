@@ -62,5 +62,13 @@ namespace qlCSYT
         {
 
         }
+        private void m_modifyBN_Click(object sender, EventArgs e)
+        {
+            frm_modifyBN frm1 = new frm_modifyBN();
+            this.Hide(); // hide when another is opened
+            frm1.Show(); //show next frm
+            frm_viewBN frm_viewBN = new frm_viewBN();
+            frm1.Closed += (s, args) => this.Show(); //when other is closed, reopend this
+        }
     }
 }

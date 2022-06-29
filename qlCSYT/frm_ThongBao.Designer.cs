@@ -36,16 +36,16 @@ namespace qlCSYT
             // gv_ThongBao
             // 
             this.gv_ThongBao.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gv_ThongBao.Location = new System.Drawing.Point(24, 85);
+            this.gv_ThongBao.Location = new System.Drawing.Point(2, 0);
             this.gv_ThongBao.Name = "gv_ThongBao";
-            this.gv_ThongBao.Size = new System.Drawing.Size(657, 264);
+            this.gv_ThongBao.Size = new System.Drawing.Size(542, 205);
             this.gv_ThongBao.TabIndex = 0;
             // 
             // frm_ThongBao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(545, 208);
             this.Controls.Add(this.gv_ThongBao);
             this.Name = "frm_ThongBao";
             this.Text = "frm_ThongBao";
