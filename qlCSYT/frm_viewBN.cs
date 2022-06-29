@@ -17,7 +17,7 @@ namespace qlCSYT
         public frm_viewBN()
         {
             InitializeComponent();
-            LoadSelfView();
+            LoadSelfViewBN();
         }
         private void btn_cancel_Click(object sender, EventArgs e)
         {
@@ -25,7 +25,7 @@ namespace qlCSYT
             if (result == DialogResult.OK) this.Close();
         }
 
-        private void LoadSelfView()
+        public void LoadSelfViewBN()
         {
             this.gv_viewSelf.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
@@ -64,11 +64,12 @@ namespace qlCSYT
         }
         private void m_modifyBN_Click(object sender, EventArgs e)
         {
-            frm_modifyBN frm1 = new frm_modifyBN();
+            frm_modifyBN frm_modifyBN = new frm_modifyBN();
             this.Hide(); // hide when another is opened
-            frm1.Show(); //show next frm
+            frm_modifyBN.Show(); //show next frm
             frm_viewBN frm_viewBN = new frm_viewBN();
-            frm1.Closed += (s, args) => this.Show(); //when other is closed, reopend this
+            frm_modifyBN.Closed += (s, args) => LoadSelfViewBN();
+            frm_modifyBN.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
     }
 }

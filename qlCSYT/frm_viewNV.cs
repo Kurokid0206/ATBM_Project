@@ -17,9 +17,9 @@ namespace qlCSYT
         public frm_viewNV()
         {
             InitializeComponent();
-            LoadSelfView();
+            LoadSelfViewNV();
         }
-        private void LoadSelfView()
+        public void LoadSelfViewNV()
         {
             this.gv_viewSelf.Columns.Clear();
             OracleConnection conn = DBUtils.GetDBConnection();
@@ -51,7 +51,8 @@ namespace qlCSYT
             frm_modifyNV.Show();
             this.Hide();
             frm_viewNV frm_viewNV = new frm_viewNV();
-            frm_modifyNV.Closed += (s, args) => frm_viewNV.Show(); //when other is closed, reopend this
+            frm_modifyNV.Closed += (s, args) => LoadSelfViewNV();
+            frm_modifyNV.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
     }
 }
