@@ -45,7 +45,7 @@
             this.gv_viewSelf.Name = "gv_viewSelf";
             this.gv_viewSelf.RowHeadersWidth = 51;
             this.gv_viewSelf.RowTemplate.Height = 24;
-            this.gv_viewSelf.Size = new System.Drawing.Size(1218, 58);
+            this.gv_viewSelf.Size = new System.Drawing.Size(1218, 181);
             this.gv_viewSelf.TabIndex = 3;
             // 
             // menuStrip1
@@ -70,7 +70,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1224, 101);
+            this.ClientSize = new System.Drawing.Size(1224, 244);
             this.Controls.Add(this.gv_viewSelf);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
