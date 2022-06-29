@@ -38,34 +38,39 @@ EXEC SA_COMPONENTS.CREATE_GROUP('ACCESS_THONGBAO',200,'CTT','CAN_TRUNG_TAM','TT'
 EXEC SA_COMPONENTS.CREATE_GROUP('ACCESS_THONGBAO',300,'NTH','NGOAI_THANH','TT');
 
 
---LV ONNLY
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 100,label_value => 'GDS:CS,NT,NGT:TT');
 
---EXEC SA_LABEL_ADMIN.DROP_LABEL(policy_name => 'ACCESS_THONGBAO',label_value => 'GDS');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 1,label_value => 'GDS');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 2,label_value => 'GDCS');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 3,label_value => 'YBS');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 200,label_value => 'GDCS:CS:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 210,label_value => 'GDCS:CS:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 220,label_value => 'GDCS:CS:NTH');
 
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 10,label_value => 'GDS:CS,NT,NGT:TT');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 20,label_value => 'GDCS:CS');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 25,label_value => 'GDCS:NT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 230,label_value => 'GDCS:NT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 240,label_value => 'GDCS:NT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 250,label_value => 'GDCS:NT:NTH');
 
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 30,label_value => 'YBS:CS');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 35,label_value => 'YBS:NT');
-EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 40,label_value => 'YBS:NGT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 260,label_value => 'GDCS:NGT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 270,label_value => 'GDCS:NGT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 280,label_value => 'GDCS:NGT:NTH');
 
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 300,label_value => 'YBS:CS:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 310,label_value => 'YBS:CS:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 320,label_value => 'YBS:CS:NTH');
 
---EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 140,label_value => 'YBS:CS:TT');
---EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 150,label_value => 'YBS:NT:TT');
---EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 160,label_value => 'YBS:NGT:NTH');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 330,label_value => 'YBS:NT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 340,label_value => 'YBS:NT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 350,label_value => 'YBS:NT:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 360,label_value => 'YBS:NGT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 370,label_value => 'YBS:NGT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 380,label_value => 'YBS:NGT:NTH');
 
 
 
 EXEC SA_POLICY_ADMIN.APPLY_TABLE_POLICY(policy_name=>'ACCESS_THONGBAO',schema_name => 'CSYT_ADMIN',table_name => 'THONGBAO',table_options=>'READ_CONTROL,WRITE_CONTROL');
 
 
-ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
 
-EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDS',max_read_label=>'GDS:NGT,NT,CS:TT',max_write_label=>'GDS:NGT,NT,CS:TT',def_label=>'GDS:NGT,NT,CS:TT');
-EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDCS',max_read_label=>'GDCS:CS',max_write_label=>'GDCS:CS',def_label=>'GDCS:CS');
-EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_YBS',max_read_label=>'YBS:CS',max_write_label=>'YBS:CS',def_label=>'YBS:CS');
-
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDS',max_read_label=>'GDS:CS,NT,NGT:TT',max_write_label=>'GDS:CS,NT,NGT:TT',def_label=>'GDS:CS,NT,NGT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDCS',max_read_label=>'GDCS:NT:TT',max_write_label=>'GDCS:NT:TT',def_label=>'GDCS:NT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_YBS',max_read_label=>'YBS:NT:TT',max_write_label=>'YBS:NT:TT',def_label=>'YBS:NT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_YBS_CTT',max_read_label=>'YBS:NGT:CTT',max_write_label=>'YBS:NGT:CTT',def_label=>'YBS:NGT:CTT');
