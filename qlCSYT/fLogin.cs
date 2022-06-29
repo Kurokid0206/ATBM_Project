@@ -56,32 +56,13 @@ namespace qlCSYT
                 //danh sách role ở dạng list: User.Roles
                 //xem là role nào thì show role đó ra
 
-                if (User.Roles.Contains("CSYT_ROLE_QUANLIDULIEU"))
-                {
-                    frm_QLDL_main frm_QLDL_Main = new frm_QLDL_main();
-                    frm_QLDL_Main.Show();
-                }
-                if (User.Roles.Contains("CSYT_ROLE_BACSI"))
-                {
-                    frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-                    frm_YsBs_main.Show();
-                }
-                if (User.Roles.Contains("CSYT_ROLE_THANHTRA"))
-                {
-                    frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
-                    frm_ThanhTra.Show();
-                }
-                if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
-                {
-                    frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
-                    frm_NghienCuu.Show();
-                }    
-                if (username == "ADMIN")
-                {
-                    this.Hide();
-                    fMain frm = new fMain();
-                    frm.Show();
-                }
+                frm_User_client frm_User_client = new frm_User_client();
+                frm_User_client.Show();
+                frm_User_client.Closed += (s, args) => {
+                    this.Show();
+                    this.Controls.Clear();
+                    this.InitializeComponent();
+                };
                 this.Hide();
             }
             catch (Exception err)
