@@ -8,8 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using qlCSYT.UserSpace;
-
-
+using Oracle.DataAccess.Client;
+using qlCSYT.SqlConn;
 namespace qlCSYT
 {
     public partial class frm_User_client : Form
@@ -103,8 +103,25 @@ namespace qlCSYT
 
         private void ThongTInCN_strip_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            frm_viewSelf frm_viewSelf = new frm_viewSelf();
+            User User = new User();
+            OracleConnection conn = DBUtils.GetDBConnection();
+            conn.Open();
+            User.getRoles();
+            if (User.Roles.Contains("CSYT_ROLE_NHANVIEN"))
+            {
+                this.Hide();
+                frm_viewNV frm_viewNV = new frm_viewNV();
+                frm_viewNV.Show();
+                frm_viewNV.Closed += (s, args) => this.Show();
+            }
+            else if (User.Roles.Contains("CSYT_ROLE_BENHNHAN"))
+            {
+                this.Hide();
+                frm_viewBN frm_viewBN = new frm_viewBN();
+                frm_viewBN.Show();
+                frm_viewBN.Closed += (s, args) => this.Show();
+            }
+
         }
     }
 }

@@ -63,7 +63,7 @@
             // tb_TenBN
             // 
             this.tb_TenBN.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TenBN.Location = new System.Drawing.Point(206, 9);
+            this.tb_TenBN.Location = new System.Drawing.Point(251, 8);
             this.tb_TenBN.Margin = new System.Windows.Forms.Padding(4);
             this.tb_TenBN.Name = "tb_TenBN";
             this.tb_TenBN.Size = new System.Drawing.Size(353, 31);
@@ -83,7 +83,7 @@
             // tb_CMND
             // 
             this.tb_CMND.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_CMND.Location = new System.Drawing.Point(206, 45);
+            this.tb_CMND.Location = new System.Drawing.Point(251, 44);
             this.tb_CMND.Margin = new System.Windows.Forms.Padding(4);
             this.tb_CMND.Name = "tb_CMND";
             this.tb_CMND.Size = new System.Drawing.Size(353, 31);
@@ -103,7 +103,7 @@
             // tb_SoNha
             // 
             this.tb_SoNha.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_SoNha.Location = new System.Drawing.Point(206, 124);
+            this.tb_SoNha.Location = new System.Drawing.Point(251, 123);
             this.tb_SoNha.Margin = new System.Windows.Forms.Padding(4);
             this.tb_SoNha.Name = "tb_SoNha";
             this.tb_SoNha.Size = new System.Drawing.Size(353, 31);
@@ -123,7 +123,7 @@
             // tb_TenDuong
             // 
             this.tb_TenDuong.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TenDuong.Location = new System.Drawing.Point(206, 161);
+            this.tb_TenDuong.Location = new System.Drawing.Point(251, 160);
             this.tb_TenDuong.Margin = new System.Windows.Forms.Padding(4);
             this.tb_TenDuong.Name = "tb_TenDuong";
             this.tb_TenDuong.Size = new System.Drawing.Size(353, 31);
@@ -143,7 +143,7 @@
             // tb_QuanHuyen
             // 
             this.tb_QuanHuyen.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_QuanHuyen.Location = new System.Drawing.Point(206, 197);
+            this.tb_QuanHuyen.Location = new System.Drawing.Point(251, 196);
             this.tb_QuanHuyen.Margin = new System.Windows.Forms.Padding(4);
             this.tb_QuanHuyen.Name = "tb_QuanHuyen";
             this.tb_QuanHuyen.Size = new System.Drawing.Size(353, 31);
@@ -163,7 +163,7 @@
             // tb_TinhTP
             // 
             this.tb_TinhTP.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TinhTP.Location = new System.Drawing.Point(206, 235);
+            this.tb_TinhTP.Location = new System.Drawing.Point(251, 234);
             this.tb_TinhTP.Margin = new System.Windows.Forms.Padding(4);
             this.tb_TinhTP.Name = "tb_TinhTP";
             this.tb_TinhTP.Size = new System.Drawing.Size(353, 31);
@@ -183,7 +183,7 @@
             // tb_tiensubenh
             // 
             this.tb_tiensubenh.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_tiensubenh.Location = new System.Drawing.Point(206, 272);
+            this.tb_tiensubenh.Location = new System.Drawing.Point(251, 271);
             this.tb_tiensubenh.Margin = new System.Windows.Forms.Padding(4);
             this.tb_tiensubenh.Name = "tb_tiensubenh";
             this.tb_tiensubenh.Size = new System.Drawing.Size(353, 31);
@@ -203,7 +203,7 @@
             // tb_tiensubenhgd
             // 
             this.tb_tiensubenhgd.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_tiensubenhgd.Location = new System.Drawing.Point(206, 309);
+            this.tb_tiensubenhgd.Location = new System.Drawing.Point(251, 308);
             this.tb_tiensubenhgd.Margin = new System.Windows.Forms.Padding(4);
             this.tb_tiensubenhgd.Name = "tb_tiensubenhgd";
             this.tb_tiensubenhgd.Size = new System.Drawing.Size(353, 31);
@@ -223,7 +223,7 @@
             // tb_diungthuoc
             // 
             this.tb_diungthuoc.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_diungthuoc.Location = new System.Drawing.Point(206, 347);
+            this.tb_diungthuoc.Location = new System.Drawing.Point(251, 346);
             this.tb_diungthuoc.Margin = new System.Windows.Forms.Padding(4);
             this.tb_diungthuoc.Name = "tb_diungthuoc";
             this.tb_diungthuoc.Size = new System.Drawing.Size(353, 31);
@@ -242,7 +242,7 @@
             // 
             // bt_TenBN
             // 
-            this.bt_TenBN.Location = new System.Drawing.Point(566, 9);
+            this.bt_TenBN.Location = new System.Drawing.Point(611, 8);
             this.bt_TenBN.Name = "bt_TenBN";
             this.bt_TenBN.Size = new System.Drawing.Size(75, 31);
             this.bt_TenBN.TabIndex = 21;
@@ -252,7 +252,7 @@
             // 
             // bt_CMND
             // 
-            this.bt_CMND.Location = new System.Drawing.Point(566, 45);
+            this.bt_CMND.Location = new System.Drawing.Point(611, 44);
             this.bt_CMND.Name = "bt_CMND";
             this.bt_CMND.Size = new System.Drawing.Size(75, 31);
             this.bt_CMND.TabIndex = 22;
@@ -262,7 +262,7 @@
             // 
             // bt_QuanHuyen
             // 
-            this.bt_QuanHuyen.Location = new System.Drawing.Point(566, 199);
+            this.bt_QuanHuyen.Location = new System.Drawing.Point(611, 198);
             this.bt_QuanHuyen.Name = "bt_QuanHuyen";
             this.bt_QuanHuyen.Size = new System.Drawing.Size(75, 31);
             this.bt_QuanHuyen.TabIndex = 23;
@@ -272,7 +272,7 @@
             // 
             // bt_TenDuong
             // 
-            this.bt_TenDuong.Location = new System.Drawing.Point(566, 159);
+            this.bt_TenDuong.Location = new System.Drawing.Point(611, 158);
             this.bt_TenDuong.Name = "bt_TenDuong";
             this.bt_TenDuong.Size = new System.Drawing.Size(75, 31);
             this.bt_TenDuong.TabIndex = 26;
@@ -282,7 +282,7 @@
             // 
             // bt_SoNha
             // 
-            this.bt_SoNha.Location = new System.Drawing.Point(566, 123);
+            this.bt_SoNha.Location = new System.Drawing.Point(611, 122);
             this.bt_SoNha.Name = "bt_SoNha";
             this.bt_SoNha.Size = new System.Drawing.Size(75, 31);
             this.bt_SoNha.TabIndex = 25;
@@ -292,7 +292,7 @@
             // 
             // bt_tiensubenh
             // 
-            this.bt_tiensubenh.Location = new System.Drawing.Point(566, 274);
+            this.bt_tiensubenh.Location = new System.Drawing.Point(611, 273);
             this.bt_tiensubenh.Name = "bt_tiensubenh";
             this.bt_tiensubenh.Size = new System.Drawing.Size(75, 31);
             this.bt_tiensubenh.TabIndex = 28;
@@ -302,7 +302,7 @@
             // 
             // bt_TinhTP
             // 
-            this.bt_TinhTP.Location = new System.Drawing.Point(566, 238);
+            this.bt_TinhTP.Location = new System.Drawing.Point(611, 237);
             this.bt_TinhTP.Name = "bt_TinhTP";
             this.bt_TinhTP.Size = new System.Drawing.Size(75, 31);
             this.bt_TinhTP.TabIndex = 27;
@@ -312,7 +312,7 @@
             // 
             // bt_diungthuoc
             // 
-            this.bt_diungthuoc.Location = new System.Drawing.Point(566, 346);
+            this.bt_diungthuoc.Location = new System.Drawing.Point(611, 345);
             this.bt_diungthuoc.Name = "bt_diungthuoc";
             this.bt_diungthuoc.Size = new System.Drawing.Size(75, 31);
             this.bt_diungthuoc.TabIndex = 30;
@@ -322,7 +322,7 @@
             // 
             // bt_tiensubenhgd
             // 
-            this.bt_tiensubenhgd.Location = new System.Drawing.Point(566, 310);
+            this.bt_tiensubenhgd.Location = new System.Drawing.Point(611, 309);
             this.bt_tiensubenhgd.Name = "bt_tiensubenhgd";
             this.bt_tiensubenhgd.Size = new System.Drawing.Size(75, 31);
             this.bt_tiensubenhgd.TabIndex = 29;
@@ -333,7 +333,7 @@
             // tb_ngaysinh
             // 
             this.tb_ngaysinh.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_ngaysinh.Location = new System.Drawing.Point(206, 84);
+            this.tb_ngaysinh.Location = new System.Drawing.Point(251, 83);
             this.tb_ngaysinh.Margin = new System.Windows.Forms.Padding(4);
             this.tb_ngaysinh.Name = "tb_ngaysinh";
             this.tb_ngaysinh.Size = new System.Drawing.Size(353, 31);
@@ -352,7 +352,7 @@
             // 
             // bt_ngaysinh
             // 
-            this.bt_ngaysinh.Location = new System.Drawing.Point(566, 84);
+            this.bt_ngaysinh.Location = new System.Drawing.Point(611, 83);
             this.bt_ngaysinh.Name = "bt_ngaysinh";
             this.bt_ngaysinh.Size = new System.Drawing.Size(75, 31);
             this.bt_ngaysinh.TabIndex = 38;
@@ -396,7 +396,7 @@
             this.Controls.Add(this.tb_TenBN);
             this.Controls.Add(this.lb_TenBN);
             this.Name = "frm_modifyBN";
-            this.Text = "Chỉnh sửa thông tin bệnh nhân";
+            this.Text = "Chỉnh sửa thông tin cá nhân";
             this.Load += new System.EventHandler(this.frm_modifyBN_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -44,5 +44,14 @@ namespace qlCSYT
                 conn.Close();
             }
         }
+
+        private void m_modifyNV_Click(object sender, EventArgs e)
+        {
+            frm_modifyNV frm_modifyNV = new frm_modifyNV();
+            frm_modifyNV.Show();
+            this.Hide();
+            frm_viewNV frm_viewNV = new frm_viewNV();
+            frm_modifyNV.Closed += (s, args) => frm_viewNV.Show(); //when other is closed, reopend this
+        }
     }
 }
