@@ -72,19 +72,17 @@ namespace qlCSYT
                     frm_ThanhTra.Show();
                 }
                 if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
-                    //Chuyen form
-                    if (username == "ADMIN")
+                {
+                    frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
+                    frm_NghienCuu.Show();
+                }    
+                if (username == "ADMIN")
                 {
                     this.Hide();
                     fMain frm = new fMain();
                     frm.Show();
                 }
                 this.Hide();
-                /*frm_ThanhTra fMain = new frm_ThanhTra();
-                fMain.Show();
-                frmFGA audit = new frmFGA();
-                audit.Show();
-                */
             }
             catch (Exception err)
             {
