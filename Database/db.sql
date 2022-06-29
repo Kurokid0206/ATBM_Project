@@ -1,4 +1,4 @@
-ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+aALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
 DROP USER CSYT_Admin CASCADE;
 
 --DROP TABLE CSYT_Admin.HSBA     CASCADE CONSTRAINTS;
@@ -510,83 +510,7 @@ DROP ROLE CSYT_ROLE_NGHIENCUU;
 DROP ROLE CSYT_ROLE_NHANVIEN;
 DROP ROLE CSYT_ROLE_BENHNHAN;
 /
---cau 1
 
---Xoa tai khoan cua toan bo nhan vien va benh nhan
-declare
-cur SYS_refcursor;
-manv dba_users.username%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select username from dba_users where username like 'CSYT_%' and username != 'CSYT_ADMIN';
-    loop
-    
-        fetch cur into manv;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'drop user ' || trim(manv) || ' Cascade';
-        EXECUTE IMMEDIATE ( lv_stmt );
-
-    end loop;
-    close cur;
-end;
-        
-/
---Them tai khoan cho toan bo nhan vien
-
-declare
-cur SYS_refcursor;
-manv csyt_admin.nhanvien.manv%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select csyt_admin.nhanvien.manv from CSYT_Admin.NhanVien where Username is null;
-    loop
-    
-        fetch cur into manv;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'CREATE USER CSYT_' || trim(manv) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
-
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(manv);
-        
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_' || trim(manv);
-
-        EXECUTE IMMEDIATE ( lv_stmt );
-        lv_stmt := 'update CSYT_Admin.NhanVien set Username = ''CSYT_'||trim(manv)||''' where MaNV = '''||trim(manv)||'''';
-        --DBMS_OUTPUT.put_line(lv_stmt);
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-
-    end loop;
-    close cur;
-end;
-/
---them tai khoan cho toan bo benh nhan
-declare
-cur SYS_refcursor;
-mabn csyt_admin.BenhNhan.MaBN%type;
-lv_stmt   VARCHAR2 (1000);
-begin
-    
-    open cur for select csyt_admin.BenhNhan.mabn from CSYT_Admin.BenhNhan where Username is null;
-    loop
-    
-        fetch cur into mabn;
-        exit when cur%NOTFOUND;
-        lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
-
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
-        --DBMS_OUTPUT.put_line(lv_stmt);
-        EXECUTE IMMEDIATE ( lv_stmt ); 
-
-    end loop;
-    close cur;
-end;
-
-
-/
 
 /
 ------------------------------
@@ -638,6 +562,12 @@ MaHSBA  CHAR(10);
 user_CSYT char(10);
 
 Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
     select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
     where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user;
     MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
@@ -650,21 +580,32 @@ Begin
     CSYT_Admin.QLDL_Insert_HSBA.MaKHOA  , 
     user_CSYT  ,
     CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
+    
+    
+    --end;
+    --end if;
     commit;
 end;
 
 /
 
+
 create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
-   MaHSBA      CHAR, 
-    MaDV        CHAR, 
-    Ngay        DATE, 
-    MaKTV       CHAR, 
-    KetQua      NVARCHAR2)
+   MaHSBA   in   CHAR, 
+    MaDV    in    CHAR, 
+    Ngay    in    DATE, 
+    MaKTV   in    CHAR, 
+    KetQua  in    NVARCHAR2)
 is
 user_MaHSBA char(10);
 
 Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
     SELECT CSYT_Admin.HSBA.MaHSBA into user_MaHSBA FROM CSYT_Admin.HSBA, CSYT_Admin.NhanVien
                                     WHERE CSYT_Admin.HSBA.MaCSYT =  CSYT_Admin.NhanVien.CSYT
                                     and 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user 
@@ -680,28 +621,54 @@ Begin
     CSYT_Admin.QLDL_Insert_HSBA_DV.KetQua );
     end if;
     commit;
+    
+     --end;
+    --end if;
 end;
 /
 create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA(
-MAHSBA char)
+MAHSBA in char)
 as
 lv_stmt   VARCHAR2 (1000);
 begin
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||'''';
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||'''';
     EXECUTE IMMEDIATE ( lv_stmt ); 
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA where MaHSBA = '''|| trim(MAHSBA)||'''';
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA where MaHSBA = '''|| trim(MAHSBA)||'''';
     EXECUTE IMMEDIATE ( lv_stmt );
+    
+    
+     --end;
+    --end if;
+    commit;
 end;
 /
+
 create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA_DV(
-MAHSBA char,
-MADV char)
+MAHSBA in char,
+MADV in char)
 as
 lv_stmt   VARCHAR2 (1000);
 begin
-    lv_stmt := 'Delete CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||''''
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||''''
     ||' and MaDV = '''||trim(MADV)||'''';
     EXECUTE IMMEDIATE ( lv_stmt ); 
+    
+    --end;
+    --end if;
+    commit;
 end;
 
 
@@ -723,11 +690,19 @@ as SELECT * FROM CSYT_ADMIN.HSBA
 WHERE CSYT_ADMIN.HSBA.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
                                 WHERE 'CSYT_'||MaBS = user);
 /
-
 CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_HSBA_DV
 as SELECT * FROM CSYT_ADMIN.HSBA_DV
 WHERE CSYT_ADMIN.HSBA_DV.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
                                 WHERE 'CSYT_'||MaBS = user);
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_BENHNHAN
+as select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan
 /
 CREATE OR REPLACE PROCEDURE CSYT_ADMIN.BACSI_SELECT_BENHNHAN(
 MABN IN CHAR DEFAULT NULL,
@@ -736,13 +711,14 @@ BENHNHAN OUT SYS_REFCURSOR)
 AS 
 BEGIN
     OPEN CSYT_ADMIN.BACSI_SELECT_BENHNHAN.BENHNHAN FOR 
-    SELECT * FROM CSYT_ADMIN.BENHNHAN
+    SELECT * FROM CSYT_ADMIN.VIEW_BACSI_BENHNHAN
     WHERE MABN = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.MABN 
     OR CMND = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.CMND;
 END;
 /
 GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA TO CSYT_ROLE_BACSI;
 GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA_DV TO CSYT_ROLE_BACSI;
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_BENHNHAN TO CSYT_ROLE_BACSI;
 GRANT EXECUTE ON CSYT_ADMIN.BACSI_SELECT_BENHNHAN TO CSYT_ROLE_BACSI;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BACSI;
 /
@@ -923,7 +899,7 @@ CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
 CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
 CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
 CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
-tiensubenh,tiensubenhgd,diungthuoc
+NgaySinh,tiensubenh,tiensubenhgd,diungthuoc
 FROM CSYT_Admin.BenhNhan
 WHERE 'CSYT_'||MaBN = user
 /
@@ -953,8 +929,7 @@ GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
 
 
 
-ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
-/
+
 
 --SELECT * FROM DBA_COL_PRIVS where grantee like 'CSYT_MEANSUN';
 --SELECT * FROM DBA_TAB_PRIVS where grantee like 'CSYT_MEANSUN';
@@ -1010,3 +985,88 @@ INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV001',to_date('15/07/2022','dd/
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV002',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS005','DV001',to_date('02/08/2022','dd/mm/yyyy'),'NV009','Co benh');
 INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS006','DV001',to_date('08/03/2022','dd/mm/yyyy'),'NV009','Co benh');
+
+--cau 1
+
+--Xoa tai khoan cua toan bo nhan vien va benh nhan
+declare
+cur SYS_refcursor;
+manv dba_users.username%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select username from dba_users where username like 'CSYT_%' and username != 'CSYT_ADMIN';
+    loop
+    
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'drop user ' || trim(manv) || ' Cascade';
+        EXECUTE IMMEDIATE ( lv_stmt );
+
+    end loop;
+    close cur;
+end;
+        
+/
+--Them tai khoan cho toan bo nhan vien
+
+declare
+cur SYS_refcursor;
+manv csyt_admin.nhanvien.manv%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select csyt_admin.nhanvien.manv from CSYT_Admin.NhanVien where Username is null;
+    loop
+    
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(manv) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(manv);
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_' || trim(manv);
+
+        EXECUTE IMMEDIATE ( lv_stmt );
+        lv_stmt := 'update CSYT_Admin.NhanVien set Username = ''CSYT_'||trim(manv)||''' where MaNV = '''||trim(manv)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+
+    end loop;
+    close cur;
+end;
+/
+--them tai khoan cho toan bo benh nhan
+declare
+cur SYS_refcursor;
+mabn csyt_admin.BenhNhan.MaBN%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select csyt_admin.BenhNhan.mabn from CSYT_Admin.BenhNhan where Username is null;
+    loop
+    
+        fetch cur into mabn;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+
+    end loop;
+    close cur;
+end;
+
+
+/
+
+
+
+
+
+ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
+/

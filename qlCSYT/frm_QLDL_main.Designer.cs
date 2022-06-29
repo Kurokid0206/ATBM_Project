@@ -44,8 +44,8 @@ namespace qlCSYT
             this.add_HSBA_btn = new System.Windows.Forms.Button();
             this.MaBS_input = new System.Windows.Forms.TextBox();
             this.MaBN_input = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Khoa_select = new System.Windows.Forms.Label();
+            this.MaBS_lable = new System.Windows.Forms.Label();
+            this.Khoa_input_lable = new System.Windows.Forms.Label();
             this.ChanDoan_lable = new System.Windows.Forms.Label();
             this.ChanDoan_input = new System.Windows.Forms.TextBox();
             this.NgayLap_input = new System.Windows.Forms.DateTimePicker();
@@ -104,12 +104,14 @@ namespace qlCSYT
             this.add_HSBADV_strip.Name = "add_HSBADV_strip";
             this.add_HSBADV_strip.Size = new System.Drawing.Size(206, 27);
             this.add_HSBADV_strip.Text = "Thêm dịch vụ vào HSBA";
+            this.add_HSBADV_strip.Click += new System.EventHandler(this.add_HSBADV_strip_Click);
             // 
             // del_HSBADV_strip
             // 
             this.del_HSBADV_strip.Name = "del_HSBADV_strip";
             this.del_HSBADV_strip.Size = new System.Drawing.Size(181, 27);
             this.del_HSBADV_strip.Text = "Xóa dịch vụ từ HSBA";
+            this.del_HSBADV_strip.Click += new System.EventHandler(this.del_HSBADV_strip_Click);
             // 
             // add_HSBA_group
             // 
@@ -119,8 +121,8 @@ namespace qlCSYT
             this.add_HSBA_group.Controls.Add(this.add_HSBA_btn);
             this.add_HSBA_group.Controls.Add(this.MaBS_input);
             this.add_HSBA_group.Controls.Add(this.MaBN_input);
-            this.add_HSBA_group.Controls.Add(this.label1);
-            this.add_HSBA_group.Controls.Add(this.Khoa_select);
+            this.add_HSBA_group.Controls.Add(this.MaBS_lable);
+            this.add_HSBA_group.Controls.Add(this.Khoa_input_lable);
             this.add_HSBA_group.Controls.Add(this.ChanDoan_lable);
             this.add_HSBA_group.Controls.Add(this.ChanDoan_input);
             this.add_HSBA_group.Controls.Add(this.NgayLap_input);
@@ -183,23 +185,23 @@ namespace qlCSYT
             this.MaBN_input.Size = new System.Drawing.Size(290, 30);
             this.MaBN_input.TabIndex = 12;
             // 
-            // label1
+            // MaBS_lable
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(371, 127);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 25);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Mã bác sĩ:";
+            this.MaBS_lable.AutoSize = true;
+            this.MaBS_lable.Location = new System.Drawing.Point(371, 127);
+            this.MaBS_lable.Name = "MaBS_lable";
+            this.MaBS_lable.Size = new System.Drawing.Size(102, 25);
+            this.MaBS_lable.TabIndex = 9;
+            this.MaBS_lable.Text = "Mã bác sĩ:";
             // 
-            // Khoa_select
+            // Khoa_input_lable
             // 
-            this.Khoa_select.AutoSize = true;
-            this.Khoa_select.Location = new System.Drawing.Point(26, 127);
-            this.Khoa_select.Name = "Khoa_select";
-            this.Khoa_select.Size = new System.Drawing.Size(94, 25);
-            this.Khoa_select.TabIndex = 7;
-            this.Khoa_select.Text = "Mã khoa:";
+            this.Khoa_input_lable.AutoSize = true;
+            this.Khoa_input_lable.Location = new System.Drawing.Point(26, 127);
+            this.Khoa_input_lable.Name = "Khoa_input_lable";
+            this.Khoa_input_lable.Size = new System.Drawing.Size(94, 25);
+            this.Khoa_input_lable.TabIndex = 7;
+            this.Khoa_input_lable.Text = "Mã khoa:";
             // 
             // ChanDoan_lable
             // 
@@ -277,9 +279,9 @@ namespace qlCSYT
         private System.Windows.Forms.Label ChanDoan_lable;
         private System.Windows.Forms.TextBox ChanDoan_input;
         private System.Windows.Forms.DateTimePicker NgayLap_input;
-        private System.Windows.Forms.Label Khoa_select;
+        private System.Windows.Forms.Label Khoa_input_lable;
         private System.Windows.Forms.Button add_HSBA_btn;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label MaBS_lable;
         private System.Windows.Forms.TextBox MaKhoa_input;
         private System.Windows.Forms.TextBox MaBS_input;
         private System.Windows.Forms.TextBox MaBN_input;

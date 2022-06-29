@@ -37,7 +37,7 @@ namespace qlCSYT
 
                 OracleDataAdapter da = new OracleDataAdapter(cmd);
                 cmd.ExecuteNonQuery();
-
+                MessageBox.Show("Thêm thành công!", "Thông báo!");
 
             }
             catch (Exception err)
@@ -67,6 +67,23 @@ namespace qlCSYT
             frm_del_hsba.Closed += (s, args) => this.Show();
 
             //
+        }
+
+        private void add_HSBADV_strip_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frm_QLDL_add_HSBA_DV frm_QLDL_add_HSBA_DV = new frm_QLDL_add_HSBA_DV();
+            frm_QLDL_add_HSBA_DV.Show();
+            frm_QLDL_add_HSBA_DV.Closed += (s, args) => this.Show();
+        }
+
+        private void del_HSBADV_strip_Click(object sender, EventArgs e)
+        {
+            
+            this.Hide();
+            frm_QLDL_del_HSBA_DV frm_QLDL_del_HSBA_DV = new frm_QLDL_del_HSBA_DV();
+            frm_QLDL_del_HSBA_DV.Show();
+            frm_QLDL_del_HSBA_DV.Closed += (s, args) => this.Show();
         }
     }
 }

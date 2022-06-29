@@ -39,6 +39,8 @@ namespace qlCSYT
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 gv_viewSelf.DataSource = dt;
+                gv_viewSelf.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                gv_viewSelf.AutoResizeColumns();
             }
             catch (Exception err)
             {
@@ -52,6 +54,11 @@ namespace qlCSYT
         }
 
         private void lb_csytID_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gv_viewSelf_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
