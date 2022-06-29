@@ -70,10 +70,11 @@ namespace qlCSYT
 
         private void BacSi_strip_Click(object sender, EventArgs e)
         {
+            //template for view HSBA thing (Y si, Bac Si)
+            frm_YsBs_viewHSBA f = new frm_YsBs_viewHSBA();
+            f.Show();
             this.Hide();
-            frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-            frm_YsBs_main.Show();
-            frm_YsBs_main.Closed += (s, args) => this.Show();
+            f.Closed += (s, args) => this.Show(); //when other is closed, reopend this
         }
 
         private void QLDL_strip_Click(object sender, EventArgs e)

@@ -77,22 +77,22 @@
             // lbCMND
             // 
             this.lbCMND.AutoSize = true;
-            this.lbCMND.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCMND.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCMND.Location = new System.Drawing.Point(1, 36);
             this.lbCMND.Name = "lbCMND";
-            this.lbCMND.Size = new System.Drawing.Size(66, 23);
+            this.lbCMND.Size = new System.Drawing.Size(69, 23);
             this.lbCMND.TabIndex = 7;
-            this.lbCMND.Text = "CMND";
+            this.lbCMND.Text = "CMND:";
             // 
             // lbMaBN
             // 
             this.lbMaBN.AutoSize = true;
-            this.lbMaBN.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMaBN.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbMaBN.Location = new System.Drawing.Point(1, 3);
             this.lbMaBN.Name = "lbMaBN";
-            this.lbMaBN.Size = new System.Drawing.Size(140, 23);
+            this.lbMaBN.Size = new System.Drawing.Size(135, 23);
             this.lbMaBN.TabIndex = 6;
-            this.lbMaBN.Text = "Mã bệnh nhân";
+            this.lbMaBN.Text = "Mã bệnh nhân:";
             // 
             // gv_viewPatient
             // 

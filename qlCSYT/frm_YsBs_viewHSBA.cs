@@ -90,5 +90,14 @@ namespace qlCSYT
             }
 
         }
+
+        private void m_viewPatient_Click(object sender, EventArgs e)
+        {
+            //template for view Patient thing (Y si, Bac Si)
+            frm_YsBs_viewPatient f = new frm_YsBs_viewPatient();
+            f.Show();
+            this.Hide();
+            f.Closed += (s, args) => this.Show(); //when other is closed, reopend this
+        }
     }
 }
