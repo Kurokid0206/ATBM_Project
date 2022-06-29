@@ -1052,7 +1052,7 @@ begin
         lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
         
         EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT CSYT_ROLE_BENHNHAN TO CSYT_' || trim(manv);
+        lv_stmt := 'GRANT CSYT_ROLE_BENHNHAN TO CSYT_' || trim(mabn);
 
         EXECUTE IMMEDIATE ( lv_stmt ); 
         lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
