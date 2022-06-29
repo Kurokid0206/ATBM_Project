@@ -32,9 +32,6 @@
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.m_viewNV = new System.Windows.Forms.ToolStripMenuItem();
             this.m_modifyNV = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_YsBs = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_Nc = new System.Windows.Forms.ToolStripMenuItem();
-            this.m_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,10 +49,7 @@
             this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.m_viewNV,
-            this.m_modifyNV,
-            this.m_YsBs,
-            this.m_Nc,
-            this.m_logout});
+            this.m_modifyNV});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
             this.menuStrip2.Size = new System.Drawing.Size(800, 28);
@@ -75,27 +69,6 @@
             this.m_modifyNV.Size = new System.Drawing.Size(112, 24);
             this.m_modifyNV.Text = "Sửa thông tin";
             this.m_modifyNV.Click += new System.EventHandler(this.m_modifyNV_Click);
-            // 
-            // m_YsBs
-            // 
-            this.m_YsBs.Name = "m_YsBs";
-            this.m_YsBs.Size = new System.Drawing.Size(61, 24);
-            this.m_YsBs.Text = "Bác sĩ";
-            this.m_YsBs.Click += new System.EventHandler(this.m_YsBs_Click);
-            // 
-            // m_Nc
-            // 
-            this.m_Nc.Name = "m_Nc";
-            this.m_Nc.Size = new System.Drawing.Size(99, 24);
-            this.m_Nc.Text = "Nghiên cứu";
-            this.m_Nc.Click += new System.EventHandler(this.m_Nc_Click);
-            // 
-            // m_logout
-            // 
-            this.m_logout.Name = "m_logout";
-            this.m_logout.Size = new System.Drawing.Size(91, 24);
-            this.m_logout.Text = "Đăng xuất";
-            this.m_logout.Click += new System.EventHandler(this.m_logout_Click);
             // 
             // frm_NhanVien_main
             // 
@@ -120,8 +93,5 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem m_viewNV;
         private System.Windows.Forms.ToolStripMenuItem m_modifyNV;
-        private System.Windows.Forms.ToolStripMenuItem m_YsBs;
-        private System.Windows.Forms.ToolStripMenuItem m_Nc;
-        private System.Windows.Forms.ToolStripMenuItem m_logout;
     }
 }

@@ -49,36 +49,5 @@ namespace qlCSYT
         {
 
         }
-
-        private void m_YsBs_Click(object sender, EventArgs e)
-        {
-            if (User.Roles.Contains("CSYT_ROLE_BACSI"))
-            {
-                frm_YsBs_main frm_YsBs_main = new frm_YsBs_main();
-                frm_YsBs_main.Show();
-                this.Hide();
-                frm_YsBs_main.Closed += (s, args) => this.Show(); //when other is closed, reopend this
-            }
-
-        }
-
-        private void m_Nc_Click(object sender, EventArgs e)
-        {
-            if (User.Roles.Contains("CSYT_ROLE_NGHIENCUU"))
-            {
-                frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
-                frm_NghienCuu.Show();
-                this.Hide();
-                frm_NghienCuu.Closed += (s, args) => this.Show(); //when other is closed, reopend this
-
-            }    
-        }
-
-        private void m_logout_Click(object sender, EventArgs e)
-        {
-            fLogin f = new fLogin();
-            f.Show();
-            this.Close();
-        }
     }
 }

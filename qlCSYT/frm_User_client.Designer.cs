@@ -37,8 +37,8 @@ namespace qlCSYT
             this.QLDL_strip = new System.Windows.Forms.ToolStripMenuItem();
             this.NghienCuu_strip = new System.Windows.Forms.ToolStripMenuItem();
             this.Admin_strip = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.logout_strip = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -65,6 +65,7 @@ namespace qlCSYT
             this.ThongTInCN_strip.Name = "ThongTInCN_strip";
             this.ThongTInCN_strip.Size = new System.Drawing.Size(182, 32);
             this.ThongTInCN_strip.Text = "Thông tin cá nhân";
+            this.ThongTInCN_strip.Click += new System.EventHandler(this.ThongTInCN_strip_Click);
             // 
             // ThanhTra_strip
             // 
@@ -101,18 +102,18 @@ namespace qlCSYT
             this.Admin_strip.Text = "Admin";
             this.Admin_strip.Click += new System.EventHandler(this.Admin_strip_Click);
             // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            // 
             // logout_strip
             // 
             this.logout_strip.Name = "logout_strip";
             this.logout_strip.Size = new System.Drawing.Size(115, 32);
             this.logout_strip.Text = "Đăng xuất";
             this.logout_strip.Click += new System.EventHandler(this.đăngXuấtToolStripMenuItem_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // frm_User_client
             // 

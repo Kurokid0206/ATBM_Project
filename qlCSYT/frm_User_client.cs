@@ -21,6 +21,8 @@ namespace qlCSYT
 
         private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            fLogin f = new fLogin();
+            f.Show();
             this.Close();
         }
 
@@ -30,8 +32,6 @@ namespace qlCSYT
             frm_ThanhTra frm_ThanhTra = new frm_ThanhTra();
             frm_ThanhTra.Show();
             frm_ThanhTra.Closed += (s, args) => this.Show();
-
-
         }
 
         private void frm_User_client_Load(object sender, EventArgs e)
@@ -87,7 +87,10 @@ namespace qlCSYT
 
         private void NghienCuu_strip_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            frm_NghienCuu frm_NghienCuu = new frm_NghienCuu();
+            frm_NghienCuu.Show();
+            frm_NghienCuu.Closed += (s, args) => this.Show();
         }
 
         private void Admin_strip_Click(object sender, EventArgs e)
@@ -96,6 +99,12 @@ namespace qlCSYT
             fMain frm = new fMain();
             frm.Show();
             frm.Closed += (s, args) => this.Show();
+        }
+
+        private void ThongTInCN_strip_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frm_viewSelf frm_viewSelf = new frm_viewSelf();
         }
     }
 }
