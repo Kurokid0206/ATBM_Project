@@ -32,7 +32,6 @@
             this.menuNghienCuu = new System.Windows.Forms.MenuStrip();
             this.menu_xemHSBA = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_xemHSBADV = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_NghienCuu = new System.Windows.Forms.DataGridView();
             this.menuNghienCuu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_NghienCuu)).BeginInit();
@@ -43,8 +42,7 @@
             this.menuNghienCuu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuNghienCuu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menu_xemHSBA,
-            this.menu_xemHSBADV,
-            this.menu_logout});
+            this.menu_xemHSBADV});
             this.menuNghienCuu.Location = new System.Drawing.Point(0, 0);
             this.menuNghienCuu.Name = "menuNghienCuu";
             this.menuNghienCuu.Size = new System.Drawing.Size(1077, 28);
@@ -64,13 +62,6 @@
             this.menu_xemHSBADV.Size = new System.Drawing.Size(87, 24);
             this.menu_xemHSBADV.Text = "HSBA_DV";
             this.menu_xemHSBADV.Click += new System.EventHandler(this.menu_xemHSBADV_Click);
-            // 
-            // menu_logout
-            // 
-            this.menu_logout.Name = "menu_logout";
-            this.menu_logout.Size = new System.Drawing.Size(91, 24);
-            this.menu_logout.Text = "Đăng xuất";
-            this.menu_logout.Click += new System.EventHandler(this.menu_logout_Click);
             // 
             // gv_NghienCuu
             // 
@@ -111,6 +102,5 @@
         private System.Windows.Forms.ToolStripMenuItem menu_xemHSBA;
         private System.Windows.Forms.ToolStripMenuItem menu_xemHSBADV;
         private System.Windows.Forms.DataGridView gv_NghienCuu;
-        private System.Windows.Forms.ToolStripMenuItem menu_logout;
     }
 }

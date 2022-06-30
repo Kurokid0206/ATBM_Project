@@ -35,7 +35,6 @@
             this.menu_xemBenhNhan = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_xemCSYT = new System.Windows.Forms.ToolStripMenuItem();
             this.menu_xemNhanVien = new System.Windows.Forms.ToolStripMenuItem();
-            this.menu_logout = new System.Windows.Forms.ToolStripMenuItem();
             this.gv_ThanhTra = new System.Windows.Forms.DataGridView();
             this.menuThanhTra.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gv_ThanhTra)).BeginInit();
@@ -49,8 +48,7 @@
             this.menu_xemHSBA_DV,
             this.menu_xemBenhNhan,
             this.menu_xemCSYT,
-            this.menu_xemNhanVien,
-            this.menu_logout});
+            this.menu_xemNhanVien});
             this.menuThanhTra.Location = new System.Drawing.Point(0, 0);
             this.menuThanhTra.Name = "menuThanhTra";
             this.menuThanhTra.Size = new System.Drawing.Size(1014, 28);
@@ -91,13 +89,6 @@
             this.menu_xemNhanVien.Size = new System.Drawing.Size(87, 24);
             this.menu_xemNhanVien.Text = "NhanVien";
             this.menu_xemNhanVien.Click += new System.EventHandler(this.menu_xemNhanVien_Click);
-            // 
-            // menu_logout
-            // 
-            this.menu_logout.Name = "menu_logout";
-            this.menu_logout.Size = new System.Drawing.Size(91, 24);
-            this.menu_logout.Text = "Đăng xuất";
-            this.menu_logout.Click += new System.EventHandler(this.menu_logout_Click);
             // 
             // gv_ThanhTra
             // 
@@ -140,7 +131,6 @@
         private System.Windows.Forms.ToolStripMenuItem menu_xemBenhNhan;
         private System.Windows.Forms.ToolStripMenuItem menu_xemCSYT;
         private System.Windows.Forms.ToolStripMenuItem menu_xemNhanVien;
-        private System.Windows.Forms.ToolStripMenuItem menu_logout;
         private System.Windows.Forms.DataGridView gv_ThanhTra;
     }
 }
