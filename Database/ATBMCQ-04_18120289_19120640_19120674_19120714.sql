@@ -1,0 +1,1494 @@
+ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+DROP USER CSYT_Admin CASCADE;
+
+CREATE USER CSYT_Admin IDENTIFIED BY a;
+
+
+--Grant Privileges
+GRANT CONNECT TO CSYT_Admin;
+GRANT CONNECT TO CSYT_Admin WITH ADMIN OPTION;
+GRANT UNLIMITED TABLESPACE TO CSYT_Admin;
+GRANT CREATE USER TO CSYT_Admin CONTAINER=CURRENT;
+GRANT DROP USER TO CSYT_Admin CONTAINER=CURRENT;
+GRANT ALTER USER TO CSYT_Admin CONTAINER=CURRENT;
+GRANT SELECT ON dba_users TO CSYT_Admin;
+GRANT SELECT ON dba_roles TO CSYT_Admin;
+GRANT SELECT ON dba_role_PRIVS TO CSYT_Admin;
+GRANT CREATE ROLE TO CSYT_Admin CONTAINER=CURRENT;
+GRANT CREATE TABLE TO CSYT_Admin;
+grant select on all_users to CSYT_Admin;
+grant select on DBA_TAB_PRIVS to CSYT_Admin;
+grant create view to CSYT_ADMIN CONTAINER=CURRENT;
+GRANT EXECUTE ON SYS.DBMS_CRYPTO TO CSYT_ADMIN;
+
+
+--Create tables
+CREATE TABLE CSYT_Admin.HSBA (
+    MaHSBA      CHAR(10), 
+    MaBN        CHAR(10), 
+    Ngay        DATE, 
+    ChanDoan    NVARCHAR2(100), 
+    MaBS        CHAR(10), 
+    MaKHOA      CHAR(10), 
+    MaCSYT      CHAR(10),
+    KetLuan     NVARCHAR2(100),
+    CONSTRAINT PK_MaHSBA_N04 PRIMARY KEY(MaHSBA)
+);
+
+CREATE TABLE CSYT_Admin.HSBA_DV (
+    MaHSBA      CHAR(10), 
+    MaDV        CHAR(10), 
+    Ngay        DATE, 
+    MaKTV       CHAR(10), 
+    KetQua      NVARCHAR2(50),
+    CONSTRAINT PK_HSBA_DV_N04 PRIMARY KEY(MaHSBA,MaDV,Ngay)
+);
+
+CREATE TABLE CSYT_Admin.BenhNhan (
+    MaBN            CHAR(10), 
+    MaCSYT          CHAR(10), 
+    TenBN           NVARCHAR2(50), 
+    CMND            varchar2(2000), 
+    NgaySinh        DATE, 
+    SoNha           varchar2(2000),
+    TenDuong        varchar2(2000), 
+    QuanHuyen       varchar2(2000), 
+    TinhTP          varchar2(2000), 
+    TienSuBenh      NVARCHAR2(50), 
+    TienSuBenhGD    NVARCHAR2(50),
+    DiUngThuoc      NVARCHAR2(50),
+    Username        CHAR(15),
+    CONSTRAINT PK_BenhNhan_N04 PRIMARY KEY(MaBN)
+);
+
+CREATE TABLE CSYT_Admin.CSYT (
+    MaCSYT  CHAR(10), 
+    TenCSYT NVARCHAR2(30), 
+    DCCSYT  NVARCHAR2(100), 
+    SDTCSYT NVARCHAR2(11),
+    CONSTRAINT PK_CSYT_N04 PRIMARY KEY(MaCSYT)
+);
+
+CREATE TABLE CSYT_Admin.NhanVien (
+    MaNV        CHAR(10), 
+    HoTen       NVARCHAR2(50), 
+    Phai        NVARCHAR2(3), 
+    NgaySinh    DATE, 
+    CMND        varchar2(2000), 
+    QueQuan     varchar2(2000), 
+    SDT         varchar2(11),
+    CSYT        CHAR(10), 
+    VaiTro      NVARCHAR2(20),--???? 
+    ChuyenKhoa  CHAR(10),--???TRIGGER?
+    Username        CHAR(15),
+    CONSTRAINT PK_NhanVien_N04 PRIMARY KEY(MaNV)
+);
+
+ALTER TABLE CSYT_Admin.HSBA        ADD CONSTRAINT FK_BN_HSBA_N04 FOREIGN KEY (MaBN)    REFERENCES CSYT_Admin.BenhNhan(MaBN);
+ALTER TABLE CSYT_Admin.HSBA        ADD CONSTRAINT FK_BS_HSBA_N04 FOREIGN KEY (MaBS)    REFERENCES CSYT_Admin.NhanVien(MaNV);
+ALTER TABLE CSYT_Admin.HSBA_DV     ADD CONSTRAINT FK_DV_HSBA_N04 FOREIGN KEY (MaHSBA)  REFERENCES CSYT_Admin.HSBA(MaHSBA);
+ALTER TABLE CSYT_Admin.BenhNhan    ADD CONSTRAINT FK_BN_CSYT_N04 FOREIGN KEY (MaCSYT)  REFERENCES CSYT_Admin.CSYT(MaCSYT);
+ALTER TABLE CSYT_Admin.NhanVien    ADD CONSTRAINT FK_NV_CSYT_N04 FOREIGN KEY (CSYT)    REFERENCES CSYT_Admin.CSYT(MaCSYT);
+
+
+--Encrypt/Decrypt
+--Functions
+CREATE OR REPLACE FUNCTION CSYT_ADMIN.ENCRYPT(pi_input VARCHAR2,pi_key VARCHAR2)
+RETURN RAW
+AS
+    input_string VARCHAR2(100) := pi_input;
+    raw_input RAW(128) := utl_raw.cast_to_raw(CONVERT(input_string,'AL32UTF8','US7ASCII'));
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(128) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+    encrypted_raw varchar2(2000);
+    encrypted_string VARCHAR2(2000);
+BEGIN
+    dbms_output.put_line('key:'||raw_key);
+    encrypted_raw := dbms_crypto.ENCRYPT(src => raw_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+
+    RETURN encrypted_raw;
+END;
+/
+
+CREATE OR REPLACE FUNCTION csyt_admin.DECRYPT(pi_input RAW,pi_key VARCHAR2)
+RETURN VARCHAR2
+AS
+    key_string VARCHAR2(100) := pi_key;
+    raw_key RAW(1280) :=utl_raw.cast_to_raw(CONVERT(key_string,'AL32UTF8','US7ASCII'));
+
+    decrypted_raw varchar2(2000);
+    decrypted_string VARCHAR2(2000);
+BEGIN
+dbms_output.put_line('key:'||raw_key);
+    BEGIN 
+    decrypted_raw := dbms_crypto.DECRYPT(src => pi_input,
+    typ => dbms_crypto.des_cbc_pkcs5,
+    KEY => raw_key);
+    decrypted_string:=CONVERT(utl_raw.cast_to_varchar2(decrypted_raw),'US7ASCII','AL32UTF8');
+    RETURN decrypted_string;
+        EXCEPTION 
+        WHEN OTHERS THEN
+        RETURN NULL;
+    END;    
+END;
+/
+
+
+--Triggers
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_BN 
+    BEFORE 
+    INSERT 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
+
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+
+END;
+/
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_BN 
+    BEFORE 
+    UPDATE 
+    ON CSYT_ADMIN.BenhNhan
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+BEGIN
+    dbms_output.put_line('key:'||:NEW.MaBN||:New.MaCSYT);
+
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.SoNha!=:OLD.SoNha)
+THEN
+:NEW.SoNha      := CSYT_ADMIN.encrypt(:NEW.SoNha,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TenDuong!=:OLD.TenDuong)
+THEN
+:NEW.TenDuong   := CSYT_ADMIN.encrypt(:NEW.TenDuong,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.QuanHuyen!=:OLD.QuanHuyen)
+THEN
+:NEW.QuanHuyen  := CSYT_ADMIN.encrypt(:NEW.QuanHuyen,:NEW.MaBN||:New.MaCSYT);
+END IF;
+IF(:NEW.TinhTP!=:OLD.TinhTP)
+THEN
+:NEW.TinhTP     := CSYT_ADMIN.encrypt(:NEW.TinhTP,:NEW.MaBN||:New.MaCSYT);
+END IF;
+END;
+/
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_I_NV 
+    BEFORE 
+    INSERT
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+
+END;
+/
+
+CREATE OR REPLACE TRIGGER CSYT_ADMIN.ENCRYPT_U_NV 
+    BEFORE 
+    UPDATE 
+    ON CSYT_ADMIN.NhanVien
+    REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+
+BEGIN
+IF(:NEW.CMND!=:OLD.CMND)
+THEN
+:NEW.CMND       := CSYT_ADMIN.encrypt(:NEW.CMND,:NEW.MaNV||:New.CSYT);
+END IF;
+IF(:NEW.QueQuan!=:OLD.QueQuan)
+THEN
+:NEW.QueQuan    := CSYT_ADMIN.encrypt(:NEW.QueQuan,:NEW.MaNV||:New.CSYT);
+END IF;
+END;
+/
+
+
+--Phan he 1
+CREATE OR REPLACE PROCEDURE CSYT_Admin.createUser(
+	pi_username IN NVARCHAR2,
+	pi_password IN NVARCHAR2) IS
+	
+	user_name NVARCHAR2(20)  	:= pi_username;
+	pwd NVARCHAR2(20) 		:= pi_password;
+    li_count       INTEGER	:= 0;
+    lv_stmt   VARCHAR2 (1000);
+BEGIN
+    lv_stmt := 'CREATE USER CSYT_' || user_name || ' IDENTIFIED BY ' || pwd || ' DEFAULT TABLESPACE SYSTEM';
+	DBMS_OUTPUT.put_line(lv_stmt);
+	EXECUTE IMMEDIATE ( lv_stmt );          
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE CSYT_Admin.dropUser(
+	pi_username IN NVARCHAR2) IS
+
+	user_name NVARCHAR2(20)  	:= pi_username;
+    lv_stmt   VARCHAR2 (1000);
+BEGIN
+    lv_stmt := 'DROP USER ' || user_name || ' CASCADE ';
+	DBMS_OUTPUT.put_line(lv_stmt);
+	EXECUTE IMMEDIATE ( lv_stmt ); 
+                                                
+END;
+/
+
+CREATE OR REPLACE PROCEDURE CSYT_Admin.createRole(
+	pi_roleName IN NVARCHAR2) IS
+	
+	role_name NVARCHAR2(20)  	:= pi_roleName;
+    lv_stmt   VARCHAR2 (1000);
+BEGIN
+    lv_stmt := 'CREATE ROLE CSYT_ROLE_' || role_name;
+	DBMS_OUTPUT.put_line(lv_stmt);
+	EXECUTE IMMEDIATE ( lv_stmt );
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE CSYT_Admin.dropRole(
+	pi_roleName IN NVARCHAR2) IS    
+	
+	role_name NVARCHAR2(50)  	:= pi_roleName;
+    lv_stmt   VARCHAR2 (1000);
+BEGIN
+    lv_stmt := 'DROP ROLE ' || role_name;
+	DBMS_OUTPUT.put_line(lv_stmt);
+	EXECUTE IMMEDIATE ( lv_stmt );    
+	COMMIT;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE CSYT_Admin.revokePrivilege(
+	pi_username IN VARCHAR2,
+	pi_priType IN INTEGER,
+    pi_obj IN VARCHAR2) IS
+	
+	user_name VARCHAR(100)  	:= pi_username;
+	priType   INTEGER 		:= pi_priType;
+    obj       VARCHAR(100)   := pi_obj;
+
+BEGIN
+    IF priType<1 then
+        EXECUTE IMMEDIATE ('REVOKE INSERT ON CSYT_ADMIN.'||obj||' FROM '||user_name);
+    ELSIF priType<2 THEN
+        EXECUTE IMMEDIATE ( 'drop view CSYT_ADMIN.'||obj ); 
+    ELSIF priType<3 THEN
+        EXECUTE IMMEDIATE ('REVOKE UPDATE ON CSYT_ADMIN.'||obj||' FROM '||user_name);
+    ELSE
+        EXECUTE IMMEDIATE ('REVOKE DELETE ON CSYT_ADMIN.'||obj||' FROM '||user_name);        
+    END IF;
+	
+                                                
+	COMMIT;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.ShowTables (mycursor OUT SYS_REFCURSOR)
+as
+BEGIN
+    OPEN mycursor FOR SELECT table_name FROM user_tables;
+END;
+/
+
+
+
+create or replace procedure CSYT_ADMIN.ShowPriviledge (username NVARCHAR2, mycursor OUT SYS_REFCURSOR)
+as
+BEGIN
+    OPEN mycursor FOR select * from all_tab_privs where grantee like '%CSYT_'||USERNAME||'%';
+END;
+/
+
+create or replace procedure CSYT_ADMIN.ShowTable (mycursor OUT SYS_REFCURSOR)
+as
+BEGIN
+    OPEN mycursor FOR select * from user_tables;
+END;
+/
+create or replace procedure CSYT_ADMIN.ShowTableCol (tblname nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+BEGIN
+    OPEN mycursor FOR
+        SELECT column_name
+        FROM user_tab_cols
+        WHERE table_name = tblname;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.ShowRolePriv (roleName nvarchar2,mycursor OUT SYS_REFCURSOR)
+as
+BEGIN
+    OPEN mycursor FOR
+        SELECT role,table_name,privilege FROM role_TAB_PRIVS
+        WHERE role = roleName and privilege != 'UPDATE';
+END;
+/
+
+--Lay tat ca quyen cho mot user
+create or replace procedure CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+as
+BEGIN
+    Open CUR for SELECT grantee,table_name,privilege FROM USER_TAB_PRIVS where grantee like user_name;
+END;
+/
+create or replace procedure CSYT_Admin.ShowAllUser (CUR out SYS_REFCURSOR)
+as
+BEGIN
+    Open CUR for SELECT USERNAME FROM dba_users where USERNAME like 'CSYT%' and USERNAME !='CSYT_ADMIN';
+
+END;
+/
+
+create or replace procedure CSYT_Admin.ShowAllRole (CUR out SYS_REFCURSOR)
+as
+BEGIN
+    Open CUR for SELECT ROLE FROM dba_roles where ROLE like 'CSYT_ROLE_%';
+END;
+/
+    
+CREATE OR REPLACE PROCEDURE CSYT_Admin.alterUser(
+	pi_username IN NVARCHAR2,
+	pi_password IN NVARCHAR2) IS
+	
+	user_name NVARCHAR2(20)  	:= pi_username;
+	pwd NVARCHAR2(20) 		:= pi_password;
+    li_count       INTEGER	:= 0;
+    lv_stmt   VARCHAR2 (1000);
+BEGIN
+    lv_stmt := 'ALTER USER ' || user_name || ' IDENTIFIED BY ' || pwd || ' DEFAULT TABLESPACE SYSTEM';
+	DBMS_OUTPUT.put_line(lv_stmt);
+	EXECUTE IMMEDIATE ( lv_stmt );              
+	COMMIT;
+END;
+    /
+
+  
+--DAC/RBAC
+--cap quyen connect cho mot user hoac role
+create or replace procedure CSYT_Admin.GrantConnect (user_role in VARCHAR2)
+as
+
+    BEGIN
+        execute IMMEDIATE ('grant connect to ' || user_role || ' with admin option');
+    END;
+/
+
+--cap quyen select cho user/role, neu la role thi opt = false
+CREATE OR REPLACE PROCEDURE CSYT_Admin.GrantSelect(tab_priv in VARCHAR2,username in varchar2,cols in varchar2, opt in VARCHAR2) IS
+sqlstmt varchar(1000):='';
+vcol varchar(50);
+cursor cur is select COLUMN_NAME from user_tab_columns where TABLE_NAME = 'VIEW_'||username||'_'||tab_priv;
+BEGIN
+    
+    sqlstmt:='create or replace view CSYT_ADMIN.VIEW_'||username||'_'||tab_priv||' as select ';
+    open cur;
+    LOOP
+    FETCH cur INTO vcol;
+    EXIT WHEN cur%NOTFOUND;
+    IF vcol != cols then
+    DBMS_OUTPUT.PUT_LINE(vcol);
+    sqlstmt:=concat(sqlstmt,vcol||',');
+    end if;
+    END LOOP;
+     
+    sqlstmt:=concat(sqlstmt,cols||',');
+    sqlstmt:=concat(RTRIM(sqlstmt,','),' from CSYT_ADMIN.'||tab_priv);
+    DBMS_OUTPUT.PUT_LINE(sqlstmt);
+	EXECUTE IMMEDIATE ( sqlstmt ); 
+    if opt = 'true' then
+            execute IMMEDIATE ('grant select on CSYT_ADMIN.VIEW_'||username||'_'||tab_priv|| ' to ' || username || ' with grant option');
+        else
+            execute IMMEDIATE ('grant select on CSYT_ADMIN.VIEW_'||username||'_'||tab_priv|| ' to ' || username );
+        end if;
+                                                
+	COMMIT;
+END;
+/
+
+create or replace procedure CSYT_Admin.GrantUpdate (user_role in VARCHAR2, cols in VARCHAR2, table_priv in VARCHAR2, opt in VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant update ('|| cols || ') on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant update ('|| cols || ') on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
+
+
+--cap quyen insert cho user/role, neu la role thi opt = false
+create or replace procedure CSYT_Admin.GrantInsert(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant insert on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
+
+--cap quyen delete cho user/role, neu la role thi opt = false
+create or replace procedure CSYT_Admin.GrantDelete(user_role in VARCHAR2, table_priv VARCHAR2, opt VARCHAR2)
+as
+
+    BEGIN
+        if opt = 'True' then
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role || ' with grant option');
+        else
+            execute IMMEDIATE ('grant delete on ' || table_priv || ' to ' || user_role );
+        end if;
+    END;
+/
+
+--Lay tat ca quyen cho mot user
+create or replace procedure CSYT_Admin.ShowPrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+as
+
+    BEGIN
+        Open CUR for SELECT grantee,table_name,privilege FROM USER_TAB_PRIVS where grantee like user_name;
+
+    END;
+/
+--Lay tat ca quyen update cho mot user
+create or replace procedure CSYT_Admin.ShowUpdatePrivilegesForUser (user_name VARCHAR2, CUR out SYS_REFCURSOR)
+as
+
+    BEGIN
+        Open CUR for SELECT grantee,table_name,privilege,column_name FROM USER_COL_PRIVS where grantee like user_name;
+
+    END;
+/
+
+
+--Chuc nang phan he 2
+create or replace procedure CSYT_ADMIN.getUserRoles(cur out SYS_REFCURSOR)
+as
+begin
+    OPEN cur FOR SELECT GRANTED_ROLE from dba_role_PRIVS where grantee like user AND GRANTED_ROLE LIKE 'CSYT_%';
+    --open cur for Select user from dual;
+    --DBMS_SQL.return_result(cur);
+end;
+/
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ADMIN WITH GRANT OPTION;
+/
+
+-- tu dong tao ma HSBA
+create or replace function CSYT_ADMIN.func_auto_MaHSBA
+return varchar
+is
+numberpart number;
+number_id number;
+temp varchar2(10);
+begin
+    select count(MAHSBA) into numberpart from CSYT_ADMIN.HSBA;
+    temp:= 'HS'|| TO_CHAR(numberpart+1, 'FM000');
+    Loop
+        select count(MAHSBA) into number_id  from CSYT_ADMIN.HSBA where trim(MAHSBA) = trim(temp);
+        if number_id != 0
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'HS'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
+end;
+
+/
+-- tu dong tao ma nhan vien
+create or replace function CSYT_ADMIN.func_auto_MaNV
+return varchar
+is
+numberpart number;
+number_id number;
+temp varchar2(10);
+begin
+    select count(MANV) into numberpart from CSYT_ADMIN.NHANVIEN;
+    temp:= 'NV'|| TO_CHAR(numberpart+1, 'FM000');
+    Loop
+        select count(MANV) into number_id  from CSYT_ADMIN.NHANVIEN where trim(MANV) = trim(temp);
+        if number_id != 0
+        
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'NV'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
+end;
+/
+--tu dong tao ma benh nhan
+create or replace function CSYT_ADMIN.func_auto_MaBN
+return varchar
+is
+numberpart number;
+number_id number;
+temp varchar2(10);
+begin
+    select count(MABN) into numberpart from CSYT_ADMIN.BEnhNhan;
+    temp:= 'BN'|| TO_CHAR(numberpart+1, 'FM000');
+    Loop
+        select count(MABN) into number_id  from CSYT_ADMIN.BenhNhan where trim(MABN) = trim(temp);
+        if number_id != 0
+        then
+        begin 
+        numberpart := numberpart +1;
+        temp:= 'BN'|| TO_CHAR(numberpart+1, 'FM000');
+        
+        end;
+        end if;
+        exit when number_id = 0;
+    end loop;
+    return trim(temp);
+end;
+
+/
+DROP ROLE CSYT_ROLE_THANHTRA;
+DROP ROLE CSYT_ROLE_QUANLIDULIEU;
+DROP ROLE CSYT_ROLE_BACSI;
+DROP ROLE CSYT_ROLE_NGHIENCUU;
+DROP ROLE CSYT_ROLE_NHANVIEN;
+DROP ROLE CSYT_ROLE_BENHNHAN;
+/
+
+--insert data
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS001','Benh vien Mat trung uong','TP.HCM','0123456789');
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS002','Benh vien Quan Y','Ha Noi','0123456789');
+INSERT INTO CSYT_Admin.CSYT VALUES ('CS003','Benh vien Y duoc TPHCM','TP.HCM','0123456789');
+
+
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN001','CS001','Pham Tan Ti', '112233445',to_date('19/04/2001','dd/mm/yyyy'), '15', 'Phan Van Tri', 'Go Vap', 'TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN002','CS001','Tran Minh Son','118833445',to_date('19/05/2002','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN003','CS001','Lam Quoc Binh','662233445',to_date('19/08/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN004','CS002','Kamisato Ayaka','112233775',to_date('08/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN005','CS002','Le Ngoc Tai','112299445',to_date('19/11/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN006','CS002','Nguyen Quang Quy','332233445',to_date('19/09/2001','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN007','CS003','Le Nam Thai Son','112233885',to_date('19/05/2003','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN008','CS003','Doc Co Cau Bai','662233445',to_date('19/04/2004','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+INSERT INTO CSYT_Admin.BenhNhan VALUES ('BN009','CS003','Dong Phuong Bat Bai','112255445',to_date('19/10/2005','dd/mm/yyyy'),'15','Phan Van Tri','Go Vap','TP.HCM',Null,Null,Null,Null);
+
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV001','Akira Mierashai','Nam',to_date('19/04/2001','dd/mm/yyyy'),'114477223','Inazuma','0123456789','CS001','Thanh tra','KH001',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV002','Yae Miko','Nu',to_date('19/06/2002','dd/mm/yyyy'),'114488223','Inazuma','0123456789','CS001','Y/ bac si','KH001',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV003','Xuan Hoang','Nam',to_date('12/08/2000','dd/mm/yyyy'),'334477223','Lam Dong','0123456789','CS001','Nghien cuu','KH002',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV004','Ningguang','Nu',to_date('02/06/2000','dd/mm/yyyy'),'114477993','Trung Quoc','0123456789','CS002','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV005','Ganyu','Nu',to_date('03/08/2001','dd/mm/yyyy'),'114454223','Liyue','0123456789','CS002','Y/ bac si','KH003',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV006','Cong Minh Hang','Nu',to_date('08/04/2001','dd/mm/yyyy'),'178477223','Tp.HCM','0123456789','CS002','Y/ bac si','KH002',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV007','Ly Mac Sau','Nu',to_date('12/02/2002','dd/mm/yyyy'),'114967223','Nhat Ban','0123456789','CS003','Thanh tra',null,Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV008','Raiden Shogun','Nu',to_date('19/09/2001','dd/mm/yyyy'),'114197223','Inazuma','0123456789','CS003','Y/ bac si','KH001',Null);
+INSERT INTO CSYT_Admin.NhanVien VALUES ('NV009','Signora','Nu',to_date('18/03/2000','dd/mm/yyyy'),'113217223','Nga','0123456789','CS003','Nghien cuu','KH003',Null);
+
+    
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS001','BN001',to_date('19/04/2022','dd/mm/yyyy'),'Dau da day','NV002','KH001','CS001','Ung thu da day');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS002','BN002',to_date('29/06/2022','dd/mm/yyyy'),'Gay tay','NV002','KH001','CS001','Gay xuong tay');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS003','BN004',to_date('12/05/2022','dd/mm/yyyy'),'Gay chan','NV005','KH002','CS002','Gay xuong chau');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS004','BN005',to_date('15/07/2022','dd/mm/yyyy'),'Xuat huyet nao','NV005','KH001','CS002','Chan thuong so nao');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS005','BN007',to_date('02/08/2022','dd/mm/yyyy'),'Thoat vi dia dem','NV008','KH003','CS003','Gay cot song');
+INSERT INTO CSYT_Admin.HSBA VALUES ('HS006','BN008',to_date('08/03/2022','dd/mm/yyyy'),'Dau mat','NV008','KH002','CS003','Duc thuy tinh the');
+
+    
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV001',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS001','DV003',to_date('19/04/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS002','DV001',to_date('29/06/2022','dd/mm/yyyy'),'NV003','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS003','DV001',to_date('12/05/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV001',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS004','DV002',to_date('15/07/2022','dd/mm/yyyy'),'NV006','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS005','DV001',to_date('02/08/2022','dd/mm/yyyy'),'NV009','Co benh');
+INSERT INTO CSYT_Admin.HSBA_DV VALUES ('HS006','DV001',to_date('08/03/2022','dd/mm/yyyy'),'NV009','Co benh');
+
+
+--CREATE ROLES
+CREATE ROLE CSYT_ROLE_THANHTRA;
+CREATE ROLE CSYT_ROLE_QUANLIDULIEU;
+CREATE ROLE CSYT_ROLE_BACSI;
+CREATE ROLE CSYT_ROLE_NGHIENCUU;
+CREATE ROLE CSYT_ROLE_BENHNHAN;
+CREATE ROLE CSYT_ROLE_NHANVIEN;
+
+
+--cau 1
+--Xoa tai khoan cua toan bo nhan vien va benh nhan
+declare
+cur SYS_refcursor;
+manv dba_users.username%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    open cur for select username from dba_users where username like 'CSYT_%' and username != 'CSYT_ADMIN';
+    loop
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'drop user ' || trim(manv) || ' Cascade';
+        EXECUTE IMMEDIATE ( lv_stmt );
+    end loop;
+    close cur;
+end;
+/
+
+--Them tai khoan cho toan bo nhan vien
+declare
+cur SYS_refcursor;
+manv csyt_admin.nhanvien.manv%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    open cur for select csyt_admin.nhanvien.manv from CSYT_Admin.NhanVien where Username is null;
+    loop
+        fetch cur into manv;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(manv) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(manv);
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_' || trim(manv);
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CSYT_ROLE_NHANVIEN TO CSYT_' || trim(manv);
+
+        EXECUTE IMMEDIATE ( lv_stmt );
+        lv_stmt := 'update CSYT_Admin.NhanVien set Username = ''CSYT_'||trim(manv)||''' where MaNV = '''||trim(manv)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+    end loop;
+    close cur;
+end;
+/
+
+--them tai khoan cho toan bo benh nhan
+declare
+cur SYS_refcursor;
+mabn csyt_admin.BenhNhan.MaBN%type;
+lv_stmt   VARCHAR2 (1000);
+begin
+    
+    open cur for select csyt_admin.BenhNhan.mabn from CSYT_Admin.BenhNhan where Username is null;
+    loop
+    
+        fetch cur into mabn;
+        exit when cur%NOTFOUND;
+        lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CSYT_ROLE_BENHNHAN TO CSYT_' || trim(mabn);
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(mabn);
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
+        --DBMS_OUTPUT.put_line(lv_stmt);
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+
+    end loop;
+    close cur;
+end;
+/
+
+--Cau 2
+create or replace procedure CSYT_Admin.TT_Select_HSBA (mycursor OUT SYS_REFCURSOR)
+as
+    BEGIN
+    OPEN mycursor FOR select * from CSYT_ADMIN.HSBA;
+    END;
+/
+
+create or replace procedure CSYT_Admin.TT_Select_HSBA_DV (mycursor OUT SYS_REFCURSOR)
+as
+    BEGIN
+    OPEN mycursor FOR select * from CSYT_ADMIN.HSBA_DV;
+    END;
+/
+
+create or replace procedure CSYT_Admin.TT_Select_BenhNhan (mycursor OUT SYS_REFCURSOR)
+as
+    BEGIN
+    OPEN mycursor FOR select * from CSYT_ADMIN.BenhNhan;
+    END;
+/
+
+create or replace procedure CSYT_Admin.TT_Select_CSYT (mycursor OUT SYS_REFCURSOR)
+as
+    BEGIN
+    OPEN mycursor FOR select * from CSYT_ADMIN.CSYT;
+    END;
+/
+
+create or replace procedure CSYT_Admin.TT_Select_NhanVien (mycursor OUT SYS_REFCURSOR)
+as
+    BEGIN
+    OPEN mycursor FOR select * from CSYT_ADMIN.NhanVien;
+    END;
+/
+
+GRANT SELECT  ON CSYT_Admin.HSBA                TO CSYT_ROLE_THANHTRA; 
+GRANT SELECT  ON CSYT_Admin.HSBA_DV             TO CSYT_ROLE_THANHTRA;
+GRANT SELECT  ON CSYT_Admin.BenhNhan            TO CSYT_ROLE_THANHTRA;
+GRANT SELECT  ON CSYT_Admin.CSYT                TO CSYT_ROLE_THANHTRA;
+GRANT SELECT  ON CSYT_Admin.NhanVien            TO CSYT_ROLE_THANHTRA;
+GRANT EXECUTE ON CSYT_Admin.TT_Select_HSBA      TO CSYT_ROLE_THANHTRA; 
+GRANT EXECUTE ON CSYT_Admin.TT_Select_HSBA_DV   TO CSYT_ROLE_THANHTRA; 
+GRANT EXECUTE ON CSYT_Admin.TT_Select_BenhNhan  TO CSYT_ROLE_THANHTRA; 
+GRANT EXECUTE ON CSYT_Admin.TT_Select_CSYT      TO CSYT_ROLE_THANHTRA; 
+GRANT EXECUTE ON CSYT_Admin.TT_Select_NhanVien  TO CSYT_ROLE_THANHTRA; 
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles        TO CSYT_ROLE_THANHTRA;
+/
+
+-----------------------------
+--Cau 3:
+create or replace view CSYT_Admin.View_QuanLiDuLieu_HSBA as 
+select CSYT_Admin.HSBA.* from CSYT_Admin.HSBA
+where CSYT_Admin.HSBA.MaCSYT in  ( select CSYT_Admin.NhanVien.CSYT from CSYT_Admin.NhanVien
+    where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user)
+    and to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'));
+
+/    
+create or replace view CSYT_Admin.View_QuanLiDuLieu_HSBA_DV as 
+select CSYT_Admin.HSBA_DV.* from CSYT_Admin.HSBA_DV
+where CSYT_Admin.HSBA_DV.MaHSBA in  (SELECT CSYT_Admin.HSBA.MaHSBA FROM CSYT_Admin.HSBA, CSYT_Admin.NhanVien
+                                    WHERE CSYT_Admin.HSBA.MaCSYT =  CSYT_Admin.NhanVien.CSYT
+                                    and 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user )
+    
+    and to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'));
+
+/
+grant select on CSYT_Admin.View_QuanLiDuLieu_HSBA to CSYT_ROLE_QUANLIDULIEU;
+grant select on CSYT_Admin.View_QuanLiDuLieu_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;
+
+/
+create or replace procedure CSYT_Admin.QLDL_Insert_HSBA(
+    MaBN  in      CHAR, 
+    Ngay     in   DATE, 
+    ChanDoan  in  NVARCHAR2, 
+    MaBS    in    CHAR, 
+    MaKHOA   in   CHAR, 
+    KetLuan  in   NVARCHAR2)
+is
+MaHSBA  CHAR(10); 
+user_CSYT char(10);
+
+Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    select CSYT_Admin.NhanVien.CSYT into user_CSYT  from CSYT_Admin.NhanVien
+    where 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user;
+    MaHSBA := CSYT_ADMIN.func_auto_MaHSBA;
+    insert into CSYT_Admin.View_QuanLiDuLieu_HSBA 
+    values(MaHSBA   , 
+    CSYT_Admin.QLDL_Insert_HSBA.MaBN  , 
+    CSYT_Admin.QLDL_Insert_HSBA.Ngay    , 
+    CSYT_Admin.QLDL_Insert_HSBA.ChanDoan , 
+    CSYT_Admin.QLDL_Insert_HSBA.MaBS    , 
+    CSYT_Admin.QLDL_Insert_HSBA.MaKHOA  , 
+    user_CSYT  ,
+    CSYT_Admin.QLDL_Insert_HSBA.KetLuan );
+    
+    
+    --end;
+    --end if;
+    commit;
+end;
+
+/
+
+
+create or replace procedure CSYT_Admin.QLDL_Insert_HSBA_DV(
+   MaHSBA   in   CHAR, 
+    MaDV    in    CHAR, 
+    Ngay    in    DATE, 
+    MaKTV   in    CHAR, 
+    KetQua  in    NVARCHAR2)
+is
+user_MaHSBA char(10);
+
+Begin
+    --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    SELECT CSYT_Admin.HSBA.MaHSBA into user_MaHSBA FROM CSYT_Admin.HSBA, CSYT_Admin.NhanVien
+                                    WHERE CSYT_Admin.HSBA.MaCSYT =  CSYT_Admin.NhanVien.CSYT
+                                    and 'CSYT_'||CSYT_Admin.NhanVien.MaNV = user 
+                                    and CSYT_Admin.QLDL_Insert_HSBA_DV.MaHSBA = csyt_admin.hsba.mahsba;
+    if CSYT_Admin.QLDL_Insert_HSBA_DV.MaHSBA = user_MaHSBA
+    then 
+    insert into CSYT_Admin.View_QuanLiDuLieu_HSBA_DV 
+    values(
+    CSYT_Admin.QLDL_Insert_HSBA_DV.MaHSBA  , 
+    CSYT_Admin.QLDL_Insert_HSBA_DV.MaDV  , 
+    CSYT_Admin.QLDL_Insert_HSBA_DV.Ngay  , 
+    CSYT_Admin.QLDL_Insert_HSBA_DV.MaKTV  , 
+    CSYT_Admin.QLDL_Insert_HSBA_DV.KetQua );
+    end if;
+    commit;
+    
+     --end;
+    --end if;
+end;
+/
+create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA(
+MAHSBA in char)
+as
+lv_stmt   VARCHAR2 (1000);
+begin
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||'''';
+    EXECUTE IMMEDIATE ( lv_stmt ); 
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA where MaHSBA = '''|| trim(MAHSBA)||'''';
+    EXECUTE IMMEDIATE ( lv_stmt );
+    
+    
+     --end;
+    --end if;
+    commit;
+end;
+/
+
+create or replace procedure CSYT_ADMIN.QLDL_Delete_HSBA_DV(
+MAHSBA in char,
+MADV in char)
+as
+lv_stmt   VARCHAR2 (1000);
+begin
+     --if to_number(to_char(sysdate, 'dd')) >= to_number(to_char(to_date('2022-01-05','yyyy-mm-dd'), 'dd'))
+    --and to_number(to_char(sysdate, 'dd')) <= to_number(to_char(to_date('2022-01-27','yyyy-mm-dd'), 'dd'))
+    --then
+    --begin
+    
+    
+    
+    lv_stmt := 'Delete from CSYT_ADMIN.HSBA_DV where MaHSBA = '''|| trim(MAHSBA)||''''
+    ||' and MaDV = '''||trim(MADV)||'''';
+    EXECUTE IMMEDIATE ( lv_stmt ); 
+    
+    --end;
+    --end if;
+    commit;
+end;
+
+
+/
+grant execute on CSYT_Admin.QLDL_Insert_HSBA to CSYT_ROLE_QUANLIDULIEU;
+grant execute on CSYT_Admin.QLDL_Insert_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;
+grant execute on CSYT_ADMIN.QLDL_Delete_HSBA to CSYT_ROLE_QUANLIDULIEU;
+grant execute on CSYT_ADMIN.QLDL_Delete_HSBA_DV to CSYT_ROLE_QUANLIDULIEU;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_QUANLIDULIEU;
+
+/
+
+-----------------------------------
+--Cau 4:
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_HSBA
+as SELECT * FROM CSYT_ADMIN.HSBA
+WHERE CSYT_ADMIN.HSBA.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
+                                WHERE 'CSYT_'||MaBS = user);
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_HSBA_DV
+as SELECT * FROM CSYT_ADMIN.HSBA_DV
+WHERE CSYT_ADMIN.HSBA_DV.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
+                                WHERE 'CSYT_'||MaBS = user);
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_BENHNHAN
+as select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan;
+/
+CREATE OR REPLACE PROCEDURE CSYT_ADMIN.BACSI_SELECT_BENHNHAN(
+MABN IN CHAR DEFAULT NULL,
+CMND IN CHAR DEFAULT NULL,
+BENHNHAN OUT SYS_REFCURSOR)
+AS 
+BEGIN
+    OPEN CSYT_ADMIN.BACSI_SELECT_BENHNHAN.BENHNHAN FOR 
+    SELECT * FROM CSYT_ADMIN.VIEW_BACSI_BENHNHAN
+    WHERE MABN = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.MABN 
+    OR CMND = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.CMND;
+END;
+/
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA TO CSYT_ROLE_BACSI;
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA_DV TO CSYT_ROLE_BACSI;
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_BENHNHAN TO CSYT_ROLE_BACSI;
+GRANT EXECUTE ON CSYT_ADMIN.BACSI_SELECT_BENHNHAN TO CSYT_ROLE_BACSI;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BACSI;
+/
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_HSBA
+as SELECT * FROM CSYT_ADMIN.HSBA
+WHERE CSYT_ADMIN.HSBA.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
+                                WHERE 'CSYT_'||MaBS = user);
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_HSBA_DV
+as SELECT * FROM CSYT_ADMIN.HSBA_DV
+WHERE CSYT_ADMIN.HSBA_DV.MAHSBA IN (SELECT MAHSBA FROM CSYT_ADMIN.HSBA 
+                                WHERE 'CSYT_'||MaBS = user);
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BACSI_BENHNHAN
+as select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan
+/
+CREATE OR REPLACE PROCEDURE CSYT_ADMIN.BACSI_SELECT_BENHNHAN(
+MABN IN CHAR DEFAULT NULL,
+CMND IN CHAR DEFAULT NULL,
+BENHNHAN OUT SYS_REFCURSOR)
+AS 
+BEGIN
+    OPEN CSYT_ADMIN.BACSI_SELECT_BENHNHAN.BENHNHAN FOR 
+    SELECT * FROM CSYT_ADMIN.VIEW_BACSI_BENHNHAN
+    WHERE MABN = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.MABN 
+    OR CMND = CSYT_ADMIN.BACSI_SELECT_BENHNHAN.CMND;
+END;
+/
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA TO CSYT_ROLE_BACSI;
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_HSBA_DV TO CSYT_ROLE_BACSI;
+GRANT SELECT ON CSYT_ADMIN.VIEW_BACSI_BENHNHAN TO CSYT_ROLE_BACSI;
+GRANT EXECUTE ON CSYT_ADMIN.BACSI_SELECT_BENHNHAN TO CSYT_ROLE_BACSI;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BACSI;
+/
+------------------------------------
+--Cau 5:
+create or replace procedure CSYT_Admin.NC_View_HSBA (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR SELECT * FROM CSYT_ADMIN.HSBA
+                      WHERE CSYT_ADMIN.HSBA.MACSYT IN (SELECT MACSYT FROM CSYT_ADMIN.NHANVIEN WHERE 'CSYT_'||MaNV = user)
+                      AND CSYT_ADMIN.HSBA.MAKHOA IN (SELECT CHUYENKHOA FROM CSYT_ADMIN.NHANVIEN WHERE 'CSYT_'||MaNV = user);
+    END;
+/
+
+create or replace procedure CSYT_Admin.NC_View_HSBA_DV (mycursor OUT SYS_REFCURSOR)
+as
+
+    BEGIN
+    OPEN mycursor FOR SELECT * FROM CSYT_ADMIN.HSBA_DV
+WHERE CSYT_ADMIN.HSBA_DV.MAHSBA IN (SELECT CSYT_ADMIN.HSBA.MAHSBA FROM CSYT_ADMIN.NHANVIEN,CSYT_ADMIN.HSBA
+                                WHERE 'CSYT_'||CSYT_ADMIN.NHANVIEN.MaNV = user
+                                AND CSYT_ADMIN.NHANVIEN.CSYT = CSYT_ADMIN.HSBA.MACSYT
+                                AND CSYT_ADMIN.NHANVIEN.CHUYENKHOA =  CSYT_ADMIN.HSBA.MAKHOA);
+    END;
+/
+GRANT select ON CSYT_Admin.HSBA      TO CSYT_ROLE_NGHIENCUU; 
+GRANT select ON CSYT_Admin.NHANVIEN      TO CSYT_ROLE_NGHIENCUU; 
+
+GRANT EXECUTE ON CSYT_Admin.NC_View_HSBA      TO CSYT_ROLE_NGHIENCUU; 
+GRANT EXECUTE ON CSYT_Admin.NC_View_HSBA_DV   TO CSYT_ROLE_NGHIENCUU; 
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles      TO CSYT_ROLE_NGHIENCUU;
+/
+
+-------------------------------
+--CAU 6: 
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW
+AS
+select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+NgaySinh,tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan
+WHERE 'CSYT_'||MaBN = user
+/
+
+GRANT SELECT ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BENHNHAN;
+/
+
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW
+AS
+SELECT  MANV,HOTEN,PHAI,NGAYSINH,
+CSYT_ADMIN.DECRYPT(CMND,MaNV||CSYT) as CMND,
+CSYT_ADMIN.DECRYPT(QUEQUAN,MaNV||CSYT) AS QUEQUAN, SDT
+FROM CSYT_Admin.NhanVien
+
+WHERE 'CSYT_'||MaNV = user
+/
+GRANT SELECT ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
+
+/
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW
+AS
+select MaBN,MaCSYT,TenBN,CSYT_ADMIN.DECRYPT(CMND,MABN||MACSYT) as CMND,  
+CSYT_ADMIN.DECRYPT(SONHA,MABN||MACSYT) as SONHA,
+CSYT_ADMIN.DECRYPT(TENDUONG,MABN||MACSYT) as TENDUONG,
+CSYT_ADMIN.DECRYPT(QUANHUYEN,MABN||MACSYT) as QUANHUYEN,
+CSYT_ADMIN.DECRYPT(TINHTP,MABN||MACSYT) as TINHTP,
+NgaySinh,tiensubenh,tiensubenhgd,diungthuoc
+FROM CSYT_Admin.BenhNhan
+WHERE 'CSYT_'||MaBN = user
+/
+
+GRANT SELECT ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW TO CSYT_ROLE_BENHNHAN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_BENHNHAN;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_TENBN(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET TENBN=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_CMND(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET CMND=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_NGAYSINH(input IN DATE DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET NgaySinh=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_SONHA(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET SoNha=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_TENDUONG(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET TenDuong=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_QUANHUYEN(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET QuanHuyen=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_TINHTP(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET TinhTP=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_TIENSUBENH(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET TIENSUBENH=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_TIENSUBENHGD(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.VIEW_BENHNHAN_SELFVIEW
+    SET TIENSUBENHGD=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+create or replace procedure CSYT_ADMIN.BENHNHAN_UPDATE_DIUNGTHUOC(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.BENHNHAN
+    SET DIUNGTHUOC=input
+    WHERE 'CSYT_'||MaBN = user;
+END;
+/
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_TENBN to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_CMND to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_NGAYSINH to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_SONHA to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_TENDUONG to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_QUANHUYEN to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_TINHTP to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_TIENSUBENH to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_TIENSUBENHGD to CSYT_ROLE_BENHNHAN;
+grant execute on CSYT_ADMIN.BENHNHAN_UPDATE_DIUNGTHUOC to CSYT_ROLE_BENHNHAN;
+/
+
+--VPD
+CREATE OR REPLACE FUNCTION CSYT_ADMIN.BN_CONTROL(
+    p_schema IN VARCHAR2,
+    p_object IN VARCHAR2
+)
+RETURN VARCHAR2
+AS
+BEGIN
+    if USER like '%BN%' then
+        RETURN '''CSYT_''||MaBN=USER';
+    ELSE
+        RETURN '1=1';
+    END IF;
+END;
+/
+
+BEGIN DBMS_RLS.ADD_POLICY(
+    object_schema   => 'CSYT_ADMIN',
+    object_name     => 'BENHNHAN',
+    policy_name     => 'BN_CONTROL',
+    function_schema => 'CSYT_ADMIN',
+    policy_function => 'BN_CONTROL',
+    statement_types => 'SELECT,INSERT,DELETE,UPDATE',
+    update_check    => TRUE
+);
+END;
+/
+
+CREATE OR REPLACE FUNCTION CSYT_ADMIN.NV_CONTROL(
+    p_schema IN VARCHAR2,
+    p_object IN VARCHAR2
+)
+RETURN VARCHAR2
+AS
+BEGIN
+    if USER like '%NV%' then
+        RETURN '''CSYT_''||MaNV=USER';
+    ELSE
+        RETURN '1=1';
+    END IF;
+END;
+/
+
+BEGIN DBMS_RLS.ADD_POLICY(
+    object_schema   => 'CSYT_ADMIN',
+    object_name     => 'NHANVIEN',
+    policy_name     => 'NV_CONTROL',
+    function_schema => 'CSYT_ADMIN',
+    policy_function => 'NV_CONTROL',
+    statement_types => 'SELECT,INSERT,DELETE,UPDATE',
+    update_check    => TRUE
+);
+END;
+/
+
+
+CREATE OR REPLACE VIEW CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW
+AS
+SELECT  MANV,HOTEN,PHAI,NGAYSINH,
+CSYT_ADMIN.DECRYPT(CMND,MaNV||CSYT) as CMND,
+CSYT_ADMIN.DECRYPT(QUEQUAN,MaNV||CSYT) AS QUEQUAN, SDT
+FROM CSYT_Admin.NhanVien
+WHERE 'CSYT_'||MaNV = user
+/
+
+GRANT SELECT ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT UPDATE ON CSYT_ADMIN.VIEW_NHANVIEN_SELFVIEW TO CSYT_ROLE_NHANVIEN;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_ROLE_NHANVIEN;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_HOTEN(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET HOTEN=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_PHAI(input IN NVARCHAR2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET PHAI=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_NGAYSINH(input IN date DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET NGAYSINH=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_CMND(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET CMND=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_QUEQUAN(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET QUEQUAN=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+create or replace procedure CSYT_ADMIN.NHANVIEN_UPDATE_SDT(input IN varchar2 DEFAULT NULL)
+AS 
+BEGIN
+    UPDATE CSYT_ADMIN.NHANVIEN
+    SET SDT=input
+    WHERE 'CSYT_'||MaNV = user;
+END;
+/
+
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_HOTEN to CSYT_ROLE_NHANVIEN;
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_PHAI to CSYT_ROLE_NHANVIEN;
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_NGAYSINH to CSYT_ROLE_NHANVIEN;
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_CMND to CSYT_ROLE_NHANVIEN;
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_QUEQUAN to CSYT_ROLE_NHANVIEN;
+grant execute on CSYT_ADMIN.NHANVIEN_UPDATE_SDT to CSYT_ROLE_NHANVIEN;
+
+
+--AUDIT
+AUDIT SELECT on CSYT_ADMIN.BenhNhan BY ACCESS WHENEVER NOT SUCCESSFUL;
+AUDIT SELECT on CSYT_ADMIN.NhanVien BY ACCESS WHENEVER NOT SUCCESSFUL;
+
+
+--FGA
+BEGIN
+    DBMS_FGA.ADD_POLICY (
+        object_schema      =>  'CSYT_ADMIN', 
+        object_name        =>  'BenhNhan', 
+        policy_name        =>  'ACCESS_BenhNhan', 
+        audit_condition    =>  'USERNAME != USER',
+        statement_types    =>  'SELECT,UPDATE,DELETE'
+    ); 
+END;
+/
+
+BEGIN
+    DBMS_FGA.ADD_POLICY (
+        object_schema      =>  'CSYT_ADMIN', 
+        object_name        =>  'NhanVien', 
+        policy_name        =>  'ACCESS_NhanVien', 
+        audit_condition    =>  'USERNAME != USER',
+        statement_types    =>  'SELECT,UPDATE,DELETE'
+    ); 
+END;
+/
+
+grant select on sys.aud$ to CSYT_ADMIN with grant option;
+grant select on  sys.DBA_FGA_AUDIT_TRAIL to CSYT_ADMIN with grant option;
+create or replace procedure CSYT_ADMIN.InvalidAccessAudit(cur out SYS_REFCURSOR)
+as
+begin
+    OPEN cur FOR 
+    select distinct USERID,obj$name AS tbl,TO_char(Ntimestamp#,'dd-mon-yyyy hh:mi:ss') AS TIME 
+    from sys.aud$ where obj$creator='CSYT_ADMIN';
+end;
+/
+
+create or replace procedure CSYT_ADMIN.IllegalAccessAudit(cur out SYS_REFCURSOR)
+as
+begin
+    OPEN cur FOR 
+    select distinct DB_USER,OBJECT_NAME AS tbl,TO_char(timestamp,'dd-mon-yyyy hh:mi:ss') AS TIME,SQL_TEXT as ViecLam 
+    from sys.DBA_FGA_AUDIT_TRAIL where OBJECT_SCHEMA='CSYT_ADMIN';
+end;
+/
+
+--dac/rbac/vpd/encrypt test
+CREATE USER CSYT_TTQB IDENTIFIED BY a;/
+CREATE USER CSYT_NCQB IDENTIFIED BY a;/
+
+GRANT CONNECT TO CSYT_TTQB;
+GRANT CONNECT TO CSYT_NCQB;
+
+GRANT CSYT_ROLE_THANHTRA TO CSYT_TTQB;
+GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NCQB;
+GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NV001;
+
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_TTQB;
+GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_NCQB;
+/
+
+--audit test
+drop user test cascade;
+drop user test2 cascade;
+
+Create user test identified by test;
+Create user test2 identified by test;
+grant connect to test,test2;
+
+grant select,insert,update on CSYT_ADMIN.BENHNHAN to test2;
+grant select,insert,update on CSYT_ADMIN.NHANVIEN to test2;
+
+
+grant CSYT_ROLE_QUANLIDULIEU to CSYT_NV001;
+grant CSYT_ROLE_BACSI to CSYT_NV002;
+
+
+
+
+--Oracle Label Security (OLS)
+CREATE USER CSYT_GDS IDENTIFIED BY a Quota 10M on users CONTAINER = CURRENT;
+CREATE USER CSYT_GDCS IDENTIFIED BY a Quota 10M on users CONTAINER = CURRENT;
+CREATE USER CSYT_YBS IDENTIFIED BY a Quota 10M on users CONTAINER = CURRENT;
+CREATE USER CSYT_YBS_CTT IDENTIFIED BY a Quota 10M on users CONTAINER = CURRENT;
+
+GRANT CONNECT TO CSYT_GDS,CSYT_GDCS,CSYT_YBS,CSYT_YBS_CTT;
+
+
+CREATE TABLE CSYT_Admin.ThongBao (
+    MaTB       INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL,
+    NoiDung    NVARCHAR2(1000), 
+    NgayGio    TIMESTAMP, 
+    DiaDiem    NVARCHAR2(1000), 
+    CONSTRAINT PK_ThongBao_N04 PRIMARY KEY(MaTB)
+);
+
+insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Giam doc so',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
+insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Co so y te',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
+insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Y bac sy noi tru',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Trung tam');
+insert into CSYT_Admin.ThongBao(NoiDung,NgayGio,DiaDiem) values('Y bac sy ngoai tru',to_timestamp('10-Sep-02 14:10:10.123000', 'DD-Mon-RR HH24:MI:SS.FF'),'Can trung tam');
+
+--IMPORTANT
+--UPDATE after create OLS policy
+UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDS:NGT,NT,CS:TT') WHERE NoiDung like '%Giam doc so%';
+UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','GDCS:NT:TT') WHERE NoiDung like '%Co so y te%';
+UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','YBS:NT:TT') WHERE NoiDung like '%Y bac sy noi tru%';
+UPDATE CSYT_Admin.ThongBao SET OLS_THONGBAO = CHAR_TO_LABEL('ACCESS_THONGBAO','YBS:NGT:CTT') WHERE NoiDung like '%Y bac sy ngoai tru%' AND DiaDiem='Can trung tam';
+
+
+GRANT INSERT,SELECT ON CSYT_Admin.THONGBAO TO CSYT_GDS;
+GRANT INSERT,SELECT ON CSYT_Admin.THONGBAO TO CSYT_GDCS;
+GRANT INSERT,SELECT ON CSYT_Admin.THONGBAO TO CSYT_YBS;
+GRANT INSERT,SELECT ON CSYT_Admin.THONGBAO TO  CSYT_YBS_CTT;
+
+GRANT INSERT,SELECT ON CSYT_Admin.THONGBAO TO CSYT_GDS;
+GRANT CSYT_ROLE_THANHTRA TO CSYT_GDS;
+
+
+--IMPORTANT
+--OLS policy (run as lbacsys)
+GRANT EXECUTE ON SA_COMPONENTS TO CSYT_ADMIN;
+GRANT EXECUTE ON SA_LABEL_ADMIN TO CSYT_ADMIN;
+GRANT EXECUTE ON SA_POLICY_ADMIN TO CSYT_ADMIN;
+GRANT EXECUTE ON SA_USER_ADMIN TO CSYT_ADMIN;
+GRANT EXECUTE ON CHAR_TO_LABEL TO CSYT_ADMIN;
+
+
+EXECUTE SA_SYSDBA.DROP_POLICY('ACCESS_THONGBAO');
+EXECUTE SA_SYSDBA.CREATE_POLICY('ACCESS_THONGBAO','OLS_THONGBAO');
+
+
+EXEC SA_COMPONENTS.CREATE_LEVEL('ACCESS_THONGBAO',150,'GDS','GIAM_DOC_SO');
+EXEC SA_COMPONENTS.CREATE_LEVEL('ACCESS_THONGBAO',100,'GDCS','GIAM_DOC_CSYT');
+EXEC SA_COMPONENTS.CREATE_LEVEL('ACCESS_THONGBAO',50,'YBS','Y_BSI');
+
+
+EXEC SA_COMPONENTS.CREATE_COMPARTMENT('ACCESS_THONGBAO',80,'CS','CHUYEN_SAU');
+EXEC SA_COMPONENTS.CREATE_COMPARTMENT('ACCESS_THONGBAO',70,'NT','NOI_TRU');
+EXEC SA_COMPONENTS.CREATE_COMPARTMENT('ACCESS_THONGBAO',60,'NGT','NGOAI_TRU');
+
+
+EXEC SA_COMPONENTS.CREATE_GROUP('ACCESS_THONGBAO',120,'TT','TRUNG_TAM');
+EXEC SA_COMPONENTS.CREATE_GROUP('ACCESS_THONGBAO',200,'CTT','CAN_TRUNG_TAM','TT');
+EXEC SA_COMPONENTS.CREATE_GROUP('ACCESS_THONGBAO',300,'NTH','NGOAI_THANH','TT');
+
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 100,label_value => 'GDS:CS,NT,NGT:TT');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 200,label_value => 'GDCS:CS:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 210,label_value => 'GDCS:CS:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 220,label_value => 'GDCS:CS:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 230,label_value => 'GDCS:NT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 240,label_value => 'GDCS:NT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 250,label_value => 'GDCS:NT:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 260,label_value => 'GDCS:NGT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 270,label_value => 'GDCS:NGT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 280,label_value => 'GDCS:NGT:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 300,label_value => 'YBS:CS:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 310,label_value => 'YBS:CS:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 320,label_value => 'YBS:CS:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 330,label_value => 'YBS:NT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 340,label_value => 'YBS:NT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 350,label_value => 'YBS:NT:NTH');
+
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 360,label_value => 'YBS:NGT:TT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 370,label_value => 'YBS:NGT:CTT');
+EXEC SA_LABEL_ADMIN.CREATE_LABEL(policy_name => 'ACCESS_THONGBAO',label_tag => 380,label_value => 'YBS:NGT:NTH');
+
+
+EXEC SA_POLICY_ADMIN.APPLY_TABLE_POLICY(policy_name=>'ACCESS_THONGBAO',schema_name => 'CSYT_ADMIN',table_name => 'THONGBAO',table_options=>'READ_CONTROL,WRITE_CONTROL');
+
+
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDS',max_read_label=>'GDS:CS,NT,NGT:TT',max_write_label=>'GDS:CS,NT,NGT:TT',def_label=>'GDS:CS,NT,NGT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_GDCS',max_read_label=>'GDCS:NT:TT',max_write_label=>'GDCS:NT:TT',def_label=>'GDCS:NT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_YBS',max_read_label=>'YBS:NT:TT',max_write_label=>'YBS:NT:TT',def_label=>'YBS:NT:TT');
+EXEC SA_USER_ADMIN.SET_USER_LABELS (policy_name=>'ACCESS_THONGBAO',user_name=>'CSYT_YBS_CTT',max_read_label=>'YBS:NGT:CTT',max_write_label=>'YBS:NGT:CTT',def_label=>'YBS:NGT:CTT');
+
+
+ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
+/
