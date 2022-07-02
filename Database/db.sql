@@ -1376,6 +1376,9 @@ begin
         lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
         
         EXECUTE IMMEDIATE ( lv_stmt ); 
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(mabn);
+        
+        EXECUTE IMMEDIATE ( lv_stmt ); 
         lv_stmt := 'GRANT CSYT_ROLE_BENHNHAN TO CSYT_' || trim(mabn);
 
         EXECUTE IMMEDIATE ( lv_stmt ); 
@@ -1390,8 +1393,6 @@ end;
 
 /
 
-DROP USER CSYT_TTQB CASCADE;/
-DROP USER CSYT_NCQB CASCADE;/
 
 CREATE USER CSYT_TTQB IDENTIFIED BY a;/
 CREATE USER CSYT_NCQB IDENTIFIED BY a;/
@@ -1406,11 +1407,10 @@ GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NV001;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_TTQB;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_NCQB;
 /
---AUDIT
-AUDIT SELECT on CSYT_ADMIN.BenhNhan BY ACCESS WHENEVER NOT SUCCESSFUL;
-AUDIT SELECT on CSYT_ADMIN.NhanVien BY ACCESS WHENEVER NOT SUCCESSFUL;
+
 
 --FGA
+
 
 begin DBMS_FGA.DROP_POLICY (  object_schema      =>  'CSYT_ADMIN', 
         object_name        =>  'BENHNHAN',       policy_name        =>  'ACCESS_BenhNhan'); end;
@@ -1444,6 +1444,8 @@ begin
     OPEN cur FOR 
     select distinct USERID,obj$name AS tbl,TO_char(Ntimestamp#,'dd-mon-yyyy hh:mi:ss') AS TIME 
     from sys.aud$ where obj$creator='CSYT_ADMIN';
+/
+
 
     --DBMS_SQL.return_result(cur);
 end;
