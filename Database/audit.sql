@@ -1,7 +1,10 @@
 ALTER SESSION SET "_ORACLE_SCRIPT"=TRUE;
+drop user test cascade;
+drop user test2 cascade;
 
 Create user test identified by test;
-grant connect to test;
+Create user test2 identified by test;
+grant connect to test,test2;
 ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
 
 

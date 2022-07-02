@@ -21,7 +21,7 @@ namespace qlCSYT
 
         private void frm_ThongBao_Load(object sender, EventArgs e)
         {
-            OracleConnection conn = DBUtils.GetDBConnection("OLS_DEMO");
+            OracleConnection conn = DBUtils.GetDBConnection();
 
             try
             {

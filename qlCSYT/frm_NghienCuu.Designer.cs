@@ -45,21 +45,22 @@
             this.menu_xemHSBADV});
             this.menuNghienCuu.Location = new System.Drawing.Point(0, 0);
             this.menuNghienCuu.Name = "menuNghienCuu";
-            this.menuNghienCuu.Size = new System.Drawing.Size(1077, 28);
+            this.menuNghienCuu.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuNghienCuu.Size = new System.Drawing.Size(808, 24);
             this.menuNghienCuu.TabIndex = 0;
             this.menuNghienCuu.Text = "menuStrip1";
             // 
             // menu_xemHSBA
             // 
             this.menu_xemHSBA.Name = "menu_xemHSBA";
-            this.menu_xemHSBA.Size = new System.Drawing.Size(61, 24);
+            this.menu_xemHSBA.Size = new System.Drawing.Size(49, 20);
             this.menu_xemHSBA.Text = "HSBA";
             this.menu_xemHSBA.Click += new System.EventHandler(this.menu_xemHSBA_Click);
             // 
             // menu_xemHSBADV
             // 
             this.menu_xemHSBADV.Name = "menu_xemHSBADV";
-            this.menu_xemHSBADV.Size = new System.Drawing.Size(87, 24);
+            this.menu_xemHSBADV.Size = new System.Drawing.Size(69, 20);
             this.menu_xemHSBADV.Text = "HSBA_DV";
             this.menu_xemHSBADV.Click += new System.EventHandler(this.menu_xemHSBADV_Click);
             // 
@@ -69,23 +70,25 @@
             this.gv_NghienCuu.AllowUserToDeleteRows = false;
             this.gv_NghienCuu.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gv_NghienCuu.Enabled = false;
-            this.gv_NghienCuu.Location = new System.Drawing.Point(12, 31);
+            this.gv_NghienCuu.Location = new System.Drawing.Point(9, 25);
+            this.gv_NghienCuu.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gv_NghienCuu.Name = "gv_NghienCuu";
             this.gv_NghienCuu.ReadOnly = true;
             this.gv_NghienCuu.RowHeadersWidth = 51;
             this.gv_NghienCuu.RowTemplate.Height = 24;
-            this.gv_NghienCuu.Size = new System.Drawing.Size(1053, 329);
+            this.gv_NghienCuu.Size = new System.Drawing.Size(790, 267);
             this.gv_NghienCuu.TabIndex = 1;
             // 
             // frm_NghienCuu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1077, 372);
+            this.ClientSize = new System.Drawing.Size(808, 302);
             this.Controls.Add(this.gv_NghienCuu);
             this.Controls.Add(this.menuNghienCuu);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuNghienCuu;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "frm_NghienCuu";
             this.Text = " Nghiên cứu";
             this.menuNghienCuu.ResumeLayout(false);

@@ -14,18 +14,18 @@ GRANT CONNECT TO CSYT_Admin;
 
 GRANT CONNECT TO CSYT_Admin WITH ADMIN OPTION;
 GRANT UNLIMITED TABLESPACE TO CSYT_Admin;
-GRANT CREATE USER TO CSYT_Admin CONTAINER=ALL;
-GRANT DROP USER TO CSYT_Admin CONTAINER=ALL;
-GRANT ALTER USER TO CSYT_Admin Container=All;
+GRANT CREATE USER TO CSYT_Admin CONTAINER=CURRENT;
+GRANT DROP USER TO CSYT_Admin CONTAINER=CURRENT;
+GRANT ALTER USER TO CSYT_Admin CONTAINER=CURRENT;
 
 GRANT SELECT ON dba_users TO CSYT_Admin;
 GRANT SELECT ON dba_roles TO CSYT_Admin;
 GRANT SELECT ON dba_role_PRIVS TO CSYT_Admin;
-GRANT CREATE ROLE TO CSYT_Admin CONTAINER=ALL;
+GRANT CREATE ROLE TO CSYT_Admin CONTAINER=CURRENT;
 GRANT CREATE TABLE TO CSYT_Admin;
 grant select on all_users to CSYT_Admin;
 grant select on DBA_TAB_PRIVS to CSYT_Admin;
-grant create view to CSYT_ADMIN CONTAINER=ALL;
+grant create view to CSYT_ADMIN CONTAINER=CURRENT;
 GRANT EXECUTE ON SYS.DBMS_CRYPTO TO CSYT_ADMIN;
 
 CREATE TABLE CSYT_Admin.HSBA (
@@ -1376,10 +1376,11 @@ begin
         lv_stmt := 'CREATE USER CSYT_' || trim(mabn) || ' IDENTIFIED BY ' || 'a' || ' DEFAULT TABLESPACE SYSTEM';
         
         EXECUTE IMMEDIATE ( lv_stmt ); 
-        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(mabn);
-        
-        EXECUTE IMMEDIATE ( lv_stmt ); 
         lv_stmt := 'GRANT CSYT_ROLE_BENHNHAN TO CSYT_' || trim(mabn);
+
+        EXECUTE IMMEDIATE ( lv_stmt ); 
+        
+        lv_stmt := 'GRANT CONNECT TO CSYT_' || trim(mabn);
 
         EXECUTE IMMEDIATE ( lv_stmt ); 
         lv_stmt := 'update CSYT_Admin.BenhNhan set Username = ''CSYT_'||trim(mabn)||''' where MaBN = '''||trim(mabn)||'''';
@@ -1392,7 +1393,6 @@ end;
 
 
 /
-
 
 CREATE USER CSYT_TTQB IDENTIFIED BY a;/
 CREATE USER CSYT_NCQB IDENTIFIED BY a;/
@@ -1407,14 +1407,12 @@ GRANT CSYT_ROLE_NGHIENCUU TO CSYT_NV001;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_TTQB;
 GRANT EXECUTE ON CSYT_ADMIN.getUserRoles TO CSYT_NCQB;
 /
+--AUDIT
 
+AUDIT SELECT on CSYT_ADMIN.BenhNhan BY ACCESS WHENEVER NOT SUCCESSFUL;
+AUDIT SELECT on CSYT_ADMIN.NhanVien BY ACCESS WHENEVER NOT SUCCESSFUL;
 
 --FGA
-
-
-begin DBMS_FGA.DROP_POLICY (  object_schema      =>  'CSYT_ADMIN', 
-        object_name        =>  'BENHNHAN',       policy_name        =>  'ACCESS_BenhNhan'); end;
-/
 BEGIN
     DBMS_FGA.ADD_POLICY (
         object_schema      =>  'CSYT_ADMIN', 
@@ -1444,8 +1442,6 @@ begin
     OPEN cur FOR 
     select distinct USERID,obj$name AS tbl,TO_char(Ntimestamp#,'dd-mon-yyyy hh:mi:ss') AS TIME 
     from sys.aud$ where obj$creator='CSYT_ADMIN';
-/
-
 
     --DBMS_SQL.return_result(cur);
 end;
@@ -1461,5 +1457,20 @@ begin
     --DBMS_SQL.return_result(cur);
 end;
 /
+--audit test
+drop user test cascade;
+drop user test2 cascade;
+
+Create user test identified by test;
+Create user test2 identified by test;
+grant connect to test,test2;
+
+grant select,insert,update on CSYT_ADMIN.BENHNHAN to test2;
+grant select,insert,update on CSYT_ADMIN.NHANVIEN to test2;
+
+
+grant CSYT_ROLE_QUANLIDULIEU to CSYT_NV001;
+grant CSYT_ROLE_BACSI to CSYT_NV002;
+
 ALTER SESSION SET "_ORACLE_SCRIPT"=FALSE;
 /

@@ -123,5 +123,13 @@ namespace qlCSYT
             }
 
         }
+
+        private void m_anouncement_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frm_ThongBao frm = new frm_ThongBao();
+            frm.Show();
+            frm.Closed += (s, args) => this.Show();
+        }
     }
 }
